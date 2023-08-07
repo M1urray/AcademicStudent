@@ -1,0 +1,78 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.Hostel>
+@{
+    ViewBag.Title = "Hostel List";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<style>
+    thead {
+        background-color: black;
+        color: white;
+    }
+</style>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="responsive-table-plugin">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="20%">
+                                        Hostel No
+                                    </th>
+                                    <th width="60%">
+                                        Description
+                                    </th>
+                                    <th width="20%">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model != null)
+                                    {
+                                        if (Model.Count() > 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.AssetNo)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Description)
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="LoadHostelRoomList('@item.AssetNo','@item.Description');" class="btn btn-sm btn-danger">Available Room</button>
+                                                       @* <a href="@Url.Action("HostelRoomList", "Welfare", new { HostelCode = item.AssetNo,HostelName=item.Description })" class="btn btn-sm btn-danger">Available Room</a>*@
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="2" style="color:red">
+                                                    No Asset Records Found
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var LoadHostelRoomList = function (HostelCode, HostelName) {
+        ShowProgress();
+        window.location = "/Welfare/HostelRoomList?HostelCode=" + HostelCode + "&HostelName=" + HostelName;
+    }
+</script>
+

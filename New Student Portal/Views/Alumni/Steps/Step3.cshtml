@@ -1,0 +1,87 @@
+﻿<!--step-3-->
+<div id="step-3">
+    <div class="d-flex justify-content-center pt-0 mt-0">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="panel border-theme-color customPanel">
+                <div class="panel-heading bg-theme-color text-center d-flex justify-content-center pl-2 pr-2">
+                    Step 3/6<span class="d-none d-sm-block"> - Academic Grades (KCSE/CUE)</span>
+                </div>
+                <div class="panel-body pb-2">
+                    <span class="text-danger"><i class="fas fa-exclamation-circle"></i> Add at least 3 Subjects related to the programme you are applying for</span>
+                    <table class="table table-striped table-bordered">
+                        <thead class="bg-info">
+                        <th>Subject</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>English</td>
+                                <td>B</td>
+                                <td>
+                                    <form action="http://192.168.88.11:881/ssp/application/remove-kcsegrade" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="_token" value="5pgT9Hb00eeOhqNQ78TytnvH0e55hdmJeZIyaTwH">                                            <input type="hidden" name="lineNo" value="44">
+                                        <input type="hidden" name="applicationNo" value="APPL-00034">
+                                        <button type="submit" class="btn btn-danger btn-sm" id="btnSubmit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form action="http://192.168.88.11:881/ssp/application/add-kcsegrade" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="5pgT9Hb00eeOhqNQ78TytnvH0e55hdmJeZIyaTwH">                    <div class="row">
+                            <!--subject-->
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 column">
+                                <div class="form-group">
+                                    <label class="control-label">Subject</label>
+                                    <select name="subject" class="form-control" id="subject" onChange="onSubjectChange()" required>
+                                        <option value="">--Select--</option>
+                                        <option value="BIOLOGY">Biology</option>
+                                        <option value="KISWAHILI">Kiswahili</option>
+                                        <option value="MATHS">Maths</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--grade-->
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 column">
+                                <div class="form-group">
+                                    <label class="control-label">Grade</label>
+                                    <select name="grade" class="form-control" id="grade" required>
+                                        <option value="">--Select--</option>
+                                        <option value="A">A</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B">B</option>
+                                        <option value="B-">B-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="C">C</option>
+                                        <option value="C-">C-</option>
+                                        <option value="C+">C+</option>
+                                        <option value="D">D</option>
+                                        <option value="D-">D-</option>
+                                        <option value="D+">D+</option>
+                                        <option value="E">E</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" value="" name="subjectName" id="ipSubjectName">
+                            <input type="hidden" name="applicationNo" value="APPL-00034">
+                            <!--btn_add-->
+                            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                                <div class="form-group">
+                                    <label class="control-label">Action</label>
+                                    <button type="submit" class="btn btn-primary form-control">Add Grade</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--btn next & back-->
+                    <hr />
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-secondary mr-2" onclick="BacktoStepTwo()"><i class="feather icon-arrow-left"></i> Back</button>
+                        <button type="submit" class="btn btn-primary" onclick="SubmitStepThreeSection()">Next <i class="feather icon-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

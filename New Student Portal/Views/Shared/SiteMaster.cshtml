@@ -1,0 +1,641 @@
+﻿@using New_Student_Portal.CustomSecurity;
+@using New_Student_Portal.Models;
+@using System.Globalization;
+@{
+    Layout = null;
+    var currentUser = User as New_Student_Portal.CustomSecurity.CustomPrincipal;
+
+    string userRole = currentUser.RoleName;
+    bool fullAccess = currentUser.Full_Access;
+    bool PrintExam = false, AllowExamCard = false, AllowEval = false, AllowApplication = false, AllowGradAppl = false;
+    string UserName = "";
+    string ProfilePicBase64 = "", gender = "", imgSrc = "";
+    int CountNotif = 0;
+    if (Session["Username"] == null)
+    {
+        Response.Write("<script type='text/javascript'>"); Response.Write("window.location = '" + Url.Action("Login", "Login") + "'</script>");
+        Response.Flush();
+    }
+    else
+    {
+        string StdNo = Session["Username"].ToString();
+        string Sem = "";
+        if (Session["CurrentSem"] == null)
+        {
+            Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+        }
+
+        Sem = Session["CurrentSem"].ToString();
+        string RegDeadlineDate = CommonClass.RegistrationDeadline(Sem);
+        CountNotif = CommonClass.GetDocumentCount();
+        if (RegDeadlineDate != "")
+        {
+            DateTime regDeadLine = DateTime.ParseExact(RegDeadlineDate.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            if (regDeadLine <= DateTime.Today)
+            {
+                PrintExam = true;
+            }
+            else
+            {
+                PrintExam = false;
+            }
+        }
+        bool[] s = CommonClass.LecEvaluationAllowed(Sem);
+        AllowExamCard = s[0];
+        AllowApplication = CommonClass.AllowGradClearanceApplication(StdNo);
+        AllowGradAppl = CommonClass.AllowGraduationApplication(StdNo);
+        AllowEval = s[1];
+        if (Session["FullName"] == null)
+        {
+            UserName = New_Student_Portal.Models.CommonClass.GetStudentName(Session["Username"].ToString());
+        }
+        else
+        {
+            UserName = Session["FullName"].ToString();
+        }
+        if (UserName != "")
+        {
+            ProfilePicBase64 = CommonClass.ProfilePicture(StdNo);
+
+            if (ProfilePicBase64 == "")
+            {
+                if (Session["Gender"] != null)
+                {
+                    if (Session["Gender"].ToString() == "Male")
+                    {
+                        gender = "Male";
+                    }
+                    else
+                    {
+                        gender = "Female";
+                    }
+                }
+            }
+            else
+            {
+                imgSrc = String.Format("data:image/gif;base64,{0}", ProfilePicBase64);
+                Session["ImgProfile"] = imgSrc;
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>AFRICA INTERNATIONAL UNIVERSITY | Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="AFRICA INTERNATIONAL UNIVERSITY Student Portal" name="description" />
+    <meta content="AFRICA INTERNATIONAL UNIVERSITY" name="DSL" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+    <link href="~/assets/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <!-- App css -->
+    <link href="~/assets/css/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="~/assets/css/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+    <link href="~/assets/css/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="~/assets/css/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+    <!-- icons -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/jquery2.0.3.min.js"></script>
+</head>
+<body class="loading" style="background-color: #dfe8f7">
+    @*<script src="~/JS/ObfuscateSite.js"></script>*@
+    <link href="~/CSS/Loader.css" rel="stylesheet" />
+    <div class="loading" align="center" id="divLoader">
+        <br />
+        <img src="~/assets/images/ajax-loader2.gif" alt="" height="150" width="150" />
+    </div>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <ul class="list-unstyled topnav-menu float-end mb-0">
+                    <li class="d-none d-lg-block">
+                        <form class="app-search">
+                            <div class="app-search-box dropdown">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" placeholder="Search..." id="top-search">
+                                    <button class="btn" type="submit">
+                                        <i class="fe-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    @if (CountNotif > 0)
+                    {
+                        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light" onclick="PopNotification();" id="DivNotif" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fe-bell noti-icon"></i>
+                                <span class="badge bg-danger rounded-circle noti-icon-badge">@CountNotif</span>
+                            </a>
+                        </li>
+                    }
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            @{
+                                if (ProfilePicBase64 != "")
+                                {
+                                    <img class="rounded-circle" src="@imgSrc" alt="">
+                                }
+                                else
+                                {
+                                    if (gender == "Female")
+                                    {
+                                        <img class="rounded-circle" src="~/assets/images/profile_f.png" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img class="rounded-circle" src="~/assets/images/profile_m.png" alt="">
+                                    }
+                                }
+                            }
+                            <span class="pro-user-name ms-1">
+                                @UserName <i class="mdi mdi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                            <!-- item-->
+                            <a href="/Dashboard/Dashboard" class="dropdown-item notify-item">
+                                <i class="ri-user-fill"></i>
+                                <span>Profile</span>
+                            </a>
+                            <!-- item-->
+                            <a href="/Login/Login" class="dropdown-item notify-item">
+                                <i class="ri-logout-box-line"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="/Dashboard/Dashboard" class="logo logo-dark text-center">
+                        <span class="logo-sm">
+                            <img src="~/assets/images/logo2.png" alt="" height="24">
+                            <!-- <span class="logo-lg-text-light">Minton</span> -->
+                        </span>
+                        <span class="logo-lg">
+                            <img src="~/assets/images/retina_logo3.png" alt="" height="20">
+                            <!-- <span class="logo-lg-text-light">M</span> -->
+                        </span>
+                    </a>
+                </div>
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                    <li>
+                        <button class="button-menu-mobile waves-effect waves-light">
+                            <i class="fe-menu"></i>
+                        </button>
+                    </li>
+
+                    <li>
+                        <!-- Mobile menu toggle (Horizontal Layout)-->
+                        <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- end Topbar -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+
+            <!-- LOGO -->
+            <div class="logo-box">
+                <a href="/Dashboard/Dashboard" class="logo logo-light text-center">
+                    <span class="logo-sm">
+                        <img src="~/assets/images/retina_logo3.png" alt="" height="64">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="~/assets/images/retina_logo3.png" alt="" height="60">
+                    </span>
+                </a>
+            </div>
+            <div class="h-100" data-simplebar>
+                <!-- User box -->
+                <div class="user-box text-center">
+                    @{
+                        if (ProfilePicBase64 != "")
+                        {
+                            <img class="rounded-circle avatar-md" src="@imgSrc" alt="">
+                        }
+                        else
+                        {
+                            if (gender == "Female")
+                            {
+                                <img class="rounded-circle avatar-md" src="~/assets/images/profile_f.png" alt="">
+                            }
+                            else
+                            {
+                                <img class="rounded-circle avatar-md" src="~/assets/images/profile_m.png" alt="">
+                            }
+                        }
+                    }
+                    <div class="dropdown">
+                        <a href="#" class="text-reset dropdown-toggle h5 mt-2 mb-1 d-block"
+                           data-bs-toggle="dropdown">@UserName</a>
+                        <div class="dropdown-menu user-pro-dropdown">
+                            <!-- item-->
+                            <a href="#" onclick="DashBoardLink('@userRole');" class="dropdown-item notify-item">
+                                <i class="fe-user me-1"></i>
+                                <span>Profile</span>
+                            </a>
+                            <!-- item-->
+                            <a href="/login/Login" class="dropdown-item notify-item">
+                                <i class="fe-log-out me-1"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <ul id="side-menu">
+                        <li class="menu-title">Dashboard</li>
+                        <li>
+                            <a href="#" onclick="DashBoardLink('@userRole');">
+                                <i class="ri-user-2-fill"></i>
+                                <span>Personal Profile</span>
+                            </a>
+                        </li>
+                        @if (userRole == "ALLUMINAE")
+                        {
+                            <li class="menu-title mt-2">Self Service</li>
+                            <li>
+                                <a href="#" onclick="AlumniAcademicRequisitionLink();">
+                                    <i class="ri-git-pull-request-fill"></i>
+                                    <span>Academic Requisition</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="#" onclick="ApplicationIsntuctionLink();">
+                                        <i class="ri-information-fill"></i>
+                                        <span>Application Instructions</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="ApplicationListLink();">
+                                        <i class="ri-input-cursor-move"></i>
+                                        <span>Application List</span>
+                                    </a>
+                                </li>*@
+
+                        }
+                        else
+                        {
+                            <li class="menu-title mt-2">Academics</li>
+                            if (fullAccess)
+                            {
+                                <li>
+                                    <a href="#" onclick="CourseRegistrationLink();">
+                                        <i class="ri-registered-fill"></i>
+                                        <span>Course Registration</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="TimeTableLink();">
+                                        <i class="ri-time-fill"></i>
+                                        <span>TimeTable</span>
+                                    </a>
+                                </li>
+                            }
+                            <li>
+                                <a href="#" onclick="AcademicRequisitionLink();">
+                                    <i class="ri-git-pull-request-fill"></i>
+                                    <span>Academic Requisition</span>
+                                </a>
+                            </li>
+                            //if (AllowGradAppl)
+                            //{
+                            <li>
+                                <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
+                                    <i class="fa fa-graduation-cap"></i>
+                                    <span>Graduation Request</span>
+                                </a>
+                            </li>
+                            <li> <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
+                                        <i class="ri-shopping-bag-fill"></i>
+                                        <span>Clearance Request</span> 
+                                     </a> 
+                                 </li>
+                            if (fullAccess && AllowEval)
+                            {
+                                <li>
+                                    <a href="#" onclick="LecturerEvaluationLink();">
+                                        <i class="ri-clapperboard-fill"></i>
+                                        <span>Course Evaluation</span>
+                                    </a>
+                                </li>
+                            }
+                            @*<li>
+                                <a href="#" onclick="EnquiryLink();">
+                                    <i class="ri-question-answer-fill"></i>
+                                    <span>General Complaint</span>
+                                </a>
+                            </li>*@
+                            <li>
+                                <a href="#" onclick="StudentAuditLink();">
+                                    <i class="ri-pushpin-fill"></i>
+                                    <span>Student Audit</span>
+                                </a>
+                            </li>
+                            <li class="menu-title mt-2">Financials</li>
+                            <li>
+                                <a href="#" onclick="FeeStatementLink();">
+                                    <i class="ri-money-cny-box-fill"></i>
+                                    <span>Fee Statement</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="ReceiptsLink();">
+                                    <i class="ri-folder-received-fill"></i>
+                                    <span>Receipts</span>
+                                </a>
+                            </li>
+                            if (fullAccess)
+                            {
+                                <li>
+                                    <a href="#" onclick="SemProformaLink();">
+                                        <i class="ri-folder-received-fill"></i>
+                                        <span>Semester Proforma</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="PaymentPlanLink();">
+                                        <i class="ri-paypal-fill"></i>
+                                        <span>Payment Plan</span>
+                                    </a>
+                                </li>
+                            }
+                            if (fullAccess)
+                            {
+                                <li class="menu-title mt-2">Welfare</li>
+                                <li>
+                                    <a href="#" onclick="HostelBookingLink();">
+                                        <i class="ri-hotel-bed-fill"></i>
+                                        <span>Hostel Booking</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="MealBookingLink();">
+                                        <i class="ri-menu-add-fill"></i>
+                                        <span>Meal Booking</span>
+                                    </a>
+                                </li>
+                                @*<li>
+                                        <a href="#" onclick="ClubsSocietiesLink();">
+                                            <i class="ri-football-fill"></i>
+                                            <span>Clubs & Society</span>
+                                        </a>
+                                    </li>*@
+                            }
+                            if (fullAccess)
+                            {
+                                <li class="menu-title mt-2">Examination</li>
+                                if (AllowExamCard)
+                                {
+                                    <li>
+                                        <a href="#" onclick="ExamCardLink();">
+                                            <i class="ri-download-fill"></i>
+                                            <span>Exam Card</span>
+                                        </a>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="#" onclick="ProvisionalResultsLink();">
+                                        <i class="ri-download-cloud-fill"></i>
+                                        <span>Transcipt</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        <li class="menu-title mt-2">Settings</li>
+                        <li>
+                            <a href="#" onclick="ChangePasswordLink();">
+                                <i class="ri-settings-2-fill"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <h4 class="page-title">@ViewBag.Title</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    @RenderBody()
+                    <hr style="border:1px solid white" />
+                    <div align="right">
+                        <script>document.write(new Date().getFullYear())</script> &copy; Designed by <a href="#">DSL Systems</a>
+                    </div>
+                </div> <!-- container -->
+            </div> <!-- content -->
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+    </div>
+    <!--/////////////////notification///////////////////// -->
+    <div id="myModalViewNotification" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Notifications | <img src="~/assets/images/NEW2.gif" /></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modalBodyViewNotification">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <!-- Vendor js -->
+    <script src="~/assets/js/vendor.min.js"></script>
+    <script src="~/assets/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Apex js-->
+    <script src="~/assets/libs/moment/min/moment.min.js"></script>
+    <script src="~/assets/libs/jquery.scrollto/jquery.scrollTo.min.js"></script>
+    <!-- TODO js-->
+    <script src="~/assets/js/pages/jquery.todo.js"></script>
+    <!-- App js -->
+    <script src="~/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/assets/js/pages/form-wizard.init.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/DatePicker/jquery-ui.min.js"></script>
+    <link href="~/DatePicker/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/JS/ShowProgression.js"></script>
+    <script type="text/javascript">
+        var PopNotification= function() {
+            ShowProgress();
+            $.ajax({
+                async: true,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                url: '@Url.Action("NotificationMessages", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBodyViewNotification").html(data);
+                    $("#myModalViewNotification").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        };
+        var DashBoardLink = function (userRole) {
+            ShowProgress();
+            if (userRole == "ALLUMINAE") {
+                window.location = "/Alumni/Dashboard";
+            }
+            else {
+                window.location = "/Dashboard/Dashboard";
+            }
+        }
+        //current student Links/////////////////
+        var CourseRegistrationLink = function () {
+            ShowProgress();
+            window.location = "/Course/CourseRegistration";
+        }
+        var FeeStatementLink = function () {
+            debugger
+            ShowProgress();
+            window.location = "/Financial/FeeStatement";
+        }
+        var ReceiptsLink = function () {
+            ShowProgress();
+            window.location = "/Financial/Receipts";
+        }
+        var SemProformaLink = function () {
+            ShowProgress();
+            window.location = "/ViewDocuments/ViewDocuments?DocT=SEMPROFINV";
+        }
+        var PaymentPlanLink = function () {
+            ShowProgress();
+            window.location = "/Financial/PaymentPlan";
+        }
+        var TimeTableLink = function () {
+            ShowProgress();
+            window.location = "/Course/StudentTimeTable";
+        }
+        var AcademicRequisitionLink = function () {
+            ShowProgress();
+            window.location = "/Course/StudentRequisitions";
+        }
+        var LecturerEvaluationLink = function () {
+            ShowProgress();
+            window.location = "/Course/LecturerEvaluation";
+        }
+        var GraduationRequestLink = function () {
+            ShowProgress();
+            window.location = "/Course/GraduationRequest";
+        }
+        var ClearanceRequestLink = function () {
+            ShowProgress();
+            window.location = "/Course/ClearanceRequest";
+        }
+        var EnquiryLink = function () {
+            ShowProgress();
+            window.location = "/Course/StudentEnquiryList";
+        }
+        var SponsorshipRequisitionLink = function () {
+            ShowProgress();
+            window.location = "/Welfare/SponsorshipApplication";
+        }
+        var HostelBookingLink = function () {
+            ShowProgress();
+            window.location = "/Welfare/HostelList";
+        }
+        var MealBookingLink = function () {
+            ShowProgress();
+            window.location = "/Welfare/MealBooking";
+        }
+        var ClubsSocietiesLink = function () {
+            ShowProgress();
+            window.location = "/Welfare/ClubsSociety";
+        }
+        var ExamCardLink = function () {
+            ShowProgress();
+            window.location = "/ViewDocuments/ViewDocuments?DocT=EXAMCARD";
+        }
+        var ProvisionalResultsLink = function () {
+            ShowProgress();
+            //window.location = "/ExamResults/ProvisionalResults";
+            window.location = "/ViewDocuments/ViewDocuments?DocT=RESULTS";
+        }
+        var StudentAuditLink = function () {
+            ShowProgress();
+            window.location = "/ViewDocuments/ViewDocuments?DocT=STDAUDIT";
+        }
+        //end current student Links/////////////////
+
+        //Alluminae Links////////////////////
+        var AlumniAcademicRequisitionLink = function () {
+            ShowProgress();
+            window.location = "/Alumni/StudentRequisitions";
+        }
+        var ApplicationIsntuctionLink = function () {
+            ShowProgress();
+            window.location = "/Alumni/OnlineApplicationInstructions";
+        }
+        var ApplicationListLink = function () {
+            ShowProgress();
+            window.location = "/Alumni/ProgrammApplicationList";
+        }
+        //end Alluminae Links/////////////////
+        var ChangePasswordLink = function () {
+            ShowProgress();
+            window.location = "/Settings/ChangePassword";
+        }
+    </script>
+</body>
+</html>

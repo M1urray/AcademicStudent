@@ -1,0 +1,313 @@
+﻿@model New_Student_Portal.ViewModel.StudentReqs
+<div class="container">
+    <div class="col-md-12" style="background-color: white">
+        <div class="row">
+            <div class="col-md-12">
+                <span style="font-weight: bold">Choose the Type of Requisition</span>
+                <div><select class="form-select" id="ReqType" name="RegType" onchange="ShowRequiredDiv()">
+    <option value="">--Select Requisition Type--</option>
+    @if (Model.SettlementT != "KUCCPS")
+    {
+        <option value="1">Campus Transfer</option>
+        <option value="2">Change of Major</option>
+    }
+    <option value="3">Deferment Request</option>
+    <option value="4">Re-Admission After Deferment</option>
+    <option value="5">Re-Admission After Suspension</option>
+    <option value="8">Special Exams</option>
+    <option value="9">Official Transcript</option>
+    <option value="11">Request to add or drop a unit</option>
+    <option value="12">Programme Minor</option>
+    <option value="13">Double Major</option>
+    <option value="14">Double Concentration</option>
+    <option value="16"> Missing Grade</option>
+    <option value="17">Exemption</option>
+    <option value="18">Exam Challenge</option>
+    <option value="19">Transit To Next Programme Level</option>
+    <option value="20">Withdrawal</option>
+    <option value="21">Change of Mode of Study</option>
+    <option value="22">Add or Drop Unit</option>
+    <option value="23">Show course appeal due to failure to sit for exams</option>
+    <option value="24">Request to resit failed examinations units.</option>
+    <option value="25">Request to retake a course</option>
+    <option value="26">Request for re-admission</option>
+    <option value="27"> Clearance – Inter School Transfer and before Graduation</option>
+    <option value="28">Request for attachment letters</option>
+    <option value="29">Request for correction of Names</option>
+    <option value="30">Request for Insurance Letters</option>
+    <option value="31">Recommendation/completion letters.</option>
+    <option value="32">Request for Lost ID Replacement.</option>
+    <option value="33">Request for caution money during clearance.</option>
+    <option value="34">Deferment Forms</option>
+    <option value="36">Request for late registration of units</option>
+    <option value="37">Request to print unofficial transcript</option>
+    <option value="38">Request to change mode of study</option>
+    <option value="39">Exam challenge requisition</option>
+    <option value="40">Request for letter of completion</option>
+    <option value="41">Application for scholarship requisition</option>
+</select></div>
+            </div>
+        </div>
+    </div>
+    <div><hr /></div>
+    <div id="RegForm">
+        <div style="background-color: white;" id="CampusChange">
+            <div class="row">
+                <div class="col-md-6">
+                    <span style="font-weight: bold">Campus To</span>
+                    <select class="form-select" id="ddlCampus" name="ddlCampus">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: white;" id="DivReqData">
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="font-weight: bold"><label id="lblTle"></label></span>
+                    <p style="color:red"><i><label id="lblTText"></label></i></p>
+                    <div id="divRegUnits"></div>
+                </div>
+            </div>
+        </div>        
+        <br />
+        <div class="row" id="DivReasons">
+            <div class="col-md-12">
+                <span class="font-weight-bold"><label id="lblTitle"></label></span>
+                <textarea class="form-control" id="txtRemarks"></textarea>
+            </div>
+        </div>
+        <hr />
+        <div align="center">
+            <input type="button" class="btn btn-danger" value="Submit Requisition" onclick="SubmitStudentRequistion();" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#RegForm").hide();
+        $("#ReqType,#ddlCampus").select2({
+            dropdownParent: $('#myModalUnits'),
+            width: '100%'
+        });
+    });
+    var ShowRequiredDiv = function () {
+        var regType = $("#ReqType").children("option:selected").val();
+        if (regType == "") {
+            $("#RegForm").hide();
+        }
+        else {
+            $("#RegForm").show();
+            $("#DivReasons").show();            
+            HideSections();
+            if (regType == "1") {
+                if (`@Model.SettlementT` == "KUCCPS") {
+                    Swal.fire('Warning', 'Campus Transfer not for KUCCPS Students', 'warning');
+                    return false;
+                }
+                else {
+                    $("#CampusChange").show();
+                    $("#lblTitle").text("Give Reason for the change");
+                    LoadCampus();
+                }
+            }
+            else if (regType == "3") {
+                $("#lblTitle").text("Give Reason for the defferement");
+            }
+            else if (regType == "4") {
+                $("#lblTitle").text("Give Reason for the Re-Admission after deferment");
+            }
+            else if (regType == "5") {
+                $("#lblTitle").text("Give Reason for the Re-Admission after Suspension");
+            }
+            else if (regType == "6") {
+                $("#lblTitle").text("Give Reason for the Re-Admission after Suspension");
+            }
+            else if (regType == "10") {
+                $("#lblTitle").text("Give Reason for the Clearance Requisition");
+            }
+            else if (regType == "8" || regType == "11" || regType == "20") {
+                $("#lblTle").text("Registered Courses");
+                $("#DivReqData").show();
+                if (regType == "8") {
+                    $("#DivReasons").hide();
+                }
+                if (regType == "11") {
+                    $("#lblTText").text("Select the courses you want to drop");
+                    $("#lblTitle").text("Give Reason for the drop of Course(s)");
+                }
+                if (regType == "20") {
+                    $("#lblTText").text("Select the courses you want to Withdraw");
+                    $("#lblTitle").text("Give Reason for the Withdrawal");
+                }
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    dataType: 'HTML',
+                    data: JSON.stringify({ RegType: regType }),
+                    contentType: "application/json; charset = utf-8",
+                    url: "/Course/GetCurrentRegisteredUnits",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "9") {
+                $("#lblTle").text("Official Transcipt");
+                $("#DivReqData").show();
+                $("#lblTitle").text("Give Reason for the Official Transcript");
+
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    dataType: 'HTML',
+                    data: JSON.stringify({ RegType: regType }),
+                    contentType: "application/json; charset = utf-8",
+                    url: "/Course/OfficialTranscript",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "2" || regType == "12" || regType == "13" || regType == "14") {
+                $("#lblTText").text("Select the Programme");
+                $("#lblTitle").text("Give Reason for the request");
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    dataType: 'HTML',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ type: regType }),
+                    processData: false,
+                    url: "/Course/ProgrammeListViewMinorMajor",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "16") {
+                $("#lblTle").text("Registered Courses");
+                $("#lblTText").text("Select the courses with Missing Grade(s)");
+                $("#lblTitle").text("Give Reason for the Missing Grade(s)");
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/GetUnitsWithMissingGrades",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "17") {
+                $("#lblTText").text("Select the courses you want Exemptions");
+                $("#lblTitle").text("Give Reason for the Exemptions");
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/GetUnitsForExemptions",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "18") {
+                $("#lblTText").text("Select the courses you want Exam Challenge");
+                $("#lblTitle").text("Give Reason for the Exam Challenge");
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/GetExamChallengeUnits",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "19") {
+                $("#lblTitle").text("Give Reason for the Transit");
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/GetProgrammeTransit",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else {
+                HideSections();
+            };
+        }
+    }
+    var HideSections = function () {
+        $("#CampusChange").hide();
+        $("#DivReqData").hide();
+    };
+    var LoadCampus = function () {
+        ShowProgress();
+        $.getJSON("/Course/GetCampusList", null,
+            function (data) {
+                $("#ddlCampus").empty().append('<option selected="selected" value="">--Select Campus--</option>');
+                $.each(data.ListOfCampus, function () {
+                    $("#ddlCampus").append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+                HideProgress();
+            });
+    }
+</script>

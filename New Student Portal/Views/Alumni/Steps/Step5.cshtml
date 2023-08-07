@@ -1,0 +1,113 @@
+﻿ <!--step-1-->
+<div id="step-6">
+    <div class="d-flex justify-content-center pt-0 mt-0">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="panel border-theme-color customPanel">
+                <div class="panel-heading bg-theme-color text-center d-flex justify-content-center pl-2 pr-2">
+                    Step 6/6<span class="d-none d-sm-block"> - Submission</span>
+                </div>
+                <div class="panel-body pb-2">
+                    <form action="http://192.168.88.11:881/ssp/application/apply/store" method="POST" id="application" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to submit this application? PLEASE NOTE YOU WILL NO LONGER BE ALLOWED TO EDIT THE CONTENT OF THE APPLICATION');">
+                        <input type="hidden" name="_token" value="5pgT9Hb00eeOhqNQ78TytnvH0e55hdmJeZIyaTwH">                    <!--declaration-->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column font-weight-bold">
+                                <label class="control-label">DECLARATION</label><br>
+                                <div class="form-check d-inline-block">
+                                    <input type="checkbox" class="form-check-input " name="declaration" id="declaration1" onchange="onDeclaration()">
+                                    <p class="ml-5 text-uppercase">By Checking this checkbox you confirm that you have read and agreed to Daystar University's students <a href="/file/student-handbook" target="blank">code of conduct</a></p>
+                                </div>
+                                <div class="form-check d-inline-block">
+                                    <input type="checkbox" class="form-check-input " name="declaration" id="declaration2" onchange="onDeclaration()">
+                                    <p class="ml-5 text-uppercase">
+                                        By Checking this checkbox you confirm that the information provided in this application is correct (<a href="/ssp/application-preview/APPL-00034" target="blank">Preview application</a>). The University will nullify any admission
+                                        obtained on the basis of untrue information.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                                <label class="control-label font-weight-bold">APPLICATION FEE PAYMENT</label><br>
+                                <p class="">Please note you are supposed to pay the application fee before you submit your application. Click the green button below to make payment</p>
+                                <p class="d-block">
+                                    <a data-toggle="modal" data-id="APPL-00034" data-phone="0712456241" data-amount="1,000.00" title="View Payment Information" class="open-paymentmodal btn btn-danger" href="#paymentmodal"><i class="fa fa-money-bill-alt"></i> Make Payment</a>
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-secondary mr-2" onclick="BacktoStepFour()"><i class="feather icon-arrow-left"></i> Back</button>
+                            <button type="submit" class="btn btn-primary" onclick="SubmitStepFourSection()">Submit & Finish</button>
+                        </div>
+                    </form>
+                    <!-- Payments Modal -->
+                    <div class="modal fade" id="paymentmodal" tabindex="-1" role="dialog" data-keyboard="false">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content bg-white">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Payment Information</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="modalBody">
+                                    <p>
+                                        Payment Options:- MPESA Express
+                                        </br>
+                                        <div id="msg" style="block:none" class="btn-success">
+
+                                        </div>
+                                        <strong>Confirm your phone number below before clicking on the MPESA Express Button</strong>
+                                    </p>
+
+                                    <input id="phone" type="text" class="form-control " name="phone" value="" required autofocus>
+                                    </p>
+                                    <button type="button" id="btnexpress" class="btn btn-success btn-md" onclick="performstk()"><i class="fas fa-bolt"></i> Trigger MPESA Express</button>
+                                    </p>
+                                    <strong>Didn't receive a prompt for PIN input on your phone? Follow the below steps</strong>
+                                    <ol>
+                                        <li>Go to MPESA Menu</li>
+                                        <li>Lipa na MPESA</li>
+                                        <li>Select Paybill</li>
+                                        <li>Enter Business Number as <strong>#####</strong></li>
+                                        <li>Enter Account Number as <strong><input type="text" name="id" id="id" value="id" readonly /></strong></li>
+                                        <li>Enter Amount As <input type="text" name="amount" id="amount" value="amount" readonly /></li>
+                                        <li>Enter PIN</li>
+                                    </ol>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <!-- Confirm Payments Modal -->
+                    <!-- Payments Modal -->
+                    <div class="modal" id="confirmpaymentmodal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Payment Information</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="msg1" style="block:none;" class="btn-warning">
+                                    </div>
+
+                                    <strong>Kindly Key in the MPESA Transaction Code Below</strong>
+                                    </p>
+
+                                    <input id="mpesacode" type="text" placeholder="OKD9384OI9" class="form-control " name="mpesacode" autocomplete="off" required autofocus>
+                                    </p>
+                                    <button type="button" id="confirmcodebtn" class="btn btn-success btn-md" onclick="confirmcode()"><i class="fas fa-check"></i> Confirm</button>
+                                    </p>
+                                </div>
+                                <!--</form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model New_Student_Portal.ViewModel.New_Requisition
+<div class="container">
+    <div class="col-md-12" style="background-color: white">
+        <div class="row">
+            <div class="col-md-6">
+                <span style="font-weight: bold">Semester</span>
+                @Html.DropDownListFor(model => model.Code, Model.ListOfSemester, "--select Semester--", new { @class = "form-control", @id = "ddlSemester", @onchange = "GetRegUnits()" })
+            </div>
+            <div class="col-md-6">
+                <span style="font-weight: bold">Unit</span>
+                <select class="form-select" id="ddlUnit" name="ddlUnit">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlSemester,#ddlUnit").select2({
+            dropdownParent: $('#myModalUnits'),
+            width: '100%'
+        });
+        $("#ddlUnit").empty().append('<option selected="selected" value="">--Select Unit--</option>');
+    });
+    var GetRegUnits = function () {
+        var Sem = $("#ddlSemester").children("option:selected").val();
+        if (Sem == "") {
+            $("#ddlUnit").empty().append('<option selected="selected" value="">--Select Unit--</option>');
+        }
+        else {
+            ShowProgress();
+            $.getJSON("/GradeCompaint/GetStudentUnitsList", { Sem: Sem },
+                function (data) {
+                    $("#ddlUnit").empty().append('<option selected="selected" value="">--Select Unit--</option>');
+                    $.each(data.ListOfUnits, function () {
+                        $("#ddlUnit").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                    HideProgress();
+                });
+        }
+    }
+</script>
+

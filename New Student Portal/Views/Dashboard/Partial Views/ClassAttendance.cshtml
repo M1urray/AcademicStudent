@@ -1,0 +1,29 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.ClassAttendance>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-hover table-striped">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="col-12" style="color:black;font-size:10px">
+                                            <b>@Html.DisplayFor(model => item.Unit) - @Html.DisplayFor(model => item.Description)</b>
+                                            <div class="progress mb-0">
+                                                <div class="progress-bar" role="progressbar" style="width: @(item.PercAtte + "%");" aria-valuenow="@item.PercAtte" aria-valuemin="0" aria-valuemax="100">@(item.PercAtte)%</div>
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div> <!-- end row -->
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div>
+    </div>
+</div>

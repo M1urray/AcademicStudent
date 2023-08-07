@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Clubs & Society";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    b {
+        font-size: 14px;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Clubs & Society</span></h4>
+    </div>
+    <div class="modal-body pre-scrollable">
+        <input type="button" class="btn btn-danger" value="New Request" onclick="NewClubSociety()" />
+        <hr />
+        <div id="divClubsSocieties"></div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New Club/Society</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadClubsSocieties();
+    });
+    function LoadClubsSocieties() {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Welfare/ClubsSocietiesList",
+            success: function (data) {
+                $("#divClubsSocieties").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                alert("There is some problem to process your request. Please try after some time");
+            }
+        });
+    }
+    var NewClubSociety = function () {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Welfare/NewClubsSociety",
+            success: function (data) {
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                alert("There is some problem to process your request. Please try after some time");
+            }
+        });
+    }
+    var SubmitNewClubsSociety = function () {
+        var MemberOf = $("#ddlMOf").children("option:selected").val();
+        var MemberType = $("#ddlMemberType").children("option:selected").val();
+        var Remarks = $("#txtRemarks").val();
+        if (MemberOf == "") {
+            Swal.fire('Error', 'Choose the type you want to be a member', 'error');
+            return;
+        }
+        else if (MemberType == "") {
+            Swal.fire('Error', 'Select Member Type', 'error');
+            return;
+        }
+        else {
+            var ClubsSocietySportSubmit = {};
+            ClubsSocietySportSubmit.MemberOf = MemberOf;
+            ClubsSocietySportSubmit.MemberType = MemberType;
+            ClubsSocietySportSubmit.Remarks = Remarks;
+
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                url: "/Welfare/SaveClubSocietySport",
+                data: JSON.stringify(ClubsSocietySportSubmit),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        HideProgress();
+                        $("#myModalUnits").modal("hide");
+                        LoadClubsSocieties();
+                        Swal.fire('Success', data.message, 'success');
+                    }
+                },
+                error: function () {
+                    if (data.success == false) {
+                        HideProgress();
+                        Swal.fire('Error', data.message, 'error');
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+

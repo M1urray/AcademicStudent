@@ -1,0 +1,124 @@
+﻿@model New_Student_Portal.ViewModel.RoomSpaces
+@{
+    ViewBag.Title = "Booked Space Details";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<div class="modal-content">    
+    <div class="modal-body pre-scrollable">
+        <div>
+            <div id="divBtns">
+                <input type="button" class="btn btn-warning" value="Print Hostel Invoice" onclick="PrintHostelInvoice()" />
+                @*<input type="button" class="btn btn-warning" value="Print Clearance Form" onclick="PrintHostelClearanceForm()" />*@
+            </div>
+            <hr />
+            <div id="divMsg">
+                <label id="lblMsg" style="color:red"></label>
+            </div>
+            <table align="center" runat="server" id="TableHost">
+                <tr>
+                    <td><b>Student No:</b></td>
+                    <td>
+                        @Model.Student
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Semester:</b></td>
+                    <td>
+                        @Model.Sem
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Hostel Booked:</b></td>
+                    <td>
+                        @Model.HostelCode
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Room Number:</b></td>
+                    <td>
+                        @Model.RoomCode
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Space Number:</b></td>
+                    <td>
+                        @Model.SpaceCode
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Accomodation Fee:</b></td>
+                    <td>
+                        @Model.Cost
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+                <iframe id="iframe" style="width:100%;height:500px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var billed = `@Model.Billed`;
+        if (billed == "True") {
+            $("#divBtns").show();
+            $("#lblMsg").text("You have booked this hostel");
+            $("#lblMsg").attr("color","Red");
+        }
+        else {
+            $("#divBtns").hide();
+            $("#lblMsg").text("You have reserved this room for 24 hours awaiting payment");
+            $("#lblMsg").attr("color", "Green");
+        }
+    });
+    var PrintHostelInvoice = function () {
+        $("#labelT").text("Hostel Invoice Printout");
+        ShowProgress();
+        $.ajaxSetup({
+            cache: false
+        });
+        $.ajax({
+            url: '/Welfare/PrintHostelInvoice',
+            type: "POST",
+            datatype: "json",
+            cache: false,
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#myModalUnits").modal("show");
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+                HideProgress();
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+</script>
+

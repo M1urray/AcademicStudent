@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <span style="font-weight: bold">Category</span>
+        <select class="form-select" id="Category" name="Category" onchange="GetProgrammeList()">
+            <option value="">--Select Category--</option>
+            <option value="Certificate">Certificate</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Undergraduate">Degree</option>
+            <option value="Masters">Masters</option>
+            <option value="PHD">PHD</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <span style="font-weight: bold">Programme</span>
+        <select class="form-select" id="ddlProgrammeTransit" name="ddlProgrammeTransit">
+        </select>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ddlProgrammeTransit').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+    });
+    var GetProgrammeList = function () {
+        var Category = $("#Category").children("option:selected").val();
+        if (Category == "") {
+            $('#ddlProgrammeTransit').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+        }
+        else {
+            ShowProgress();
+            $("#ProgrammeDetails").show();
+            $('#ddlProgrammeTransit').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+
+            $.getJSON("/Course/GetProgrammeList", { Categ: Category },
+                function (data) {
+                    $("#ddlProgrammeTransit").empty().append('<option selected="selected" value="">--Select Programme--</option>');
+                    $.each(data.programmeList.ListOfProgrammes, function () {
+                        $("#ddlProgrammeTransit").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                    HideProgress();
+                });
+        }
+    }
+</script>
+
+

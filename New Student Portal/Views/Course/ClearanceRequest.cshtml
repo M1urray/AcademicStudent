@@ -1,0 +1,108 @@
+﻿@model New_Student_Portal.ViewModel.StudentDetailView
+@{
+    ViewBag.Title = "ClearanceRequest";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    label {
+        font-weight: bold;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title"><span class="spanClass"><label id="lblTitle"></label></span></h4>
+    </div>
+    <div class="modal-body">
+        <div id="divRequisition"></div>
+    </div>
+</div>
+
+<script src="~/JS/ShowProgression.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetNewClearanceRequest();
+    });
+    function GetNewClearanceRequest() {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Course/NewClearanceRequest",
+            success: function (data) {
+                $("#divRequisition").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Error', 'There is some problem to process your request. Please try after some time', 'error');
+            }
+        });
+    }
+    var SubmitClearanceRequest = function (StdNo, Prog) {
+        var StudentReqs = {};
+        StudentReqs.StdNo = StdNo;
+        StudentReqs.Prog = Prog;
+        StudentReqs.Requisition_Type = 10;
+        StudentReqs.Remarks = "";
+        ShowProgress();
+        $.ajax({
+                url: "/Course/SubmitClearanceRequest",
+                datatype: "json",
+                type: "POST",
+                data: JSON.stringify({ regData: StudentReqs }),
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    if (data.success == true) {
+                        HideProgress();
+                        GetNewClearanceRequest();
+                        Swal.fire('Success', data.message, 'success');
+                    }
+                    else {
+                        HideProgress();
+                        Swal.fire('Warning', data.message, 'warning');
+                    }
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Error', err, 'error');
+                }
+            });
+    };
+    var SubmitCollectionDate = function () {
+        var date = $("#dtPicker").val();
+        if (date == "") {
+            Swal.fire('Warning', 'Select the collection date', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                url: "/Course/CertificateCollectionDate",
+                datatype: "json",
+                type: "POST",
+                data: JSON.stringify({ Date: date }),
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    if (data.success == true) {
+                        HideProgress();
+                        LoadClearanceRequest();
+                        Swal.fire('Success', data.message, 'success');
+                    }
+                    else {
+                        Swal.fire('Warning', data.message, 'warning');
+                        HideProgress();
+                    }
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Warning', err, 'warning');
+                }
+            });
+        }
+    };
+</script>
+
+

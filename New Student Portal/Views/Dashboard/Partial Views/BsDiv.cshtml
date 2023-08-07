@@ -1,0 +1,117 @@
+﻿@model New_Student_Portal.ViewModel.ChaplainGroupDetails
+<div class="card">
+    <h4 class="card-title">Bible Study</h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.IsBSLeader && Model.BsGroup != "")
+                {
+                    <span class="badge btn-sm btn-secondary" style="font-size:12px">
+                        You are Bible Sdudy Leader.
+                    </span>
+                    <h4>Your Bible Study Group is <span class="badge badge-outline-success">@Model.BsGroup</span></h4>
+                    <hr />
+                    <div class="row">
+                        @*<div class="col-4">
+                                <button class="btn btn-sm btn-danger form-control" id="lblCreateBS" onclick="CreateDocument('BS');">Create Bible Study Group</button>
+                                <hr />
+                            </div>*@
+                        @*<div class="col-6">
+                                <button class="btn btn-sm btn-danger form-control" id="lblJoinDCF" onclick="BibleStudyMembers('@Model.BsGroup', true, 'Students in Waiting Room');">Waiting Room</button>
+                                <hr />
+                            </div>*@
+                        <div class="col-6">
+                            <button class="btn btn-sm btn-success form-control" id="lblJoinBS" onclick="BSDetails(`@Model.BsGroup`);">Bible Study Group Details</button>
+                            <hr />
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-sm btn-danger form-control" id="lblJoinDCF" onclick="BibleStudyMembers('@Model.BsGroup', false, 'Bible Study Members');">Members</button>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @*<table class="table table-bordered dt-responsive nowrap">
+                                    <thead style="color:white;background-color:black;">
+                                        <tr>
+                                            <th width="45%">Bible Study</th>
+                                            <th width="40%">Student Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            if (Model.BstudyDetails != null)
+                                            {
+                                                <tr>
+                                                    <td>@Model.Description</td>
+                                                    <td>@Model.StdCount</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="2" style="color:Red">No Internal Memos found</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>*@
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    if (Model.RequestToBeLeader && Model.BsLeaderRequestStatus == "Open")
+                    {
+                        <div class="row">
+                            <div class="col-12"> <h4>Requested to be a Leader. Waiting Approval</h4></div>
+                        </div>
+                    }
+                    else
+                    {
+                        if (Model.BsGroup != "")
+                        {
+
+                            <div class="row">
+                                <div class="col-12"> <h4>Your Bible Study Group is <span class="badge badge-outline-success">@Model.BsGroup</span></h4></div>
+                            </div>
+                            <hr />
+                        }
+                        <div class="row">
+                            @if (Model.BsLeaderRequestStatus == "Declined" && Model.BsGroup == "")
+                            {
+                                <div class="row">
+                                    <div class="col-12"> <h4>Request to be a Bible Study Leader has been declined. Request to Join a Bible Study</h4></div>
+                                </div>
+                                <hr />
+                            }
+                            <div class="col-6">
+                                <button class="btn btn-sm btn-success form-control" id="lblJoinBS" onclick="BSDetails(`@Model.BsGroup`);">Join Bible Study Group</button>
+                            </div>
+                            @if (Model.BsGroup == "" && Model.RequestToBeLeader == false)
+                            {
+                                <div class="col-6">
+                                    <button class="btn btn-sm btn-danger form-control" onclick="RequestToBeBSLeader();">Request to be a Bible Study Group Leader</button>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadNotifications();
+        if ('@Model.BsGroup' == "") {
+            $("#lblJoinBS").text("Join Bible Study Group");
+        }
+        else {
+            $("#lblJoinBS").text("Bible Study Group Details");
+        }
+        if ('@Model.BsGroup' == "") {
+            $("#lblJoinBS").text("Join Bible Study Group");
+        }
+    });
+</script>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.SponsorshipApplication>
+<div class="pre-scrollable">
+    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <thead style="background-color:black;color:white">
+            <tr>
+                <th>Action</th>
+                <th>No</th>
+                <th>Application Date</th>
+                <th>Applied Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><a href="#" onclick="ViewDocument('@item.Application_No');">View Document</a></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Application_No)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Application_Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Applied_Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" style="color:red">
+                            No Records Found
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+

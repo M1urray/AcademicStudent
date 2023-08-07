@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "New Programme Application";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<div class="modal-content">    
+    <div class="modal-body">
+        @*<div class="stepwizard">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-primary btn-circle" disabled>1</button>
+                    <p class="d-none d-sm-block">Programme</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" disabled>2</button>
+                    <p class="d-none d-sm-block">Education</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" disabled>3</button>
+                    <p class="d-none d-sm-block">Grades</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" disabled>4</button>
+                    <p class="d-none d-sm-block">Contacts</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" disabled>5</button>
+                    <p class="d-none d-sm-block">Submission</p>
+                </div>
+            </div>
+        </div>*@
+        <div id="divSteps"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetStepSection('StepOneView');
+    });
+    function GetStepSection(Step) {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Alumni/" + Step,
+            success: function (data) {
+                $("#divSteps").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepOneSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Alumni/SaveStepOneData",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('StepTwoView');
+                }
+                else {
+                    HideProgress();
+                    swal('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepTwoSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Alumni/SaveStepTwoData",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('StepThreeView');
+                }
+                else {
+                    HideProgress();
+                    swal('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepThreeSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Alumni/SaveStepThreeData",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('StepFourView');
+                }
+                else {
+                    HideProgress();
+                    swal('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepFourSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Alumni/SaveStepFourData",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('StepFiveView');
+                }
+                else {
+                    HideProgress();
+                    swal('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepFiveSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Alumni/SaveStepFiveData",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('StepFiveView');
+                }
+                else {
+                    HideProgress();
+                    swal('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                swal('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function BacktoStepOne() {
+        GetStepSection('StepOneView');
+    }
+    function BacktoStepTwo() {
+        GetStepSection('StepTwoView');
+    }
+    function BacktoStepThree() {
+        GetStepSection('StepThreeView');
+    }
+    function BacktoStepFour() {
+        GetStepSection('StepFourView');
+    }
+</script>
+

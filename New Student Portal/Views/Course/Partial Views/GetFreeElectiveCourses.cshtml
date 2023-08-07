@@ -1,0 +1,269 @@
+﻿@model New_Student_Portal.ViewModel.FreeElectiveUnits
+@{
+    string ClassCodeNeeded = "";
+    int i = 1;
+}
+<link href="~/CSS/Loader.css" rel="stylesheet" />
+<div class="loading" align="center" id="divLoader">
+    <br />
+    <img src="~/img/ajax-loader.gif" alt="" />
+</div>
+<style>
+    .checkboxClass {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+    }
+
+    td, th {
+        white-space: normal;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .pre-scrollable {
+        max-height: 300px;
+        border: 2px solid black;
+    }
+</style>
+<div>
+    <span style="font-size:14px;font-weight:bolder">Free Elective Units</span>
+    <div class="pre-scrollable">
+        <table class="table" id="tblProgUnit" style="font-size:12px">
+            <thead>
+                <tr>
+                    <th width="10%" style="text-align:right">Select</th>
+                    <th width="15%">
+                        Course
+                    </th>
+                    <th width="15%" style="text-align:center">
+                        Section
+                    </th>
+                    <th width="30%">
+                        Desription
+                    </th>
+                    <th width="15%">
+                        Day
+                    </th>
+                    <th width="15%">
+                        Period
+                    </th>
+                    <th width="15%">
+                        Campus
+                    </th>
+                    <th width="15%">
+                        Lecturer
+                    </th>
+                    <th class="hide">
+                    </th>
+                    <th class="hide"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.ListOfFreeElectiveUnitsSubjects != null && Model.ListOfFreeElectiveUnitsSubjects.Count() > 0)
+                    {
+                        foreach (var item in Model.ListOfFreeElectiveUnitsSubjects)
+                        {
+                            <tr>
+                                <td align="center">
+                                    <input type="checkbox" class="checkboxClass" id="@i" value="@item.CF" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+                                </td>
+                                <td align="center">
+                                    @Html.DisplayFor(modelItem => item.Class)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Desription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Day)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Period)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Campus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lec)
+                                </td>
+                                <td class="hide">
+                                    @Html.DisplayFor(modelItem => item.HasPrelqUnit)
+                                </td>
+                                <td class="hide">
+                                    @Html.DisplayFor(modelItem => item.ClassFull)
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">
+                                No Records Found
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <hr />
+
+</div>
+<div align="center">
+    <hr />
+    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits('@ClassCodeNeeded');" />
+</div>
+<script src="~/JS/ShowProgression.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var varID = 0;
+        $(':checkbox').on('change', function () {
+            var CurrDay, currTime,CstartTime,currentRow;
+            if ($(this).prop('checked') == true) {
+                varID = $(this).prop("id");
+                currentRow = $(this);
+                CurrDay = currentRow.closest('tr').find("td").eq(4).html().trim();
+                currTime = currentRow.closest('tr').find("td").eq(5).html().trim();
+                CurrentCourse = currentRow.closest('tr').find("td").eq(1).html().trim();
+                var hasPrel = currentRow.closest('tr').find("td").eq(8).html().trim();
+                var ClassFull = currentRow.closest('tr').find("td").eq(9).html().trim();
+                var s = currTime.split('-');
+                CstartTime = s[0];
+            }
+            if (ClassFull == "Y") {
+                swal('Warning', 'The class size has reached its maximum. Choose another class/Unit', 'warning');
+                $(this).closest('tr').find(':checkbox').prop('checked', false);
+                return;
+            }
+            else {
+                var proceed = true;
+                if (hasPrel == "Y") {
+                    ShowProgress();
+                    $.ajax({
+                        type: "POST",
+                        url: "/Course/GetPrerequisiteUnits",
+                        //data: data,
+                        data: JSON.stringify({ Unit: CurrentCourse }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.success == true) {
+                                if (data.Found == true) {
+                                    swal('Warning', data.message, 'warning');
+                                    currentRow.closest('tr').find(':checkbox').prop('checked', false);
+                                    proceed = false;
+                                    HideProgress();
+                                }
+                                else {
+                                    proceed = true;
+                                    HideProgress();
+                                }
+                            }
+                            else {
+                                swal('Warning', data.message, 'warning');
+                                currentRow.closest('tr').find(':checkbox').prop('checked', false);
+                                HideProgress();
+                            }
+                        },
+                        error: function () {
+                            HideProgress();
+                            alert("There is some problem to process your request. Please try after some time");
+                        }
+                    });
+                }
+                if (proceed) {
+                    $('tbody tr').has(':checkbox:checked').each(function () {
+                        var row = $(this);
+                        var varID2 = $(this).find("input[type=checkbox]").prop("id");
+                        if (varID != varID2) {
+                            var Course, day, STime;
+
+                            Course = row.find("td").eq(1).html().trim();
+                            day = row.find("td").eq(4).html().trim();
+                            STime = row.find("td").eq(5).html().trim();
+
+                            var s = STime.split('-');
+                            STime = s[0];
+                            endTime = s[1];
+
+
+                            if (CurrDay == day) {
+                                //convert both time into timestamp
+                                var CurrentTime = new Date("November 13, 2021 " + CstartTime);
+                                CurrentTime = CurrentTime.getTime();
+
+                                var stt = new Date("November 13, 2021 " + STime);
+                                stt = stt.getTime();
+
+                                var endt = new Date("November 13, 2021 " + endTime);
+                                endt = endt.getTime();
+
+
+                                if ((stt <= CurrentTime) && (CurrentTime <= endt)) {
+                                    currentRow.closest('tr').find(':checkbox').prop('checked', false);
+                                    swal('Warning', 'This unit coflicts with ' + Course, 'warning');
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+
+                    var TotalSelected = 0;
+
+                    $('input:checkbox:checked').each(function () {
+                        TotalSelected += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());
+                    });
+
+                    TotalSelected = TotalSelected + parseInt(@Model.SelectedCourses);
+                    if (TotalSelected > parseInt(@Model.MaximumCourses)) {
+                        swal('Warning', 'You have reached maximum number of Credits. Maximum allowed is ' +@Model.MaximumCourses+' Credits', 'warning');
+                        $(this).closest('tr').find(':checkbox').prop('checked', false);
+                        return;
+                    }
+                }
+            }
+        });
+    });
+    var checkPrerequisiteUnits = function (Unit) {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Course/GetPrerequisiteUnits",
+            //data: data,
+            data: JSON.stringify({ Unit: CurrentCourse }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    if (data.Found == true) {
+                        swal('Warning', data.message, 'warning');
+                        currentRow.closest('tr').find(':checkbox').prop('checked', false);
+                        HideProgress();
+                    }
+                    else {
+                        HideProgress();
+                    }
+                }
+                else {
+                    swal('Warning', data.message, 'warning');
+                    currentRow.closest('tr').find(':checkbox').prop('checked', false);
+                    HideProgress();
+                }
+            },
+            error: function () {
+                HideProgress();
+                alert("There is some problem to process your request. Please try after some time");
+            }
+        });
+    };
+</script>
+
+

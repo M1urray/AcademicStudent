@@ -1,0 +1,83 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.StudentUnits>
+
+<style>
+    .BtnPadding {
+        padding: 1px;
+        font-size: 12px;
+    }
+</style>
+<div class="pre-scrollable">
+    <table class="table" id="tbRegUnits">
+        <thead>
+            <tr>
+                <th>
+                    Programme
+                </th>
+                <th>
+                    Stage
+                </th>
+                <th>
+                    Semester
+                </th>
+                <th>
+                    Unit
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Register for
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                {
+                    if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Programme)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Stage)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Semester)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Unit)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Unit_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegFor)
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" style="color:red">No Units Found</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="color:red">@ViewBag.Error</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

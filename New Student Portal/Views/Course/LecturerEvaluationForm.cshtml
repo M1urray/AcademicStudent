@@ -1,0 +1,858 @@
+﻿
+@model New_Student_Portal.ViewModel.Evaluation_Form
+@{
+    string Cat = "";
+}
+<style>
+    .RadioClass {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+    }
+
+    label {
+        vertical-align: -webkit-baseline-middle;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-body" style="font-size: 12px">
+        <p style="font-size: 14px; font-weight: bold; text-decoration: underline;">
+            Introduction
+        </p>
+        <p>
+            <u><b>PURPOSE AND CONFIDENTIALITY</b></u><br />
+            The purpose of this evaluation is to provide feedback about the course presentation to help in future
+            improvement. Please rate the statements given by choosing the most appropriate score as per the
+            following scale:
+        </p>
+        <p style="font-weight:bold">
+            1=Strongly Disagree; 2=Disagree; 3=Neutral; 4=Agree; 5=Strongly Agree
+        </p>
+        <hr />
+        <div class="panel panel-default">
+            <div class="panel-body pre-scrollable">
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Lecturer Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight:bold; width:20%">Lecturer Name:</td>
+                            <td style="width:80%">
+                                <asp:Label ID="lblLecturerName" runat="server" class="label label-info">@Model.LecDet.LecName</asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Unit Code :</td>
+                            <td>
+                                <asp:Label ID="lblUnitCode" class="label label-info">@Model.LecDet.Unit</asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Unit Name :</td>
+                            <td>
+                                <asp:Label ID="lblUnitName" runat="server" class="label label-info">@Model.LecDet.UnitName</asp:Label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr style="border-bottom:3px solid Black" />
+        <div id="Step1">
+            <div class="panel panel-default">
+                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 1))
+                {
+                    Cat = "";
+                    <div class="panel-heading" style="font-weight: bold">
+                        @c.Category
+                    </div>
+                    <div class="responsive-table-plugin">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive" data-pattern="priority-columns">
+                                <table class="table table-border-style" id="TB1">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Question</th>
+                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                            <th width="10%" style="text-align:center">Disagree</th>
+                                            <th width="10%" style="text-align:center">Neutral</th>
+                                            <th width="10%" style="text-align:center">Agree</th>
+                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                        </tr>
+                                    </thead>
+                                    @{ int i = 1;}
+                                    <tbody>
+                                        @foreach (var d in c.Eval_Quiz)
+                                        {
+                                            string name = "Ans" + i.ToString();
+
+                                            <tr>
+                                                <td>
+                                                    @i. @d.Quiz
+                                                    <input type="hidden" value="@d.Quiz" id="@i" />
+                                                </td>
+                                                @for (int j = 1; j < 6; j++)
+                                                {
+                                                    string ID = "Ans1" + j.ToString();
+                                                    <td align="center">
+                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
+                                                    </td>
+
+                                                }
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    Cat = c.Category;
+                }
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-8 col-sm-8 col-md-8" style="text-align:center">Steps 1 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('2',true,false,'@Cat');">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step2">
+            <div class="panel panel-default">
+                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 2))
+                {
+                    Cat = "";
+                    <div class="panel-heading" style="font-weight: bold">
+                        @c.Category
+                    </div>
+                    <div class="responsive-table-plugin">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive" data-pattern="priority-columns">
+                                <table class="table table-border-style" id="TB2">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Question</th>
+                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                            <th width="10%" style="text-align:center">Disagree</th>
+                                            <th width="10%" style="text-align:center">Neutral</th>
+                                            <th width="10%" style="text-align:center">Agree</th>
+                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                        </tr>
+                                    </thead>
+                                    @{ int i = 1;}
+                                    <tbody>
+                                        @foreach (var d in c.Eval_Quiz)
+                                        {
+                                            string name = "Ans2" + i.ToString();
+
+                                            <tr>
+                                                <td>
+                                                    @i. @d.Quiz
+                                                    <input type="hidden" value="@d.Quiz" id="@i" />
+                                                </td>
+                                                @for (int j = 1; j < 6; j++)
+                                                {
+                                                    string ID = "Ans2" + j.ToString();
+                                                    <td align="center">
+                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
+                                                    </td>
+
+                                                }
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    Cat = c.Category;
+                }
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('1');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 2 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('3',false,false,'@Cat');">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step3">
+            <div class="panel panel-default">
+                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 3))
+                {
+                    Cat = "";
+                    <div class="panel-heading" style="font-weight: bold">
+                        @c.Category
+                    </div>
+                    <div class="responsive-table-plugin">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive" data-pattern="priority-columns">
+                                <table class="table table-border-style" id="TB3">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Question</th>
+                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                            <th width="10%" style="text-align:center">Disagree</th>
+                                            <th width="10%" style="text-align:center">Neutral</th>
+                                            <th width="10%" style="text-align:center">Agree</th>
+                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                        </tr>
+                                    </thead>
+                                    @{ int i = 1;}
+                                    <tbody>
+                                        @foreach (var d in c.Eval_Quiz)
+                                        {
+                                            string name = "Ans3" + i.ToString();
+
+                                            <tr>
+                                                <td>
+                                                    @i. @d.Quiz
+                                                    <input type="hidden" value="@d.Quiz" id="@i" />
+                                                </td>
+                                                @for (int j = 1; j < 6; j++)
+                                                {
+                                                    string ID = "Ans3" + j.ToString();
+                                                    <td align="center">
+                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
+                                                    </td>
+                                                }
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    Cat = c.Category;
+                }
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('2');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 3 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('4',false,false,'@Cat');">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step4">
+            @{ string OnlineCat = "", FaceCat = ""; }
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    D. What was the mode of learning for this course<br />
+                    <div style="padding-left:50px">
+                        <div class="form-check">
+                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="1" id="flexRadioDefault1" onchange="StudyMode('1');">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Online
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="2" id="flexRadioDefault2" onchange="StudyMode('2');">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Face to Face
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom:3px solid Black" />
+                <div class="responsive-table-plugin d-none" id="FaceToFace">
+                    @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 4))
+                    {
+                        Cat = "";
+                        <div class="panel-heading" style="font-weight: bold">
+                            @c.Category
+                        </div>
+                        <div class="responsive-table-plugin">
+                            <div class="table-rep-plugin">
+                                <div class="table-responsive" data-pattern="priority-columns">
+                                    <table class="table table-border-style" id="TB4">
+                                        <thead>
+                                            <tr>
+                                                <th width="50%">Question</th>
+                                                <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                                <th width="10%" style="text-align:center">Disagree</th>
+                                                <th width="10%" style="text-align:center">Neutral</th>
+                                                <th width="10%" style="text-align:center">Agree</th>
+                                                <th width="10%" style="text-align:center">Strongly Agree</th>
+                                            </tr>
+                                        </thead>
+                                        @{ int i = 1;}
+                                        <tbody>
+                                            @foreach (var d in c.Eval_Quiz)
+                                            {
+                                                string name = "Ans4" + i.ToString();
+
+                                                <tr>
+                                                    <td>
+                                                        @i. @d.Quiz
+                                                        <input type="hidden" value="@d.Quiz" id="@i" />
+                                                    </td>
+                                                    @for (int j = 1; j < 6; j++)
+                                                    {
+                                                        string ID = "Ans4" + j.ToString();
+                                                        <td align="center">
+                                                            <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
+                                                        </td>
+
+                                                    }
+                                                </tr>
+                                                i++;
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        FaceCat = c.Category;
+                    }
+                </div>
+                <div class="responsive-table-plugin d-none" id="Online">
+                    @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 5))
+                    {
+                        Cat = "";
+                        <div class="panel-heading" style="font-weight: bold">
+                            @c.Category
+                        </div>
+                        <hr />
+                        <div class="panel-heading" style="font-weight: bold">
+                            1. Have all the materials for your courses for the semester been posted on the e-learninge platform
+                            <input type="hidden" id="hidden1" value="Have all the materials for your courses for the semester been posted on the e-learninge platform" />
+                            <div style="padding-left:50px">
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="radio" name="AnsMat" value="1" id="radMat1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="radio" name="AnsMat" value="2" id="radMat2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading" style="font-weight: bold">
+                            2. Have you been meeting on the e-learning platform weekly with your lecturer
+                            <input type="hidden" id="hidden2" value="Have you been meeting on the e-learning platform weekly with your lecturer" />
+                            <div style="padding-left:50px">
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="radio" name="AnsEL" value="1" id="radEl1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="radio" name="AnsEL" value="2" id="radEl2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading" style="font-weight: bold">
+                            3. What other modes has your lecturer employed to ensure that you continue learning
+                            <input type="hidden" id="hidden3" value="What other modes has your lecturer employed to ensure that you continue learning" />
+                            <div style="padding-left:50px">
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox1" value=" Microsoft Teams">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Microsoft Teams
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox2" value="Zoom">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Zoom
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox3" value="Skype">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Skype
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox4" value="Email">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Email
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox5" value="WhatsApp">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        WhatsApp
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox6" value="Google Meet">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Google Meet
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox7" value="Telegram">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Telegram
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    Other
+                                    <input type="text" id="txtOther1" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading" style="font-weight: bold">
+                            4. Please indicate below the greatest challenge you have faced during this season of e-learning
+                            <input type="hidden" id="hidden4" value="Please indicate below the greatest challenge you have faced during this season of e-learning" />
+                            <div style="padding-left:50px">
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg1" value="Poor Internet">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Poor Internet
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg2" value="Lack of bundles">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Lack of bundles
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg3" value="Not having a smart phone">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Not having a smart phone
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg4" value="Not having a laptop">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Not having a laptop
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    Other
+                                    <input type="text" id="txtOther2" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        OnlineCat = c.Category;
+                    }
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('3');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 4 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep5('@OnlineCat','@FaceCat');">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step5">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    E. What elements of the course most contributed to your learning?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtContrb" class="form-control"></textarea>
+                </div>
+                <div class="panel-heading" style="font-weight: bold">
+                    F. What improvements to the course would you recommend?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtImprivents" class="form-control"></textarea>
+                </div>
+                <div class="panel-heading" style="font-weight: bold">
+                    G. Any other comment?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtOtherComment" class="form-control"></textarea>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('4');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 5 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                </div>
+            </div>
+            <br />
+            <div align="center">
+                <button class="btn btn-sm btn-danger" onclick="CompleteEvaluation(`@Model.LecDet.Unit`,`@Model.LecDet.UnitName`,`@Model.LecDet.LecNo`);">Complete Evaluation</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var NextStep = function (step, FirstStep, LastStep,Cat) {
+        var Lecturer = {};
+
+        Lecturer.LecName = `@Model.LecDet.LecName`;;
+        Lecturer.LecNo = `@Model.LecDet.LecNo`;
+        Lecturer.Unit = `@Model.LecDet.Unit`;;
+        Lecturer.UnitName = `@Model.LecDet.UnitName`;;
+        Lecturer.Comments = "";
+      //var Mode = "";
+        var LecEval = new Array();
+      //var ELearning = new Array();
+        if (step == "2") {
+            var SaveData = false;
+            var ErroMsg = "";
+            $("#TB1 tbody tr").each(function (index) {
+                SaveData = false;
+                ErroMsg = "";
+                if ($("input[name=Ans" + (index + 1) +"]").is(':checked')) {
+                    $(this).removeClass("rowFocus");
+                    SaveData = true;
+                }
+                else {
+                    $(this).addClass("rowFocus");
+                    SaveData = false;
+                    ErroMsg = "Answer question " + (index + 1) + "";
+                    return false;
+                }
+            });
+            if (SaveData == false) {
+                Swal.fire('Warning', ErroMsg, 'warning');
+                return;
+            }
+            else {
+                $("#TB1 tbody tr").each(function (index) {
+                    var EvalQuiz = {};
+                    EvalQuiz.QuizCategory = Cat;
+                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
+                    EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
+                    LecEval.push(EvalQuiz);
+                });
+            }
+        }
+        if (step == "3") {
+            var SaveData = false;
+            var ErroMsg = "";
+            $("#TB2 tbody tr").each(function (index) {
+                SaveData = false;
+                ErroMsg = "";
+                if ($("input[name=Ans2" + (index + 1) + "]").is(':checked')) {
+                    $(this).removeClass("rowFocus");
+                    SaveData = true;
+                }
+                else {
+                    $(this).addClass("rowFocus");
+                    SaveData = false;
+                    ErroMsg = "Answer question " + (index + 1) + "";
+                    return false;
+                }
+            });
+            if (SaveData == false) {
+                Swal.fire('Warning', ErroMsg, 'warning');
+                return;
+            }
+            else {
+                $("#TB2 tbody tr").each(function (index) {
+                    var EvalQuiz = {};
+                    EvalQuiz.QuizCategory = Cat;
+                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
+                    EvalQuiz.Score = $("input[name=Ans2" + (index + 1) + "]:checked").val();
+                    LecEval.push(EvalQuiz);
+                });
+            }
+        }
+        if (step == "4") {
+            var SaveData = false;
+            var ErroMsg = "";
+
+            $("#TB3 tbody tr").each(function (index) {
+                SaveData = false;
+                ErroMsg = "";
+                if ($("input[name=Ans3" + (index + 1) + "]").is(':checked')) {
+                    $(this).removeClass("rowFocus");
+                    SaveData = true;
+                }
+                else {
+                    $(this).addClass("rowFocus");
+                    SaveData = false;
+                    ErroMsg = "Answer question " + (index + 1) + "";
+                    return false;
+                }
+            });
+            if (SaveData == false) {
+                Swal.fire('Warning', ErroMsg, 'warning');
+                return;
+            }
+            else {
+                $("#TB3 tbody tr").each(function (index) {
+                    var EvalQuiz = {};
+                    EvalQuiz.QuizCategory = Cat;
+                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
+                    EvalQuiz.Score = $("input[name=Ans3" + (index + 1) + "]:checked").val();
+                    LecEval.push(EvalQuiz);
+                });
+            }
+        }
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/LecturerEvaluation/SaveSectionData",
+            data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: FirstStep, LastSection: LastStep }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    if (step == "2") {
+                        $("#Step1").addClass("d-none");
+                        $("#Step2").removeClass("d-none");
+                    }
+                    if (step == "3") {
+                        $("#Step2").addClass("d-none");
+                        $("#Step3").removeClass("d-none");
+                    }
+                    if (step == "4") {
+                        $("#Step3").addClass("d-none");
+                        $("#Step4").removeClass("d-none");
+                    }
+                    if (step == "5") {
+                        $("#Step4").addClass("d-none");
+                        $("#Step5").removeClass("d-none");
+                    }
+                    if (step == "6") {
+                        $("#Step5").addClass("d-none");
+                        $("#Step6").removeClass("d-none");
+                    }
+                    Swal.fire('Success', data.message, 'success');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Error', data.message, 'error');
+            }
+        });
+    };
+    var NextStep5 = function (OnlineCat, FaceCat) {
+        var Mode = "";
+        if (!$("input[name=AnsStM").is(':checked')) {
+            Swal.fire('Warning', "Select Study Mode", 'warning');
+            return false;
+        }
+        else {
+            Mode = $("input[name=AnsStM]:checked").val();
+
+            var Lecturer = {};
+
+            Lecturer.LecName = `@Model.LecDet.LecName`;;
+            Lecturer.LecNo = `@Model.LecDet.LecNo`;
+            Lecturer.Unit = `@Model.LecDet.Unit`;;
+            Lecturer.UnitName = `@Model.LecDet.UnitName`;;
+            Lecturer.Comments = "";
+
+            var LecEval = new Array();
+            var ELearning = new Array();
+
+            var SaveData = false;
+            var ErroMsg = "";
+            if (Mode == "1") {
+                var QuizText = "";
+
+                if (!$("input[name=AnsMat").is(':checked')) {
+                    Swal.fire('Warning', "Answer question 1", 'warning');
+                    return false;
+                }
+                else if (!$("input[name=AnsEL]").is(':checked')) {
+                    Swal.fire('Warning', "Answer question 2", 'warning');
+                    return false;
+                }
+                else if (!$("input[type=checkbox][name=ModesS]").is(':checked')) {
+                    Swal.fire('Warning', "You have not selected any Modes of learning used", 'warning');
+                    return false;
+                }
+                else if (!$("input[type=checkbox][name=Challenge]").is(':checked')) {
+                    Swal.fire('Warning', "You have not selected any challenges faced", 'warning');
+                    return false;
+                }
+                else {
+                    var EvalQuiz = {};
+                    EvalQuiz.QuizCategory = OnlineCat;
+                    EvalQuiz.Quiz = $("#hidden1").val();
+                    EvalQuiz.Score = $("input[name=AnsMat]:checked").val();
+                    LecEval.push(EvalQuiz);
+
+                    var EvalQuiz = {};
+                    EvalQuiz.QuizCategory = OnlineCat;
+                    EvalQuiz.Quiz = $("#hidden2").val();
+                    EvalQuiz.Score = $("input[name=AnsEL]:checked").val();
+                    LecEval.push(EvalQuiz);
+
+                    QuizText = $("#hidden3").val();
+
+                    $('input[type=checkbox][name=ModesS]').each(function (index) {
+                        var OnlineQ = {};
+                        if ($("#chckBox" + (index + 1) + "").is(':checked')) {
+                            OnlineQ.Quiz = QuizText;
+                            OnlineQ.Asnwer = $("#chckBox" + (index + 1) + "").val();
+                            OnlineQ.Cat = "1";
+                            ELearning.push(OnlineQ);
+                        }
+                    });
+                    if ($("#txtOther1").val() != "") {
+                        var OnlineQ = {};
+                        OnlineQ.Quiz = QuizText;
+                        OnlineQ.Asnwer = $("#txtOther1").val();
+                        OnlineQ.Cat = "1";
+                        ELearning.push(OnlineQ);
+                    }
+                    QuizText = "";
+
+                    QuizText = $("#hidden4").val();
+                    $('input[type=checkbox][name=Challenge]').each(function (index) {
+                        var OnlineQ = {};
+                        if ($("#chckBoxChallg" + (index + 1) + "").is(':checked')) {
+                            OnlineQ.Quiz = QuizText;
+                            OnlineQ.Asnwer = $("#chckBoxChallg" + (index + 1) + "").val();
+                            OnlineQ.Cat = "2";
+                            ELearning.push(OnlineQ);
+                        }
+                    });
+                    if ($("#txtOther2").val() != "") {
+                        var OnlineQ = {};
+                        OnlineQ.Quiz = QuizText;
+                        OnlineQ.Asnwer = $("#txtOther2").val();
+                        OnlineQ.Cat = "2";
+                        ELearning.push(OnlineQ);
+                    }
+
+                    ShowProgress();
+                    $.ajax({
+                        type: "POST",
+                        url: "/LecturerEvaluation/SaveELearningCourseEvaluation",
+                        data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, EQuiz: ELearning }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.success == true) {
+                                HideProgress();
+                                $("#Step4").addClass("d-none");
+                                $("#Step5").removeClass("d-none");
+                                Swal.fire('Success', data.message, 'success');
+                            }
+                            else {
+                                HideProgress();
+                                Swal.fire('Warning', data.message, 'warning');
+                            }
+                        },
+                        error: function () {
+                            HideProgress();
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    });
+                }
+            }
+            if (Mode == "2") {
+                $("#TB4 tbody tr").each(function (index) {
+                    SaveData = false;
+                    ErroMsg = "";
+                    if ($("input[name=Ans4" + (index + 1) + "]").is(':checked')) {
+                        $(this).removeClass("rowFocus");
+                        SaveData = true;
+                    }
+                    else {
+                        $(this).addClass("rowFocus");
+                        SaveData = false;
+                        ErroMsg = "Answer question " + (index + 1) + "";
+                        return false;
+                    }
+                });
+                if (SaveData == false) {
+                    Swal.fire('Warning', ErroMsg, 'warning');
+                    return;
+                }
+                else {
+                    $("#TB4 tbody tr").each(function (index) {
+                        var EvalQuiz = {};
+                        EvalQuiz.QuizCategory = FaceCat;
+                        EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
+                        EvalQuiz.Score = $("input[name=Ans4" + (index + 1) + "]:checked").val();
+                        LecEval.push(EvalQuiz);
+                    });
+                    ShowProgress();
+                    $.ajax({
+                        type: "POST",
+                        url: "/LecturerEvaluation/SaveSectionData",
+                        data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: false, LastSection: false }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.success == true) {
+                                HideProgress();
+                                $("#Step4").addClass("d-none");
+                                $("#Step5").removeClass("d-none");
+                                Swal.fire('Success', data.message, 'success');
+                            }
+                            else {
+                                HideProgress();
+                                Swal.fire('Warning', data.message, 'warning');
+                            }
+                        },
+                        error: function () {
+                            HideProgress();
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    });
+                }
+            }
+        }
+    };
+    var PreviousStep = function (step) {
+        if (step == "1") {
+            $("#Step2").addClass("d-none");
+            $("#Step1").removeClass("d-none");
+        }
+        if (step == "2") {
+            $("#Step3").addClass("d-none");
+            $("#Step2").removeClass("d-none");
+        }
+        if (step == "3") {
+            $("#Step4").addClass("d-none");
+            $("#Step3").removeClass("d-none");
+        }
+        if (step == "4") {
+            $("#Step5").addClass("d-none");
+            $("#Step4").removeClass("d-none");
+        }
+        if (step == "5") {
+            $("#Step6").addClass("d-none");
+            $("#Step5").removeClass("d-none");
+        }
+    };
+    var StudyMode = function (Type) {
+        if (Type == "1") {
+            $("#Online").removeClass("d-none");
+            $("#FaceToFace").addClass("d-none");
+        }
+        else {
+            $("#Online").addClass("d-none");
+            $("#FaceToFace").removeClass("d-none");
+        }
+    };
+</script>

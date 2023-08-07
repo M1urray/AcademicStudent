@@ -1,0 +1,73 @@
+﻿@model  IEnumerable<New_Student_Portal.ViewModel.Enquiry>
+<style>
+    .checkboxClass {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+    }
+
+    thead {
+        background-color: black;
+        color: white;
+    }
+</style>
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns">
+            <table class="table table-border-style" id="tbRegUnits">
+                <thead>
+                    <tr>
+                        @*<th>Action</th>*@
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            Qeury
+                        </th>
+                        <th>
+                            Response
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="font-size:10px">
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EnqNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OpenTo)
+                                        </td>
+                                        <td>
+                                            @Html.TextAreaFor(modelItem => item.EnquireFor, new { @class = "form-control", @readonly = "readonly", @rows = "2", @style = "font-size:10px" })
+                                        <td>
+                                            @Html.TextAreaFor(modelItem => item.Response, new { @class = "form-control", @readonly = "readonly", @rows = "2", @style = "font-size:10px" })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" style="color:red">No Enquiries Found</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

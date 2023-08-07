@@ -1,0 +1,208 @@
+﻿@model New_Student_Portal.ViewModel.SemeterEndDate
+<link href="~/assets/css/Loader.css" rel="stylesheet" />
+<div class="loading" align="center" id="divLoader">
+    <br />
+    <img src="~/assets/images/ajax-loader.gif" alt="" />
+</div>
+<div class="row">
+    <input type="hidden" id="hiddenDate" value="@Model.SemEndDate" />
+    <div class="col-md-6">
+        <div id="divTotalNo">
+            <span style="font-weight: bold">Total Number of Istallments</span>
+            <input type="text" class="form-control" style="text-align:center" maxlength="1" max="4" id="txtTotal" onkeypress="return functionx(event)" onkeyup="CheckNumberofIstallment()" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <br />
+        <input type="button" class="btn btn-primary waves-effect waves-light" value="Add Installment Lines" onclick="AddLines();" />
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover" id="IstallmentLines">
+            <thead>
+                <tr>
+                    <th>Installmet</th>
+                    <th class="text-center">By Date</th>
+                    <th class="text-center">Upto Percentage(%)</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr class="NoRecords">
+                    <td colspan="4">
+                        <span style="color:red" id="NoRecords">No Intallment Lines Added</span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<hr />
+<div align="center">
+    <input type="button" class="btn btn-danger" value="Submit Plan" onclick="SubmitPaymentPlan();" />
+</div>
+<script src="~/JS/ShowProgression.js"></script>
+<script type="text/javascript">
+    var CheckNumberofIstallment = function () {
+        var TotalNo = $("#txtTotal").val();        
+        if (parseInt(TotalNo) < 1) {
+            $("#txtTotal").val("");
+            swal("Warning", "Minimum number of intallment is one(1)", "warning");
+            return;
+        }
+        else if (parseInt(TotalNo) > 4) {
+            $("#txtTotal").val("");
+            swal("Warning", "Maximum number of intallment is four(4)", "warning");
+            return;
+        }
+        else {
+            delete_row();
+            DetermineNoOfRows();
+        }
+    }
+    var AddLines = function () {
+        var TotalNo = $("#txtTotal").val();
+        if (TotalNo == "" || TotalNo == "0") {
+            swal('Warning', "Enter the number of Istallments. Cannot be zero(0)", 'warning');
+            return;
+        }
+        else {
+            delete_row();
+            var regDate = $("#hiddenDate").val();
+            var x = regDate.split("/");
+            var date1 = new Date(x[2], (x[1] - 1), x[0]);
+
+            for (i = 1; i <= parseInt(TotalNo); i++) {
+                var tBody = $("#IstallmentLines > TBODY")[0];
+
+                //Add Row.
+                var row = tBody.insertRow(-1);
+
+                //Add Item.
+                var cell = $(row.insertCell(-1));
+                cell.html(i);
+
+                cell = $(row.insertCell(-1));
+                var txtDate = $("<input />");
+                txtDate.attr("type", "text");
+                txtDate.attr("onkeypress", "return functionx(event)");
+                txtDate.attr("placeholder", "dd/mm/yyyy");
+                txtDate.attr("onkeydown", "return false;");
+                txtDate.attr("autocomplete", "off");
+                txtDate.addClass("form-control classDate");
+                txtDate.uniqueId("txtDate");
+                cell.attr("align", "center");
+                txtDate.datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    autoclose: true,
+                    yearRange: '-0:+2',
+                    showOtherMonths: true,
+                    dateFormat: 'dd/mm/yy',
+                    minDate: 0,
+                    maxDate: new Date(date1)
+                });
+                txtDate.attr("onchange", "DetermineDateSelected(this);");
+                cell.append(txtDate);
+
+                cell = $(row.insertCell(-1));
+                var txtPerc = $("<input />");
+                txtPerc.attr("type", "text");
+                txtPerc.css("text-align", "center");
+                txtPerc.attr("onkeypress", "return functionx(event)");
+                txtPerc.addClass("form-control classPerc");
+                txtPerc.uniqueId("txtPerc");
+                cell.attr("align", "center");
+                txtPerc.attr("onchange", "DeterminePercentageEntered(this);");
+                cell.append(txtPerc);
+            }
+        }
+        $("#txtTotal").val("");
+        DetermineNoOfRows();
+    }
+    var DetermineDateSelected = function (inputtxt) {
+        var row = $(inputtxt).closest("TBODY>TR").find("TD").eq(1);;
+        var Prevrow = $(inputtxt).closest("TBODY>TR").prev().find("TD").eq(1);
+        var rowIndex = row.closest("TBODY>tr").index();
+        if (parseInt(rowIndex) > 0) {
+            var currentDate = row.find("input[type=text]").val();
+            var prevDate = Prevrow.find("input[type=text]").val();
+
+            if (prevDate == "") {
+                row.find("input[type=text]").val("");
+                swal("Warning", "Select date for the previous intallment. It cannot be empty", "warning");
+                return;
+            }
+            else {
+                var x = currentDate.split("/");
+                var y = prevDate.split("/");
+
+                var date1 = new Date(x[2], (x[1] - 1), x[0]);
+                var date2 = new Date(y[2], (y[1] - 1), y[0]);
+                if (date1 <= date2) {
+                    row.find("input[type=text]").val("");
+                    swal("Warning", "This date cannot be less than or equal to " + prevDate + ", the previous intallment", "warning");
+                    return;
+                }
+            }
+        }
+    }
+    var DeterminePercentageEntered = function (inputPerc) {
+        var row = $(inputPerc).closest("TBODY>TR").find("TD").eq(2);
+        var row1 = $(inputPerc).closest("TBODY>TR").find("TD").eq(1);
+        var valueT = row.find("input[type=text]").val();
+        var valueD = row1.find("input[type=text]").val();
+        if (parseInt(valueT) > 100) {
+            row.find("input[type=text]").val("");
+            swal("Warning", "Intallment percentage cannot be greater than 100%", "warning");
+            return;
+        }
+        else if (valueT != "" && valueD == "") {
+            row.find("input[type=text]").val("");
+            swal("Warning", "Select first the due date for the intallment", "warning");
+            return;
+        }
+        else if (valueT != "" && valueD == "") {
+            row.find("input[type=text]").val("");
+            swal("Warning", "Select first the due date for the intallment", "warning");
+            return;
+        }
+        else {
+            var Prevrow = $(inputPerc).closest("TBODY>TR").prev().find("TD").eq(2);
+            var valueP = Prevrow.find("input[type=text]").val();
+            var rowIndex = row.closest("TBODY>tr").index();
+            if (parseInt(rowIndex) > 0) {
+                if (valueP == "") {
+                    row.find("input[type=text]").val("");
+                    swal("Warning", "You have not entered the previous % intallment", "warning");
+                    return;
+                }
+                if (parseInt(valueT) < parseInt(valueP)) {
+                    row.find("input[type=text]").val("");
+                    swal("Warning", "Intallment percentage cannot be less than " + valueP + ", the previous installment percentage", "warning");
+                    return;
+                }
+            }
+        }
+    }
+    var DetermineNoOfRows = function () {
+        var totalRowCount = $("#IstallmentLines TBODY tr").length;
+        if (totalRowCount > 0) {
+            $("#NoRecords").hide();
+        }
+        else {
+            $("#NoRecords").show();
+        }
+    }
+    function delete_row() {
+        $('#IstallmentLines tbody tr').each(function () {
+            var tableData = $(this).find('td');
+            if (tableData.length > 0) {
+                $($(this).closest("tr")).remove();
+            }
+        });
+    }
+</script>

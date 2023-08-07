@@ -1,0 +1,197 @@
+﻿@model New_Student_Portal.ViewModel.StudentReqs
+<style>
+    thead {
+        background-color: black;
+        color: white;
+    }
+
+    tfoot {
+        background-color: #051936;
+        color: #cbcc32;
+    }
+
+    b, strong {
+        font-size: 12px;
+        text-decoration: underline;
+    }
+
+    .spanClass {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .BtnPadding {
+        padding: 1px;
+        font-size: 12px;
+    }
+</style>
+@if (Model.CommentFound)
+{
+    <hr />
+    <p class="text-c-yellow">
+        Your request has been rejected at the @Model.ApprovalLevel level.
+        Click <button onclick="ViewrejectComments();" class="btn btn-primary BtnPadding">Here</button> to view the reason for rejection
+    </p>
+    <hr />
+}
+<div class="pre-scrollable">
+    <table class="table table-bordered table-hover" style="font-size:12px">
+        <thead>
+            <tr>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Requisition Type
+                </th>
+
+                <th>
+                    Semester
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Approval Level
+                </th>
+                <th>
+                    Certificate<br />Collection Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                {
+                    if (Model.CommentFound)
+                    {
+                        <tr style="background-color:red">
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Code)
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(Model.Date).ToString("yy/MM/yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Requisition_Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Semester)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.ApprovalLevel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.CollectionDate)
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Code)
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(Model.Date).ToString("yy/MM/yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Requisition_Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Semester)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.ApprovalLevel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.CollectionDate)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="color:red">
+                            No Records Found
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div id="divClearanceReport" align="center">
+    <hr />
+    <input type="button" id="btnPrintReport" class="btn btn-danger" value="Download Online Clearance Form" onclick="PrintClearanceReport();" />
+    <hr />
+    <p class="text-googleplus">REMEMBER: Book Collection Date for your Certificate</p>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @Html.Label("Collection Date:", htmlAttributes: new { @class = "control-label col-md-12" })
+            <input type="datetime" placeholder="dd/mm/yyyy" class="form-control" id="dtPicker" onkeydown="return false;" autocomplete="off" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <hr />
+    <input type="button" id="btnPrintReport" class="btn btn-primary" value="Submit Collection Date" onclick="SubmitCollectionDate();" />
+</div>
+@*//////////////////////Document Rejection Modal////////////////////////////*@
+<div class="modal fade" id="myModalComments" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h4 class="modal-title">Rejection Comments</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalCommentBody">
+                <div id="divDocComments"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (`@Model.Status` == "Approved") {
+            $("#divClearanceReport").hide();
+            $('#dtPicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true,
+                yearRange: '-0:+2',
+                showOtherMonths: true,
+                dateFormat: 'dd/mm/yy',
+                minDate: 0
+            });
+        }
+        else {
+            $("#divClearanceReport").hide();
+        }
+    });
+    var ViewrejectComments = function () {
+        $("#divDocComments").html(`@Model.Comment`);
+        $("#myModalComments").modal("show");
+    };
+</script>
+
+
+
+
+
+
+

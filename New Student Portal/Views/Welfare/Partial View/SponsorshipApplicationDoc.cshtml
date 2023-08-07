@@ -1,0 +1,33 @@
+﻿@model New_Student_Portal.ViewModel.SponsorshipApplication
+<div class="row">
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Application No")</span> - @Html.DisplayFor(model => model.Application_No)
+    </div>
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Project No")</span> - @Html.DisplayFor(model => model.Application_No)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Application Date")</span> - @Html.DisplayFor(model => model.Application_Date)
+    </div>
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Status")</span> - @Html.DisplayFor(model => model.Status)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Applied Amount")</span> - @Html.DisplayFor(model => model.Applied_Amount)
+    </div>
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Approved Amount")</span> - @Html.DisplayFor(model => model.Approved_Amount)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Approval Status")</span> - @Html.DisplayFor(model => model.ApprovalStatus)
+    </div>
+    <div class="col-md-6">
+        <span style="font-weight:bold">@Html.Label("Recommendations")</span> - @Html.DisplayFor(model => model.Recommendation)
+    </div>
+</div>

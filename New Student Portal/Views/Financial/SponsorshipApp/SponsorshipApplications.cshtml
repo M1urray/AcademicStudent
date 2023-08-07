@@ -1,0 +1,56 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.SponsorshipApplication>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th class="text-center">Application Date</th>
+                    <th>Remarks</th>
+                    <th class="text-center">Applied Amount</th>
+                    <th class="text-center">Approved Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                @{
+                    if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Application_No)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => item.Application_Date, new { @readonly = "true", Style = "text-align:center", @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remarks)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => item.Applied_Amount, new { @readonly = "true", Style = "text-align:right", @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => item.Approved_Amount, new { @readonly = "true", Style = "text-align:right", @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" style="color:red">
+                                No Records Found
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@model New_Student_Portal.ViewModel.Error
+@{
+    ViewBag.Title = "Error Messange";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Error Message</span></h4>
+    </div>
+    <div class="modal-body">
+        <p style="color:red">@Model.Message</p>
+        <input type="hidden" id="txtMsg" value="@Model.Message" />
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($("#txtMsg").val() != "") {
+            var msg = $("#txtMsg").val();
+            swal('Error', msg, 'error');
+        }
+    });
+</script>
+

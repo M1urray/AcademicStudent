@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "Scolorship Applcation Form";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    .BtnPadding {
+        padding: 1px;
+        font-size: 12px;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">APPLICATION FOR FINANCIAL AID</span></h4>
+    </div>
+    <div class="modal-body">
+        <div class="stepwizard">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn1" disabled>1</button>
+                    <p class="d-none d-sm-block">Introduction</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn2" disabled>2</button>
+                    <p class="d-none d-sm-block">Personal Information</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn3" disabled>3</button>
+                    <p class="d-none d-sm-block">Family Information</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn4" disabled>4</button>
+                    <p class="d-none d-sm-block">Academic Information</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn5" disabled>5</button>
+                    <p class="d-none d-sm-block">Spiritual Growth</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn6" disabled>6</button>
+                    <p class="d-none d-sm-block">Financial Assessment</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn btn-secondary btn-circle" id="btn7" disabled>7</button>
+                    <p class="d-none d-sm-block">Submission</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="divSteps"></div>        
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetStepSection('Step1');
+    });
+    function GetStepSection(Step) {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            datatype: "json",
+            data: JSON.stringify({ Step: Step }),
+            contentType: "application/json; charset = utf-8",
+            processData: false,            
+            url: "/Welfare/StepView",
+            success: function (data) {
+                if (Step == "Step1") {
+                    $("button").removeClass("btn-primary").addClass("btn-secondary");
+                    $("#btn1").attr("background-color", "blue");
+                }
+                $("#divSteps").html(data);                
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    var GetStepTwoSection = function () {
+        GetStepSection('Step2');
+    };
+    var GetPreviousStep = function (Step) {
+        GetStepSection(Step);
+    };
+    function SubmitStepTwoSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepTwoSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('Step3');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepThreeSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepThreeSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('Step4');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepFourSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepFourSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('Step5');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepFiveSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepFiveSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('Step6');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepSixSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepSixSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    GetStepSection('Step7');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function SubmitStepSevenSection() {
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Welfare/SaveStepSixSection",
+            //data: JSON.stringify(UnitReg),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+</script>
+

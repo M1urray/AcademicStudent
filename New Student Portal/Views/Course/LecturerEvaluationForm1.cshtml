@@ -1,0 +1,1004 @@
+﻿@model New_Student_Portal.ViewModel.Lecturer
+<style>
+    .RadioClass {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-body" style="font-size: 12px">
+        <p style="font-size: 14px; font-weight: bold; text-decoration: underline;">
+            Introduction
+        </p>
+        <p>
+            <u><b>PURPOSE AND CONFIDENTIALITY</b></u><br />
+            The purpose of this evaluation is to provide feedback about the course presentation to help in future
+            improvement. Please rate the statements given by choosing the most appropriate score as per the
+            following scale:
+        </p>
+        <p style="font-weight:bold">
+            1=Strongly Disagree; 2=Disagree; 3=Neutral; 4=Agree; 5=Strongly Agree
+        </p>
+        <hr />
+        <div class="panel panel-default">
+            <div class="panel-body pre-scrollable">
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Lecturer Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight:bold; width:20%">Lecturer Name:</td>
+                            <td style="width:80%">
+                                <asp:Label ID="lblLecturerName" runat="server" class="label label-info">@Model.LecName</asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Unit Code :</td>
+                            <td>
+                                <asp:Label ID="lblUnitCode" class="label label-info">@Model.Unit</asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Unit Name :</td>
+                            <td>
+                                <asp:Label ID="lblUnitName" runat="server" class="label label-info">@Model.UnitName</asp:Label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr style="border-bottom:3px solid Black" />
+        <div id="Step1">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    A. About You
+                </div>
+                <div class="responsive-table-plugin">
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns">
+                            <table class="table table-border-style" id="TB1">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Question</th>
+                                        <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                        <th width="10%" style="text-align:center">Disagree</th>
+                                        <th width="10%" style="text-align:center">Neutral</th>
+                                        <th width="10%" style="text-align:center">Agree</th>
+                                        <th width="10%" style="text-align:center">Strongly Agree</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1. I am prepared when I attend this class.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans11" name="Ans1" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans12" name="Ans1" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans13" name="Ans1" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans14" name="Ans1" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans15" name="Ans1" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2. I have learnt the material for this course.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans21" name="Ans2" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans22" name="Ans2" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans23" name="Ans2" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans24" name="Ans2" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans25" name="Ans2" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3. I enjoy this class.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans31" name="Ans3" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans32" name="Ans3" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans33" name="Ans3" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans34" name="Ans3" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans35" name="Ans3" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4. I participate in this class.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans41" name="Ans4" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans42" name="Ans4" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans43" name="Ans4" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans44" name="Ans4" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans45" name="Ans4" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-8 col-sm-8 col-md-8" style="text-align:center">Steps 1 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('2',true,false);">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step2">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    B. Concerning the Course Itself
+                </div>
+                <div class="responsive-table-plugin">
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns">
+                            <table class="table table-border-style" id="TB2">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Question</th>
+                                        <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                        <th width="10%" style="text-align:center">Disagree</th>
+                                        <th width="10%" style="text-align:center">Neutral</th>
+                                        <th width="10%" style="text-align:center">Agree</th>
+                                        <th width="10%" style="text-align:center">Strongly Agree</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1. The course outline is clear and helpful.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans211" name="Ans21" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans212" name="Ans21" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans213" name="Ans21" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans214" name="Ans21" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans215" name="Ans21" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2. The course is well organized.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans221" name="Ans22" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans222" name="Ans22" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans223" name="Ans22" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans224" name="Ans22" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans225" name="Ans22" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3. The course requirements are stated clearly.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans231" name="Ans23" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans232" name="Ans23" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans233" name="Ans23" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans234" name="Ans23" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans235" name="Ans23" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4. Current developments in the field are presented.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans241" name="Ans24" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans242" name="Ans24" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans243" name="Ans24" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans244" name="Ans24" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans245" name="Ans24" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            5. This course encourages me to investigate ideas and apply them to life.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans251" name="Ans25" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans252" name="Ans25" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans253" name="Ans25" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans254" name="Ans25" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans255" name="Ans25" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            6. The stated learning outcomes have been met.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans261" name="Ans26" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans262" name="Ans26" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans263" name="Ans26" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans264" name="Ans26" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans265" name="Ans26" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('1');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 2 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('3',false,false);">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step3">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    C. Concerning the Instructor
+                </div>
+                <div class="responsive-table-plugin">
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns">
+                            <table class="table table-border-style" id="TB3">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Question</th>
+                                        <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                        <th width="10%" style="text-align:center">Disagree</th>
+                                        <th width="10%" style="text-align:center">Neutral</th>
+                                        <th width="10%" style="text-align:center">Agree</th>
+                                        <th width="10%" style="text-align:center">Strongly Agree</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1. The instructor is always prepared for class.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans311" name="Ans31" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans312" name="Ans31" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans313" name="Ans31" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans314" name="Ans31" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans315" name="Ans31" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2. The instructor provides an environment conducive to learning.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans321" name="Ans32" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans322" name="Ans32" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans323" name="Ans32" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans324" name="Ans32" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans325" name="Ans32" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3. The instructor is available to give help.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans331" name="Ans33" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans332" name="Ans33" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans333" name="Ans33" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans334" name="Ans33" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans335" name="Ans33" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4. The instructor uses suitable methods to evaluate student learning.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans341" name="Ans34" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans342" name="Ans34" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans343" name="Ans34" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans344" name="Ans34" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans345" name="Ans34" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            5. The processes the instructor has used to evaluate me in this class are fair.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans351" name="Ans35" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans352" name="Ans35" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans353" name="Ans35" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans354" name="Ans35" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans355" name="Ans35" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            6. The instructor communicates his/her expectations to the students.
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans361" name="Ans36" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans362" name="Ans36" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans363" name="Ans36" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans364" name="Ans36" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans365" name="Ans36" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('2');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 3 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('4',false,false);">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    D. What was the mode of learning for this course<br />
+                    <div style="padding-left:50px">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Ans41" value="1" id="flexRadioDefault1" onchange="StudyMode('1');">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Online
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Ans41" value="2" id="flexRadioDefault2" onchange="StudyMode('2');">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Face to Face
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom:3px solid Black" />
+
+                <hr />
+                <div class="responsive-table-plugin d-none" id="Online">
+                    <div>
+                        <p>For Online Courses</p>
+                    </div>
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns">
+                            <table class="table table-border-style" id="TB4">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1. Have all the materials for your courses for the semester been posted on the e-learning platform?
+                                        </td>
+                                        <td>
+                                            <input id="Ans411" name="Ans42" type="radio" value="1" /> Yes&nbsp;
+                                            <input id="Ans412" name="Ans42" type="radio" value="2" /> No
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2. Have you been meeting on the e-learning platform weekly with your lecturer
+                                        </td>
+                                        <td>
+                                            <input id="Ans421" name="Ans42" type="radio" value="1" /> Yes&nbsp;
+                                            <input id="Ans422" name="Ans42" type="radio" value="2" /> No
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3. What other modes has your lecturer employed to ensure that you continue learning?
+                                        </td>
+                                        <td>
+                                            <input id="Ans431" name="Ans43" type="checkbox" value="1" /> Poor&nbsp;
+                                            <input id="Ans432" name="Ans43" type="radio" value="2" /> Reasonable&nbsp;
+                                            <input id="Ans433" name="Ans43" type="radio" value="3" /> Satisfactory&nbsp;
+                                            <input id="Ans434" name="Ans43" type="radio" value="4" /> Good&nbsp;
+                                            <input id="Ans435" name="Ans43" type="radio" value="5" /> Very good
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4. Please indicate below the greatest challenge you have faced during this season of e-learning
+                                        </td>
+                                        <td>
+                                            <input id="Ans441" name="Ans44" type="radio" value="1" /> Poor&nbsp;
+                                            <input id="Ans442" name="Ans44" type="radio" value="2" /> Reasonable&nbsp;
+                                            <input id="Ans443" name="Ans44" type="radio" value="3" /> Satisfactory&nbsp;
+                                            <input id="Ans444" name="Ans44" type="radio" value="4" /> Good&nbsp;
+                                            <input id="Ans445" name="Ans44" type="radio" value="5" /> Very good
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="responsive-table-plugin d-none" id="FaceToFace">
+                    <div>
+                        <p>For Face to Face Courses</p>
+                    </div>
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns">
+                            <table class="table table-border-style" id="TB41">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Question</th>
+                                        <th width="10%" style="text-align:center">Strongly Disagree</th>
+                                        <th width="10%" style="text-align:center">Disagree</th>
+                                        <th width="10%" style="text-align:center">Neutral</th>
+                                        <th width="10%" style="text-align:center">Agree</th>
+                                        <th width="10%" style="text-align:center">Strongly Agree</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1. A projector was mounted in the classroom
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans411" name="Ans41" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans412" name="Ans41" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans413" name="Ans41" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans414" name="Ans41" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans415" name="Ans41" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2. The projector was used for teaching/learning during this course
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans421" name="Ans42" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans422" name="Ans42" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans423" name="Ans42" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans424" name="Ans42" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans425" name="Ans42" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3. The projector was in working condition during this course
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans431" name="Ans43" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans432" name="Ans43" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans433" name="Ans43" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans434" name="Ans43" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans435" name="Ans43" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4. General maintenance in the class was good throughout the semester
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans441" name="Ans44" type="radio" value="1" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans442" name="Ans44" type="radio" value="2" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans443" name="Ans44" type="radio" value="3" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans444" name="Ans44" type="radio" value="4" class="RadioClass" />
+                                        </td>
+                                        <td align="center">
+                                            <input id="Ans445" name="Ans44" type="radio" value="5" class="RadioClass" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('3');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 4 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-success" onclick="NextStep('5', false, false);">Next >>></button>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="Step5">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">
+                    E. What elements of the course most contributed to your learning?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtContrb" class="form-control"></textarea>
+                </div>
+                <div class="panel-heading" style="font-weight: bold">
+                    F. What improvements to the course would you recommend?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtImprivents" class="form-control"></textarea>
+                </div>
+                <div class="panel-heading" style="font-weight: bold">
+                    G. Any other comment?
+                </div>
+                <div class="panel-body">
+                    <textarea id="txtOtherComment" class="form-control"></textarea>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="d-inline col-4 col-sm-4 col-md-4">
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('4');"><<< Back</button>
+                </div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 5 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
+                    <button class="btn btn-sm btn-danger" onclick="CompleteEvaluation('@Model.Unit','@Model.UnitName','@Model.LecNo');">Complete Evaluation</button>
+                </div>
+            </div>
+            @*<br />
+                <div align="center">
+                    <input type="submit" value="Submit Form" class="btn btn-danger" onclick="SubmitEvaluationForm();" style="color: palevioletred" />
+                </div>*@
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var NextStep = function (step, FirstStep, LastStep) {
+        var Lecturer = {};
+        var LecName = $("#lblLecturerName").text();
+        var LecNo = '@Model.LecNo';
+        var LecUnit = $("#lblUnitCode").text();
+        var LecUnitName = $("#lblUnitName").text();
+
+        Lecturer.LecName = LecName;
+        Lecturer.LecNo = LecNo;
+        Lecturer.Unit = LecUnit;
+        Lecturer.UnitName = LecUnitName;
+        Lecturer.Comments = "";
+        var LecEval = new Array();
+        if (step == "2") {
+            if ($('input[name=Ans1]').is(':checked')) {
+                $("#TB1 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB1 > tbody > tr:nth-child(1)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 1', 'warning');
+                return;
+            }
+            if ($('input[name=Ans2]').is(':checked')) {
+                $("#TB1 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB1 > tbody > tr:nth-child(2)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 2', 'warning');
+                return;
+            }
+            if ($('input[name=Ans3]').is(':checked')) {
+                $("#TB1 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB1 > tbody > tr:nth-child(3)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 3', 'warning');
+                return;
+            }
+            if ($('input[name=Ans4]').is(':checked')) {
+                $("#TB1 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB1 > tbody > tr:nth-child(4)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 4', 'warning');
+                return;
+            }
+            $("#TB1 tbody tr").each(function (index) {
+                var row = $(this);
+                var EvalQuiz = {};
+                EvalQuiz.QuizCategory = 1;
+                EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+                EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
+                LecEval.push(EvalQuiz);
+            });
+        }
+        if (step == "3") {
+            if ($('input[name=Ans21]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(1)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 1', 'warning');
+                return;
+            }
+            if ($('input[name=Ans22]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(2)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 2', 'warning');
+                return;
+            }
+            if ($('input[name=Ans23]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(3)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 3', 'warning');
+                return;
+            }
+            if ($('input[name=Ans24]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(4)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 4', 'warning');
+                return;
+            }
+            if ($('input[name=Ans25]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(5)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(5)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 5', 'warning');
+                return;
+            }
+            if ($('input[name=Ans26]').is(':checked')) {
+                $("#TB2 > tbody > tr:nth-child(6)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB2 > tbody > tr:nth-child(6)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 6', 'warning');
+                return;
+            }
+            $("#TB2 tbody tr").each(function (index) {
+                var row = $(this);
+                var EvalQuiz = {};
+                EvalQuiz.QuizCategory = 2;
+                EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+                EvalQuiz.Score = $("input[name=Ans2" + (index + 1) + "]:checked").val();
+                LecEval.push(EvalQuiz);
+            });
+        }
+        if (step == "4") {
+            if ($('input[name=Ans31]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(1)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 1', 'warning');
+                return;
+            }
+            if ($('input[name=Ans32]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(2)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 2', 'warning');
+                return;
+            }
+            if ($('input[name=Ans33]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(3)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 3', 'warning');
+                return;
+            }
+            if ($('input[name=Ans34]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(4)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 4', 'warning');
+                return;
+            }
+            if ($('input[name=Ans35]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(5)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(5)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 5', 'warning');
+                return;
+            }
+            if ($('input[name=Ans36]').is(':checked')) {
+                $("#TB3 > tbody > tr:nth-child(6)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB3 > tbody > tr:nth-child(6)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 6', 'warning');
+                return;
+            }
+            $("#TB3 tbody tr").each(function (index) {
+                var row = $(this);
+                var EvalQuiz = {};
+                EvalQuiz.QuizCategory = 3;
+                EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+                EvalQuiz.Score = $("input[name=Ans3" + (index + 1) + "]:checked").val();
+                LecEval.push(EvalQuiz);
+            });
+        }
+        if (step == "5") {
+            if ($('input[name=Ans41]').is(':checked')) {
+                $("#TB4 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB4 > tbody > tr:nth-child(1)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 10', 'warning');
+                return;
+            }
+            if ($('input[name=Ans42]').is(':checked')) {
+                $("#TB4 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB4 > tbody > tr:nth-child(2)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 11', 'warning');
+                return;
+            }
+            if ($('input[name=Ans43]').is(':checked')) {
+                $("#TB4 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB4 > tbody > tr:nth-child(3)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 12', 'warning');
+                return;
+            }
+            if ($('input[name=Ans44]').is(':checked')) {
+                $("#TB4 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+            }
+            else {
+                $("#TB4 > tbody > tr:nth-child(4)").addClass("rowFocus");
+                Swal.fire('Warning', 'Answer question 13', 'warning');
+                return;
+            }
+            $("#TB4 tbody tr").each(function (index) {
+                var row = $(this);
+                var EvalQuiz = {};
+                EvalQuiz.QuizCategory = 1;
+                EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+                EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
+                LecEval.push(EvalQuiz);
+            });
+        }
+
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/LecturerEvaluation/SaveSectionData",
+            data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: FirstStep, LastSection: LastStep }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    if (step == "2") {
+                        $("#Step1").addClass("d-none");
+                        $("#Step2").removeClass("d-none");
+                    }
+                    if (step == "3") {
+                        $("#Step2").addClass("d-none");
+                        $("#Step3").removeClass("d-none");
+                    }
+                    if (step == "4") {
+                        $("#Step3").addClass("d-none");
+                        $("#Step4").removeClass("d-none");
+                    }
+                    if (step == "5") {
+                        $("#Step4").addClass("d-none");
+                        $("#Step5").removeClass("d-none");
+                    }
+                    if (step == "6") {
+                        $("#Step5").addClass("d-none");
+                        $("#Step6").removeClass("d-none");
+                    }
+                    Swal.fire('Success', data.message, 'success');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Error', data.message, 'error');
+            }
+        });
+    };
+    var PreviousStep = function (step) {
+        if (step == "1") {
+            $("#Step2").addClass("d-none");
+            $("#Step1").removeClass("d-none");
+        }
+        if (step == "2") {
+            $("#Step3").addClass("d-none");
+            $("#Step2").removeClass("d-none");
+        }
+        if (step == "3") {
+            $("#Step4").addClass("d-none");
+            $("#Step3").removeClass("d-none");
+        }
+        if (step == "4") {
+            $("#Step5").addClass("d-none");
+            $("#Step4").removeClass("d-none");
+        }
+        if (step == "5") {
+            $("#Step6").addClass("d-none");
+            $("#Step5").removeClass("d-none");
+        }
+    };
+    var StudyMode = function (Type) {
+        if (Type == "1") {
+            $("#Online").removeClass("d-none");
+            $("#FaceToFace").addClass("d-none");
+        }
+        else {
+            $("#Online").addClass("d-none");
+            $("#FaceToFace").removeClass("d-none");
+        }
+    };
+</script>

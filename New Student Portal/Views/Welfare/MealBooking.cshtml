@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Meal Booking";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <div id="divMealBook"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadForm();
+    });
+    var LoadForm = function () {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Welfare/MealBookingForm",
+            success: function (data) {
+                $("#divMealBook").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Success', "There is some problem to process your request. Please try after some time", 'success');
+            }
+        });
+    };
+    var SubmitMealBooking = function () {
+        ShowProgress();
+        $.ajax({
+            url: "/Welfare/SubmitMealBooking",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                if (data.success) {
+                    HideProgress();
+                    LoadForm();
+                    Swal.fire('Success', data.message, 'success');
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+            },
+            error: function (err) {
+                HideProgress();
+                console.log(err);
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+</script>
+

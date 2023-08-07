@@ -1,0 +1,25 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.ApprovalComment>
+<div class="row">
+    <div class="col-md-12">
+        @{
+            if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div>
+                        @item.Comment
+                        <hr />
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    No Records Found
+                </div>
+            }
+        }
+    </div>
+</div>
+
+

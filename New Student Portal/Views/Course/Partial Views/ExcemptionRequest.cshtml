@@ -1,0 +1,151 @@
+﻿@model New_Student_Portal.ViewModel.ProgrammeConcentration
+<style>
+    .hide {
+        display: none;
+    }
+
+    tbody {
+        background-color: white;
+        color: black;
+    }
+
+    tfoot {
+        background-color: white;
+    }
+</style>
+<div style="background-color:#a5a0a0;color:black">
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <span style="font-weight: bold">Course</span>
+            @Html.DropDownListFor(model => model.Code, Model.ListOfConcentration, "--select Option--", new { @class = "form-select", id = "ddlUnit" })
+        </div>
+        <div class="col-md-6">
+            <span style="font-weight: bold">Equivalent Course</span>
+            <input type="text" class="form-control" id="txtEquivalent" />
+        </div>
+    </div>
+    <hr />
+    <div align="center">
+        <input type="button" class="btn btn-danger BtnPadding" value="Add Unit" onclick="AddUnitToExcept();" />
+    </div>
+    <br />
+</div>
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover" id="tblExemption">
+                        <thead>
+                            <tr>
+                                <th class="hide">Unit Code</th>
+                                <th width="45%">Unit</th>
+                                <th width="45%">Equivalent Unit</th>
+                                <th style="text-align:right" width="10%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr class="NoRecords">
+                                <td colspan="4">
+                                    <span style="color:red" id="NoRecords">No Lines Added</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.Label("Attach Result Slip", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                <table id="tableAttachments" width="100%" class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="file" id="ExmptfileAttachment" class="form-control" required="" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<script type="text/javascript">
+    $("#ddlUnit").select2({
+        dropdownParent: $('#myModalUnits'),
+        width: '100%'
+    });
+    function Remove(button) {
+        var row = $(button).closest("TR");
+        //Get the reference of the Table.
+        var table = $("#tblExemption")[0];
+        //Delete the Table row using it's Index.
+        table.deleteRow(row[0].rowIndex);
+        DetermineNoOfRows();
+    };
+    var AddUnitToExcept = function () {
+        var Unit = $("#ddlUnit").children("option:selected").val();
+        var UnitDesc = $("#ddlUnit").children("option:selected").text();
+        var ExUnit = $("#txtEquivalent").val();
+
+        if (Unit == "") {
+            Swal.fire('Warning', "Select a course to excempt", 'warning');
+            return;
+        }
+        else if (ExUnit == "") {
+            Swal.fire('Warning', "Enter your equivalent course", 'warning');
+            return;
+        }
+        else {
+            var tBody = $("#tblExemption > TBODY")[0];
+
+            var row = tBody.insertRow(-1);
+
+            //Add file cell.
+            cell = $(row.insertCell(-1));
+            cell.html(Unit);
+            cell.addClass("hide");
+
+            cell = $(row.insertCell(-1));
+            cell.html(UnitDesc);
+
+
+            cell = $(row.insertCell(-1));
+            cell.html(ExUnit);
+
+            //Add Button cell.
+            cell = $(row.insertCell(-1));
+            cell.attr("align", "right");
+            var btnRemove = $("<input />");
+            btnRemove.attr("type", "button");
+            btnRemove.addClass("btn btn-danger BtnPadding");
+            btnRemove.attr("onclick", "Remove(this);");
+            btnRemove.val("Remove");
+            cell.append(btnRemove);
+            $("#txtEquivalent").val("");
+            $('#ddlUnit').val('').trigger('change');
+            DetermineNoOfRows();
+        }
+    };
+    var DetermineNoOfRows = function () {
+        var rowCount = $('#tblExemption>TBODY>tr').length;
+        if (rowCount > 0) {
+            $(".NoRecords").hide();
+        }
+        else {
+            $(".NoRecords").show();
+        }
+    };
+</script>
+
+

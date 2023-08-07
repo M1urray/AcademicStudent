@@ -1,0 +1,54 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.Rooms>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th width="10%">
+                Room
+            </th>
+            <th width="10%">
+                Room Cost
+            </th>
+            <th width="10%">
+                Status
+            </th>
+            <th width="10%">
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                if (Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cost)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                <a href="#" onclick="LoadRoomSpaces('@item.HostelCode','@item.RoomCode','@item.Cost')" class="btn btn-sm btn-danger">Room Spaces</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" style="color:red">
+                            No Rooms Found
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,55 @@
+﻿@model New_Student_Portal.ViewModel.NonResidenceData
+@{
+    ViewBag.Title = "Non-Residence Form";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<div class="modal-content">
+    <hr />
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Non Residence Information</span></h4>
+    </div>
+    <div class="modal-body pre-scrollable">
+        <div class="row">
+            <div class="col-md-12" id="DivInf" runat="server">
+                <input type="button" class="btn btn-warning" value="Print Residential Form" onclick="PrintResidentialForm()" />
+                @*<input type="button" class="btn btn-warning" value="Edit Residential Form" onclick="SubmitBookedSpace()" />*@
+            </div>
+        </div>
+        <hr style="border: 1px solid Black" />
+        <div class="row">
+            <div class="col-md-6">
+                <b>Residential Premise</b>
+                <label class="label label-info">@Model.Premise</label>
+            </div>
+            <div class="col-md-6">
+                <b>Room No</b>
+                <label class="label label-info">@Model.RoomNo</label>
+            </div>
+        </div>
+        <hr class="hr1" />
+        <div class="row">
+            <div class="col-md-6">
+                <b>LardLord Name</b>
+                <label class="label label-info">@Model.LandLoard</label>
+            </div>
+            <div class="col-md-6">
+                <b>Caretaker Name</b>
+                <label class="label label-info">@Model.Caretaker</label>
+            </div>
+        </div>
+        <hr class="hr1" />
+        <div class="row">
+            <div class="col-md-6">
+                <b>Witness</b>
+                <label class="label label-info">@Model.Witness</label>
+            </div>
+            <div class="col-md-6">
+                <b>Area Name</b>
+                <label class="label label-info">@Model.AreaName</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,140 @@
+﻿@model New_Student_Portal.ViewModel.TimeTableSummeryView
+@{
+    ViewBag.Title = "Student TimeTable";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    thead {
+        background-color: black;
+        color: white;
+    }
+</style>
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Unit
+                        </th>
+                        <th>
+                            Section
+                        </th>
+                        <th>
+                            Day of Week
+                        </th>
+                        <th>
+                            Period
+                        </th>
+                        <th>
+                            Campus
+                        </th>
+                        <th>
+                            Lecture Room
+                        </th>
+                        <th>
+                            Lecturer
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.RegisteredUnitsTimeT.Count() > 0)
+                            {
+                                <tr style="background-color:black;color:white">
+                                    <td colspan="7">My Timetable</td>
+                                </tr>
+                                foreach (var item in Model.RegisteredUnitsTimeT)
+                                {
+                                    <tr style="background-color:cadetblue">
+                                        <td>
+                                            @item.Unit
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Section)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Day_of_Week)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Period)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Campus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lecture_Room)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lecturer)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" style="color:red">
+                                        No Records Found
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+                <tbody>
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.FutureUnitsTimeT.Count() > 0)
+                            {
+                                <tr style="background-color:black;color:white">
+                                    <td colspan="7">Courses in Timetable</td>
+                                </tr>
+                                foreach (var item in Model.FutureUnitsTimeT)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Unit
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Section)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Day_of_Week)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Period)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Campus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lecture_Room)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lecturer)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" style="color:red">
+                                        No Records Found
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

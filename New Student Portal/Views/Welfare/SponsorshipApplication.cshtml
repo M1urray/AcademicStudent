@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Sponsorship Application";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    .selectedTableRow {
+        background-color: #74788d;
+        color: white;
+    }
+
+    .BtnPadding {
+        padding: 1px;
+        font-size: 12px;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Sponsorship Application</span></h4>
+    </div>
+    <div class="modal-body pre-scrollable">
+        <hr />
+        <div class="card-body">
+            <a href="#" onclick="NewApplication();" class="btn btn-primary BtnPadding">New Application</a>
+            <hr />
+            <div id="divSponsorship"></div>
+        </div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalApplication" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadSponsorshipApplicationList();
+    });
+    function LoadSponsorshipApplicationList() {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
+            processData: false,
+            url: "/Welfare/SponsorshipApplicationList",
+            success: function (data) {
+                $("#divSponsorship").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                swal('Error', "There is some problem to process your request. Please try after some time", 'error');
+            }
+        });
+    }
+    var NewApplication = function () {
+        window.location = "/Welfare/ScolorshipApplcationForm";        
+    };
+    var SubmitApplication = function () {
+        var Amount = $('#txtAmount').val();
+        var Remarks = $('#txtRemarks').val().replace(/(\r\n|\n|\r)/gm, " ");
+        if (Amount == "") {
+            swal('Error', 'Enter Amount being Applied', 'error');
+            return;
+        }
+        else if (Remarks == "") {
+            swal('Error', 'Give brief remarks for the application', 'error');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                url: "/Welfare/SubmitSponsorshipApplication",
+                data: JSON.stringify({ Amount: Amount, Remarks: Remarks }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        HideProgress();
+                        LoadSponsorshipApplicationList();
+                        $("#myModalApplication").modal("hide");
+                        swal('Success', data.message, 'success');
+                    }
+                    else {
+                        HideProgress();
+                        swal('Error', data.message, 'error');
+                    }
+                },
+                error: function (err) {
+                    HideProgress();
+                    swal('Error', v.message, 'error');
+                }
+            });
+        }
+    }
+    var ViewDocument = function (DocNo) {
+        $("#labelT").text("Sponsorship Application Document");
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            datatype: "json",
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            data: JSON.stringify({ DocNo: DocNo }),
+            url: "/Welfare/SponsorshipApplicationDoc",
+            success: function (data) {
+                $("#modalBody").html(data);
+                HideProgress();
+                $("#myModalApplication").modal("show");
+            },
+            error: function (err) {
+                HideProgress();
+                swal('Warning', err, 'warning');
+            }
+        });
+    };
+</script>
+

@@ -1,0 +1,17 @@
+﻿@model New_Student_Portal.ViewModel.GradRequestInfomation
+<div class="col-md-12">
+    <button class="btn btn-sm btn-danger" onclick="ViewApprovalTrail('@Model.ReqNo');">Approval Trail</button>
+</div>
+<hr />
+<div class="col-md-12" style="color:wheat">
+    <h3>Requisition No. : @Model.ReqNo</h3>
+    @if (Model.Balance > 0)
+    {
+        <p style="color:red">Graduation request has been recieved. Awaiting clearance of Fee balance of Ksh. @Model.Balance.ToString("#,##0.00")</p>
+    }
+    else
+    {
+        <p>Graduation request has been successfully recieved</p>
+    }
+    <hr />
+</div>

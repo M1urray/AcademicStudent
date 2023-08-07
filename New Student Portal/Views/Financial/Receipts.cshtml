@@ -1,0 +1,148 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.Receipts>
+@{
+    ViewBag.Title = "Receipts";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<style>
+    thead {
+        background-color: black;
+        color: white;
+    }
+
+    tfoot {
+        background-color: #a7001a;
+        color: #f5e2bc;
+    }
+</style>
+<div class="card">
+    <div class="card-body">
+        <div class="responsive-table-plugin">
+            <div class="table-rep-plugin">
+                <div class="table-responsive" data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table table-striped table-hover">
+                        @{
+                            decimal total = 0;
+                        }
+                        <thead>
+                            <tr>
+                                <th width="15%">
+                                    Receipt No
+                                </th>
+                                <th width="15%">
+                                    Date
+                                </th>
+                                <th width="30%">
+                                    Payment Mode
+                                </th>
+                                <th width="30%" style="text-align:right">
+                                    Amount
+                                </th>
+                                <th width="10%" style="text-align:right">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    if (Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Receipt_No)
+                                                </td>
+                                                <td>
+                                                    @Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Payment_Mode)
+                                                </td>
+                                                <td align="right">
+                                                    @Convert.ToDecimal(item.Amount).ToString("#,##0.00")
+                                                </td>
+                                                <td align="right">
+                                                    <input type="button" value="Print Receipt" class="btn btn-danger" onclick="PrintReceipt('@item.Receipt_No');" />
+                                                    @*<a href="@Url.Action("Receipts", "ViewDocuments",new { ReceiptNo = item.Receipt_No})" class="btn btn-danger" style="padding:1px">Print Receipt</a>*@
+                                                </td>
+                                            </tr>
+                                            total = total + Convert.ToDecimal(item.Amount);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" style="color:red">
+                                                No Records Found
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" align="right">
+                                    Total : @total.ToString("#,##0.00")
+                                </td>
+                                <td align="right">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Receipt Printout</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+                <iframe id="iframe" style="width:100%;height:450px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var PrintReceipt = function (Receipt) {
+        ShowProgress();
+        $.ajaxSetup({
+            cache: false
+        });
+        $.ajax({
+            url: '/ViewDocuments/Receipts',
+            type: "POST",
+            datatype: "json",
+            cache: false,
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            data: JSON.stringify({ ReceiptNo: Receipt }),
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#myModalUnits").modal("show");
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+                HideProgress();
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+</script>
+
