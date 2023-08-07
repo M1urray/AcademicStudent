@@ -10,8 +10,8 @@
     }
 
     tfoot {
-        background-color: #a7001a;
-        color: #f5e2bc;
+        background-color: #051936;
+        color: #cbcc32;
     }
 </style>
 <div class="card">
@@ -114,6 +114,7 @@
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     var PrintReceipt = function (Receipt) {
         ShowProgress();
@@ -121,7 +122,7 @@
             cache: false
         });
         $.ajax({
-            url: '/ViewDocuments/Receipts',
+            url: '@Url.Action("Receipts", "ViewDocuments")',
             type: "POST",
             datatype: "json",
             cache: false,

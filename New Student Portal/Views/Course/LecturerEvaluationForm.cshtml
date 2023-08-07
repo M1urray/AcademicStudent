@@ -1,20 +1,8 @@
-﻿
-@model New_Student_Portal.ViewModel.Evaluation_Form
-@{
-    string Cat = "";
-}
-<style>
-    .RadioClass {
-        width: 20px;
-        height: 20px;
-        padding: 0px;
-    }
-
-    label {
-        vertical-align: -webkit-baseline-middle;
-    }
-</style>
+﻿@model New_Student_Portal.ViewModel.Lecturer
 <div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><b>Lecturer Evaluation</b></h4>
+    </div>
     <div class="modal-body" style="font-size: 12px">
         <p style="font-size: 14px; font-weight: bold; text-decoration: underline;">
             Introduction
@@ -25,9 +13,7 @@
             improvement. Please rate the statements given by choosing the most appropriate score as per the
             following scale:
         </p>
-        <p style="font-weight:bold">
-            1=Strongly Disagree; 2=Disagree; 3=Neutral; 4=Agree; 5=Strongly Agree
-        </p>
+        <p style="font-weight:bold">1=Poor; 2=Reasonable; 3=Satisfactory; 4=Good; 5=Very good</p>
         <hr />
         <div class="panel panel-default">
             <div class="panel-body pre-scrollable">
@@ -41,818 +27,323 @@
                         <tr>
                             <td style="font-weight:bold; width:20%">Lecturer Name:</td>
                             <td style="width:80%">
-                                <asp:Label ID="lblLecturerName" runat="server" class="label label-info">@Model.LecDet.LecName</asp:Label>
+                                <label id="lblLecturerName" class="label label-info">@Model.LecName</label>
+                                <input type="hidden" id="lblLectNo" value="@Model.LecNo" />
                             </td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <td style="font-weight:bold">Unit Code :</td>
                             <td>
-                                <asp:Label ID="lblUnitCode" class="label label-info">@Model.LecDet.Unit</asp:Label>
+                                <label id="lblUnitCode" class="label label-info">@Model.Unit</label>
                             </td>
                         </tr>
                         <tr>
                             <td style="font-weight:bold">Unit Name :</td>
                             <td>
-                                <asp:Label ID="lblUnitName" runat="server" class="label label-info">@Model.LecDet.UnitName</asp:Label>
+                                <label id="lblUnitName" class="label label-info">@Model.UnitName</label>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <hr style="border-bottom:3px solid Black" />
-        <div id="Step1">
-            <div class="panel panel-default">
-                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 1))
-                {
-                    Cat = "";
-                    <div class="panel-heading" style="font-weight: bold">
-                        @c.Category
-                    </div>
-                    <div class="responsive-table-plugin">
-                        <div class="table-rep-plugin">
-                            <div class="table-responsive" data-pattern="priority-columns">
-                                <table class="table table-border-style" id="TB1">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
-                                        </tr>
-                                    </thead>
-                                    @{ int i = 1;}
-                                    <tbody>
-                                        @foreach (var d in c.Eval_Quiz)
-                                        {
-                                            string name = "Ans" + i.ToString();
-
-                                            <tr>
-                                                <td>
-                                                    @i. @d.Quiz
-                                                    <input type="hidden" value="@d.Quiz" id="@i" />
-                                                </td>
-                                                @for (int j = 1; j < 6; j++)
-                                                {
-                                                    string ID = "Ans1" + j.ToString();
-                                                    <td align="center">
-                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
-                                                    </td>
-
-                                                }
-                                            </tr>
-                                            i++;
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    Cat = c.Category;
-                }
+        <hr />
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                A. Objective
             </div>
-            <hr />
-            <div class="row">
-                <div class="d-inline col-8 col-sm-8 col-md-8" style="text-align:center">Steps 1 of 5</div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
-                    <button class="btn btn-sm btn-success" onclick="NextStep('2',true,false,'@Cat');">Next >>></button>
+            <div class="panel-body pre-scrollable">
+                <table class="table table-border-style" id="TB1">
+                    <tbody>
+                        <tr>
+                            <td>
+                                1. Clarity of the course objectives
+                            </td>
+                            <td>
+                                <input id="Ans11" name="Ans1" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans12" name="Ans1" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans13" name="Ans1" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans14" name="Ans1" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans15" name="Ans1" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2. Achievement of the course objectives
+                            </td>
+                            <td>
+                                <input id="Ans21" name="Ans2" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans22" name="Ans2" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans23" name="Ans2" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans24" name="Ans2" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans25" name="Ans2" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3. Relevance of course to program objectives
+                            </td>
+                            <td>
+                                <input id="Ans31" name="Ans3" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans32" name="Ans3" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans33" name="Ans3" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans34" name="Ans3" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans35" name="Ans3" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                B. Course Content and methodology
+            </div>
+            <div class="panel-body">
+                <div class="panel-body pre-scrollable">
+                    <table class="table table-border-style" id="TB2">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    4. Presents course concepts and theories in a clear
+                                    and interesting way
+                                </td>
+                                <td>
+                                    <input id="Ans211" name="Ans21" type="radio" value="1" /> Poor&nbsp;
+                                    <input id="Ans212" name="Ans21" type="radio" value="2" /> Reasonable&nbsp;
+                                    <input id="Ans213" name="Ans21" type="radio" value="3" /> Satisfactory&nbsp;
+                                    <input id="Ans214" name="Ans21" type="radio" value="4" /> Good&nbsp;
+                                    <input id="Ans215" name="Ans21" type="radio" value="5" /> Very good
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    5.Clarity in presentation of course content
+                                </td>
+                                <td>
+                                    <input id="Ans221" name="Ans22" type="radio" value="1" /> Poor&nbsp;
+                                    <input id="Ans222" name="Ans22" type="radio" value="2" /> Reasonable&nbsp;
+                                    <input id="Ans223" name="Ans22" type="radio" value="3" /> Satisfactory&nbsp;
+                                    <input id="Ans224" name="Ans22" type="radio" value="4" /> Good&nbsp;
+                                    <input id="Ans225" name="Ans22" type="radio" value="5" /> Very good
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    6. Coverage of course syllabus within the given time
+                                </td>
+                                <td>
+                                    <input id="Ans231" name="Ans23" type="radio" value="1" /> Poor&nbsp;
+                                    <input id="Ans232" name="Ans23" type="radio" value="2" /> Reasonable&nbsp;
+                                    <input id="Ans233" name="Ans23" type="radio" value="3" /> Satisfactory&nbsp;
+                                    <input id="Ans234" name="Ans23" type="radio" value="4" /> Good&nbsp;
+                                    <input id="Ans235" name="Ans23" type="radio" value="5" /> Very good
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="d-none" id="Step2">
-            <div class="panel panel-default">
-                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 2))
-                {
-                    Cat = "";
-                    <div class="panel-heading" style="font-weight: bold">
-                        @c.Category
-                    </div>
-                    <div class="responsive-table-plugin">
-                        <div class="table-rep-plugin">
-                            <div class="table-responsive" data-pattern="priority-columns">
-                                <table class="table table-border-style" id="TB2">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
-                                        </tr>
-                                    </thead>
-                                    @{ int i = 1;}
-                                    <tbody>
-                                        @foreach (var d in c.Eval_Quiz)
-                                        {
-                                            string name = "Ans2" + i.ToString();
-
-                                            <tr>
-                                                <td>
-                                                    @i. @d.Quiz
-                                                    <input type="hidden" value="@d.Quiz" id="@i" />
-                                                </td>
-                                                @for (int j = 1; j < 6; j++)
-                                                {
-                                                    string ID = "Ans2" + j.ToString();
-                                                    <td align="center">
-                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
-                                                    </td>
-
-                                                }
-                                            </tr>
-                                            i++;
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    Cat = c.Category;
-                }
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                C. Materials and Physical Facilities
             </div>
-            <hr />
-            <div class="row">
-                <div class="d-inline col-4 col-sm-4 col-md-4">
-                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('1');"><<< Back</button>
-                </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 2 of 5</div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
-                    <button class="btn btn-sm btn-success" onclick="NextStep('3',false,false,'@Cat');">Next >>></button>
-                </div>
+            <div class="panel-body pre-scrollable">
+                <table class="table table-border-style" id="TB3">
+                    <tbody>
+                        <tr>
+                            <td>
+                                7. Relevance and sufficiency of teaching materials
+                            </td>
+                            <td>
+                                <input id="Ans311" name="Ans31" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans312" name="Ans31" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans313" name="Ans31" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans314" name="Ans31" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans315" name="Ans31" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                8. Guidance on source of internet material
+                            </td>
+                            <td>
+                                <input id="Ans321" name="Ans32" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans322" name="Ans32" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans323" name="Ans32" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans324" name="Ans32" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans325" name="Ans32" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                9. Guidance on the use of library material
+                            </td>
+                            <td>
+                                <input id="Ans331" name="Ans33" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans332" name="Ans33" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans333" name="Ans33" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans334" name="Ans33" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans335" name="Ans33" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="d-none" id="Step3">
-            <div class="panel panel-default">
-                @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 3))
-                {
-                    Cat = "";
-                    <div class="panel-heading" style="font-weight: bold">
-                        @c.Category
-                    </div>
-                    <div class="responsive-table-plugin">
-                        <div class="table-rep-plugin">
-                            <div class="table-responsive" data-pattern="priority-columns">
-                                <table class="table table-border-style" id="TB3">
-                                    <thead>
-                                        <tr>
-                                            <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
-                                        </tr>
-                                    </thead>
-                                    @{ int i = 1;}
-                                    <tbody>
-                                        @foreach (var d in c.Eval_Quiz)
-                                        {
-                                            string name = "Ans3" + i.ToString();
-
-                                            <tr>
-                                                <td>
-                                                    @i. @d.Quiz
-                                                    <input type="hidden" value="@d.Quiz" id="@i" />
-                                                </td>
-                                                @for (int j = 1; j < 6; j++)
-                                                {
-                                                    string ID = "Ans3" + j.ToString();
-                                                    <td align="center">
-                                                        <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
-                                                    </td>
-                                                }
-                                            </tr>
-                                            i++;
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    Cat = c.Category;
-                }
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                D. Assignments
             </div>
-            <hr />
-            <div class="row">
-                <div class="d-inline col-4 col-sm-4 col-md-4">
-                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('2');"><<< Back</button>
-                </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 3 of 5</div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
-                    <button class="btn btn-sm btn-success" onclick="NextStep('4',false,false,'@Cat');">Next >>></button>
-                </div>
+            <div class="panel-body pre-scrollable">
+                <table class="table table-border-style" id="TB4">
+                    <tbody>
+                        <tr>
+                            <td>
+                                10. Relevance and usefulness of course assignments
+                            </td>
+                            <td>
+                                <input id="Ans411" name="Ans41" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans412" name="Ans41" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans413" name="Ans41" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans414" name="Ans41" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans415" name="Ans41" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                11. Gives relevant and challenging assignments/tests
+                            </td>
+                            <td>
+                                <input id="Ans421" name="Ans42" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans422" name="Ans42" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans423" name="Ans42" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans424" name="Ans42" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans425" name="Ans42" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                12. Marks assignments promptly
+                            </td>
+                            <td>
+                                <input id="Ans431" name="Ans43" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans432" name="Ans43" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans433" name="Ans43" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans434" name="Ans43" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans435" name="Ans43" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                13. Gives helpful feedback on assignments and tests
+                            </td>
+                            <td>
+                                <input id="Ans441" name="Ans44" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans442" name="Ans44" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans443" name="Ans44" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans444" name="Ans44" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans445" name="Ans44" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="d-none" id="Step4">
-            @{ string OnlineCat = "", FaceCat = ""; }
-            <div class="panel panel-default">
-                <div class="panel-heading" style="font-weight: bold">
-                    D. What was the mode of learning for this course<br />
-                    <div style="padding-left:50px">
-                        <div class="form-check">
-                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="1" id="flexRadioDefault1" onchange="StudyMode('1');">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Online
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="2" id="flexRadioDefault2" onchange="StudyMode('2');">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Face to Face
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom:3px solid Black" />
-                <div class="responsive-table-plugin d-none" id="FaceToFace">
-                    @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 4))
-                    {
-                        Cat = "";
-                        <div class="panel-heading" style="font-weight: bold">
-                            @c.Category
-                        </div>
-                        <div class="responsive-table-plugin">
-                            <div class="table-rep-plugin">
-                                <div class="table-responsive" data-pattern="priority-columns">
-                                    <table class="table table-border-style" id="TB4">
-                                        <thead>
-                                            <tr>
-                                                <th width="50%">Question</th>
-                                                <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                                <th width="10%" style="text-align:center">Disagree</th>
-                                                <th width="10%" style="text-align:center">Neutral</th>
-                                                <th width="10%" style="text-align:center">Agree</th>
-                                                <th width="10%" style="text-align:center">Strongly Agree</th>
-                                            </tr>
-                                        </thead>
-                                        @{ int i = 1;}
-                                        <tbody>
-                                            @foreach (var d in c.Eval_Quiz)
-                                            {
-                                                string name = "Ans4" + i.ToString();
-
-                                                <tr>
-                                                    <td>
-                                                        @i. @d.Quiz
-                                                        <input type="hidden" value="@d.Quiz" id="@i" />
-                                                    </td>
-                                                    @for (int j = 1; j < 6; j++)
-                                                    {
-                                                        string ID = "Ans4" + j.ToString();
-                                                        <td align="center">
-                                                            <input id="@ID" name="@name" type="radio" value="@j" class="RadioClass" />
-                                                        </td>
-
-                                                    }
-                                                </tr>
-                                                i++;
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        FaceCat = c.Category;
-                    }
-                </div>
-                <div class="responsive-table-plugin d-none" id="Online">
-                    @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 5))
-                    {
-                        Cat = "";
-                        <div class="panel-heading" style="font-weight: bold">
-                            @c.Category
-                        </div>
-                        <hr />
-                        <div class="panel-heading" style="font-weight: bold">
-                            1. Have all the materials for your courses for the semester been posted on the e-learninge platform
-                            <input type="hidden" id="hidden1" value="Have all the materials for your courses for the semester been posted on the e-learninge platform" />
-                            <div style="padding-left:50px">
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="radio" name="AnsMat" value="1" id="radMat1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Yes
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="radio" name="AnsMat" value="2" id="radMat2">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-heading" style="font-weight: bold">
-                            2. Have you been meeting on the e-learning platform weekly with your lecturer
-                            <input type="hidden" id="hidden2" value="Have you been meeting on the e-learning platform weekly with your lecturer" />
-                            <div style="padding-left:50px">
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="radio" name="AnsEL" value="1" id="radEl1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Yes
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="radio" name="AnsEL" value="2" id="radEl2">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-heading" style="font-weight: bold">
-                            3. What other modes has your lecturer employed to ensure that you continue learning
-                            <input type="hidden" id="hidden3" value="What other modes has your lecturer employed to ensure that you continue learning" />
-                            <div style="padding-left:50px">
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox1" value=" Microsoft Teams">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Microsoft Teams
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox2" value="Zoom">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Zoom
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox3" value="Skype">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Skype
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox4" value="Email">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Email
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox5" value="WhatsApp">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        WhatsApp
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox6" value="Google Meet">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Google Meet
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" name="ModesS" type="checkbox" id="chckBox7" value="Telegram">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Telegram
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    Other
-                                    <input type="text" id="txtOther1" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-heading" style="font-weight: bold">
-                            4. Please indicate below the greatest challenge you have faced during this season of e-learning
-                            <input type="hidden" id="hidden4" value="Please indicate below the greatest challenge you have faced during this season of e-learning" />
-                            <div style="padding-left:50px">
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg1" value="Poor Internet">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Poor Internet
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg2" value="Lack of bundles">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Lack of bundles
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg3" value="Not having a smart phone">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Not having a smart phone
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input RadioClass" type="checkbox" name="Challenge" id="chckBoxChallg4" value="Not having a laptop">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Not having a laptop
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    Other
-                                    <input type="text" id="txtOther2" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        OnlineCat = c.Category;
-                    }
-                </div>
-
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                E. Availability of lecturer
             </div>
-            <hr />
-            <div class="row">
-                <div class="d-inline col-4 col-sm-4 col-md-4">
-                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('3');"><<< Back</button>
-                </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 4 of 5</div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
-                    <button class="btn btn-sm btn-success" onclick="NextStep5('@OnlineCat','@FaceCat');">Next >>></button>
-                </div>
+            <div class="panel-body pre-scrollable">
+                <table class="table table-border-style" id="TB5">
+                    <tbody>
+                        <tr>
+                            <td>
+                                14. Punctuality and availability during class sessions
+                            </td>
+                            <td>
+                                <input id="Ans511" name="Ans51" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans512" name="Ans51" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans513" name="Ans51" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans514" name="Ans51" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans515" name="Ans51" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                15. Availability for consultation outside class time
+                            </td>
+                            <td>
+                                <input id="Ans521" name="Ans52" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans522" name="Ans52" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans523" name="Ans52" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans524" name="Ans52" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans525" name="Ans52" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="d-none" id="Step5">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="font-weight: bold">
-                    E. What elements of the course most contributed to your learning?
-                </div>
-                <div class="panel-body">
-                    <textarea id="txtContrb" class="form-control"></textarea>
-                </div>
-                <div class="panel-heading" style="font-weight: bold">
-                    F. What improvements to the course would you recommend?
-                </div>
-                <div class="panel-body">
-                    <textarea id="txtImprivents" class="form-control"></textarea>
-                </div>
-                <div class="panel-heading" style="font-weight: bold">
-                    G. Any other comment?
-                </div>
-                <div class="panel-body">
-                    <textarea id="txtOtherComment" class="form-control"></textarea>
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                F. Course Delivery
             </div>
-            <hr />
-            <div class="row">
-                <div class="d-inline col-4 col-sm-4 col-md-4">
-                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('4');"><<< Back</button>
-                </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 5 of 5</div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
-                </div>
+            <div class="panel-body pre-scrollable">
+                <table class="table table-border-style" id="TB6">
+                    <tbody>
+                        <tr>
+                            <td>
+                                16. Facilitates meaningful and active class participation by students
+                            </td>
+                            <td>
+                                <input id="Ans611" name="Ans61" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans612" name="Ans61" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans613" name="Ans61" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans614" name="Ans61" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans615" name="Ans61" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                17. Answers questions clearly
+                            </td>
+                            <td>
+                                <input id="Ans621" name="Ans62" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans622" name="Ans62" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans623" name="Ans62" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans624" name="Ans62" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans625" name="Ans62" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                18. Is open to diverse viewpoints
+                            </td>
+                            <td>
+                                <input id="Ans631" name="Ans63" type="radio" value="1" /> Poor&nbsp;
+                                <input id="Ans632" name="Ans63" type="radio" value="2" /> Reasonable&nbsp;
+                                <input id="Ans633" name="Ans63" type="radio" value="3" /> Satisfactory&nbsp;
+                                <input id="Ans634" name="Ans63" type="radio" value="4" /> Good&nbsp;
+                                <input id="Ans635" name="Ans63" type="radio" value="5" /> Very good
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <br />
-            <div align="center">
-                <button class="btn btn-sm btn-danger" onclick="CompleteEvaluation(`@Model.LecDet.Unit`,`@Model.LecDet.UnitName`,`@Model.LecDet.LecNo`);">Complete Evaluation</button>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="font-weight: bold">
+                G. Comments and any other area of improvement of the course
             </div>
+            <div class="panel-body">
+                <textarea id="txtComments" class="form-control"></textarea>
+            </div>
+        </div>
+        <br />
+        <div align="center">
+            <input type="submit" value="Submit Form" class="btn btn-danger" onclick="SubmitEvaluationForm();" style="color: palevioletred" />
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var NextStep = function (step, FirstStep, LastStep,Cat) {
-        var Lecturer = {};
-
-        Lecturer.LecName = `@Model.LecDet.LecName`;;
-        Lecturer.LecNo = `@Model.LecDet.LecNo`;
-        Lecturer.Unit = `@Model.LecDet.Unit`;;
-        Lecturer.UnitName = `@Model.LecDet.UnitName`;;
-        Lecturer.Comments = "";
-      //var Mode = "";
-        var LecEval = new Array();
-      //var ELearning = new Array();
-        if (step == "2") {
-            var SaveData = false;
-            var ErroMsg = "";
-            $("#TB1 tbody tr").each(function (index) {
-                SaveData = false;
-                ErroMsg = "";
-                if ($("input[name=Ans" + (index + 1) +"]").is(':checked')) {
-                    $(this).removeClass("rowFocus");
-                    SaveData = true;
-                }
-                else {
-                    $(this).addClass("rowFocus");
-                    SaveData = false;
-                    ErroMsg = "Answer question " + (index + 1) + "";
-                    return false;
-                }
-            });
-            if (SaveData == false) {
-                Swal.fire('Warning', ErroMsg, 'warning');
-                return;
-            }
-            else {
-                $("#TB1 tbody tr").each(function (index) {
-                    var EvalQuiz = {};
-                    EvalQuiz.QuizCategory = Cat;
-                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
-                    EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
-                    LecEval.push(EvalQuiz);
-                });
-            }
-        }
-        if (step == "3") {
-            var SaveData = false;
-            var ErroMsg = "";
-            $("#TB2 tbody tr").each(function (index) {
-                SaveData = false;
-                ErroMsg = "";
-                if ($("input[name=Ans2" + (index + 1) + "]").is(':checked')) {
-                    $(this).removeClass("rowFocus");
-                    SaveData = true;
-                }
-                else {
-                    $(this).addClass("rowFocus");
-                    SaveData = false;
-                    ErroMsg = "Answer question " + (index + 1) + "";
-                    return false;
-                }
-            });
-            if (SaveData == false) {
-                Swal.fire('Warning', ErroMsg, 'warning');
-                return;
-            }
-            else {
-                $("#TB2 tbody tr").each(function (index) {
-                    var EvalQuiz = {};
-                    EvalQuiz.QuizCategory = Cat;
-                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
-                    EvalQuiz.Score = $("input[name=Ans2" + (index + 1) + "]:checked").val();
-                    LecEval.push(EvalQuiz);
-                });
-            }
-        }
-        if (step == "4") {
-            var SaveData = false;
-            var ErroMsg = "";
-
-            $("#TB3 tbody tr").each(function (index) {
-                SaveData = false;
-                ErroMsg = "";
-                if ($("input[name=Ans3" + (index + 1) + "]").is(':checked')) {
-                    $(this).removeClass("rowFocus");
-                    SaveData = true;
-                }
-                else {
-                    $(this).addClass("rowFocus");
-                    SaveData = false;
-                    ErroMsg = "Answer question " + (index + 1) + "";
-                    return false;
-                }
-            });
-            if (SaveData == false) {
-                Swal.fire('Warning', ErroMsg, 'warning');
-                return;
-            }
-            else {
-                $("#TB3 tbody tr").each(function (index) {
-                    var EvalQuiz = {};
-                    EvalQuiz.QuizCategory = Cat;
-                    EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
-                    EvalQuiz.Score = $("input[name=Ans3" + (index + 1) + "]:checked").val();
-                    LecEval.push(EvalQuiz);
-                });
-            }
-        }
-        ShowProgress();
-        $.ajax({
-            type: "POST",
-            url: "/LecturerEvaluation/SaveSectionData",
-            data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: FirstStep, LastSection: LastStep }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-                    HideProgress();
-                    if (step == "2") {
-                        $("#Step1").addClass("d-none");
-                        $("#Step2").removeClass("d-none");
-                    }
-                    if (step == "3") {
-                        $("#Step2").addClass("d-none");
-                        $("#Step3").removeClass("d-none");
-                    }
-                    if (step == "4") {
-                        $("#Step3").addClass("d-none");
-                        $("#Step4").removeClass("d-none");
-                    }
-                    if (step == "5") {
-                        $("#Step4").addClass("d-none");
-                        $("#Step5").removeClass("d-none");
-                    }
-                    if (step == "6") {
-                        $("#Step5").addClass("d-none");
-                        $("#Step6").removeClass("d-none");
-                    }
-                    Swal.fire('Success', data.message, 'success');
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Error', data.message, 'error');
-            }
-        });
-    };
-    var NextStep5 = function (OnlineCat, FaceCat) {
-        var Mode = "";
-        if (!$("input[name=AnsStM").is(':checked')) {
-            Swal.fire('Warning', "Select Study Mode", 'warning');
-            return false;
-        }
-        else {
-            Mode = $("input[name=AnsStM]:checked").val();
-
-            var Lecturer = {};
-
-            Lecturer.LecName = `@Model.LecDet.LecName`;;
-            Lecturer.LecNo = `@Model.LecDet.LecNo`;
-            Lecturer.Unit = `@Model.LecDet.Unit`;;
-            Lecturer.UnitName = `@Model.LecDet.UnitName`;;
-            Lecturer.Comments = "";
-
-            var LecEval = new Array();
-            var ELearning = new Array();
-
-            var SaveData = false;
-            var ErroMsg = "";
-            if (Mode == "1") {
-                var QuizText = "";
-
-                if (!$("input[name=AnsMat").is(':checked')) {
-                    Swal.fire('Warning', "Answer question 1", 'warning');
-                    return false;
-                }
-                else if (!$("input[name=AnsEL]").is(':checked')) {
-                    Swal.fire('Warning', "Answer question 2", 'warning');
-                    return false;
-                }
-                else if (!$("input[type=checkbox][name=ModesS]").is(':checked')) {
-                    Swal.fire('Warning', "You have not selected any Modes of learning used", 'warning');
-                    return false;
-                }
-                else if (!$("input[type=checkbox][name=Challenge]").is(':checked')) {
-                    Swal.fire('Warning', "You have not selected any challenges faced", 'warning');
-                    return false;
-                }
-                else {
-                    var EvalQuiz = {};
-                    EvalQuiz.QuizCategory = OnlineCat;
-                    EvalQuiz.Quiz = $("#hidden1").val();
-                    EvalQuiz.Score = $("input[name=AnsMat]:checked").val();
-                    LecEval.push(EvalQuiz);
-
-                    var EvalQuiz = {};
-                    EvalQuiz.QuizCategory = OnlineCat;
-                    EvalQuiz.Quiz = $("#hidden2").val();
-                    EvalQuiz.Score = $("input[name=AnsEL]:checked").val();
-                    LecEval.push(EvalQuiz);
-
-                    QuizText = $("#hidden3").val();
-
-                    $('input[type=checkbox][name=ModesS]').each(function (index) {
-                        var OnlineQ = {};
-                        if ($("#chckBox" + (index + 1) + "").is(':checked')) {
-                            OnlineQ.Quiz = QuizText;
-                            OnlineQ.Asnwer = $("#chckBox" + (index + 1) + "").val();
-                            OnlineQ.Cat = "1";
-                            ELearning.push(OnlineQ);
-                        }
-                    });
-                    if ($("#txtOther1").val() != "") {
-                        var OnlineQ = {};
-                        OnlineQ.Quiz = QuizText;
-                        OnlineQ.Asnwer = $("#txtOther1").val();
-                        OnlineQ.Cat = "1";
-                        ELearning.push(OnlineQ);
-                    }
-                    QuizText = "";
-
-                    QuizText = $("#hidden4").val();
-                    $('input[type=checkbox][name=Challenge]').each(function (index) {
-                        var OnlineQ = {};
-                        if ($("#chckBoxChallg" + (index + 1) + "").is(':checked')) {
-                            OnlineQ.Quiz = QuizText;
-                            OnlineQ.Asnwer = $("#chckBoxChallg" + (index + 1) + "").val();
-                            OnlineQ.Cat = "2";
-                            ELearning.push(OnlineQ);
-                        }
-                    });
-                    if ($("#txtOther2").val() != "") {
-                        var OnlineQ = {};
-                        OnlineQ.Quiz = QuizText;
-                        OnlineQ.Asnwer = $("#txtOther2").val();
-                        OnlineQ.Cat = "2";
-                        ELearning.push(OnlineQ);
-                    }
-
-                    ShowProgress();
-                    $.ajax({
-                        type: "POST",
-                        url: "/LecturerEvaluation/SaveELearningCourseEvaluation",
-                        data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, EQuiz: ELearning }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.success == true) {
-                                HideProgress();
-                                $("#Step4").addClass("d-none");
-                                $("#Step5").removeClass("d-none");
-                                Swal.fire('Success', data.message, 'success');
-                            }
-                            else {
-                                HideProgress();
-                                Swal.fire('Warning', data.message, 'warning');
-                            }
-                        },
-                        error: function () {
-                            HideProgress();
-                            Swal.fire('Error', data.message, 'error');
-                        }
-                    });
-                }
-            }
-            if (Mode == "2") {
-                $("#TB4 tbody tr").each(function (index) {
-                    SaveData = false;
-                    ErroMsg = "";
-                    if ($("input[name=Ans4" + (index + 1) + "]").is(':checked')) {
-                        $(this).removeClass("rowFocus");
-                        SaveData = true;
-                    }
-                    else {
-                        $(this).addClass("rowFocus");
-                        SaveData = false;
-                        ErroMsg = "Answer question " + (index + 1) + "";
-                        return false;
-                    }
-                });
-                if (SaveData == false) {
-                    Swal.fire('Warning', ErroMsg, 'warning');
-                    return;
-                }
-                else {
-                    $("#TB4 tbody tr").each(function (index) {
-                        var EvalQuiz = {};
-                        EvalQuiz.QuizCategory = FaceCat;
-                        EvalQuiz.Quiz = $(this).find("input[type='hidden']").val();
-                        EvalQuiz.Score = $("input[name=Ans4" + (index + 1) + "]:checked").val();
-                        LecEval.push(EvalQuiz);
-                    });
-                    ShowProgress();
-                    $.ajax({
-                        type: "POST",
-                        url: "/LecturerEvaluation/SaveSectionData",
-                        data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: false, LastSection: false }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.success == true) {
-                                HideProgress();
-                                $("#Step4").addClass("d-none");
-                                $("#Step5").removeClass("d-none");
-                                Swal.fire('Success', data.message, 'success');
-                            }
-                            else {
-                                HideProgress();
-                                Swal.fire('Warning', data.message, 'warning');
-                            }
-                        },
-                        error: function () {
-                            HideProgress();
-                            Swal.fire('Error', data.message, 'error');
-                        }
-                    });
-                }
-            }
-        }
-    };
-    var PreviousStep = function (step) {
-        if (step == "1") {
-            $("#Step2").addClass("d-none");
-            $("#Step1").removeClass("d-none");
-        }
-        if (step == "2") {
-            $("#Step3").addClass("d-none");
-            $("#Step2").removeClass("d-none");
-        }
-        if (step == "3") {
-            $("#Step4").addClass("d-none");
-            $("#Step3").removeClass("d-none");
-        }
-        if (step == "4") {
-            $("#Step5").addClass("d-none");
-            $("#Step4").removeClass("d-none");
-        }
-        if (step == "5") {
-            $("#Step6").addClass("d-none");
-            $("#Step5").removeClass("d-none");
-        }
-    };
-    var StudyMode = function (Type) {
-        if (Type == "1") {
-            $("#Online").removeClass("d-none");
-            $("#FaceToFace").addClass("d-none");
-        }
-        else {
-            $("#Online").addClass("d-none");
-            $("#FaceToFace").removeClass("d-none");
-        }
-    };
-</script>

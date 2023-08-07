@@ -26,29 +26,19 @@ namespace New_Student_Portal.ViewModel
         public string Value { get; set; }
         public List<SelectListItem> ListOfValues { get; set; }
     }
-    public class ApprovalEntries
+
+    public class NoticeBoard
     {
-        public string DocNo { get; set; }
-        public string UserID { get; set; }
-        public string DateSendForApproval { get; set; }
-        public string DueDate { get; set; }
-        public string Status { get; set; }
-        public int Sequence { get; set; }
+        public string Description { get; set; }
+        public string Campus { get; set; }
+        public string DatePosted { get; set; }
     }
-    public class ApprovalComment
+
+    public class ImportantDepartments
     {
-        public string Comment { get; set; }
-    }
-    public class ChaplainGroupDetails
-    {
-        public bool IsBSLeader { get; set; }
-        public bool RequestToBeLeader { get; set; }
-        public bool BsLeaderRequestApproved { get; set; }
-        public string BsLeaderRequestStatus { get; set; }
-        public string BsGroup { get; set; }
-        public string BsGroupName { get; set; }
-        public bool IsDCFLeader { get; set; }
-        public string DCFGroup { get; set; }
-        public string DCFGroupName { get; set; }
+        public string Description { get; set; }
+        public string  Contacts { get; set; }
+        public string Campus { get; set; }
+        public string School { get; set; }
     }
 }

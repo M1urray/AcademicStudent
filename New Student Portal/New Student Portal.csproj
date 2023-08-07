@@ -38,10 +38,10 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -161,8 +161,6 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ExamResultsController.cs" />
     <Compile Include="Controllers\FinancialController.cs" />
-    <Compile Include="Controllers\GradeCompaintController.cs" />
-    <Compile Include="Controllers\LecturerEvaluationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\ViewDocumentsController.cs" />
@@ -193,7 +191,6 @@
     <Compile Include="ViewModel\Error.cs" />
     <Compile Include="ViewModel\ExamResults.cs" />
     <Compile Include="ViewModel\FeeStatement.cs" />
-    <Compile Include="ViewModel\Grade_Compaint.cs" />
     <Compile Include="ViewModel\Hostel.cs" />
     <Compile Include="ViewModel\HostelBookingView.cs" />
     <Compile Include="ViewModel\ImportantDocs.cs" />
@@ -212,7 +209,6 @@
     <Compile Include="ViewModel\StudentReqs.cs" />
     <Compile Include="ViewModel\TimeTableView.cs" />
     <Compile Include="ViewModel\UserCredentials.cs" />
-    <Compile Include="ViewModel\Welfare.cs" />
     <Compile Include="Web References\NAVWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,14 +231,13 @@
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\ajax-loader2.gif" />
+    <Content Include="assets\images\login-bg.jpeg" />
     <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\login-bg.gif" />
     <Content Include="assets\images\login-bg2.jpg" />
-    <Content Include="assets\images\logo2.png" />
+    <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
     <Content Include="assets\images\profile_m.png" />
-    <Content Include="assets\images\retina_logo3.png" />
     <Content Include="assets\js\app.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery2.0.3.min.js" />
@@ -432,8 +427,92 @@
     <Content Include="assets\libs\x-editable\bootstrap-editable\js\bootstrap-editable.min.js" />
     <Content Include="assets\select2\css\select2.min.css" />
     <Content Include="assets\select2\js\select2.min.js" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\New Student Portal.dll" />
+    <Content Include="bin\New Student Portal.pdb" />
+    <Content Include="bin\New Student Portal.XmlSerializers.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Net.Http.dll" />
+    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="CSS\Loader.css" />
-    <Content Include="CustomErrorPage.html" />
     <Content Include="DatePicker\images\ui-icons_444444_256x240.png" />
     <Content Include="DatePicker\images\ui-icons_555555_256x240.png" />
     <Content Include="DatePicker\images\ui-icons_777620_256x240.png" />
@@ -451,6 +530,7 @@
     <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
     <Content Include="Global.asax" />
     <Content Include="JS\ShowProgression.js" />
+    <Content Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -463,8 +543,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Downloads\" />
-    <Folder Include="Views\LecturerEvaluation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
@@ -556,16 +634,24 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
+    <Content Include="Downloads\APP000008_admletter.pdf" />
+    <Content Include="bin\New Student Portal.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Shared\LoginMaster.cshtml" />
-    <Content Include="Views\Shared\SiteMaster.cshtml" />
-    <Content Include="Views\Login\ForgotPassword.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Login\AccountResetPassword.cshtml" />
     <Content Include="Views\Alumni\Dashboard.cshtml" />
     <Content Include="Views\Alumni\NewProgrammeApplication.cshtml" />
     <Content Include="Views\Alumni\OnlineApplicationInstructions.cshtml" />
@@ -577,29 +663,8 @@
     <Content Include="Views\Alumni\Steps\Step5.cshtml" />
     <Content Include="Views\Common\ErrorMessage.cshtml" />
     <Content Include="Views\Common\Unauthorized.cshtml" />
-    <Content Include="Views\Course\ClearanceRequest.cshtml" />
-    <Content Include="Views\Course\CourseRegistration.cshtml" />
-    <Content Include="Views\Course\CourseRegistrationDetails.cshtml" />
-    <Content Include="Views\Course\CourseRequisitionLines.cshtml" />
-    <Content Include="Views\Course\CurrentRegisteredUnits.cshtml" />
-    <Content Include="Views\Course\GetProgramUnits.cshtml" />
-    <Content Include="Views\Course\GradClearanceLine.cshtml" />
-    <Content Include="Views\Course\GraduationRequest.cshtml" />
-    <Content Include="Views\Course\LecturerEvaluation.cshtml" />
-    <Content Include="Views\Course\LecturerEvaluationForm.cshtml" />
-    <Content Include="Views\Course\NewAcademicRequisition.cshtml" />
-    <Content Include="Views\Course\Partial Views\GetFreeElectiveCourses.cshtml" />
-    <Content Include="Views\Course\Partial Views\ProgrammeMajor.cshtml" />
-    <Content Include="Views\Course\Partial Views\ProgrammeMajorMinor.cshtml" />
-    <Content Include="Views\Course\ProgrammeOptions.cshtml" />
-    <Content Include="Views\Course\RequisitionLines.cshtml" />
-    <Content Include="Views\Course\StudentRequisitionList.cshtml" />
-    <Content Include="Views\Course\StudentRequisitions.cshtml" />
-    <Content Include="Views\Course\StudentTimeTable.cshtml" />
-    <Content Include="Views\Course\UnitsNotInTimeTable.cshtml" />
-    <Content Include="Views\Course\ViewStudentRegisteredUnits.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
-    <Content Include="Views\Dashboard\ViewUnitSummery.cshtml" />
+    <Content Include="Views\Dashboard\ViewUitSummery.cshtml" />
     <Content Include="Views\ExamResults\ProvisionalResults.cshtml" />
     <Content Include="Views\Financial\FeeStatement.cshtml" />
     <Content Include="Views\Financial\Payment Plan\PaymentPlanData.cshtml" />
@@ -609,6 +674,7 @@
     <Content Include="Views\Financial\SponsorshipApplication.cshtml" />
     <Content Include="Views\Financial\SponsorshipApp\SponsorshipApplications.cshtml" />
     <Content Include="Views\Settings\ChangePassword.cshtml" />
+    <Content Include="Views\ViewDocuments\ProvisionalResults.cshtml" />
     <Content Include="Views\ViewDocuments\ViewDocuments.cshtml" />
     <Content Include="Views\Welfare\BookedSpaceDetails.cshtml" />
     <Content Include="Views\Welfare\ClubsSociety.cshtml" />
@@ -631,52 +697,47 @@
     <Content Include="Views\Welfare\Steps\Step4.cshtml" />
     <Content Include="Views\Welfare\Steps\Step5.cshtml" />
     <Content Include="Views\Welfare\Steps\Step6.cshtml" />
+    <Content Include="Views\Login\AccountResetPassword.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\ErrorMessange.cshtml" />
+    <Content Include="Views\Shared\LoginMaster.cshtml" />
     <Content Include="Views\Shared\Partial Views\ErroMessangeView.cshtml" />
     <Content Include="Views\Shared\Partial Views\GraduationReqInfo.cshtml" />
-    <Content Include="Views\Common\Notification.cshtml" />
+    <Content Include="Views\Shared\SiteMaster.cshtml" />
+    <Content Include="Views\Course\ClearanceRequest.cshtml" />
+    <Content Include="Views\Course\CourseRegistration.cshtml" />
+    <Content Include="Views\Course\CourseRegistrationDetails.cshtml" />
+    <Content Include="Views\Course\CourseRequisitionLines.cshtml" />
+    <Content Include="Views\Course\CurrentRegisteredUnits.cshtml" />
     <Content Include="Views\Course\EnquiryListView.cshtml" />
+    <Content Include="Views\Course\GetProgramUnits.cshtml" />
+    <Content Include="Views\Course\GradClearanceLine.cshtml" />
+    <Content Include="Views\Course\GraduationRequest.cshtml" />
+    <Content Include="Views\Course\LecturerEvaluation.cshtml" />
+    <Content Include="Views\Course\LecturerEvaluationForm.cshtml" />
+    <Content Include="Views\Course\NewAcademicRequisition.cshtml" />
+    <Content Include="Views\Course\NonResidenceForm.cshtml" />
+    <Content Include="Views\Course\ProgrammeOptions.cshtml" />
+    <Content Include="Views\Course\RequisitionLines.cshtml" />
+    <Content Include="Views\Course\Residence_Nonresidence.cshtml" />
+    <Content Include="Views\Course\Resit_Retake.cshtml" />
     <Content Include="Views\Course\StudentEnquiryList.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\JoinBS.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BSDetails.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\DCFEvents.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\DCFEventsLeader.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\CreateDoc.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\CreateDCFActivity.cshtml" />
-    <Content Include="Views\Course\Partial Views\ProgrammeTransit.cshtml" />
-    <Content Include="Views\Course\Partial Views\ExcemptionRequest.cshtml" />
-    <Content Include="Uploads\Jan 2022 semester plan %283%29.pdf" />
-    <Content Include="Uploads\2021-2022  Fee Structure0001.pdf" />
-    <Content Include="Views\Shared\Partial Views\ApprovalTrail.cshtml" />
-    <Content Include="Views\Common\ApprovalComments.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\ClassAttendance.cshtml" />
-    <Content Include="Views\Course\Partial Views\OfficalTranscript.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\EmploymentHistory.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\QualificationHistory.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\ProgrammeEnrolment.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\EmpHistForm.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\QualHistForm.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
-    <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BsDiv.cshtml" />
-    <Content Include="Views\Alumni\StudentRequisitions.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\NewAcademicRequisition.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\ProgrammeTransit.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\AskLeadershipWithGroup.cshtml" />
-    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
-    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestList.cshtml" />
-    <Content Include="Views\Course\Partial Views\SpecialExamForm.cshtml" />
-    <Content Include="Views\GradeCompaint\Grade_Complaint_List.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\Grade_Complaint_List_Views.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\NewRequisition.cshtml" />
-    <Content Include="Views\Common\AcademicCalender.cshtml" />
+    <Content Include="Views\Course\StudentRequisitionList.cshtml" />
+    <Content Include="Views\Course\StudentRequisitions.cshtml" />
+    <Content Include="Views\Course\StudentTimeTable.cshtml" />
+    <Content Include="Views\Course\ViewStudentRegisteredUnits.cshtml" />
+    <Content Include="Views\Common\Notification.cshtml" />
+    <Content Include="Uploads\Jan 2022 semester plan.pdf" />
+    <Content Include="Views\ViewDocuments\DocumentViewResults.cshtml" />
     <Content Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Common\GetNotice.cshtml" />
+    <Content Include="Views\Common\GetImportantDepartments.cshtml" />
+    <Content Include="Views\Course\GetBonusCourse.cshtml" />
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -686,10 +747,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

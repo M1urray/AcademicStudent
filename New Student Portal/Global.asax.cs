@@ -22,22 +22,6 @@ namespace New_Student_Portal
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            JsonValueProviderFactory jsonValueProviderFactory = null;
-
-            foreach (var factory in ValueProviderFactories.Factories)
-            {
-                if (factory is JsonValueProviderFactory)
-                {
-                    jsonValueProviderFactory = factory as JsonValueProviderFactory;
-                }
-            }
-
-            //remove the default JsonVAlueProviderFactory
-            if (jsonValueProviderFactory != null) ValueProviderFactories.Factories.Remove(jsonValueProviderFactory);
-
-            //add the custom one
-            ValueProviderFactories.Factories.Add(new CustomJsonValueProviderFactory());
         }
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
@@ -56,10 +40,6 @@ namespace New_Student_Portal
                         myUser.UserID = userData[1];
                         myUser.Email = userData[2];
                         myUser.RoleName = userData[3];
-                        if (userData[4] != "" && userData[4] != null)
-                        {
-                            myUser.Full_Access = bool.Parse(userData[4]);
-                        }
 
                         HttpContext.Current.User = myUser;
                     }

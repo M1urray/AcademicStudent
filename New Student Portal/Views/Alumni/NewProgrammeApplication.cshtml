@@ -1,11 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "New Programme Application";
+    ViewBag.Title = "NewProgrammeApplication";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
-<div class="modal-content">    
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><b>New Programme Application</b></h4>
+    </div>
     <div class="modal-body">
-        @*<div class="stepwizard">
+        <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
                     <button type="button" class="btn btn-primary btn-circle" disabled>1</button>
@@ -28,10 +31,11 @@
                     <p class="d-none d-sm-block">Submission</p>
                 </div>
             </div>
-        </div>*@
+        </div>
         <div id="divSteps"></div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         GetStepSection('StepOneView');
@@ -44,7 +48,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Alumni/" + Step,
+            url: "/Allumni/" + Step,
             success: function (data) {
                 $("#divSteps").html(data);
                 HideProgress();
@@ -59,7 +63,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Alumni/SaveStepOneData",
+            url: "/Allumni/SaveStepOneData",
             //data: JSON.stringify(UnitReg),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -83,7 +87,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Alumni/SaveStepTwoData",
+            url: "/Allumni/SaveStepTwoData",
             //data: JSON.stringify(UnitReg),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -107,7 +111,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Alumni/SaveStepThreeData",
+            url: "/Allumni/SaveStepThreeData",
             //data: JSON.stringify(UnitReg),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -131,7 +135,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Alumni/SaveStepFourData",
+            url: "/Allumni/SaveStepFourData",
             //data: JSON.stringify(UnitReg),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -155,7 +159,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Alumni/SaveStepFiveData",
+            url: "/Allumni/SaveStepFiveData",
             //data: JSON.stringify(UnitReg),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

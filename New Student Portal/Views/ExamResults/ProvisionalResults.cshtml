@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<New_Student_Portal.ViewModel.ExamSemesters>
 @{
-    ViewBag.Title = "Provisional Results";
+    ViewBag.Title = "ProvisionalResults";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -22,8 +22,11 @@
     .pre-scrollable {
         max-height: none
     }
-</style> 
-<div class="modal-content">    
+</style>
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Provisional Results</span></h4>
+    </div>
     <div class="modal-body pre-scrollable">
         <table class="table table-hover" style="font-size:12px">
             <thead style="color:white;background-color:black">

@@ -1,4 +1,4 @@
-﻿@model New_Student_Portal.ViewModel.RequisitionLines
+﻿@model IEnumerable<New_Student_Portal.ViewModel.StudentReqLines>
 <style>
     thead {
         background-color: black;
@@ -9,7 +9,6 @@
         background-color: #051936;
         color: #cbcc32;
     }
-
     .BtnPadding {
         padding: 1px;
         font-size: 12px;
@@ -25,52 +24,28 @@
                 <th>
                     Unit Description
                 </th>
-                @if (Model.Status == "Approved" && (Model.RegT == "Special Exams" || Model.RegT == "Exam Challenge"))
-                {
-                    <th>
-                        Lecture
-                    </th>
-                    <th>
-                        Section
-                    </th>
-                }
-                @if (Model.Status == "Open")
-                {
-                    <th align="center">Action</th>
-                }
+                <th align="center">Action</th>
             </tr>
         </thead>
         <tbody>
             @{
                 if (Model != null)
                 {
-                    if (Model.ListLines.Count() > 0)
+                    if (Model.Count() > 0)
                     {
-                        foreach (var item in Model.ListLines)
+                        foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Unit)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UnitName)
-                                </td>
-                                @if (Model.Status == "Approved" && (Model.RegT == "Special Exams" || Model.RegT == "Exam Challenge"))
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Lecturer)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Section)
-                                    </td>
-                                }
-                                @if (Model.Status == "Open")
-                                {
-                                    <td>
-                                        <button id="btnEval" class="btn btn-warning BtnPadding" onclick="SelectedRowUnit('@item.Unit');">Drop</button>
-                                    </td>
-                                }
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Unit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UnitName)
+                            </td>
+                            <td>
+                                <button id="btnEval" class="btn btn-warning BtnPadding" onclick="SelectedRowUnit('@item.Unit');">Drop</button>
+                            </td>
+                        </tr>
                         }
                     }
                     else

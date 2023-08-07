@@ -28,21 +28,25 @@
     </div>
 </div>
 @*//////////////////////Modal////////////////////////////*@
-<div id="myModalApplication" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<div class="modal fade" id="myModalApplication" tabindex="-1" role="dialog" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
             <div class="modal-header">
                 <h4 class="modal-title"><label id="labelT"></label></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body p-4" id="modalBody">
+            <div class="modal-body" id="modalBody">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
+<script src="~/JS/pdfobject.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadSponsorshipApplicationList();
@@ -55,7 +59,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Welfare/SponsorshipApplicationList",
+            url: '@Url.Action("SponsorshipApplicationList", "Welfare")',
             success: function (data) {
                 $("#divSponsorship").html(data);
                 HideProgress();
@@ -67,7 +71,7 @@
         });
     }
     var NewApplication = function () {
-        window.location = "/Welfare/ScolorshipApplcationForm";        
+        window.location = '@Url.Action("ScolorshipApplcationForm", "Welfare")';
     };
     var SubmitApplication = function () {
         var Amount = $('#txtAmount').val();
@@ -84,7 +88,7 @@
             ShowProgress();
             $.ajax({
                 type: "POST",
-                url: "/Welfare/SubmitSponsorshipApplication",
+                url:'@Url.Action("SubmitSponsorshipApplication", "Welfare")',
                 data: JSON.stringify({ Amount: Amount, Remarks: Remarks }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -117,7 +121,7 @@
             contentType: "application/json; charset = utf-8",
             processData: false,
             data: JSON.stringify({ DocNo: DocNo }),
-            url: "/Welfare/SponsorshipApplicationDoc",
+            url: '@Url.Action("SponsorshipApplicationDoc", "Welfare")',
             success: function (data) {
                 $("#modalBody").html(data);
                 HideProgress();

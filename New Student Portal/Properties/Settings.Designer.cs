@@ -26,7 +26,7 @@ namespace New_Student_Portal.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal")]
         public string New_Student_Portal_NAVWS_WebPortal {
             get {
                 return ((string)(this["New_Student_Portal_NAVWS_WebPortal"]));

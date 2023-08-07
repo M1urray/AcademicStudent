@@ -1,0 +1,76 @@
+﻿@model New_Student_Portal.ViewModel.DropdownListValues
+<div class="container">
+    <div class="col-md-12" style="background-color: white">
+        <div class="row">
+            <div class="col-md-6">
+                @if (Model.Code == "2")
+                {
+                    <span style="font-weight: bold">Choose Stage</span>
+                }
+                else
+                {
+                    <span style="font-weight: bold">Choose Academic Year</span>
+                }
+                @Html.DropDownListFor(model => model.Value, Model.ListOfValues, "----", new
+                {
+                    @class = "form-control",
+                    @id = "ddlValue",
+                    @onclick = "ShowRequiredDiv();"
+           })
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+    <div><hr /></div>
+    <div style="background-color: white;" id="RegistUnits">
+        <div class="row">
+            <div class="col-md-12">
+                <span style="font-weight: bold">Registered Courses</span>
+                <p style="color:red"><i><label id="lblTText"></label></i></p>
+                <div id="divRegUnits"></div>
+            </div>
+            <hr />
+            <div align="center">
+                <input type="button" class="btn btn-danger" value="Submit Requisition" onclick="SubmitStudentRequistion();" />
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/ShowProgression.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#RegistUnits").hide();
+    });
+    var ShowRequiredDiv = function () {
+        var value = $("#ddlValue").children("option:selected").val();
+        if (value == "") {
+            $("#RegistUnits").hide();
+        }
+        else {
+            $("#RegistUnits").show();
+            LoadUnits(value);
+        }
+    }
+    var LoadUnits = function (value) {
+        var type = `@Model.Code`;
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: 'json',
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            data: JSON.stringify({ Type: type, Value: value }),
+            url: '@Url.Action("GetRetakeResitUnits", "Course")',
+            success: function (data) {
+                $("#divRegUnits").html(data);
+                HideProgress();
+            },
+            error: function () {
+                HideProgress();
+                alert("There is some problem to process your request. Please try after some time");
+            }
+        });
+    }
+</script>
+

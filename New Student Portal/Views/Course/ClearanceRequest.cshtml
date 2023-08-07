@@ -9,47 +9,140 @@
     }
 </style>
 <div class="modal-content">
-    <div class="modal-header">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
         <h4 class="modal-title"><span class="spanClass"><label id="lblTitle"></label></span></h4>
     </div>
     <div class="modal-body">
-        <div id="divRequisition"></div>
+        <div id="divForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="RegNo" class="lblClass">Registration No</label>
+                        <label class="label label-info">@Model.No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fullName" class="lblClass">Full Name</label>
+                        <label class="label label-info">@Model.Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IDNo" class="lblClass">National ID</label>
+                        <label class="label label-info">@Model.ID_No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IDaddress" class="lblClass">Address</label>
+                        <label class="label label-info">@Model.Address</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtTel" class="lblClass">Telephone</label>
+                        <label class="label label-info">@Model.Phone_No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtEmail" class="lblClass">Jooust Email</label>
+                        <label class="label label-info">@Model.E_Mail</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtProg" class="lblClass">Programme</label>
+                        <label class="label label-info">@Model.Prog (@Model.ProgName)</label>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div align="center">
+                <input type="button" id="btnSaving" class="btn btn-danger" value="Make Request" onclick="SubmitClearanceRequest();" />
+            </div>
+            <hr />
+        </div>
+        <div id="divLine">
+            <p class="text-googleplus">
+                You have successfully requested for clearance. Follow the approval level to know where
+                the document is pending
+            </p>
+            <div id="divRequisitionLine"></div>
+        </div>
     </div>
 </div>
-
+@*//////////////////////Modal////////////////////////////*@
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h4 class="modal-title">Fee Statement</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody" style="width:100%;height:450px">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/JS/ShowProgression.js"></script>
+<script src="~/JS/pdfobject.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        GetNewClearanceRequest();
+        if (`@Model.MadeRequest` == "True") {
+            $("#lblTitle").text("Clearance Request Line");
+            $("#divForm").hide();
+            $("#divLine").show();
+            LoadClearanceRequest();
+        }
+        else {
+            $("#lblTitle").text("Clearance Request Form");
+            $("#divForm").show();
+            $("#divLine").hide();
+        }
     });
-    function GetNewClearanceRequest() {
+    var LoadClearanceRequest = function () {
         ShowProgress();
         $.ajax({
+            cache: false,
             async: true,
-            type: "GET",
-            dataType: 'HTML',
+            type: "POST",
+            dataType: 'html',
             contentType: false,
-            processData: false,
-            url: "/Course/NewClearanceRequest",
+            data: JSON.stringify({ RegType: 'Clearance' }),
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("StudentGradClearanceRequisitionLine", "Course")',
             success: function (data) {
-                $("#divRequisition").html(data);
+                $("#divRequisitionLine").html(data);
                 HideProgress();
             },
             error: function () {
                 HideProgress();
-                Swal.fire('Error', 'There is some problem to process your request. Please try after some time', 'error');
+                Swal.fire("There is some problem to process your request. Please try after some time");
             }
         });
-    }
-    var SubmitClearanceRequest = function (StdNo, Prog) {
+    };
+    var SubmitClearanceRequest = function () {
         var StudentReqs = {};
-        StudentReqs.StdNo = StdNo;
-        StudentReqs.Prog = Prog;
+        StudentReqs.StdNo = `@Model.No`;
+        StudentReqs.Prog = `@Model.Prog`;
         StudentReqs.Requisition_Type = 10;
         StudentReqs.Remarks = "";
         ShowProgress();
         $.ajax({
-                url: "/Course/SubmitClearanceRequest",
+                url: '@Url.Action("SubmitClearanceRequest", "Course")',
                 datatype: "json",
                 type: "POST",
                 data: JSON.stringify({ regData: StudentReqs }),
@@ -57,7 +150,10 @@
                 success: function (data) {
                     if (data.success == true) {
                         HideProgress();
-                        GetNewClearanceRequest();
+                        $("#lblTitle").text("Clearance Request Line");
+                        $("#divForm").hide();
+                        $("#divLine").show();
+                        LoadClearanceRequest();
                         Swal.fire('Success', data.message, 'success');
                     }
                     else {
@@ -71,6 +167,30 @@
                 }
             });
     };
+    var PrintClearanceReport = function () {
+        ShowProgress();
+        $.ajax({
+            url: '@Url.Action("PrintClearanceForm", "Course")',
+            type: "POST",
+            success: function (data) {
+                if (data.success == true) {
+                    var viewer = $("#modalBody");
+                    PDFObject.embed(data.message, viewer);
+                    $("#myModalUnits").modal("show");
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
     var SubmitCollectionDate = function () {
         var date = $("#dtPicker").val();
         if (date == "") {
@@ -80,7 +200,7 @@
         else {
             ShowProgress();
             $.ajax({
-                url: "/Course/CertificateCollectionDate",
+                url: '@Url.Action("CertificateCollectionDate", "Course")',
                 datatype: "json",
                 type: "POST",
                 data: JSON.stringify({ Date: date }),

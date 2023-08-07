@@ -17,6 +17,7 @@
 
     try
     {
+
         if (Session["ImgProfile"] == null)
         {
             var base64 = CommonClass.ProfilePicture(Session["Username"].ToString());
@@ -50,50 +51,10 @@
         CreditAmout = Convert.ToDecimal(Model.Credit_Amount).ToString("#,##0.00");
     }
 }
-<style>
-    .card, .card-title {
-        color: white
-    }
-
-    .card-header, .card-title {
-        background-color: #d10e2c;
-    }
-
-    .card-title {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-    }
-</style>
-@if (Model.DisplinaryCases.Count() > 0)
-{
-    <div class="row">
-        <div class="col-md-12">
-            @foreach (var c in Model.DisplinaryCases)
-            {
-                <table class="table table-hover" style="border:2px solid Black">
-                    <thead style="background-color:black;color:white">
-                        <tr>
-                            <th>Displinary Remarks</th>
-                            <th>Return Date</th>
-                        </tr>
-                    </thead>
-                    <tbody style="color:red">
-                        <tr>
-                            <td>
-                                <img src="~/assets/images/NEW2.gif" /> @c.Remarks
-                            </td>
-                            <td>@c.EndDate</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-        </div>
-    </div>
-}
 <div class="card">
-    <h4 class="card-title">Basic information</h4>
     <div class="card-body">
+        <h4 class="header-title mb-3">Basic information</h4>
+        <hr />
         <div class="row">
             <div class="col-sm-6 col-md-2 col-lg-2">
                 @{
@@ -106,11 +67,11 @@
                     {
                         if (Model.Gender == "Female")
                         {
-                            <img src="~/img/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                         else
                         {
-                            <img src="~/img/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                     }
                 }
@@ -146,9 +107,9 @@
                     </div> <!-- end col -->
                     <div class="col-sm-6 col-md-6">
                         <div class="row mb-3">
-                            <label class="col-md-4"> Address</label>
+                            <label class="col-md-4"> Campus</label>
                             <div class="col-md-8">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Address)</span>
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Campus)</span>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -164,46 +125,18 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-md-4"> Campus</label>
+                            <label class="col-md-4"> Leadership Position</label>
                             <div class="col-md-8">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Campus)</span>
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Position)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Mode of Study</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Session["SettlementType"]</span>
                             </div>
                         </div>
                     </div> <!-- end col -->
-                    @if (Model.Qualify_For_Catering)
-                    {
-                        <div class="col-sm-4 col-md-4">
-                            <hr />
-                            <div class="row mb-3">
-                                <label class="col-md-2"></label>
-                                <div class="col-md-8">
-                                    <button class="btn btn-sm btn-danger form-control" onclick="GenerateCateringToken('@Model.Semester');">Get Catering Token</button>
-                                    <b style="color:black">Current Catering Token :</b> <label id="lblToken" class="label badge badge-outline-success"></label>
-                                </div>
-                                <label class="col-md-2"></label>
-                            </div>
-                        </div>
-                    }
-                    <div class="col-sm-4 col-md-4">
-                        <hr />
-                        <div class="row mb-3">
-                            <label class="col-md-2"></label>
-                            <div class="col-md-8">
-                                <button class="btn btn-sm btn-success form-control" onclick="AcademicCalender('@Model.Semester');">Get Academic Calender</button>
-                            </div>
-                            <label class="col-md-2"></label>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <hr />
-                        <div class="row mb-3">
-                            <label class="col-md-2"></label>
-                            <div class="col-md-8">
-                                <button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>
-                            </div>
-                            <label class="col-md-2"></label>
-                        </div>
-                    </div>
                 </div> <!-- end row -->
             </div>
         </div>
@@ -212,43 +145,29 @@
 <div class="row">
     <div class="col-md-3 col-md-6">
         <div class="card">
-            <h4 class="card-title">Academic Information</h4>
             <div class="card-body">
+                <h4 class="header-title mb-3">Academic Information</h4>
+                <hr />
                 <div class="row">
                     <div class="col-12">
                         <div class="row mb-3">
-                            <label class="col-md-5">Current Programme</label>
+                            <label class="col-md-5">Course Guide</label>
+                            <div class="col-md-7">
+                                <a href="#" class="btn btn-sm btn-success" onclick="GetDocumentAttachments('@Model.Prog');">Get Course Guide</a>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-5">Programme</label>
                             <div class="col-md-7">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ProgName)</span>
                             </div>
                         </div>
-                        @if (Model.OtherProg != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Other Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.OtherProg)</span>
-                                </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Current Academic Stage</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Stage)</span>
                             </div>
-                        }
-                        @if (Model.SecondConc != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Double Concentration</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.SecondConc)</span>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Minor != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Minor Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Minor)</span>
-                                </div>
-                            </div>
-                        }
+                        </div>
                         <div class="row mb-3">
                             <label class="col-md-5"> Completed Units</label>
                             <div class="col-md-7">
@@ -256,7 +175,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-md-5"> GPA</label>
+                            <label class="col-md-5"> Remaining</label>
                             <div class="col-md-7">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.GPA)</span>
                             </div>
@@ -274,8 +193,9 @@
     </div>
     <div class="col-md-3 col-md-6">
         <div class="card">
-            <h4 class="card-title">Fee Payment</h4>
             <div class="card-body">
+                <h4 class="header-title mb-3">Fee Payment</h4>
+                <hr />
                 <div class="row">
                     <div class="col-12">
                         <div class="row mb-3">
@@ -302,12 +222,38 @@
         </div> <!-- end card-->
     </div>
 </div>
+@if (Model.ClassAttendance != null && Model.ClassAttendance.Count > 0)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mb-3">Class Attendance</h4>
+                    <hr />
+                    <div class="row">
+                        @foreach (var item in Model.ClassAttendance)
+                        {
+                            <div class="col-12">
+                                <b>@Html.DisplayFor(model => item.Unit) - @Html.DisplayFor(model => item.Description)</b>
+                                <div class="progress mb-0">
+                                    <div class="progress-bar" role="progressbar" style="width: @(item.PercAtte + "%");" aria-valuenow="@item.PercAtte" aria-valuemin="0" aria-valuemax="100">@(item.PercAtte)%</div>
+                                </div>
+                            </div> <!-- end col -->
+                        }
+                    </div> <!-- end row -->
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div>
+    </div>
+}
 <hr />
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-md-12">
         <div class="card">
-            <h4 class="card-title">Important Documents</h4>
             <div class="card-body">
+                <h4 class="header-title mb-3">Important Documents</h4>
+                <hr />
                 <div class="row">
                     <div class="col-12">
                         <table class="table table-bordered dt-responsive nowrap">
@@ -362,23 +308,6 @@
         </div> <!-- end card-->
     </div>
 </div>
-
-@*//////////////////////Modal////////////////////////////*@
-<div id="myModalUnits" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><label id="labelT"></label></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4" id="modalBody">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!--/////////////////notification/////////////////////-->
 <div id="myModalNotif" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -397,14 +326,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if ('@Model.BSGroup' == "") {
-            $("#lblJoinBS").text("Join Bible Study(BS) Group");
-        }
-        else {
-            $("#lblJoinBS").text("Bible Study(BS) Group Details");
-        }
-        $("#lblToken").text(`@Model.Cat_Token`);
-        MyBSInformation();
+        LoadNotifications();
     });
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
@@ -416,7 +338,7 @@
         }
         ShowProgress();
         $.ajax({
-            url: "/Dashboard/ViewStudentRegisteredUnits",
+            url: '@Url.Action("ViewStudentRegisteredUnits", "Dashboard")',
             datatype: "json",
             type: "POST",
             data: JSON.stringify({ Type: Type }),
@@ -428,25 +350,7 @@
             },
             error: function () {
                 HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var MyBSInformation = function () {
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: 'HTML',
-            url: '@Url.Action("GetBsDetailForm", "Dashboard")',
-            success: function (data) {
-                $("#divBs").html(data);
-                HideProgress();
-                LoadNotifications();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                swal('Warning', 'Problem encountered while reading Units', 'warning');
             }
         });
     }
@@ -472,354 +376,68 @@
             });
         }
     };
-    var BSDetails = function (BsG) {
-        var x = document.getElementById("labelT");
-        var url;
-        if (BsG != "") {
-            x.innerHTML = 'Bible Study Details';
-            url = "/Dashboard/GetBSDetails";
-        }
-        else {
-            x.innerHTML = 'Join a Bible Study(BSG)';
-           url = "/Dashboard/JoinBSGroup";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ BSG: BsG }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateDocument = function (Type) {
-        var x = document.getElementById("labelT");
-        if (Type == "BS") {
-            x.innerHTML = 'Create Bible Study(BS)';
-        }
-        if (Type == "DCF") {
-            x.innerHTML = 'Create Daystar Christain Fellowship(DCF)';
-        }
-       ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDocument",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Type:Type  }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                swal('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var BibleStudyMembers = function (Bs,Waiting,Title) {
-        var x = document.getElementById("labelT");
-        x.innerHTML = Title;
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/BibleStudyMembers",
-            datatype: "json",
-            data:JSON.stringify({ waitingRoom: Waiting, BsG: Bs }),
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var AdmitStudent = function (StdNo) {
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/ApproveBSRequest",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Bs: '@Model.BstudyDetails.Code', StdNo: StdNo }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                if (data.success) {
-                    HideProgress();
-                    BibleStudyMembers('@Model.BSGroup', true, 'Students in Waiting Room');
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CDFEvents = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Daystar Christian Fellowship(CDF) Events';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/DCFEventsList",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateCDFEvent = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Create Daystar Christian Fellowship(CDF) Event';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDCFDocument",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitBSRequest = function () {
-        var BSG = $("#ddlBs").children("option:selected").val();
-        if (BSG == "") {
-            Swal.fire('Warning', 'Kindly select a group', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitBSRequest",
-                datatype: "json",
-                type: "POST",
-                async:false,
-                data: JSON.stringify({ BSG: BSG }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    MyBSInformation();
-                    $("#myModalUnits").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var RequestToBeBSLeader = function () {
-        var url;
-        if (`@Model.LeadershipOption` == "Request Against A Group") {
-            url = "/Dashboard/JoinBSGroupAgainstGroup";
-        }
-        else {
-            url = "/Dashboard/RequestBsGroupLeader";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                MyBSInformation();
-                Swal.fire('Success', data.message, 'success');
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitCreatedDocument = function (Type) {
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ Code: Code, Desc: Descr, Type: Type }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var SubmitDCFDocument = function () {
-        var CDF = $("#ddlDCF").children("option:selected").val();
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (CDF == "") {
-            Swal.fire('Warning', 'Kindly Select DCF', 'warning');
-            return;
-        }
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDCFDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ DCF: CDF, Code: Code, Desc: Descr }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        HideProgress();
-                        CreateCDFEvent();
-                        Swal.fire('Success', data.message, 'success');
-                    }
-                    else {
-                        HideProgress();
-                        Swal.fire('Error', data.message, 'error');
-                    }
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var AcademicCalender = function (Sem) {
-        if (Sem == "" || Sem == null) {
-            Swal.fire('Warning', 'Current Semester not set', 'warning');
-            return;
-        }
-        else {
-            var x = document.getElementById("labelT");
-            x.innerHTML = 'Academic Calender';
-            ShowProgress();
-            $.ajax({
-                type: "POST",
-                dataType: 'HTML',
-                contentType: "application/json; charset = utf-8",
-                data: JSON.stringify({ Sem: Sem }),
-                url: "/Common/GetAcademicCalender",
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBody").html(data);
-                    $("#myModalUnits").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var GetClassAttendanceList = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Class Attendance';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/GetUnitsClassAttendance",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    };
-    var GenerateCateringToken = function () {
-        ShowProgress();
-        $.ajax({
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            url: "/Dashboard/GenerateNewCateringToken",
-            success: function (data) {
-                if (data.success == true) {
-                    HideProgress();
-                    Swal.fire('Success', "Token Generated successfully. Current token is : <b>" + data.message+"</b>", 'success');
-                    $("#lblToken").text(data.message);
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Error', data.message, 'error');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
+    var DownLoadFile = function (fileName) {
+        window.location = '@Url.Action("Download", "Dashboard")?fileName=' + fileName;
+        Swal.fire('Success', 'Document Downloaded successfully.', 'success');
     };
     var ViewAttachment = function (tbl, No, Id, fName, ext) {
         $.ajaxSetup({ cache: false });
         ShowProgress();
         $.ajax({
             cache: false,
-            url: "/Common/DocumentAttachmentview",
+            url: '@Url.Action("DocumentAttachmentview", "Common")',
             type: "POST",
             datatype: "json",
             cache: false,
             contentType: "application/json; charset = utf-8",
             processData: false,
             data: JSON.stringify({ tblID: tbl, No: No, ID: Id, fileName: fName, ext: ext }),
+            success: function (data) {
+                if (data.success == true) {
+                    if (data.view == true) {
+                        var viewer = $("#modalAttachmentBody");
+                        if (ext == "pdf") {
+                            PDFObject.embed("data:application/" + ext + ";base64," + data.message + "", viewer);
+                        }
+                        if (ext == "png" || ext == "jpg") {
+                            PDFObject.embed("data:image/" + ext + ";base64," + data.message + "", viewer);
+                        }
+                        $("#myModalAttachment").modal("show");
+                        HideProgress();
+                    }
+                    else {
+                        window.location = '@Url.Action("AttachmentDownload", "Common")?fileName=' + data.message;
+                        Swal.fire('Success', 'Document Downloaded successfully', 'success');
+                        HideProgress();
+                    }
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+
+    var GetDocumentAttachments = function (DocNo) {
+        $.ajaxSetup({ cache: false });
+        ShowProgress();
+        var fName = "Course_Guide";
+        var ext = "pdf";
+        var Id = "1";
+        $.ajax({
+            cache: false,
+            url: '@Url.Action("CourseDocumentAttachmentview", "Common")',
+            type: "POST",
+            datatype: "json",
+            cache: false,
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            data: JSON.stringify({ tblID: 70134769, No: DocNo, ID: Id, fileName: fName, ext: ext }),
             success: function (data) {
                 if (data.success == true) {
                     if (data.view == true) {

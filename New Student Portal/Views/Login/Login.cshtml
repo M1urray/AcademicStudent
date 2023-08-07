@@ -6,60 +6,39 @@
 <style>
     label {
         color: white;
-    }
-
-    .card-body {
-        padding: 0.7rem 0.5rem;
-    }
-    .w-75 {
-        width: 100% !important;
-    }
+    }    
 </style>
-<div class="card">
-    <div class="card-body p-4">
-        <div class="text-center w-75 m-auto">
-            <div class="auth-logo">
-                <a href="#" class="logo logo-dark text-center">
-                    <span class="logo-lg">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="120" width="100%">
-                    </span>
-                </a>
-            </div>
-        </div>
-        <hr />
-        <div class="mb-2">
-            <label for="emailaddress" class="form-label">Reg. Number</label>
-            <input class="form-control" type="text" id="username" required="" placeholder="Reg. Number">
-        </div>
 
-        <div class="mb-2">
-            <label for="password" class="form-label">Password</label>
-            <div class="input-group input-group-merge">
-                <input type="password" id="userpassword" class="form-control" placeholder="Password">
+<div class="mb-2">
+    <label for="emailaddress" class="form-label">Reg. Number</label>
+    <input class="form-control" type="text" id="username" required="" placeholder="Reg. Number">
+</div>
 
-                <div class="input-group-text" data-password="false">
-                    <span class="password-eye"></span>
-                </div>
-            </div>
-        </div>
+<div class="mb-2">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group input-group-merge">
+        <input type="password" id="userpassword" class="form-control" placeholder="Password">
 
-        <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkbox-signin" checked>
-                <label class="form-check-label" for="checkbox-signin">
-                    Remember me
-                </label>
-            </div>
+        <div class="input-group-text" data-password="false">
+            <span class="password-eye"></span>
         </div>
-        <div class="d-grid mb-0 text-center">
-            <button class="btn btn-primary" id="btnLogin" type="submit"> Log In </button>
-        </div>
-        <div class="row mt-3">
-            <div class="col-12 text-center">
-                <p> <a href="/Login/ForgotPassword" class="text-muted ms-1">Forgot your password?</a></p>
-            </div> <!-- end col -->
-        </div>
-    </div> <!-- end card-body -->
+    </div>
+</div>
+<div class="mb-3">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkbox-signin" checked>
+        <label class="form-check-label" for="checkbox-signin">
+            Remember me
+        </label>
+    </div>
+</div>
+<div class="d-grid mb-0 text-center">
+    <button class="btn btn-primary" id="btnLogin" type="submit"> Log In </button>
+</div>
+<div class="row mt-3">
+    <div class="col-12 text-center">
+        <p> <a href="@Url.Action("ForgotPassword", "Login")" class="text-muted ms-1">Forgot your password?</a></p>
+    </div> <!-- end col -->
 </div>
 <!-- end card -->
 <!-- end row -->
@@ -83,14 +62,21 @@
                 Authedication.Password = password;
                 ShowProgress();
                 $.ajax({
-                    url: "/Login/LoginUser",
+                    url: '@Url.Action("LoginUser", "Login")',
                     datatype: "json",
                     type: "POST",
                     data: JSON.stringify({ userlogin: Authedication }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         if (data.success == true) {
-                            window.location = data.message;
+                            if (data.message == "ALL") {
+                                window.location = '@Url.Action("Alumni", "Dashboard")';
+                            } else if (data.message == "RESET") {
+                                window.location = '@Url.Action("AccountResetPassword", "Login")';
+                            }
+                            else {
+                                window.location = '@Url.Action("Dashboard", "Dashboard")';
+                            }
                         }
                         else {
                             HideProgress();

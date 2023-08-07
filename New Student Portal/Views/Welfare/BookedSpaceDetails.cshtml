@@ -3,7 +3,10 @@
     ViewBag.Title = "Booked Space Details";
     Layout = "~/Views/Shared/Sitemaster.cshtml";
 }
-<div class="modal-content">    
+<div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Booked Space Details</span></h4>
+    </div>
     <div class="modal-body pre-scrollable">
         <div>
             <div id="divBtns">
@@ -77,6 +80,7 @@
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var billed = `@Model.Billed`;
@@ -98,7 +102,7 @@
             cache: false
         });
         $.ajax({
-            url: '/Welfare/PrintHostelInvoice',
+            url: '@Url.Action("PrintHostelInvoice", "Welfare")',
             type: "POST",
             datatype: "json",
             cache: false,

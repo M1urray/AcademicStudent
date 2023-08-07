@@ -15,27 +15,12 @@ namespace New_Student_Portal.ViewModel
         public string Prog { get; set; }
         public string HostelCode { get; set; }
     }
-    public class RegisteredProgrammes
-    {
-        public string CurrentProg { get; set; }
-        public string OtherProg { get; set; }
-        public string SecondConc { get; set; }
-        public string Minor { get; set; }
-        public string CurrentProgDesc { get; set; }
-        public string OtherProgDesc { get; set; }
-        public string SecondConcDesc { get; set; }
-        public string MinorDesc { get; set; }
-    }
     public class StudentCourseRegistration
     {
         public string Code { get; set; }
-        public RegisteredProgrammes RegProg { get; set; }
         public IEnumerable<CourseReg> ListOfCourseRegistration { get; set; }
         public IEnumerable<StudentUnits> ListOfStudentBasketUnits { get; set; }
         public List<SelectListItem> ListOfUnitCategory { get; set; }
-        public List<SelectListItem> ListOfUnitCategory1 { get; set; }
-        public List<SelectListItem> ListOfUnitCategory2 { get; set; }
-        public List<SelectListItem> ListOfUnitCategory3 { get; set; }
         public string HostelCode { get; set; }
         public string Campus { get; set; }
     }
@@ -43,6 +28,7 @@ namespace New_Student_Portal.ViewModel
     {
         public string RegID { get; set; }
         public string Programme { get; set; }
+        public string ProgrammeName { get; set; }
         public string Stage { get; set; }
         public string Semester { get; set; }
         public string Register_for { get; set; }
@@ -51,6 +37,7 @@ namespace New_Student_Portal.ViewModel
         public string UnitsTaken { get; set; }
         public string TotalBilled { get; set; }
         public string HostelCode { get; set; }
+        public string YList { get; set; }
     }
     public class StudentUnits
     {
@@ -66,10 +53,8 @@ namespace New_Student_Portal.ViewModel
     }
     public class GetRegisteredUnit
     {
-        public string Code { get; set; }
         public string RegDeadlineDate { get; set; }
-        public List<StudentUnits> ListOfRegUnit { get; set; }
-        public List<SelectListItem> ListOfSpecExmReasons { get; set; }
+        public List<StudentUnits> ListOfRegUnit { get; set; }       
     }
     public class UnitRegistrationSummery
     {
@@ -78,9 +63,7 @@ namespace New_Student_Portal.ViewModel
     }
     public class ProgrammeConcentration
     {
-        public string Conc { get; set; }
         public string Code { get; set; }
-        public string RegType { get; set; }
         public List<SelectListItem> ListOfConcentration { get; set; }
     }
 }

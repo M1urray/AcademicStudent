@@ -12701,8 +12701,8 @@ textarea.form-control-lg {
 }
 
 .badge-soft-pink {
-    color: black;
-   /* background-color: #1233;*/
+    color: #192f59;
+    background-color: #1233;
     box-shadow: none
 }
 

@@ -25,50 +25,54 @@
         font-size: 10px;
     }
 </style>
-<div class="pre-scrollable">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Action</th>
-                <th>
-                    Unit Code
-                </th>
-                <th>
-                    Unit Description
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                if (Model.ListOfRegisteredUnits != null)
-                {
-                    if (Model.ListOfRegisteredUnits.Count() > 0)
-                    {
-                        foreach (var item in Model.ListOfRegisteredUnits)
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>
+                            Unit Code
+                        </th>
+                        <th>
+                            Unit Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model.ListOfRegisteredUnits != null)
                         {
-                            <tr>
-                                <td>
-                                    <button id="btnEval" class="btn btn-danger btnPadding" onclick="SelectedRowUnit('@item.Unit', '@item.Section');">Evaluate</button>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Unit)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Unit_Name)
-                                </td>
-                            </tr>
+                            if (Model.ListOfRegisteredUnits.Count() > 0)
+                            {
+                                foreach (var item in Model.ListOfRegisteredUnits)
+                                {
+                                    <tr>
+                                        <td>
+                                            <button id="btnEval" class="btn btn-danger btnPadding" onclick="SelectedRowUnit('@item.Unit');">Evaluate</button>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Unit)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Unit_Name)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" style="color:red">
+                                        No Registered Units for evaluation Found
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
-                    else
-                    {
-                        <tr>
-                            <td colspan="6" style="color:red">
-                                No Registered Units for evaluation Found
-                            </td>
-                        </tr>
-                    }
-                }
-            }
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

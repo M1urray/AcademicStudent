@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Course Evaluation";
+    ViewBag.Title = "Lecturer Evaluation";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -15,6 +15,8 @@
 </style>
 <div class="card">
     <div class="card-body">
+        <h4 class="modal-title"><span class="spanClass">Lecturer Evaluation Units</span></h4>
+        <hr />
         <div id="divRegUnits"></div>
     </div>
 </div>
@@ -34,6 +36,7 @@
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadCurrentRegisteredUnits();
@@ -41,29 +44,29 @@
     function LoadCurrentRegisteredUnits() {
         ShowProgress();
         $.ajax({
-            async: false,
+            async: true,
             type: "GET",
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Course/CurrentRegistredUnits",
+            url: '@Url.Action("CurrentRegistredUnits", "Course")',
             success: function (data) {
                 $("#divRegUnits").html(data);
                 HideProgress();
             },
             error: function () {
                 HideProgress();
-                Swal.fire('Error', "There is some problem to process your request. Please try after some time", 'error');
+                Swal.fire('Error',"There is some problem to process your request. Please try after some time",'error');
             }
         });
     }
-    var SelectedRowUnit = function (unit,Sec) {
-        $("#labelT").text("Course Evaluation Form");
+    var SelectedRowUnit = function (unit) {
+        $("#labelT").text("Lecturer Evaluation Form");
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Course/LecturerEvaluationForm",
-            data: JSON.stringify({ Unit: unit, Sec: Sec }),
+            url: '@Url.Action("LecturerEvaluationForm", "Course")',
+            data: JSON.stringify({ Unit: unit }),
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             success: function (data) {
@@ -77,15 +80,228 @@
             }
         });
     }
-    var CompleteEvaluation = function (Unit, UnitName, StaffNo) {
-        var sug1 = $("#txtContrb").val();
-        var sug2 = $("#txtImprivents").val();
-        var sug3 = $("#txtOtherComment").val();
+    var SubmitEvaluationForm = function () {
+        if ($('input[name=Ans1]').is(':checked')) {
+            $("#TB1 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB1 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 1', 'warning');
+            return;
+        }
+        if ($('input[name=Ans2]').is(':checked')) {
+            $("#TB1 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB1 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 2', 'warning');
+            return;
+        }
+        if ($('input[name=Ans2]').is(':checked')) {
+            $("#TB1 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB1 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 3', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans21]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 4', 'warning');
+            return;
+        }
+        if ($('input[name=Ans22]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 5', 'warning');
+            return;
+        }
+        if ($('input[name=Ans23]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 6', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans31]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 7', 'warning');
+            return;
+        }
+        if ($('input[name=Ans32]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 8', 'warning');
+            return;
+        }
+        if ($('input[name=Ans33]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 9', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans41]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 10', 'warning');
+            return;
+        }
+        if ($('input[name=Ans42]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 11', 'warning');
+            return;
+        }
+        if ($('input[name=Ans43]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 12', 'warning');
+            return;
+        }
+        if ($('input[name=Ans44]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(4)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 13', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans51]').is(':checked')) {
+            $("#TB5 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB5 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 14', 'warning');
+            return;
+        }
+        if ($('input[name=Ans52]').is(':checked')) {
+            $("#TB5 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB5 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 15', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans61]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 16', 'warning');
+            return;
+        }
+        if ($('input[name=Ans62]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 17', 'warning');
+            return;
+        }
+        if ($('input[name=Ans63]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 18', 'warning');
+            return;
+        }
+        var comment = $("#txtComments").val().replace(/(\r\n|\n|\r)/gm, " ");
+        if (comment == "") {
+            Swal.fire('Warning', 'Give general comments', 'warning');
+            return;
+        }
+
+        var LecName = $("#lblLecturerName").text();
+        var LecNo = $("#lblLectNo").val();
+        var LecUnit = $("#lblUnitCode").text();
+        var LecUnitName = $("#lblUnitName").text();
+
+        var Lecturer = {};
+        Lecturer.LecName = LecName;
+        Lecturer.LecNo = LecNo;
+        Lecturer.Unit = LecUnit;
+        Lecturer.UnitName = LecUnitName;
+        Lecturer.Comments = comment;
+
+        var LecEval = new Array();
+        $("#TB1 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 1;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB2 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 2;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans2" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB3 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 3;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans3" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB4 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 4;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans4" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB5 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 5;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans5" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB6 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 6;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans6" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/LecturerEvaluation/CompleteCourseEvaluation",
-            data: JSON.stringify({ Unit: Unit, UnitName: UnitName, StaffNo: StaffNo, sug1: sug1, sug2: sug2, sug3: sug3, sug4: "" }),
+            url: '@Url.Action("SaveEvalueatedUnit", "Course")',
+            data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {

@@ -1,0 +1,112 @@
+﻿@model New_Student_Portal.ViewModel.UnitSubject
+<style>
+    .radioClass {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+    }
+</style>
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns">
+            <span style="font-size:14px;font-weight:bolder">Bonus Courses</span>
+            <br/>
+            <span style="font-size:20px;font-weight:bolder">You can only select one Bonus Course</span>
+            <table class="table" id="tblProgUnit">
+                <thead>
+                    <tr>
+                        <th width="10%" style="text-align:right">Select</th>
+                        <th width="20%">
+                            Course Code
+                        </th>
+                        <th width="70%">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model.ListOfCoreUnitsSubjects != null && Model.ListOfCoreUnitsSubjects.Count() > 0)
+                        {
+                            foreach (var item in Model.ListOfCoreUnitsSubjects)
+                            {
+                                <tr>
+                                    <td align="center">
+                                        <input type="radio" name="selectedUnit" class="radioClass" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Code)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Desription)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">
+                                    No Records Found
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <hr />
+            @{
+                if (Model.ListOfElectiveUnitsSubjects != null)
+                {
+                    <span style="font-size:14px;font-weight:bolder">Elective Units</span>
+                    <table class="table" id="tblProgUnitElective">
+                        <thead>
+                            <tr>
+                                <th width="10%" style="text-align:right">Select</th>
+                                <th width="20%">
+                                    Course Code
+                                </th>
+                                <th width="70%">
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                if (Model.ListOfElectiveUnitsSubjects.Count() > 0)
+                                {
+                                    foreach (var item in Model.ListOfElectiveUnitsSubjects)
+                                    {
+                                        <tr>
+                                            <td align="center">
+                                                <input type="radio" name="selectedUnit" class="radioClass" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Code)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Desription)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3">
+                                            No Records Found
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+</div>
+<div align="center">
+    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedBonusCourses();" />
+</div>

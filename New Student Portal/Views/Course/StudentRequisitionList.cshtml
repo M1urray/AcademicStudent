@@ -21,9 +21,10 @@
     }
 </style>
 <div class="pre-scrollable">
-    <table class="table table-bordered table-responsive table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
+                <th></th>
                 <th>
                     Code
                 </th>
@@ -40,9 +41,6 @@
                 <th>
                     Status
                 </th>
-                <th>
-                    Action
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -55,34 +53,18 @@
                         {
                             <tr>
                                 <td>
+                                    <a href="#" onclick="SelectedRow('@item.Code');">Select</a>
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Code)
                                 </td>
                                 <td>
                                     @Convert.ToDateTime(item.Date).ToString("yy/MM/yyyy")
                                 </td>
                                 <td>
-                                    @if (item.Requisition_Type == "Exemption" || item.Requisition_Type == "Drop Courses" || item.Requisition_Type == "Special Exams" || item.Requisition_Type == "Exam Challenge" || item.Requisition_Type == "Withdrawal")
+                                    @if (item.Requisition_Type == "Drop Courses" || item.Requisition_Type == "Special Exams")
                                     {
-                                        <div>
-                                            @Html.DisplayFor(modelItem => item.Requisition_Type) <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.LinesCounter Units)</button>
-                                            @if (item.ApprovedCount > 0 && item.Status == "Approved")
-                                            {
-                                                <span>
-                                                    @if (item.ApprovalCount > 0)
-                                                    {
-                                                        <span>
-                                                            Approved <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.ApprovalCount Units)</button>
-                                                        </span>
-                                                    }
-                                                    @if (item.RejectedCount > 0)
-                                                    {
-                                                        <span>
-                                                            Rejected <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.RejectedCount Units)</button>
-                                                        </span>
-                                                    }
-                                                </span>
-                                            }
-                                        </div>
+                                        @Html.DisplayFor(modelItem => item.Requisition_Type) <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code');">(@item.LinesCounter Units)</button>
                                     }
                                     else
                                     {
@@ -94,31 +76,6 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-
-                                <td>
-                                    @if (item.ApprovalCount > 0 && item.Status == "Pending Approval")
-                                    {
-                                        <button class="btn btn-sm btn-success" onclick="ViewApprovalTrail('@item.Code');">Approval Trail</button>
-                                    }
-                                    else if (item.Status == "Rejected")
-                                    {
-                                        <button class="btn btn-sm btn-danger" onclick="ViewComments('@item.Code');">View Comment</button>
-                                    }
-                                    else if (item.Status == "Approved" && (item.Requisition_Type == "Special Exams" || item.Requisition_Type == "Exam Challenge"))
-                                    {
-                                        @*<button class="btn btn-sm btn-danger" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">Assigned Lecturer</button>
-                                            <hr style="margin:1px" />*@
-                                        <button class="btn btn-sm btn-danger" onclick="GetExamCard('@item.Code');">Print Exam Card</button>
-                                    }
-                                    else if (item.Status == "Approved" && item.Requisition_Type == "Transit To Next Programme Level")
-                                    {
-                                        <button class="btn btn-sm btn-danger" onclick="GetAdmissionLetters('@item.Code');">Print Admission Letter</button>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-soft-warning">No Action</span>
-                                    }
                                 </td>
                             </tr>
                         }
@@ -136,7 +93,6 @@
         </tbody>
     </table>
 </div>
-
 
 
 

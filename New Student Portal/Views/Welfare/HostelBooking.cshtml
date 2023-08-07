@@ -8,27 +8,33 @@
     }
 </style>
 <div class="modal-content">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
+        <h4 class="modal-title"><span class="spanClass">Hostel Booking</span></h4>
+    </div>
     <div class="modal-body pre-scrollable">
         <div id="divHostelBooking"></div>
     </div>
 </div>
 @*//////////////////////Modal////////////////////////////*@
-<div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
             <div class="modal-header">
                 <h4 class="modal-title"><label id="labelT"></label></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body p-4" id="modalBody">
+            <div class="modal-body" id="modalBody">
                 <iframe id="iframe" style="width:100%;height:450px"></iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadHostelDetails();
@@ -41,7 +47,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Welfare/HostelAccommondation",
+            url: '@Url.Action("HostelAccommondation", "Welfare")',
             success: function (data) {
                 $("#divHostelBooking").html(data);
                 $('#ddlRoom').empty().append('<option selected="selected" value="0">--Select Room--</option>');
@@ -97,7 +103,7 @@
                     ShowProgress();
                     $.ajax({
                         type: "POST",
-                        url: "/Welfare/SaveSelectedSpace",
+                        url: '@Url.Action("SaveSelectedSpace", "Welfare")',
                         data: JSON.stringify(BookedSpaceDetails),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -133,7 +139,7 @@
             cache: false
         });
         $.ajax({
-            url: '/Welfare/PrintHostelInvoice',
+            url: '@Url.Action("PrintHostelInvoice", "Welfare")',
             type: "POST",
             datatype: "json",
             cache: false,
@@ -163,7 +169,7 @@
             cache: false
         });
         $.ajax({
-            url: '/Welfare/PrintHostelClearanceForm',
+            url: '@Url.Action("PrintHostelClearanceForm", "Welfare")',
             type: "POST",
             datatype: "json",
             cache: false,

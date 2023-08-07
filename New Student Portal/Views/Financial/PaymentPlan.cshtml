@@ -15,6 +15,7 @@
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadForm();
@@ -23,7 +24,7 @@
             Swal.fire('Success', Successmsg, 'success', true);
             $.ajax({
                 type: "POST",
-                url: "/Common/NullibySessions"
+                url: '@Url.Action("NullibySessions", "Common")';
             });
         }
     });
@@ -35,7 +36,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Financial/GetPaymentPlan",
+            url: '@Url.Action("GetPaymentPlan", "Financial")',
             success: function (data) {
                 $("#divPaymentPlan").html(data);
                 HideProgress();
@@ -95,7 +96,7 @@
                 //Send the JSON array to Controller using AJAX.
                 $.ajax({
                     type: "POST",
-                    url: "/Financial/SavePaymentPlan",
+                    url: '@Url.Action("SavePaymentPlan", "Financial")',
                     data: { pPlan: myTableArray },
                     contenttype: "text/plain; charset=utf-8",
                     success: function (data) {

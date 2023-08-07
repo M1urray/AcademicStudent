@@ -28,7 +28,6 @@ namespace New_Student_Portal.CustomSecurity
         }
         public string UserID { get; set; }
         public string RoleName { get; set; }
-        public bool Full_Access { get; set; }
         public string Email { get; set; }
     }
 }

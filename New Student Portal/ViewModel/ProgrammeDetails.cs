@@ -57,7 +57,6 @@ namespace New_Student_Portal.ViewModel
         public string Lec { get; set; }
         public string CF { get; set; }
         public string Campus { get; set; }
-        public string UnitType { get; set; }
         public string HasPrelqUnit { get; set; }
         public string ClassFull { get; set; }
     }
@@ -71,7 +70,6 @@ namespace New_Student_Portal.ViewModel
         public string Lec { get; set; }
         public string CF { get; set; }
         public string Campus { get; set; }
-        public string UnitType { get; set; }
         public string HasPrelqUnit { get; set; }
         public string ClassFull { get; set; }
 
@@ -91,7 +89,6 @@ namespace New_Student_Portal.ViewModel
         public string Lec { get; set; }
         public string CF { get; set; }
         public string Campus { get; set; }
-        public string UnitType { get; set; }
         public string HasPrelqUnit { get; set; }
         public string ClassFull { get; set; }
     }
@@ -105,7 +102,6 @@ namespace New_Student_Portal.ViewModel
         public string Lec { get; set; }
         public string CF { get; set; }
         public string Campus { get; set; }
-        public string UnitType { get; set; }
         public string HasPrelqUnit { get; set; }
         public string ClassFull { get; set; }
     }
@@ -114,7 +110,6 @@ namespace New_Student_Portal.ViewModel
         public string UnitCode { get; set; }
         public string ClassCode { get; set; }
         public string Campus { get; set; }
-        public string UnitType { get; set; }
         public string Day { get; set; }
         public string Period { get; set; }
     }

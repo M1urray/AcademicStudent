@@ -12,6 +12,8 @@ namespace New_Student_Portal.Models
     public class Credentials
     {
         public static string fileSourcePath = ConfigurationManager.AppSettings["FILEPATH"];
+        public static string ImportantDocParth = ConfigurationManager.AppSettings["MEMOPATH"];
+        public static string fileDownLoads = ConfigurationManager.AppSettings["DOWNLOADLINKS"];
         public static HttpWebResponse GetOdataData(string page)
         {
             HttpWebResponse httpResponse = null;
@@ -67,21 +69,19 @@ namespace New_Student_Portal.Models
         {
             File.WriteAllBytes(path, bytes);
         }
-        public static string UploadDocumentAttachment(string DocNo, string base64String, string filePath, int TableID)
+
+        public static string GetCourseDocumentAttachmet(int TblID, string DocNo)
         {
-            string Uploaded = "";
+            string PicString = "";
             try
             {
-                File.WriteAllBytes(filePath, Convert.FromBase64String(base64String));
-
-                ObjNav.UploadAttachedDocument(DocNo, filePath, base64String, TableID);
-                Uploaded = "SUCCESS";
+                PicString = ObjNav.GetDocumentAttachmentCourse(TblID, DocNo);
             }
             catch (Exception ex)
             {
-                Uploaded = ex.Message;
+                ex.Data.Clear();
             }
-            return Uploaded;
+            return PicString;
         }
     }
 }

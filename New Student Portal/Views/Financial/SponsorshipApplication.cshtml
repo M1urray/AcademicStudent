@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Sponsorship Application";
+    ViewBag.Title = "SponsorshipApplication";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -8,7 +8,7 @@
         background-color: black;
         color: white;
     }
-</style> 
+</style>
 <div class="modal-content">
     <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
         <h4 class="modal-title"><span class="spanClass">Sponsorship Application</span></h4>
@@ -17,6 +17,7 @@
         <div id="divSponsorhsipApp"></div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadForm();
@@ -29,7 +30,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Financial/GetSponsorshipApplications",
+            url: '@Url.Action("GetSponsorshipApplications", "Financial")',
             success: function (data) {
                 $("#divSponsorhsipApp").html(data);
                 HideProgress();

@@ -8,6 +8,11 @@
         padding: 1px;
         font-size: 12px;
     }
+    /*input[type=radio] {
+        border: 0px;
+        width: 100%;
+        height: 2em;
+    }*/
 </style>
 <div class="modal-content">
     <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
@@ -50,6 +55,7 @@
         <div id="divSteps"></div>        
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         GetStepSection('Step1');
@@ -62,14 +68,14 @@
             datatype: "json",
             data: JSON.stringify({ Step: Step }),
             contentType: "application/json; charset = utf-8",
-            processData: false,            
-            url: "/Welfare/StepView",
+            processData: false,
+            url: '@Url.Action("StepView", "Welfare")',
             success: function (data) {
                 if (Step == "Step1") {
                     $("button").removeClass("btn-primary").addClass("btn-secondary");
                     $("#btn1").attr("background-color", "blue");
                 }
-                $("#divSteps").html(data);                
+                $("#divSteps").html(data);
                 HideProgress();
             },
             error: function () {
@@ -88,8 +94,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepTwoSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepTwoSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -112,8 +117,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepThreeSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepThreeSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -136,8 +140,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepFourSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepFourSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -160,8 +163,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepFiveSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepFiveSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -184,8 +186,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepSixSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepSixSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -208,8 +209,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/Welfare/SaveStepSixSection",
-            //data: JSON.stringify(UnitReg),
+            url: '@Url.Action("SaveStepSixSection", "Welfare")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {

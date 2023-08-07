@@ -1,13 +1,16 @@
-﻿using New_Student_Portal.CustomSecurity;
+﻿using Microsoft.Ajax.Utilities;
+using New_Student_Portal.CustomSecurity;
 using New_Student_Portal.Models;
+using New_Student_Portal.ViewModel;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
-using New_Student_Portal.ViewModel;
 
 namespace New_Student_Portal.Controllers
 {
@@ -20,6 +23,122 @@ namespace New_Student_Portal.Controllers
         {
             return View();
         }
+        public ActionResult DocumentViewResults()
+        {
+            string RegNo = Session["Username"].ToString();
+            StudentProgrammes ListPrograms = new StudentProgrammes();
+            #region Years
+            List<CourseReg> CReg = new List<CourseReg>();
+
+            string page = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Reversed eq false&format=json";
+
+            HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+
+                var details = JObject.Parse(result);
+                foreach (JObject config in details["value"])
+                {
+                    CourseReg Prgrammes = new CourseReg();
+                    Prgrammes.Programme = (string)config["Programme"];
+                    Prgrammes.ProgrammeName = (string)config["Programme_Name"];
+                    CReg.Add(Prgrammes);
+                }
+            }
+            #endregion            
+            ListPrograms = new StudentProgrammes
+            {
+                ListOfProgrammes = CReg.Select(x =>
+                                     new SelectListItem()
+                                     {
+                                         Text = x.ProgrammeName,
+                                         Value = x.Programme
+                                     }).DistinctBy(x => x.Value).ToList()
+            };
+            return View(ListPrograms);
+
+        }
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetSemesters(string Programme)
+        {
+            try
+            {
+                string RegNo = Session["Username"].ToString();
+                StudentSemesters ListSemesters = new StudentSemesters();
+                #region Years
+                List<CourseReg> CReg = new List<CourseReg>();
+
+                string page = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Reversed eq false and Programme eq '"+Programme+"'&format=json";
+
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    foreach (JObject config in details["value"])
+                    {
+                        CourseReg Prgrammes = new CourseReg();
+                        Prgrammes.Semester = (string)config["Semester"];
+                        CReg.Add(Prgrammes);
+                    }
+                }
+                #endregion
+                ListSemesters = new StudentSemesters
+                {
+                    ListOfSemesters = CReg.Select(x =>
+                                         new SelectListItem()
+                                         {
+                                             Text = x.Semester,
+                                             Value = x.Semester
+                                         }).DistinctBy(x => x.Value).ToList()
+                };
+                return Json(ListSemesters, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetTranscriptReport(string Programme, string Semester)
+        {
+            try 
+            {
+                string message = "";
+                bool success = false;
+                
+                    string RegNo = Session["Username"].ToString();
+
+                    string filename = Session["Username"].ToString().Replace("/", "");
+                    Credentials.ObjNav.GenerateSemesterTranscript(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf", Semester, Programme);
+                    filename = "PROVISIONAL RESULTS-" + filename + ".pdf";
+                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
+                    CommonClass.MoveFile(filename, DestinationPath);
+
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    if (file.Exists)
+                    {
+                        success = true;
+                        message = Credentials.fileDownLoads + filename;
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "File Not Found";
+                    }
+                
+                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
         public JsonResult FeeStatement()
         {
             try
@@ -40,11 +159,52 @@ namespace New_Student_Portal.Controllers
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new FileInfo(DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "File Not Found";
+                    }
+                }
+                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult FeeStructure()
+        {
+            try
+            {
+                string message = "";
+                bool success = false;
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect(Url.Action("Login", "Login"));
+                }
+                else
+                {
+                    string StudentNo = Session["Username"].ToString();
+                    string Prog = Session["CurrProg"].ToString();
+                    string SettlementType = Session["SettlementType"].ToString();
+                    string filename = StudentNo.Replace("/", "");
+
+                    Credentials.ObjNav.GenerateFeeStructureReport(Prog, SettlementType,StudentNo, "FEESTRUCTURE-" + filename + ".pdf");
+                    filename = "FEESTRUCTURE-" + filename + ".pdf";
+                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
+                    CommonClass.MoveFile(filename, DestinationPath);
+
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    if (file.Exists)
+                    {
+                        success = true;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -78,59 +238,11 @@ namespace New_Student_Portal.Controllers
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult SemesterProformaInvoice()
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null || Convert.ToString(Session["CurrentSem"]) == "")
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
-                    }
-
-                    Sem = Session["CurrentSem"].ToString();
-
-                    string filename = StudentNo.Replace("/", "") + "-SEM-PROFORMA";
-                    Credentials.ObjNav.GenerateStudentSemesterInvoice(StudentNo, Sem, filename + ".pdf");
-                    filename = filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
                     System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -162,34 +274,28 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester();
                     }
                     Sem = Session["CurrentSem"].ToString();
 
-                    if (EvaluatedAllUnits(RegNo, Sem))
-                    {
-                        string filename = Session["Username"].ToString().Replace("/", "");
-                        Credentials.ObjNav.GenerateStudentExamCard(RegNo, Sem, "EXAMCARD-" + filename + ".pdf");
-                        filename = "EXAMCARD-" + filename + ".pdf";
-                        string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                        CommonClass.MoveFile(filename, DestinationPath);
+                    //if (EvaluatedAllUnits(RegNo, Sem))
+                    //{
+                    string filename = Session["Username"].ToString().Replace("/", "");
+                    Credentials.ObjNav.GenerateStudentExamCard(RegNo, Sem, "EXAMCARD-" + filename + ".pdf");
+                    filename = "EXAMCARD-" + filename + ".pdf";
+                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
+                    CommonClass.MoveFile(filename, DestinationPath);
 
-                        System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                        if (file.Exists)
-                        {
-                            success = true;
-                            message = @"/Downloads/" + filename;
-                        }
-                        else
-                        {
-                            success = false;
-                            message = "File Not Found";
-                        }
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    if (file.Exists)
+                    {
+                        success = true;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
                         success = false;
-                        message = "You need to Evaluate all the Units before printing exam card";
+                        message = "File Not Found";
                     }
                 }
                 return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
@@ -204,7 +310,7 @@ namespace New_Student_Portal.Controllers
             bool s = true;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + StdNo + "' and Semester eq '" + Sem + "' and Evaluated eq false and (Teaching_Type eq 'Lecture' or Teaching_Type eq 'Teaching Practice')&format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + StdNo + "' and Semester eq '" + Sem + "' and Evaluated eq false&format=json";
 
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -224,7 +330,7 @@ namespace New_Student_Portal.Controllers
             }
             return s;
         }
-        public ActionResult ProvisionalResults(string Prog)
+        public ActionResult ProvisionalResults()
         {
             try
             {
@@ -239,7 +345,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
 
                     string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentReportCardByProg(RegNo, Prog, "PROVISIONAL RESULTS-" + filename + ".pdf");
+                    Credentials.ObjNav.GenerateStudentReportCard(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf");
                     filename = "PROVISIONAL RESULTS-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -248,7 +354,7 @@ namespace New_Student_Portal.Controllers
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -279,7 +385,7 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester();
                     }
 
                     Sem = Session["CurrentSem"].ToString();
@@ -294,7 +400,7 @@ namespace New_Student_Portal.Controllers
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -326,7 +432,7 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester();
                     }
 
                     Sem = Session["CurrentSem"].ToString();
@@ -341,7 +447,7 @@ namespace New_Student_Portal.Controllers
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -357,7 +463,7 @@ namespace New_Student_Portal.Controllers
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GenerateStudentAudit(string Prog)
+        public JsonResult GenerateStudentAudit()
         {
             try
             {
@@ -372,11 +478,7 @@ namespace New_Student_Portal.Controllers
                     string StudentNo = Session["Username"].ToString();
                     string filename = StudentNo.Replace("/", "");
 
-                    if (Prog == null)
-                    {
-                        Prog = "";
-                    }
-                    Credentials.ObjNav.GenerateStudentAudit(StudentNo, Prog, "STDAUDIT-" + filename + ".pdf");
+                    Credentials.ObjNav.GenerateStudentAudit(StudentNo, "STDAUDIT-" + filename + ".pdf");
                     filename = "STDAUDIT-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -385,7 +487,7 @@ namespace New_Student_Portal.Controllers
                     if (file.Exists)
                     {
                         success = true;
-                        message = @"/Downloads/" + filename;
+                        message = Credentials.fileDownLoads + filename;
                     }
                     else
                     {
@@ -441,85 +543,6 @@ namespace New_Student_Portal.Controllers
             catch (Exception ex)
             {
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult AdmissionLetter(string AppNo)
-        {
-            bool success = false;
-            try
-            {
-                string message = "";
-
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-                    Credentials.ObjNav.GenerateNextLevelAdmissionLetter(AppNo, "ADMLETTER-" + filename + ".pdf", "");
-                    filename = "ADMLETTER-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-                }
-                return Json(new { message = message, success = success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public ActionResult SpecialExamCard(string DocNo)
-        {
-            bool success = false;
-            try
-            {
-                string message = "";
-
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();                  
-
-                    string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.PrintSpecialExamCard(DocNo, "SPC_EXAMCARD-" + filename + ".pdf");
-                    filename = "SPC_EXAMCARD-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
             }
         }
     }

@@ -18,15 +18,18 @@ namespace New_Student_Portal.Controllers
         {
             return View();
         }
+
         public void NullibySessions()
         {
             Session["SuccessMsg"] = null;
             Session["ErrorMsg"] = null;
         }
+
         public PartialViewResult NotificationMessages()
         {
             List<Notifications> notList = new List<Notifications>();
-            string pageLine = "CompayInformation?$select=Notificaion,Start_date&$filter=Category eq 'Student'&$format=json";
+            string pageLine =
+                "CompayInformation?$select=Notificaion,Start_date&$filter=Category eq 'Student'&$format=json";
             HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -41,8 +44,11 @@ namespace New_Student_Portal.Controllers
                     notList.Add(newNotif);
                 }
             }
-            return PartialView("~/Views/Common/Notification.cshtml", notList.OrderByDescending(x => x.StartDate).ToList());
+
+            return PartialView("~/Views/Common/Notification.cshtml",
+                notList.OrderByDescending(x => x.StartDate).ToList());
         }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult DocumentAttachmentview(int tblID, string No, int ID, string fileName, string ext)
         {
@@ -63,19 +69,48 @@ namespace New_Student_Portal.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { message = ex.Message, success = false, view = false }, JsonRequestBehavior.AllowGet); ;
+                return Json(new { message = ex.Message, success = false, view = false }, JsonRequestBehavior.AllowGet);
+                ;
             }
         }
+
         [HttpGet]
         public virtual ActionResult AttachmentDownload(string fileName)
         {
             string fullPath = Server.MapPath("~/Uploads/" + fileName);
             return File(fullPath, "application/octet-stream", fileName);
         }
-        public PartialViewResult GetAcademicCalender(string Sem)
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult CourseDocumentAttachmentview(int tblID, string No, int ID, string fileName, string ext)
         {
-            List<Academic_Calender> calenderList = new List<Academic_Calender>();
-            string pageLine = "AcademicCalender?$filter=Semester eq '" + Sem + "'&$format=json";
+            try
+            {
+                bool success = false, view = false;
+                string msg = "";
+                string Attachment = Credentials.GetCourseDocumentAttachmet(tblID, No);
+
+                string fName = fileName + "." + ext;
+                Byte[] bytes = Convert.FromBase64String(Attachment);
+                string path = Server.MapPath("~/Uploads/" + fName);
+                Credentials.DownloadAttachment(path, bytes);
+                msg = fName;
+                view = false;
+                success = true;
+
+                return Json(new { message = msg, success, view }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false, view = false }, JsonRequestBehavior.AllowGet);
+                ;
+            }
+        }
+
+        public ActionResult GetNotice()
+        {
+            List<NoticeBoard> notList = new List<NoticeBoard>();
+            string pageLine = "StudentNoticeBoard?$select=Description,Campus,Active,Date_Posted&$format=json";
             HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -84,23 +119,25 @@ namespace New_Student_Portal.Controllers
                 var details = JObject.Parse(result);
                 foreach (JObject config in details["value"])
                 {
-                    Academic_Calender c = new Academic_Calender();
-                    c.Event = (string)config["Event_Name"];
-                    c.SD = (DateTime)config["Start_Date"];
-                    c.StartDate = ((DateTime)config["Start_Date"]).ToString("dd/MM/yyyy");
-                    c.EndDate = ((DateTime)config["End_Date"]).ToString("dd/MM/yyyy");
-                    calenderList.Add(c);
+                    bool check = ((bool)config["Active"]);
+                    NoticeBoard noticeBoard = new NoticeBoard();
+                    if (check)
+                    {
+                        noticeBoard.Description = (string)config["Description"];
+                        noticeBoard.Campus = (string)config["Campus"];
+                        noticeBoard.DatePosted = (string)config["Date_Posted"];
+                        notList.Add(noticeBoard);
+                    }
                 }
             }
-            return PartialView("~/Views/Common/AcademicCalender.cshtml", calenderList.OrderBy(x => x.SD).ToList());
+
+            return View(notList.OrderByDescending(x => x.DatePosted).ToList());
         }
-        public PartialViewResult DocumentApprovalTrail(string DocNo)
+        public ActionResult GetImportantDepartments()
         {
-            List<ApprovalEntries> ApprovalTrail = new List<ApprovalEntries>();
-
-            string page = "StudentReqApprovalList?select=Approver_ID,Date_Time_Sent_for_Approval,Due_Date,Status,Sequence_No,ApproverNames&$filter=Document_No eq '" + DocNo + "' and Status ne 'Canceled' and Status ne 'Rejected'&format=json";
-
-            HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+            List<ImportantDepartments> depList = new List<ImportantDepartments>();
+            string pageLine = "InstitutionalDepartments?$select=Description,Campus,Contacts,School&$format=json";
+            HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
@@ -108,47 +145,18 @@ namespace New_Student_Portal.Controllers
                 var details = JObject.Parse(result);
                 foreach (JObject config in details["value"])
                 {
-                    ApprovalEntries AppTra = new ApprovalEntries();
-                    AppTra.DocNo = DocNo;
-                    string EmplName = (string)config["ApproverNames"];
-                    if (EmplName != null)
-                    {
-                        AppTra.UserID = EmplName;
-                    }
-                    else
-                    {
-                        AppTra.UserID = (string)config["Approver_ID"];
-                    }
-
-                    AppTra.DateSendForApproval = Convert.ToDateTime((string)config["Date_Time_Sent_for_Approval"]).ToString("dd/MM/yyyy");
-                    AppTra.DueDate = Convert.ToDateTime((string)config["Due_Date"]).ToString("dd/MM/yyyy");
-                    AppTra.Status = (string)config["Status"];
-                    AppTra.Sequence = Convert.ToInt32((string)config["Sequence_No"]);
-                    ApprovalTrail.Add(AppTra);
+                    // string studentCampus = Session["Campus"].ToString();
+                    // string checkCampus = (string)config["Campus"].ToString();
+                    ImportantDepartments importantDepartments = new ImportantDepartments();
+                    importantDepartments.Description = (string)config["Description"];
+                    importantDepartments.Campus = (string)config["Campus"];
+                    importantDepartments.Contacts = (string)config["Contacts"];
+                    importantDepartments.School = (string)config["School"];
+                    depList.Add(importantDepartments);
                 }
             }
-            return PartialView("~/Views/Shared/Partial Views/ApprovalTrail.cshtml", ApprovalTrail.OrderBy(x => x.Sequence));
-        }
-        public PartialViewResult DocumentComments(string DocNo)
-        {
-            List<ApprovalComment> CommentList = new List<ApprovalComment>();
 
-            string page = "ApprovalComments?select=Comment&$filter=Document_No eq '" + DocNo + "'&$format=json";
-
-            HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-
-                var details = JObject.Parse(result);
-                foreach (JObject config in details["value"])
-                {
-                    ApprovalComment c = new ApprovalComment(); 
-                    c.Comment = (string)config["Comment"];
-                    CommentList.Add(c);
-                }
-            }
-            return PartialView("~/Views/Common/ApprovalComments.cshtml", CommentList);
+            return View(depList);
         }
     }
 }

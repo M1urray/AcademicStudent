@@ -10,8 +10,8 @@
     }
 
     tfoot {
-        background-color: #a7001a;
-        color: #f5e2bc;
+        background-color: #051936;
+        color: #cbcc32;
     }
 </style>
 <div class="card">
@@ -23,7 +23,7 @@
         <div class="responsive-table-plugin">
             <div class="table-rep-plugin">
                 <div class="table-responsive" data-pattern="priority-columns">
-                    <table id="tech-companies-1" class="table table-striped table-hover" style="font-size:12px">
+                    <table id="tech-companies-1" class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th width="10%">
@@ -131,12 +131,20 @@
         </div>
     </div>
 </div>
+<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     var PrintFeeStatement = function () {
         ShowProgress();
+        $.ajaxSetup({
+            cache: false
+        });
         $.ajax({
-            url: '/ViewDocuments/FeeStatement',
+            url: '@Url.Action("FeeStatement", "ViewDocuments")',
             type: "POST",
+            datatype: "json",
+            cache: false,
+            contentType: "application/json; charset = utf-8",
+            processData: false,
             success: function (data) {
                 if (data.success == true) {
                     $('iframe').attr('src', data.message);

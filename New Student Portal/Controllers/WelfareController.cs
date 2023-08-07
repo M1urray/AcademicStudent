@@ -19,52 +19,79 @@ namespace New_Student_Portal.Controllers
         // GET: Welfare      
         public ActionResult HostelList()
         {
-            try
+            if (Session["Username"] == null)
             {
-                if (Session["Username"] == null)
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                string RegNo = Session["Username"].ToString();
+                if (Session["CurrentSem"] == null)
                 {
-                    return RedirectToAction("Login", "Login");
+                    Session["CurrentSem"] = CommonClass.CurrentSemester();
+                }
+                string sem = Session["CurrentSem"].ToString();
+
+                string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
+                if (r[0] == "")
+                {
+                    Error errormsg = new Error();
+                    errormsg.Message = "You have not been registered in the current semester. Register for Units first";
+                    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                }
+                else if (Convert.ToInt32(r[3]) < 1)
+                {
+                    Error errormsg = new Error();
+                    errormsg.Message = "You need to register for units before booking for hostel";
+                    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                    }
-                    string sem = Session["CurrentSem"].ToString();
 
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
-                    if (r[0] == "")
+                    bool AllowBooking = CommonClass.AllowOnlyY1S1(RegNo);
+                    if (AllowBooking)
                     {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You have not been registered in the current semester. Register for Units first";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (Convert.ToInt32(r[3]) < 1)
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You need to register for units before booking for hostel";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else
-                    {
-
-                        bool AllowBooking = CommonClass.AllowOnlyY1S1(RegNo);
-                        if (AllowBooking)
+                        string residency = CommonClass.GetStudentResidence(RegNo, sem);
+                        if (residency == "Non Resident")
                         {
-                            string residency = CommonClass.GetStudentResidence(RegNo, sem);
-                            if (residency == "Non Resident")
+                            #region Residential Details
+                            NonResidenceData resDetails = new NonResidenceData();
+                            string page = "NonResidence?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
+
+                            HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+                            using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
                             {
-                                #region Residential Details
-                                NonResidenceData resDetails = new NonResidenceData();
-                                string page = "NonResidence?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
+                                var result = streamReader.ReadToEnd();
+
+                                var details = JObject.Parse(result);
+
+                                foreach (JObject config in details["value"])
+                                {
+                                    resDetails = new NonResidenceData
+                                    {
+                                        Student = RegNo,
+                                        Sem = sem,
+                                        Premise = (string)config["Residential_Premise"],
+                                        RoomNo = (string)config["Room_No"],
+                                        LandLoard = (string)config["LardLord_Name"],
+                                        Caretaker = (string)config["Caretaker_Name"],
+                                        Witness = (string)config["Witness"],
+                                        AreaName = (string)config["Area_Name"]
+                                    };
+                                }
+                            }
+                            #endregion
+                            return View("~/Views/Welfare/NonResidenceForm.cshtml", resDetails);
+                        }
+                        else
+                        {
+                            bool s = HasBookedHostel(RegNo, sem);
+
+                            if (s)
+                            {
+                                RoomSpaces bookedSpaceDetails = new RoomSpaces();
+                                #region Hostel Booked Details
+                                string page = "StudentHostelRooms?$filter=Student eq '" + RegNo + "' and Semester eq '" + sem + "' and Cleared eq false&$format=json";
 
                                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -75,128 +102,86 @@ namespace New_Student_Portal.Controllers
 
                                     foreach (JObject config in details["value"])
                                     {
-                                        resDetails = new NonResidenceData
+                                        bookedSpaceDetails = new RoomSpaces
                                         {
                                             Student = RegNo,
                                             Sem = sem,
-                                            Premise = (string)config["Residential_Premise"],
-                                            RoomNo = (string)config["Room_No"],
-                                            LandLoard = (string)config["LardLord_Name"],
-                                            Caretaker = (string)config["Caretaker_Name"],
-                                            Witness = (string)config["Witness"],
-                                            AreaName = (string)config["Area_Name"]
+                                            HostelCode = (string)config["Hostel_No"],
+                                            RoomCode = (string)config["Room_No"],
+                                            SpaceCode = (string)config["Space_No"],
+                                            Cost = Convert.ToDecimal((string)config["Accomodation_Fee"]).ToString("#,##0.00"),
+                                            Billed = (bool)config["Billed"]
                                         };
                                     }
                                 }
                                 #endregion
-                                return View("~/Views/Welfare/NonResidenceForm.cshtml", resDetails);
+
+                                return PartialView("~/Views/Welfare/BookedSpaceDetails.cshtml", bookedSpaceDetails);
                             }
                             else
                             {
-                                bool s = HasBookedHostel(RegNo, sem);
-
-                                if (s)
+                                bool allowHostelBooking = CommonClass.AllowHostelBooking();
+                                if (allowHostelBooking)
                                 {
-                                    RoomSpaces bookedSpaceDetails = new RoomSpaces();
-                                    #region Hostel Booked Details
-                                    string page = "StudentHostelRooms?$filter=Student eq '" + RegNo + "' and Semester eq '" + sem + "' and Cleared eq false&$format=json";
-
-                                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                                    #region Hostel List
+                                    string gender = CommonClass.GetStudentGender(RegNo);
+                                    if (gender != "")
                                     {
-                                        var result = streamReader.ReadToEnd();
+                                        List<Hostel> HostelList = new List<Hostel>();
+                                        string page = "";
 
-                                        var details = JObject.Parse(result);
-
-                                        foreach (JObject config in details["value"])
+                                        //string Hostel = CommonClass.GetHostelFromCourseReg(RegNo, sem);
+                                        //if (Hostel != "")
+                                        //{
+                                        //    page = "HostelCard?$filter=Asset_No eq '" + Hostel + "' and Gender eq '" + gender + "' and Not_Available eq false&$format=json";
+                                        //}
+                                        //else
+                                        //{
+                                        //    page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false&$format=json";
+                                        //}
+                                        page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false&$format=json";
+                                        HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+                                        using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
                                         {
-                                            bookedSpaceDetails = new RoomSpaces
+                                            var result = streamReader.ReadToEnd();
+
+                                            var details = JObject.Parse(result);
+
+                                            foreach (JObject config in details["value"])
                                             {
-                                                Student = RegNo,
-                                                Sem = sem,
-                                                HostelCode = (string)config["Hostel_No"],
-                                                RoomCode = (string)config["Room_No"],
-                                                SpaceCode = (string)config["Space_No"],
-                                                Cost = Convert.ToDecimal((string)config["Accomodation_Fee"]).ToString("#,##0.00"),
-                                                Billed = (bool)config["Billed"]
-                                            };
-                                        }
-                                    }
-                                    #endregion
-
-                                    return PartialView("~/Views/Welfare/BookedSpaceDetails.cshtml", bookedSpaceDetails);
-                                }
-                                else
-                                {
-                                    bool allowHostelBooking = CommonClass.AllowHostelBooking();
-                                    if (allowHostelBooking)
-                                    {
-                                        #region Hostel List
-                                        string gender = CommonClass.GetStudentGender(RegNo);
-                                        if (gender != "")
-                                        {
-                                            List<Hostel> HostelList = new List<Hostel>();
-                                            string page = "";
-
-                                            //string Hostel = CommonClass.GetHostelFromCourseReg(RegNo, sem);
-                                            //if (Hostel != "")
-                                            //{
-                                            //    page = "HostelCard?$filter=Asset_No eq '" + Hostel + "' and Gender eq '" + gender + "' and Not_Available eq false&$format=json";
-                                            //}
-                                            //else
-                                            //{
-                                            //    page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false&$format=json";
-                                            //}
-                                            page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false and Total_Vacant gt 0&$format=json";
-                                            HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                            using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                                            {
-                                                var result = streamReader.ReadToEnd();
-
-                                                var details = JObject.Parse(result);
-
-                                                foreach (JObject config in details["value"])
-                                                {
-                                                    Hostel Hlist = new Hostel();
-                                                    Hlist.AssetNo = (string)config["Asset_No"];
-                                                    Hlist.Description = (string)config["Discription"];
-                                                    //Hlist.VacantSpaces = (int)config["Semester"];
-                                                    HostelList.Add(Hlist);
-                                                }
+                                                Hostel Hlist = new Hostel();
+                                                Hlist.AssetNo = (string)config["Asset_No"];
+                                                Hlist.Description = (string)config["Discription"];
+                                                //Hlist.VacantSpaces = (int)config["Semester"];
+                                                HostelList.Add(Hlist);
                                             }
-                                            return View(HostelList);
-                                        }
-                                        else
-                                        {
-                                            Error erroMsg = new Error();
-                                            erroMsg.Message = "Your gender has not been set. Contact admission";
-                                            return PartialView("~/Views/Shared/ErrorMessange.cshtml", erroMsg);
-                                        }
-                                        #endregion
+                                        }                                        
+                                        return View(HostelList);
                                     }
                                     else
                                     {
-                                        Error errormsg = new Error();
-                                        errormsg.Message = "Hostel Booking not allowed at the moment";
-                                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                                        Error erroMsg = new Error();
+                                        erroMsg.Message = "Your gender has not been set. Contact admission";
+                                        return PartialView("~/Views/Shared/ErrorMessange.cshtml", erroMsg);
                                     }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    Error errormsg = new Error();
+                                    errormsg.Message = "Hostel Booking not allowed at the moment";
+                                    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                                 }
                             }
                         }
-                        else
-                        {
-                            Error errormsg = new Error();
-                            errormsg.Message = "Hostel Booking allowed only for first years at the moment";
-                            return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                        }
+                    }
+                    else
+                    {
+                        Error errormsg = new Error();
+                        errormsg.Message = "Hostel Booking allowed only for first years at the moment";
+                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
             }
         }
         protected bool HasBookedHostel(string StdNo, string sem)
@@ -263,9 +248,7 @@ namespace New_Student_Portal.Controllers
             }
             catch (Exception ex)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                return PartialView();
             }
         }
         public PartialViewResult RoomSpacesList(string HostelCode, string RoomCode, string Cost)
@@ -301,9 +284,7 @@ namespace New_Student_Portal.Controllers
             }
             catch (Exception ex)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                return PartialView();
             }
         }
         [HttpPost]
@@ -316,7 +297,7 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester();
                 }
                 string sem = Session["CurrentSem"].ToString();
 
@@ -348,7 +329,7 @@ namespace New_Student_Portal.Controllers
 
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester();
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -479,14 +460,13 @@ namespace New_Student_Portal.Controllers
             try
             {
                 string RegNo = Session["Username"].ToString();
-
+                #region Hostel List
                 HostelList HostD = new HostelList();
                 string gender = CommonClass.GetStudentGender(RegNo);
                 if (gender != "")
                 {
-                    #region Hostel List
                     List<Hostel> HostelList = new List<Hostel>();
-                    string page = "HostelList?$filter=Gender eq '" + gender + "' and Not_Available eq false and Total_Vacant gt 0&$format=json";
+                    string page = "HostelList?$filter=Gender eq '" + gender + "'&$format=json";
 
                     HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -523,115 +503,91 @@ namespace New_Student_Portal.Controllers
         }
         public ActionResult MealBooking()
         {
-            try
+            string RegNo = Session["Username"].ToString();
+            if (Session["Username"] == null)
             {
-                string RegNo = Session["Username"].ToString();
-                if (Session["Username"] == null)
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                if (Session["CurrentSem"] == null)
                 {
-                    return RedirectToAction("Login", "Login");
+                    Session["CurrentSem"] = CommonClass.CurrentSemester();
+                }
+                string sem = Session["CurrentSem"].ToString();
+                string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
+                if (r[0] == "")
+                {
+                    Error errormsg = new Error();
+                    errormsg.Message = "You have not been registered in the current semester. Register for Units first";
+                    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                }
+                else if (Convert.ToInt32(r[3]) < 1)
+                {
+                    Error errormsg = new Error();
+                    errormsg.Message = "You need to register for units before booking for Meals";
+                    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                 }
                 else
                 {
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                    }
-                    string sem = Session["CurrentSem"].ToString();
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
-                    if (r[0] == "")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You have not been registered in the current semester. Register for Units first";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (Convert.ToInt32(r[3]) < 1)
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You need to register for units before booking for Meals";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else
-                    {
-                        return View();
-                    }
+                    return View();
                 }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
             }
         }
         public PartialViewResult MealBookingForm()
         {
+            string RegNo = Session["Username"].ToString();
+            MealBooking mealB = new MealBooking();
             try
             {
-                string RegNo = Session["Username"].ToString();
-                MealBooking mealB = new MealBooking();
-                try
+                if (Session["CurrentSem"] == null)
                 {
-                    if (Session["CurrentSem"] == null)
+                    Session["CurrentSem"] = CommonClass.CurrentSemester();
+                }
+                string sem = Session["CurrentSem"].ToString();
+                string pageRoom = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + sem + "' and Meals_Booked eq true&$format=json";
+
+                HttpWebResponse httpResponseRoom = Credentials.GetOdataData(pageRoom);
+                using (var streamReaderRoom = new StreamReader(httpResponseRoom.GetResponseStream()))
+                {
+                    var resultRoom = streamReaderRoom.ReadToEnd();
+
+                    var detailsRoom = JObject.Parse(resultRoom);
+
+                    if (detailsRoom["value"].Count() > 0)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        mealB.Message = "You have already booked for meals";
+                        mealB.BookedMeals = true;
                     }
-                    string sem = Session["CurrentSem"].ToString();
-                    string pageRoom = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + sem + "' and Meals_Booked eq true&$format=json";
-
-                    HttpWebResponse httpResponseRoom = Credentials.GetOdataData(pageRoom);
-                    using (var streamReaderRoom = new StreamReader(httpResponseRoom.GetResponseStream()))
+                    else
                     {
-                        var resultRoom = streamReaderRoom.ReadToEnd();
+                        string pageCharge = "ChargeList?$select=Amount&$filter=Code eq 'MEAL CHARGE'&$format=json";
 
-                        var detailsRoom = JObject.Parse(resultRoom);
-
-                        if (detailsRoom["value"].Count() > 0)
+                        HttpWebResponse httpResponseCharge = Credentials.GetOdataData(pageCharge);
+                        using (var streamReaderCharge = new StreamReader(httpResponseCharge.GetResponseStream()))
                         {
-                            mealB.Message = "You have already booked for meals";
-                            mealB.BookedMeals = true;
-                        }
-                        else
-                        {
-                            string pageCharge = "ChargeList?$select=Amount&$filter=Code eq 'CAFETERIA'&$format=json";
+                            var resultCharge = streamReaderCharge.ReadToEnd();
 
-                            HttpWebResponse httpResponseCharge = Credentials.GetOdataData(pageCharge);
-                            using (var streamReaderCharge = new StreamReader(httpResponseCharge.GetResponseStream()))
+                            var detailsCharge = JObject.Parse(resultCharge);
+
+                            if (detailsCharge["value"].Count() > 0)
                             {
-                                var resultCharge = streamReaderCharge.ReadToEnd();
-
-                                var detailsCharge = JObject.Parse(resultCharge);
-
-                                if (detailsCharge["value"].Count() > 0)
+                                foreach (JObject config2 in detailsCharge["value"])
                                 {
-                                    foreach (JObject config2 in detailsCharge["value"])
-                                    {
-                                        mealB.Message = "Total Meal Charge = Ksh. " + Math.Round(((decimal)config2["Amount"]), 2).ToString("#,##0.00");
-                                        mealB.BookedMeals = false;
-                                    }
+                                    mealB.Message = "Total Meal Charge = Ksh. " + Math.Round(((decimal)config2["Amount"]), 2).ToString("#,##0.00");
+                                    mealB.BookedMeals = false;
                                 }
                             }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    mealB.Message = ex.Message;
-                    mealB.BookedMeals = false;
-                }
-                return PartialView("~/Views/Welfare/Partial View/MealBookingForm.cshtml", mealB);
             }
             catch (Exception ex)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                mealB.Message = ex.Message;
+                mealB.BookedMeals = false;
             }
+            return PartialView("~/Views/Welfare/Partial View/MealBookingForm.cshtml", mealB);
         }
         [HttpPost]
         public JsonResult SubmitMealBooking()
@@ -643,7 +599,7 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester();
                 }
                 string sem = Session["CurrentSem"].ToString();
 

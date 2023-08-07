@@ -1,0 +1,134 @@
+﻿@model New_Student_Portal.ViewModel.StudentProgrammes
+@{
+    ViewBag.Title = "DocumentViewResults";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<div class="card pre-scrollable">
+    <div class="card-title">Provisional Results</div>
+    <div class="card-body">
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Programme :", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Programme, Model.ListOfProgrammes, "--select Programme--", new { @class = "form-control", @id = "ddlProgrammes", @onchange = "GetSemsesters()" })
+                        @Html.ValidationMessageFor(model => model.Programme, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Semester :", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <select class="form-control" id="ddlSemester" name="ddlSemester">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"> </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8" align="center">
+                <input type="button" class="btn btn-primary" value="View Provisional Results" onclick="GetTransReport();" />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <div id="divViewDoc"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h4 class="modal-title">Report</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <iframe id="iframe" style="width:100%;height:450px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/ShowProgression.js"></script>
+<script src="~/assets/js/pdfobject.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ddlSemester').empty().append('<option selected="selected" value="">--Select Semester--</option>');
+    });
+    var GetTransReport = function () {
+        var Prog = $("#ddlProgrammes").children("option:selected").val();
+        var Semester = $("#ddlSemester").children("option:selected").val();
+        if (Prog == "") {
+            Swal.fire('Warning', 'Select Programme', 'warning');
+            return;
+        }
+        else if (Semester == "") {
+            Swal.fire('Warning', 'Select Semester', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                url: '@Url.Action("GetTranscriptReport", "ViewDocuments")',
+                datatype: "json",
+                type: "POST",
+                data: JSON.stringify({ Programme: Prog, Semester: Semester }),
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    if (data.success == true) {
+                        $('iframe').attr('src', data.message);
+                        $("#myModalUnits").modal("show");
+                        HideProgress();
+                    }
+                    else {
+                        HideProgress();
+                        Swal.fire('Warning', data.message, 'warning');
+                    }
+
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Warning', err, 'warning');
+                }
+            });
+        }
+    }
+    var GetSemsesters = function () {
+        var Prog = $("#ddlProgrammes").children("option:selected").val();
+        if (Prog == "") {
+            $("#ddlSemester option").remove();
+            $('#ddlSemester').empty().append('<option selected="selected" value="">--Select Semester--</option>');
+        }
+        else {
+            ShowProgress();
+            $("#ddlSemester option").remove();
+            $('#ddlSemester').empty().append('<option selected="selected" value="">--Select Semester--</option>');
+
+            $.getJSON('@Url.Action("GetSemesters", "ViewDocuments")', { Programme: Prog },
+                function (data) {
+                    $('#ddlSemester').empty().append('<option selected="selected" value="0">--Select Semester--</option>');
+                    $.each(data.ListOfSemesters, function () {
+                        $("#ddlSemester").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                    HideProgress();
+                });
+        }
+    }
+</script>
+
+
+
+

@@ -5,23 +5,7 @@
 }
 <div class="card">
     <div class="card-body">
-        <div class="row" id="divProg">
-            <div class="col-md-6">
-                <b>Programme</b>
-                <select class="form-select" id="ddlProgramme" name="ddlProgramme">
-                </select>
-            </div>
-            <div class="col-md-6">
-                <br />
-                <input type="button" id="btnGetReport" class="btn btn-danger" value="Get Report" onclick="GetReport();" />
-            </div>
-            <hr />
-        </div>
-        <div class="row" id="divReport">
-            <div class="col-md-12">
-                <iframe id="iframe" style="width:100%;height:600px"></iframe>
-            </div>
-        </div>
+        <iframe id="iframe" style="width:100%;height:500px"></iframe>
     </div>
 </div>
 <script src="~/JS/ShowProgression.js"></script>
@@ -38,59 +22,19 @@
     });
     function LoadDocument(DocType) {
         if (DocType == "EXAMCARD") {
-            $("#divProg").hide();
-            $("#divReport").show();
             PrintExamCard();
         }
-        if (DocType == "RESULTS" || DocType == "STDAUDIT") {
-            $("#divProg").show();
-            $("#divReport").hide();
-            ShowProgress();
-            $("#ddlProgramme option").remove();
-            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-
-            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
-                function (data) {
-                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-                    $.each(data.ListOfValues, function () {
-                        $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
-                    });
-                    HideProgress();
-                });
-        };
-        if (DocType == "SEMPROFINV") {
-            $("#divProg").hide();
-            $("#divReport").show();
-            GetSemesterInvoice();
+        if (DocType == "RESULTS") {
+            PrintProvissionalResults();
         }
-    }
-    var GetSemesterInvoice = function () {
-        ShowProgress();
-        $.ajax({
-            url: '/ViewDocuments/SemesterProformaInvoice',
-            type: "POST",
-            async: false,
-            success: function (data) {
-                if (data.success == true) {
-                    $('iframe').attr('src', data.message);
-                    HideProgress();
-                }
-                else {
-                    Swal.fire('Warning', data.message, 'warning');
-                    HideProgress();
-                }
-
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
+        if (DocType == "STDAUDIT") {
+            GetStudentAudit();
+        }
     }
     var PrintExamCard = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ExamCard',
+            url: '@Url.Action("ExamCard", "ViewDocuments")',
             type: "POST",
             async: false,
             success: function (data) {
@@ -110,47 +54,22 @@
             }
         });
     }
-    var GetReport = function () {
-        var Prog = $("#ddlProgramme").children("option:selected").val();
-        if (Prog == "") {
-            Swal.fire('Warning', "Select programme", 'warning');
-            return;
-        }
-        else {
-            var DocType = GetParameterValues('DocT');
-            function GetParameterValues(name) {
-                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                var results = regex.exec(location.search);
-                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            }
-            
-            if (DocType == "RESULTS") {
-                PrintProvissionalResults(Prog);
-            }
-            if (DocType == "STDAUDIT") {
-                GetStudentAudit(Prog);
-            }
-        }
-    };
-    var PrintProvissionalResults = function (Prog) {
+    var PrintProvissionalResults = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ProvisionalResults',
+            url: '@Url.Action("ProvisionalResults", "ViewDocuments")',
             type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
+            async: false,
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message + "#toolbar=0");
-                    $("#divReport").show();
+                    $('iframe').attr('src', data.message);
                     HideProgress();
                 }
                 else {
                     Swal.fire('Warning', data.message, 'warning');
                     HideProgress();
                 }
+
             },
             error: function (err) {
                 HideProgress();
@@ -158,24 +77,22 @@
             }
         });
     }
-    var GetStudentAudit = function (Prog) {
+    var GetStudentAudit = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/GenerateStudentAudit',
+            url: '@Url.Action("GenerateStudentAudit", "ViewDocuments")',
             type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
+            async: false,
             success: function (data) {
                 if (data.success == true) {
                     $('iframe').attr('src', data.message);
-                    $("#divReport").show();
                     HideProgress();
                 }
                 else {
                     Swal.fire('Warning', data.message, 'warning');
                     HideProgress();
                 }
+
             },
             error: function (err) {
                 HideProgress();

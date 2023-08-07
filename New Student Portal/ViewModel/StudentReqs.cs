@@ -10,10 +10,8 @@ namespace New_Student_Portal.ViewModel
         public string Code { get; set; }
         public string StdNo { get; set; }
         public string Prog { get; set; }
-        public string StdProg { get; set; }
         public string Concentration { get; set; }
         public string Campus { get; set; }
-        public string SettlementT { get; set; }
         public string Date { get; set; }
         public string Requisition_Type { get; set; }
         public string Semester { get; set; }
@@ -24,11 +22,6 @@ namespace New_Student_Portal.ViewModel
         public string CollectionDate { get; set; }
         public bool CommentFound { get; set; }
         public string Comment { get; set; }
-        public string NoOfCopies { get; set; }
-        public bool SendFApproval { get; set; }
-        public int ApprovalCount { get; set; }
-        public int ApprovedCount { get; set; }
-        public int RejectedCount { get; set; }
     }
     public class StudentReqLines
     {
@@ -36,22 +29,11 @@ namespace New_Student_Portal.ViewModel
         public string Unit { get; set; }
         public string UnitName { get; set; }
         public string Reason { get; set; }
-        public string EquivalentUnit { get; set; }
-        public string Lecturer { get; set; }
-        public string Section { get; set; }
-    }
-    public class RequisitionLines
-    {
-        public List<StudentReqLines> ListLines { get; set; }
-        public string RegT { get; set; }
-        public string Status { get; set; }
     }
     public class GradRequest
     {
-        public string Prog { get; set; }
         public string PersoanlEmail { get; set; }
         public string CrrProf { get; set; }
-        public string CorrectName { get; set; }
         public string Company { get; set; }
         public string CrrPhoneNo { get; set; }
         public bool Gown { get; set; }
@@ -61,25 +43,5 @@ namespace New_Student_Portal.ViewModel
     {
         public string ReqNo { get; set; }
         public decimal Balance { get; set; }       
-    }
-    public class ApprovalCodes
-    {
-        public string ApprovalCode { get; set; }
-        public string Sequence { get; set; }
-        public string Status { get; set; }
-        public bool CommentExist { get; set; }
-        public string Rejection_Comment { get; set; }
-    }
-    public class Clearance_Codes
-    {
-        public List<ApprovalCodes> ApprovalCode { get; set; }
-        public bool print { get; set; }
-        public string DocNo { get; set; }
-    }
-    public class IsClearanceRequest
-    {
-        public string ReqNo { get; set; }
-        public bool Requested { get; set; }
-        public bool print { get; set; }
     }
 }
