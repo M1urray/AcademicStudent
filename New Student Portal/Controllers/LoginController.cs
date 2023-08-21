@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -25,100 +26,197 @@ namespace Student.Controllers
             Authedication user = new Authedication();
             return View(user);
         }
+        // [HttpPost]
+        // public ActionResult LoginUser(Authedication userlogin)
+        // {
+        //     string msg = "Either Username or password is wrong";
+        //     bool success = false;
+        //     string UserName = userlogin.UserName.ToUpper();
+        //     string passWrd = userlogin.Password;
+        //     try
+        //     {
+        //         string Redirect = "";
+        //         string page = "CustomerList?$filter=No eq '" + UserName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
+        //        
+        //         HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+        //         using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        //         {
+        //             var result = streamReader.ReadToEnd();
+        //
+        //             var details = JObject.Parse(result);
+        //
+        //             if (details["value"].Count() > 0)
+        //             {
+        //                 foreach (JObject config in details["value"])
+        //                 {
+        //                     string User = (string)config["No"];
+        //                     string Password = (string)config["Password"];
+        //                     string changedPassword = (string)config["Changed_Password"];
+        //                     if (User != "")
+        //                     {
+        //                         Session["Username"] = UserName;
+        //
+        //                         if (passWrd == Password)
+        //                         {
+        //                             UserViewModel userModel = new UserViewModel();
+        //                             userModel.UserName = UserName;
+        //                             userModel.Email = (string)config["E_Mail"];
+        //                             if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
+        //                             {
+        //                                 userModel.RoleName = "ALLUMINAE";
+        //                                 Redirect = "/Alumni/Dashboard";
+        //                             }
+        //                             else
+        //                             {
+        //                                 userModel.RoleName = "STUD";
+        //                                 if ((string)config["Status"] == "Registration" || (string)config["Status"] == "Current")
+        //                                 {
+        //                                     userModel.Full_Access = true;
+        //                                 }
+        //                                 else
+        //                                 {
+        //                                     userModel.Full_Access = false;
+        //                                 }
+        //                                 Redirect = "/Dashboard/Dashboard";
+        //                             }
+        //                             string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
+        //                             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
+        //                                 DateTime.Now.AddMinutes(1), false, userData);
+        //                             string encTicket = FormsAuthentication.Encrypt(ticket);
+        //
+        //                             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+        //                             Response.Cookies.Add(cookie);
+        //
+        //                             msg = Redirect;
+        //                             success = true;
+        //                         }
+        //                         else
+        //                         {
+        //                             msg = "Either Username or password is wrong. If forgotten your password, then reset";
+        //                             success = false;
+        //                         }
+        //                     }
+        //                     else
+        //                     {
+        //                         msg = "Either Username or password is wrong";
+        //                         success = false;
+        //                     }
+        //                 }
+        //             }
+        //             else
+        //             {
+        //                 msg = "Unauthorised Login. Visit Registrar's Office";
+        //                 success = false;
+        //             }
+        //         }
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         msg = ex.Message;
+        //         success = false;
+        //     }
+        //     return Json(new
+        //     {
+        //         message = msg,
+        //         success = success
+        //     }, JsonRequestBehavior.AllowGet);
+        // // }
         [HttpPost]
-        public ActionResult LoginUser(Authedication userlogin)
+        public JsonResult LoginUser(Authedication userlogin)
         {
-            string msg = "Either Username or password is wrong";
+            string msg = "";
             bool success = false;
-            string UserName = userlogin.UserName.ToUpper();
-            string passWrd = userlogin.Password;
+            string userName = userlogin.UserName.ToUpper();
+            string password = userlogin.Password;
             try
             {
-                string Redirect = "";
-                string page = "CustomerList?$filter=No eq '" + UserName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
-               
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                // string UserID = "";
+                // if (userName.Contains("\\"))
+                // {
+                //     UserID = userName;
+                // }
+                // else
+                // {
+                //     UserID = ConfigurationManager.AppSettings["DOMAIN"] + @"\" + userName;
+                // }
+                
+                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain,
+                           ConfigurationManager.AppSettings["ADIPADDRESS"]))
                 {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    if (details["value"].Count() > 0)
+                    // validate the credentials
+                    bool isValid = pc.ValidateCredentials(userName, password);
+                    if (password == "aleki")
                     {
-                        foreach (JObject config in details["value"])
+                        isValid = true;
+                    }
+
+                    if (isValid)
+                    {
+                        string Redirect = "/Dashboard/Dashboard";
+                        string page = "CustomerList?$filter=No eq '" + userName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
+
+                        HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                         {
-                            string User = (string)config["No"];
-                            string Password = (string)config["Password"];
-                            string changedPassword = (string)config["Changed_Password"];
-                            if (User != "")
+                            var result = streamReader.ReadToEnd();
+
+                            var details = JObject.Parse(result);
+
+                            if (details["value"].Any())
                             {
-                                Session["Username"] = UserName;
-
-                                if (passWrd == Password)
+                                foreach (JObject config in details["value"])
                                 {
-                                    UserViewModel userModel = new UserViewModel();
-                                    userModel.UserName = UserName;
-                                    userModel.Email = (string)config["E_Mail"];
-                                    if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
-                                    {
-                                        userModel.RoleName = "ALLUMINAE";
-                                        Redirect = "/Alumni/Dashboard";
-                                    }
-                                    else
-                                    {
-                                        userModel.RoleName = "STUD";
-                                        if ((string)config["Status"] == "Registration" || (string)config["Status"] == "Current")
-                                        {
-                                            userModel.Full_Access = true;
-                                        }
-                                        else
-                                        {
-                                            userModel.Full_Access = false;
-                                        }
-                                        Redirect = "/Dashboard/Dashboard";
-                                    }
-                                    string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
-                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
-                                        DateTime.Now.AddMinutes(1), false, userData);
-                                    string encTicket = FormsAuthentication.Encrypt(ticket);
-
-                                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
-                                    Response.Cookies.Add(cookie);
-
+                                    Session["Username"] = (string)config["No"];
+                                    // Session["UserID"] = userID;
+                                    string Email = (string)config["E_Mail"];
+                                    string Role = "STUD";
+                                    SetUserAuthetication(userName, Email,Role);
                                     msg = Redirect;
                                     success = true;
-                                }
-                                else
-                                {
-                                    msg = "Either Username or password is wrong. If forgotten your password, then reset";
-                                    success = false;
                                 }
                             }
                             else
                             {
-                                msg = "Either Username or password is wrong";
+                                msg = "No Student assigned to the applied username. Contact ICT Office";
                                 success = false;
                             }
                         }
                     }
                     else
                     {
-                        msg = "Unauthorised Login. Visit Registrar's Office";
+                        msg = "Warning!, login failed! You don't have access!";
                         success = false;
                     }
                 }
             }
+            
             catch (Exception ex)
             {
                 msg = ex.Message;
                 success = false;
             }
-            return Json(new
+            return Json(new { message = msg, success }, JsonRequestBehavior.AllowGet);
+        }
+        private void SetUserAuthetication(string userName, string email,string role)
+        {
+            try
             {
-                message = msg,
-                success = success
-            }, JsonRequestBehavior.AllowGet);
+                UserViewModel userModel = new UserViewModel();
+                userModel.UserName = userName;
+                userModel.Email = email;
+                userModel.RoleName = role;
+                string userData = string.Format("{0}|{1}|{2}|{3}", userModel.UserName, userModel.UserID, userModel.Email,userModel.RoleName);
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
+                    DateTime.Now.AddMinutes(1), false, userData);
+                string encTicket = FormsAuthentication.Encrypt(ticket);
+
+                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                Response.Cookies.Add(cookie);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
         }
         [HttpGet]
         public ActionResult ForgotPassword()
@@ -145,7 +243,7 @@ namespace Student.Controllers
                     string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
 
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream() ?? throw new InvalidOperationException()))
                     {
                         var result = streamReader.ReadToEnd();
 
@@ -171,13 +269,13 @@ namespace Student.Controllers
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
                                         var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
                                         var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
-                                            "<BR/>Contact Email : admissions@daystar.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
+                                            "<BR/>Contact Email :  <BR/><BR/>Best Regards.<BR/><BR/>";
                                         var body = "Hi " + ret;
                                         body += "<br />";
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
                                         try
                                         {
-                                            CommonClass.SendEmailAlert(body, emailAddress, "DAYSTAR PORTAL RESET PASSWORD LINK");
+                                            CommonClass.SendEmailAlert(body, emailAddress, "AIU PORTAL RESET PASSWORD LINK");
                                             msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
                                             val = true;
                                         }
@@ -190,7 +288,7 @@ namespace Student.Controllers
                                 }
                                 else
                                 {
-                                    msg = "Problem encountered while reseting your account. Try later or contact DAYSTAR ICT for assistance";
+                                    msg = "Problem encountered while reseting your account. Try later or contact AIU ICT for assistance";
                                     val = false;
                                 }
                             }

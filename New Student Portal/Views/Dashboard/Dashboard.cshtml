@@ -507,7 +507,7 @@
             x.innerHTML = 'Create Bible Study(BS)';
         }
         if (Type == "DCF") {
-            x.innerHTML = 'Create Daystar Christain Fellowship(DCF)';
+            x.innerHTML = 'Create Aiu Christain Fellowship(DCF)';
         }
        ShowProgress();
         $.ajax({
@@ -574,7 +574,7 @@
     }
     var CDFEvents = function () {
         var x = document.getElementById("labelT");
-        x.innerHTML = 'Daystar Christian Fellowship(CDF) Events';
+        x.innerHTML = 'AIU Christian Fellowship(CDF) Events';
         ShowProgress();
         $.ajax({
             url: "/Dashboard/DCFEventsList",
@@ -594,7 +594,7 @@
     }
     var CreateCDFEvent = function () {
         var x = document.getElementById("labelT");
-        x.innerHTML = 'Create Daystar Christian Fellowship(CDF) Event';
+        x.innerHTML = 'Create AIU Christian Fellowship(CDF) Event';
         ShowProgress();
         $.ajax({
             url: "/Dashboard/CreateDCFDocument",

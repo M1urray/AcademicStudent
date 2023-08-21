@@ -131,7 +131,7 @@ namespace Student.Controllers
                             Details.ListInternalMemos = ImportantDocuments(RegNo);
                             Details.BstudyDetails = GetBSGroupDetails(RegNo, sem);
                             Details.AcademicStatus = CommonClass.StudentStatusDescription((string)config["Academic_Status"]);
-                            Details.LeadershipOption = CommonClass.LeadershipOption();
+                            // Details.LeadershipOption = CommonClass.LeadershipOption();
                         }
                     }
                     return View(Details);
