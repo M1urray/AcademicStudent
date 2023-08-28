@@ -49,14 +49,49 @@ namespace New_Student_Portal.Models
             }
             return dtMenu;
         }
-        public static string[] CurrentCourseRegistration(string RegNo, string CurrSem)
+        // public static string[] CurrentCourseRegistration(string RegNo, string CurrSem)
+        // {
+        //     string[] dtMenu = new string[6];
+        //     try
+        //     {
+        //         string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+        //         string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No,Student_Residence&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
+        //
+        //         HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+        //         using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+        //         {
+        //             var result = streamReader.ReadToEnd();
+        //
+        //             var details = JObject.Parse(result);
+        //
+        //             foreach (JObject config in details["value"])
+        //             {
+        //                 dtMenu[0] = (string)config["Programme"];
+        //                 dtMenu[1] = (string)config["Stage"];
+        //                 dtMenu[2] = (string)config["Class_Code"];
+        //                 dtMenu[3] = (string)config["UnitsTaken"];
+        //                 dtMenu[4] = (string)config["Booked_Hostel_No"];
+        //                 dtMenu[5] = (string)config["Student_Residence"];
+        //             }
+        //         }
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         ex.Data.Clear();
+        //     }
+        //     return dtMenu;
+        // }
+        public static string[] CurrentCourseRegistration(string RegNo, string CurrSem, string RegT)
         {
-            string[] dtMenu = new string[6];
+            string[] dtMenu = new string[5];
             try
             {
                 string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No,Student_Residence&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
-
+                string page = "";
+                if (RegT == "0" || RegT == "1")
+                {
+                    page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and (Registerfor eq 'Stage' or Registerfor eq 'Unit/Subject')&$format=json";
+                }
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
                 {
@@ -71,7 +106,6 @@ namespace New_Student_Portal.Models
                         dtMenu[2] = (string)config["Class_Code"];
                         dtMenu[3] = (string)config["UnitsTaken"];
                         dtMenu[4] = (string)config["Booked_Hostel_No"];
-                        dtMenu[5] = (string)config["Student_Residence"];
                     }
                 }
             }
@@ -80,6 +114,106 @@ namespace New_Student_Portal.Models
                 ex.Data.Clear();
             }
             return dtMenu;
+        }
+               public static bool QualifyForSupplimentary(string RegNo, string Prog, string Stage)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool QualifyForRetake(string RegNo, string Prog, string Stage)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static string GetStudentStage(string studentNumber)
+        {
+            string stage = "";
+            try
+            {
+                string page = "CustomerList?$select=Current_Stage&$filter=No eq '" + studentNumber + "' &format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        foreach (JObject config in details["value"])
+                        {
+                            stage = (string)config["Current_Stage"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return stage;
+        }
+        public static bool AllowSupp_Special(string Sem)
+        {
+            bool b = false;
+            try
+            {
+                string page = "SemesterList?$filter=Code eq '" + Sem + "' and Allow_Supp_Spec_Registration eq true&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
         }
         public static string CurrentSemester(string StdNo)
         {
@@ -498,6 +632,36 @@ namespace New_Student_Portal.Models
                 ex.Data.Clear();
             }
             return changed;
+        }
+        public static string[] GetSupp_RetakeRegistration(string RegNo, string CurrSem, string RegT, string Stage)
+        {
+            string[] dtMenu = new string[5];
+            try
+            {
+                string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and Registerfor eq '" + RegT + "' and Stage eq '" + Stage + "'&$format=json";
+                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    foreach (JObject config in details["value"])
+                    {
+                        dtMenu[0] = (string)config["Programme"];
+                        dtMenu[1] = (string)config["Stage"];
+                        dtMenu[2] = (string)config["Class_Code"];
+                        dtMenu[3] = (string)config["UnitsTaken"];
+                        dtMenu[4] = (string)config["Booked_Hostel_No"];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return dtMenu;
         }
         public static string RegistrationDeadline(string Sem)
         {

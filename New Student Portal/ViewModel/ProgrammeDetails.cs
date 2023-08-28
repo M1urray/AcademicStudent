@@ -38,6 +38,8 @@ namespace New_Student_Portal.ViewModel
         public int MaximumCourses { get; set; }
         public int SelectedCourses { get; set; }
         public string HostelCode { get; set; }
+        public string RegT { get; set; }
+        public string Stage { get; set; }
     }
     public class FreeElectiveUnits
     {

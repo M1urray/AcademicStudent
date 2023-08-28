@@ -1,4 +1,402 @@
-﻿@model New_Student_Portal.ViewModel.StudentCourseDetails
+﻿@* @model New_Student_Portal.ViewModel.StudentCourseDetails *@
+@* @{ *@
+@*     ViewBag.Title = "Course Registration"; *@
+@*     Layout = "~/Views/Shared/SiteMaster.cshtml"; *@
+@* } *@
+@* <div class="card"> *@
+@*     <div class="card-body"> *@
+@*         <div id="divCourseReg"></div> *@
+@*     </div> <!-- end card-body --> *@
+@* </div> <!-- end card--> *@
+@* $1$//////////////////////Modal////////////////////////////#1# *@
+@* <div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"> *@
+@*     <div class="modal-dialog modal-lg"> *@
+@*         <div class="modal-content"> *@
+@*             <div class="modal-header"> *@
+@*                 <h4 class="modal-title"><label id="labelT"></label></h4> *@
+@*                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+@*             </div> *@
+@*             <div class="modal-body p-4" id="modalBody"> *@
+@*             </div> *@
+@*             <div class="modal-footer"> *@
+@*                 <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* $1$//////////////////////Modal////////////////////////////#1# *@
+@* <div id="myModalReports" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"> *@
+@*     <div class="modal-dialog modal-lg"> *@
+@*         <div class="modal-content"> *@
+@*             <div class="modal-header"> *@
+@*                 <h4 class="modal-title"><label id="labelTitle"></label></h4> *@
+@*                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+@*             </div> *@
+@*             <div class="modal-body p-4" id="modalBodyReport"> *@
+@*                 <iframe id="iframe" style="width:100%;height:450px"></iframe> *@
+@*             </div> *@
+@*             <div class="modal-footer"> *@
+@*                 <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* <script type="text/javascript"> *@
+@*     $(document).ready(function () { *@
+@*         LoadCourseRegistrationDetails(); *@
+@*     }); *@
+@*     function LoadCourseRegistrationDetails() { *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             async: false, *@
+@*             type: "GET", *@
+@*             dataType: 'HTML', *@
+@*             contentType: false, *@
+@*             processData: false, *@
+@*             url: "/Course/CourseRegistrationDetails", *@
+@*             success: function (data) { *@
+@*                 $("#divCourseReg").html(data); *@
+@*                 HideProgress(); *@
+@*             }, *@
+@*             error: function () { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var ViewUnits = function (RegID, prog, stage, sem, regFor) { *@
+@*         var x = document.getElementById("labelT"); *@
+@*         x.innerHTML = 'Student Units'; *@
+@*         var StudentUnits = {}; *@
+@*         StudentUnits.Programme = prog; *@
+@*         StudentUnits.Stage = stage; *@
+@*         StudentUnits.Semester = sem; *@
+@*         StudentUnits.RegFor = regFor; *@
+@*         StudentUnits.RegID = RegID; *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             url: "/Course/ViewStudentRegisteredUnits", *@
+@*             datatype: "json", *@
+@*             type: "POST", *@
+@*             data: JSON.stringify({ Filters: StudentUnits }), *@
+@*             contentType: "application/json; charset = utf-8", *@
+@*             success: function (data) { *@
+@*                 HideProgress(); *@
+@*                 $("#modalBody").html(data); *@
+@*                 $("#myModalUnits").modal("show"); *@
+@*             }, *@
+@*             error: function () { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Warning', 'Problem encountered while reading Units', 'warning'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var GetUnits = function (hostel, Prog, Type) { *@
+@*         var regType = "0";// $("#RegType").children("option:selected").val(); *@
+@*         var IntestedInHostel = $("#ddlInterest").children("option:selected").val(); *@
+@*         var HostelCode = $("#ddlHostelList").children("option:selected").val(); *@
+@*         var UniyType; *@
+@*         var Title; *@
+@*         if (Type == "0") { *@
+@*             UniyType = $("#ddlUnitType").children("option:selected").val(); *@
+@*             Title = $("#ddlUnitType").children("option:selected").text(); *@
+@*         } *@
+@*         else if (Type == "1") { *@
+@*             UniyType = $("#ddlUnitType1").children("option:selected").val(); *@
+@*             Title = $("#ddlUnitType1").children("option:selected").text(); *@
+@*         } *@
+@*         else if (Type == "2") { *@
+@*             UniyType = $("#ddlUnitType2").children("option:selected").val(); *@
+@*             Title = $("#ddlUnitType2").children("option:selected").text(); *@
+@*         } *@
+@*         else if (Type == "3") { *@
+@*             UniyType = $("#ddlUnitType3").children("option:selected").val(); *@
+@*             Title = $("#ddlUnitType3").children("option:selected").text(); *@
+@*         } *@
+@*         else { *@
+@*             UniyType = ""; *@
+@*             Title = ""; *@
+@*         } *@
+@*         if (UniyType == "") { *@
+@*             Swal.fire('Warning', 'Kindly select the unit type you want to register', 'warning'); *@
+@*             return; *@
+@*         } *@
+@*         else { *@
+@*             if (IntestedInHostel == "" && hostel == "") { *@
+@*                 Swal.fire('Warning', 'Kindly select Student Resident', 'warning'); *@
+@*                 return; *@
+@*             } *@
+@*             else if (IntestedInHostel == "1" && HostelCode == "") { *@
+@*                 Swal.fire('Warning', 'Choose your preferred Hostel', 'warning'); *@
+@*                 return; *@
+@*             } *@
+@*             if (regType == "") { *@
+@*                 Swal.fire('Warning', 'Select Registration Type', 'warning'); *@
+@*                 return; *@
+@*             } *@
+@*             else { *@
+@*                 ShowProgress(); *@
+@*                 var x = document.getElementById("labelT"); *@
+@*                 x.innerHTML = Title; *@
+@*                 $.ajax({ *@
+@*                     url: "/Course/GetProgramUnits", *@
+@*                     datatype: "json", *@
+@*                     type: "POST", *@
+@*                     data: JSON.stringify({ Stdresidence: IntestedInHostel, Type: regType, HostelCode: HostelCode, UnitType: UniyType, Prog: Prog }), *@
+@*                     contentType: "application/json; charset = utf-8", *@
+@*                     success: function (data) { *@
+@*                         $("#modalBody").html(data); *@
+@*                         $("#myModalUnits").modal("show"); *@
+@*                         HideProgress(); *@
+@*                     }, *@
+@*                     error: function () { *@
+@*                         HideProgress(); *@
+@*                         Swal.fire('Warning', 'Problem encountered while reading Units', 'warning'); *@
+@*                     } *@
+@*                 }); *@
+@*             } *@
+@*         } *@
+@*     } *@
+@*     var GetFreeElectiveUnits = function () { *@
+@*         ShowProgress(); *@
+@*         var x = document.getElementById("labelT"); *@
+@*         x.innerHTML = 'Free Elective Course Registration'; *@
+@* *@
+@*         $.ajax({ *@
+@*             url: "/Course/GetFreeElectiveUnits", *@
+@*             datatype: "json", *@
+@*             type: "POST", *@
+@*             //data: JSON.stringify({ Type: regType, HostelCode: HostelCode }), *@
+@*             contentType: "application/json; charset = utf-8", *@
+@*             success: function (data) { *@
+@*                 $("#modalBody").html(data); *@
+@*                 $("#myModalUnits").modal("show"); *@
+@*                 HideProgress(); *@
+@*             }, *@
+@*             error: function () { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Warning', 'Problem encountered while reading Units', 'warning'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var SubmitSelectedUnits = function (ClassCodeNeeded) { *@
+@*         var UnitReg = new Array(); *@
+@*         $("#tblProgUnit tbody tr").each(function () { *@
+@*             var row = $(this); *@
+@*             if (row.find('input[type="checkbox"]').is(':checked')) { *@
+@*                 var Unit = {}; *@
+@*                 Unit.UnitCode = row.find("td").eq(1).html(); *@
+@*                 Unit.ClassCode = row.find("td").eq(2).html(); *@
+@*                 Unit.Day = row.find("td").eq(4).html(); *@
+@*                 Unit.Period = row.find("td").eq(5).html(); *@
+@*                 Unit.Campus = row.find("td").eq(6).html(); *@
+@*                 UnitReg.push(Unit); *@
+@*             } *@
+@*         }); *@
+@*         if (UnitReg.length < 1) { *@
+@*             Swal.fire('Warning', 'You have not selected any unit', 'warning'); *@
+@*             return; *@
+@*         } *@
+@*         else { *@
+@*             ShowProgress(); *@
+@*             $.ajax({ *@
+@*                 type: "POST", *@
+@*                 url: "/Course/SaveSelectedUnits", *@
+@*                 data: JSON.stringify(UnitReg), *@
+@*                 contentType: "application/json; charset=utf-8", *@
+@*                 dataType: "json", *@
+@*                 success: function (data) { *@
+@*                     if (data.success == true) { *@
+@*                         HideProgress(); *@
+@*                         LoadCourseRegistrationDetails(); *@
+@*                         $("#myModalUnits").modal("hide"); *@
+@*                         Swal.fire('Success', data.message, 'success'); *@
+@*                     } *@
+@*                     else { *@
+@*                         HideProgress(); *@
+@*                         LoadCourseRegistrationDetails(); *@
+@*                         Swal.fire('Warning', data.message, 'warning'); *@
+@*                     } *@
+@*                 }, *@
+@*                 error: function () { *@
+@*                     HideProgress(); *@
+@*                     Swal.fire('Error', data.message, 'error'); *@
+@*                 } *@
+@*             }); *@
+@*         } *@
+@*     } *@
+@*     var DropUnit = function (prog, stage, sem, Unit) { *@
+@*         var UnitFilters = {}; *@
+@*         UnitFilters.prog = prog; *@
+@*         UnitFilters.stage = stage; *@
+@*         UnitFilters.sem = sem; *@
+@*         UnitFilters.Unit = Unit; *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             url: "/Course/DropBasketUnit", *@
+@*             datatype: "json", *@
+@*             type: "POST", *@
+@*             data: JSON.stringify({ Filters: UnitFilters }), *@
+@*             contentType: "application/json; charset = utf-8", *@
+@*             success: function (data) { *@
+@*                 if (data.success == true) { *@
+@*                     HideProgress(); *@
+@*                     LoadCourseRegistrationDetails(); *@
+@*                     Swal.fire('Success', data.message, 'success'); *@
+@*                 } *@
+@*                 else { *@
+@*                     HideProgress(); *@
+@*                     Swal.fire('Warning', data.message, 'warning'); *@
+@*                 } *@
+@*             }, *@
+@*             error: function () { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Error', data.message, 'error'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var RegisterSelectedUnits = function () { *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             type: "POST", *@
+@*             url: "/Course/RegisterSelectedUnits", *@
+@*             contentType: "application/json; charset=utf-8", *@
+@*             dataType: "json", *@
+@*             success: function (data) { *@
+@*                 if (data.success == true) { *@
+@*                     if (data.Redirect == true) { *@
+@*                         window.location = data.message; *@
+@*                     } *@
+@*                     else { *@
+@*                         HideProgress(); *@
+@*                         LoadCourseRegistrationDetails(); *@
+@*                         Swal.fire('Success', data.message, 'success'); *@
+@*                     } *@
+@*                 } *@
+@*                 else { *@
+@*                     HideProgress(); *@
+@*                     LoadCourseRegistrationDetails(); *@
+@*                     Swal.fire('Error', data.message, 'error'); *@
+@*                 } *@
+@*             }, *@
+@*             error: function (data) { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Error', data.message, 'error'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var DropRegisteredUnit = function (button, prog, sem, Unit, UnitName, RegFor) { *@
+@*         Swal.fire({ *@
+@*             title: 'Are you sure?', *@
+@*             text: "You won't be able to revert this!", *@
+@*             icon: 'warning', *@
+@*             showCancelButton: true, *@
+@*             confirmButtonText: 'Yes, delete it!', *@
+@*             cancelButtonText: 'No, cancel!', *@
+@*             confirmButtonClass: 'btn btn-success mt-2', *@
+@*             cancelButtonClass: 'btn btn-danger ms-2 mt-2', *@
+@*             buttonsStyling: false *@
+@*         }).then(function (result) { *@
+@*             if (result.value) { *@
+@*                 var UnitFilters = {}; *@
+@*                 UnitFilters.prog = prog; *@
+@*                 //UnitFilters.stage = stage; *@
+@*                 UnitFilters.sem = sem; *@
+@*                 UnitFilters.Unit = Unit; *@
+@*                 UnitFilters.UnitName = UnitName; *@
+@*                 UnitFilters.RegFor = RegFor; *@
+@*                 ShowProgress(); *@
+@*                 $.ajax({ *@
+@*                     url: "/Course/DropRegisteredUnit", *@
+@*                     datatype: "json", *@
+@*                     type: "POST", *@
+@*                     data: JSON.stringify({ Filters: UnitFilters }), *@
+@*                     contentType: "application/json; charset = utf-8", *@
+@*                     success: function (data) { *@
+@*                         if (data.success == true) { *@
+@*                             HideProgress(); *@
+@*                             Swal.fire('Success', data.message, 'success'); *@
+@*                             LoadCourseRegistrationDetails(); *@
+@* *@
+@*                             var row = $(button).closest("TR"); *@
+@*                             var table = $("#tbRegUnits")[0]; *@
+@*                             //Delete the Table row using it's Index. *@
+@*                             table.deleteRow(row[0].rowIndex); *@
+@*                         } *@
+@*                         else { *@
+@*                             HideProgress(); *@
+@*                             Swal.fire('Warning', data.message, 'warning'); *@
+@*                         } *@
+@*                     }, *@
+@*                     error: function () { *@
+@*                         HideProgress(); *@
+@*                         Swal.fire('Error', data.message, 'error'); *@
+@*                     } *@
+@*                 }); *@
+@*             } else if (result.dismiss === Swal.DismissReason.cancel) { *@
+@*                 Swal.fire({ *@
+@*                     title: 'Cancelled', *@
+@*                     text: 'Unit has not been dropped. Its safe', *@
+@*                     icon: 'error', *@
+@*                     confirmButtonColor: "#1abc9c", *@
+@*                 }); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var PrintCourseStatement = function () { *@
+@*         var x = document.getElementById("labelTitle"); *@
+@*         x.innerHTML = 'Course Statement'; *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             url: '/ViewDocuments/PrintCourseStatement', *@
+@*             type: "POST", *@
+@*             //async: false, *@
+@*             success: function (data) { *@
+@*                 if (data.success == true) { *@
+@*                     $('iframe').attr('src', data.message); *@
+@*                     $("#myModalReports").modal("show"); *@
+@*                     HideProgress(); *@
+@*                 } *@
+@*                 else { *@
+@*                     Swal.fire('Warning', data.message, 'warning'); *@
+@*                     HideProgress(); *@
+@*                 } *@
+@* *@
+@*             }, *@
+@*             error: function (err) { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Warning', err, 'warning'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@*     var GetProformaInvoice = function () { *@
+@*         var x = document.getElementById("labelTitle"); *@
+@*         x.innerHTML = 'Proforma Invoice'; *@
+@*         ShowProgress(); *@
+@*         $.ajax({ *@
+@*             url: '/ViewDocuments/ProformaInvoice', *@
+@*             type: "POST", *@
+@*             //async: false, *@
+@*             success: function (data) { *@
+@*                 if (data.success == true) { *@
+@*                     $('iframe').attr('src', data.message); *@
+@*                     $("#myModalReports").modal("show"); *@
+@*                     HideProgress(); *@
+@*                 } *@
+@*                 else { *@
+@*                     Swal.fire('Warning', data.message, 'warning'); *@
+@*                     HideProgress(); *@
+@*                 } *@
+@*             }, *@
+@*             error: function (err) { *@
+@*                 HideProgress(); *@
+@*                 Swal.fire('Warning', err, 'warning'); *@
+@*             } *@
+@*         }); *@
+@*     } *@
+@* </script> *@
+@* *@
+@model New_Student_Portal.ViewModel.StudentCourseDetails
 @{
     ViewBag.Title = "Course Registration";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
@@ -43,17 +441,16 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        LoadCourseRegistrationDetails();
+        LoadCourseRegistrationDetails("");
     });
-    function LoadCourseRegistrationDetails() {
+    function LoadCourseRegistrationDetails(RegT) {
         ShowProgress();
         $.ajax({
-            async: false,
-            type: "GET",
-            dataType: 'HTML',
-            contentType: false,
-            processData: false,
-            url: "/Course/CourseRegistrationDetails",
+            datatype: "json",
+            type: "POST",
+            data: JSON.stringify({ RegT: RegT }),
+            contentType: "application/json; charset = utf-8",
+            url: '@Url.Action("CourseRegistrationDetails", "Course")',
             success: function (data) {
                 $("#divCourseReg").html(data);
                 HideProgress();
@@ -75,7 +472,7 @@
         StudentUnits.RegID = RegID;
         ShowProgress();
         $.ajax({
-            url: "/Course/ViewStudentRegisteredUnits",
+            url: '@Url.Action("ViewStudentRegisteredUnits", "Course")',
             datatype: "json",
             type: "POST",
             data: JSON.stringify({ Filters: StudentUnits }),
@@ -91,70 +488,40 @@
             }
         });
     }
-    var GetUnits = function (hostel, Prog, Type) {
-        var regType = "0";// $("#RegType").children("option:selected").val();
-        var IntestedInHostel = $("#ddlInterest").children("option:selected").val();
-        var HostelCode = $("#ddlHostelList").children("option:selected").val();
-        var UniyType;
-        var Title;
-        if (Type == "0") {
-            UniyType = $("#ddlUnitType").children("option:selected").val();
-            Title = $("#ddlUnitType").children("option:selected").text();
+    var GetUnits = function (Prog) {
+        var regType = $("#RegType").children("option:selected").val();
+        var Stage = $("#ddlStage").children("option:selected").val();
+        var Option = $("#ddlProgOption").children("option:selected").val();
+        var Title = "Units Registration";
+        if (regType == "") {
+            Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
+            return;
         }
-        else if (Type == "1") {
-            UniyType = $("#ddlUnitType1").children("option:selected").val();
-            Title = $("#ddlUnitType1").children("option:selected").text();
-        }
-        else if (Type == "2") {
-            UniyType = $("#ddlUnitType2").children("option:selected").val();
-            Title = $("#ddlUnitType2").children("option:selected").text();
-        }
-        else if (Type == "3") {
-            UniyType = $("#ddlUnitType3").children("option:selected").val();
-            Title = $("#ddlUnitType3").children("option:selected").text();
-        }
-        else {
-            UniyType = "";
-            Title = "";
-        }
-        if (UniyType == "") {
-            Swal.fire('Warning', 'Kindly select the unit type you want to register', 'warning');
+        else if ((Stage == "") && (regType == "2" || regType=="3")) {
+            Swal.fire('Warning', 'Kindly select Stage', 'warning');
             return;
         }
         else {
-            if (IntestedInHostel == "" && hostel == "") {
-                Swal.fire('Warning', 'Kindly select Student Resident', 'warning');
-                return;
-            }
-            else if (IntestedInHostel == "1" && HostelCode == "") {
-                Swal.fire('Warning', 'Choose your preferred Hostel', 'warning');
-                return;
-            }
-            if (regType == "") {
-                Swal.fire('Warning', 'Select Registration Type', 'warning');
-                return;
-            }
-            else {
-                ShowProgress();
+            ShowProgress();
                 var x = document.getElementById("labelT");
                 x.innerHTML = Title;
                 $.ajax({
-                    url: "/Course/GetProgramUnits",
+                    url: '@Url.Action("GetProgramUnits", "Course")',
                     datatype: "json",
                     type: "POST",
-                    data: JSON.stringify({ Stdresidence: IntestedInHostel, Type: regType, HostelCode: HostelCode, UnitType: UniyType, Prog: Prog }),
+                    data: JSON.stringify({ RegType: regType, Prog: Prog, Stage: Stage, Option: Option }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
+                        HideProgress();
+                        LoadCourseRegistrationDetails(regType);
                         $("#modalBody").html(data);
                         $("#myModalUnits").modal("show");
-                        HideProgress();
                     },
                     error: function () {
                         HideProgress();
                         Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
                     }
                 });
-            }
         }
     }
     var GetFreeElectiveUnits = function () {
@@ -163,7 +530,7 @@
         x.innerHTML = 'Free Elective Course Registration';
 
         $.ajax({
-            url: "/Course/GetFreeElectiveUnits",
+            url: '@Url.Action("GetFreeElectiveUnits", "Course")',
             datatype: "json",
             type: "POST",
             //data: JSON.stringify({ Type: regType, HostelCode: HostelCode }),
@@ -179,17 +546,13 @@
             }
         });
     }
-    var SubmitSelectedUnits = function (ClassCodeNeeded) {
+    var SubmitSelectedUnits = function (RegT,Stage) {
         var UnitReg = new Array();
         $("#tblProgUnit tbody tr").each(function () {
             var row = $(this);
             if (row.find('input[type="checkbox"]').is(':checked')) {
                 var Unit = {};
                 Unit.UnitCode = row.find("td").eq(1).html();
-                Unit.ClassCode = row.find("td").eq(2).html();
-                Unit.Day = row.find("td").eq(4).html();
-                Unit.Period = row.find("td").eq(5).html();
-                Unit.Campus = row.find("td").eq(6).html();
                 UnitReg.push(Unit);
             }
         });
@@ -201,20 +564,19 @@
             ShowProgress();
             $.ajax({
                 type: "POST",
-                url: "/Course/SaveSelectedUnits",
-                data: JSON.stringify(UnitReg),
+                url: '@Url.Action("SaveSelectedUnits", "Course")',
+                data: JSON.stringify({ UnitReg: UnitReg, RegT: RegT, Stage:Stage }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
                     if (data.success == true) {
                         HideProgress();
-                        LoadCourseRegistrationDetails();
+                        LoadCourseRegistrationDetails(RegT);
                         $("#myModalUnits").modal("hide");
                         Swal.fire('Success', data.message, 'success');
                     }
                     else {
                         HideProgress();
-                        LoadCourseRegistrationDetails();
                         Swal.fire('Warning', data.message, 'warning');
                     }
                 },
@@ -226,6 +588,7 @@
         }
     }
     var DropUnit = function (prog, stage, sem, Unit) {
+        var regType = $("#RegType").children("option:selected").val();
         var UnitFilters = {};
         UnitFilters.prog = prog;
         UnitFilters.stage = stage;
@@ -233,7 +596,7 @@
         UnitFilters.Unit = Unit;
         ShowProgress();
         $.ajax({
-            url: "/Course/DropBasketUnit",
+            url: '@Url.Action("DropBasketUnit", "Course")',
             datatype: "json",
             type: "POST",
             data: JSON.stringify({ Filters: UnitFilters }),
@@ -241,7 +604,7 @@
             success: function (data) {
                 if (data.success == true) {
                     HideProgress();
-                    LoadCourseRegistrationDetails();
+                    LoadCourseRegistrationDetails(regType);
                     Swal.fire('Success', data.message, 'success');
                 }
                 else {
@@ -256,36 +619,45 @@
         });
     }
     var RegisterSelectedUnits = function () {
-        ShowProgress();
-        $.ajax({
-            type: "POST",
-            url: "/Course/RegisterSelectedUnits",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-                    if (data.Redirect == true) {
-                        window.location = data.message;
+        var regType = $("#RegType").children("option:selected").val();
+        if (regType == "") {
+            Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RegisterSelectedUnits", "Course")',
+                data: JSON.stringify({ RegT: regType }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        if (data.Redirect == true) {
+                            window.location = data.message;
+                        }
+                        else {
+                            HideProgress();
+                            LoadCourseRegistrationDetails(regType);
+                            Swal.fire('Success', data.message, 'success');
+                        }
                     }
                     else {
                         HideProgress();
-                        LoadCourseRegistrationDetails();
-                        Swal.fire('Success', data.message, 'success');
+                        LoadCourseRegistrationDetails(regType);
+                        Swal.fire('Error', data.message, 'error');
                     }
-                }
-                else {
+                },
+                error: function (data) {
                     HideProgress();
-                    LoadCourseRegistrationDetails();
                     Swal.fire('Error', data.message, 'error');
                 }
-            },
-            error: function (data) {
-                HideProgress();
-                Swal.fire('Error', data.message, 'error');
-            }
-        });
+            });
+        }
     }
     var DropRegisteredUnit = function (button, prog, sem, Unit, UnitName, RegFor) {
+        var regType = $("#RegType").children("option:selected").val();
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -307,7 +679,7 @@
                 UnitFilters.RegFor = RegFor;
                 ShowProgress();
                 $.ajax({
-                    url: "/Course/DropRegisteredUnit",
+                    url: '@Url.Action("DropRegisteredUnit", "Course")',
                     datatype: "json",
                     type: "POST",
                     data: JSON.stringify({ Filters: UnitFilters }),
@@ -316,7 +688,7 @@
                         if (data.success == true) {
                             HideProgress();
                             Swal.fire('Success', data.message, 'success');
-                            LoadCourseRegistrationDetails();
+                            LoadCourseRegistrationDetails(regType);
 
                             var row = $(button).closest("TR");
                             var table = $("#tbRegUnits")[0];
@@ -348,7 +720,7 @@
         x.innerHTML = 'Course Statement';
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/PrintCourseStatement',
+            url: '@Url.Action("PrintCourseStatement", "Course")',
             type: "POST",
             //async: false,
             success: function (data) {
@@ -374,7 +746,7 @@
         x.innerHTML = 'Proforma Invoice';
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ProformaInvoice',
+            url: '@Url.Action("ProformaInvoice", "ViewDocuments")',
             type: "POST",
             //async: false,
             success: function (data) {

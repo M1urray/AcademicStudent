@@ -38,6 +38,7 @@ namespace New_Student_Portal.ViewModel
         public List<SelectListItem> ListOfUnitCategory3 { get; set; }
         public string HostelCode { get; set; }
         public string Campus { get; set; }
+        public string RegT { get; set; }
     }
     public class CourseReg
     {
