@@ -30,7 +30,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
@@ -75,7 +75,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
                 Credentials.ObjNav.DeleteLecturerEvaluationOnlineLearning(RegNo, Lec.Unit, Sem, "", Lec.LecNo, "");
@@ -115,7 +115,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
