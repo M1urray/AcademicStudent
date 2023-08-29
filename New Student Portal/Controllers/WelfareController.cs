@@ -34,7 +34,7 @@ namespace New_Student_Portal.Controllers
                     }
                     string sem = Session["CurrentSem"].ToString();
 
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem,"0");
                     if (r[0] == "")
                     {
                         Error errormsg = new Error();
@@ -537,7 +537,7 @@ namespace New_Student_Portal.Controllers
                         Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
                     }
                     string sem = Session["CurrentSem"].ToString();
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem,"0");
                     if (r[0] == "")
                     {
                         Error errormsg = new Error();

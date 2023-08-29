@@ -25,6 +25,7 @@ namespace New_Student_Portal.ViewModel
         public string OtherProgDesc { get; set; }
         public string SecondConcDesc { get; set; }
         public string MinorDesc { get; set; }
+        public string Programme_Option { get; set; }
     }
     public class StudentCourseRegistration
     {
@@ -32,6 +33,7 @@ namespace New_Student_Portal.ViewModel
         public RegisteredProgrammes RegProg { get; set; }
         public IEnumerable<CourseReg> ListOfCourseRegistration { get; set; }
         public IEnumerable<StudentUnits> ListOfStudentBasketUnits { get; set; }
+        public List<SelectListItem> ListOfStages { get; set; }
         public List<SelectListItem> ListOfUnitCategory { get; set; }
         public List<SelectListItem> ListOfUnitCategory1 { get; set; }
         public List<SelectListItem> ListOfUnitCategory2 { get; set; }
@@ -51,6 +53,7 @@ namespace New_Student_Portal.ViewModel
         public string Registration_Date { get; set; }
         public string UnitsTaken { get; set; }
         public string TotalBilled { get; set; }
+        public string UnpostedCharges { get; set; }
         public string HostelCode { get; set; }
     }
     public class StudentUnits

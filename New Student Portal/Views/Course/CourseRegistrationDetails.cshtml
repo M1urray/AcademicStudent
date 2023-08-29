@@ -113,7 +113,7 @@
 @*                         <option value="1">Norminal Role</option> *@
 @*                     </select> *@
 @*                 </div> *@
-@*             </div>*@ *@
+@*             </div>*@
 @*         <hr /> *@
 @*         <div class="row"> *@
 @*             <div class="col-md-4 DivHostelDetails" id="divHostelT"> *@
@@ -385,9 +385,9 @@
                 <thead>
                     <tr>
                         <th class="alignC" width="10%">Action</th>
-                        <th>
+                        @*<th>
                             Stage
-                        </th>
+                        </th>*@
                         <th>
                             Semester
                         </th>
@@ -424,9 +424,9 @@
                                         <td align="center">
                                             <a href="#" class="btn btn-danger btn-sm" onclick="ViewUnits('@item.RegID','@item.Programme','@item.Stage','@item.Semester','@item.Register_for');">View Units</a>
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Html.DisplayFor(modelItem => item.Stage)
-                                        </td>
+                                        </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Semester)
                                         </td>
@@ -485,15 +485,15 @@
                 <div class="col-md-4">
                     <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
                     <select class="form-select" id="RegType" name="RegType" onchange="ShowBasketUnits();">
-                        <option value="">----</option>
-                        <option value="0">Normal</option>
+                        
+                        <option value="0" selected>Normal</option>
                         <option value="2">Supplementary</option>
                         <option value="3">Retake</option>
                     </select>
                 </div>
                 <div class="col-md-4" id="divStage">
-                    <span style="font-size: 16px; font-weight: bold">Stage:</span>
-                    @Html.DropDownListFor(model => model.Code, Model.ListOfStages, "--select Stage--", new { @class = "form-select", @id = "ddlStage", @onchange = "ShowProgOption();" })
+                    <span style="font-size: 16px; font-weight: bold">Unit Category:</span>
+                    @Html.DropDownListFor(model => model.Code, Model.ListOfUnitCategory, "--Select Unit Category --", new { @class = "form-select", @id = "ddlStage", @onchange = "ShowProgOption();" })
                 </div>
                 <div class="col-md-4" id="divOption">
                     <span style="font-size: 16px; font-weight: bold">Programme Option:</span>
@@ -530,19 +530,29 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        
+        RegTypeChanged()
+        ShowBasketUnits()
         if (`@Model.RegT` == "") {
-            $("#divBasket").hide();
+            $("#divBasket").show();
         }
         else {
             $("#RegType").val(`@Model.RegT`);
-            LoadBasketUits(`@Model.RegT`);
+            LoadBasketUnits(`@Model.RegT`);
         }
-        $("#divStage").hide();
+        //$("#divStage").hide();
         $("#divOption").hide();
     });
     var RegTypeChanged = function () {
+        
+        ShowBasketUnits()
+        var refTT = document.getElementById('RegType').value;
+        
+        if (refTT != null) {
+            ShowBasketUnits()
+        }
         var RegT = $("#RegType").children("option:selected").val();
-        if (RegT == "2" || RegT == "3") {
+        if (RegT == "0" || RegT == "2" || RegT == "3") {
             $("#divStage").show();
         }
         else {
@@ -551,22 +561,24 @@
     };
     var ShowBasketUnits = function () {
         var RegT = $("#RegType").children("option:selected").val();
+        
         if (RegT == "") {
             $("#divBasket").hide();
         }
         else {
-            if (RegT == "2" || RegT == "3") {
+            if (RegT == "0" || RegT == "2" || RegT == "3") {
+                
                 $("#divStage").show();
             }
             else {
                 $("#divStage").hide();
             }
             $("#divBasket").show();
-            LoadBasketUits(RegT);
+            LoadBasketUnits(RegT);
         }
     }
-    function LoadBasketUits(RegT) {
-        ShowProgress();
+    function LoadBasketUnits(RegT) {
+        //ShowProgress();
         $.ajax({
             datatype: "json",
             type: "POST",
@@ -575,23 +587,19 @@
             url: '@Url.Action("GetBasketUnitRegistration", "Course")',
             success: function (data) {
                 $("#divBasketList").html(data);
-                HideProgress();
+                //HideProgress();
             },
             error: function () {
-                HideProgress();
+                //HideProgress();
                 Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
             }
         });
     }
     var ShowProgOption = function () {
-        var stage = $("#ddlStage").children("option:selected").val();
-        if (stage == "") {
             $("#ddlProgOption option").remove();
             $('#ddlProgOption').empty().append('<option selected="selected" value="">--Select Programme Option--</option>');
             $("#divOption").hide();
-        }
-        else {
-            $.getJSON('@Url.Action("GetProgrammeOptions", "Course")', { Prog: `@Model.RegProg.CurrentProg`, Stage: stage },
+            $.getJSON('@Url.Action("GetProgrammeOptions", "Course")', { Prog: `@Model.RegProg.CurrentProg`},
                     function (data) {
                         if (data.success == true) {
                             if (data.message.ListOfValues.length > 0) {
@@ -611,6 +619,5 @@
                             Swal.fire('Warning', data.message, 'warning');
                         }
                     });
-        };
     };
 </script>

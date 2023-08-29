@@ -453,6 +453,7 @@
             url: '@Url.Action("CourseRegistrationDetails", "Course")',
             success: function (data) {
                 $("#divCourseReg").html(data);
+                LoadBasketUnits(RegT);
                 HideProgress();
             },
             error: function () {
@@ -490,15 +491,15 @@
     }
     var GetUnits = function (Prog) {
         var regType = $("#RegType").children("option:selected").val();
-        var Stage = $("#ddlStage").children("option:selected").val();
+        var UnitType = $("#ddlStage").children("option:selected").val();
         var Option = $("#ddlProgOption").children("option:selected").val();
         var Title = "Units Registration";
         if (regType == "") {
             Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
             return;
         }
-        else if ((Stage == "") && (regType == "2" || regType=="3")) {
-            Swal.fire('Warning', 'Kindly select Stage', 'warning');
+        else if ((UnitType == "") && (regType == "0" || regType == "2" || regType=="3")) {
+            Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
             return;
         }
         else {
@@ -509,11 +510,11 @@
                     url: '@Url.Action("GetProgramUnits", "Course")',
                     datatype: "json",
                     type: "POST",
-                    data: JSON.stringify({ RegType: regType, Prog: Prog, Stage: Stage, Option: Option }),
+                    data: JSON.stringify({ RegType: regType, Prog: Prog, UnitType: UnitType, Option: Option }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         HideProgress();
-                        LoadCourseRegistrationDetails(regType);
+                        LoadBasketUnits(regType)
                         $("#modalBody").html(data);
                         $("#myModalUnits").modal("show");
                     },
@@ -571,7 +572,7 @@
                 success: function (data) {
                     if (data.success == true) {
                         HideProgress();
-                        LoadCourseRegistrationDetails(RegT);
+                        LoadBasketUnits(RegT);
                         $("#myModalUnits").modal("hide");
                         Swal.fire('Success', data.message, 'success');
                     }
@@ -656,7 +657,7 @@
             });
         }
     }
-    var DropRegisteredUnit = function (button, prog, sem, Unit, UnitName, RegFor) {
+    var DropRegisteredUnit = function (button, prog, sem, Unit, RegFor) {
         var regType = $("#RegType").children("option:selected").val();
         Swal.fire({
             title: 'Are you sure?',
@@ -675,7 +676,7 @@
                 //UnitFilters.stage = stage;
                 UnitFilters.sem = sem;
                 UnitFilters.Unit = Unit;
-                UnitFilters.UnitName = UnitName;
+                //UnitFilters.UnitName = UnitName;
                 UnitFilters.RegFor = RegFor;
                 ShowProgress();
                 $.ajax({

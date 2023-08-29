@@ -125,7 +125,7 @@ namespace New_Student_Portal.ViewModel
         public string prog { get; set; }
         public string stage { get; set; }
         public string Unit { get; set; }
-        public string UnitName { get; set; }
+        //public string UnitName { get; set; }
         public string sem { get; set; }
         public string RegFor { get; set; }
     }

@@ -11,6 +11,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using New_Student_Portal.CustomSecurity;
+using System.Web.UI.WebControls;
 
 namespace New_Student_Portal.Controllers
 {
@@ -29,79 +30,8 @@ namespace New_Student_Portal.Controllers
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                    }
-                    if (Session["StudentDetails"] == null || Session["CurrentSem"].ToString() == "")
-                    {
-                        Session["StudentDetails"] = CommonClass.StudentProgrammeDetails(RegNo);
-                    }
-                    string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                    string[] s = (string[])Session["StudentDetails"];
-                    if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                    }
-                    string sem = Session["CurrentSem"].ToString();
-                    bool NotInTimeTable = false;
-                    string Campus = CommonClass.GetStudentCampus(RegNo);
-                    string pageReg = "StudentUnits?$select=Unit,Unit_Description,Unit_Class_Code&$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "' and In_Timetable eq false&$format=json";
-                    List<TimeTableView> timeTable = new List<TimeTableView>();
-                    HttpWebResponse httpResponse = Credentials.GetOdataData(pageReg);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
-                        {
-                            foreach (JObject config in details["value"])
-                            {
-                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "'&$format=json";
-
-                                HttpWebResponse httpResponseTimeTable = Credentials.GetOdataData(pageTimetable);
-                                using (var streamReaderTimeTable = new StreamReader(httpResponseTimeTable.GetResponseStream()))
-                                {
-                                    var resultTimeTable = streamReaderTimeTable.ReadToEnd();
-
-                                    var detailsTimeTable = JObject.Parse(resultTimeTable);
-
-                                    if (detailsTimeTable["value"].Count() > 0)
-                                    {
-                                        foreach (JObject config1 in detailsTimeTable["value"])
-                                        {
-                                            if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
-                                            {
-                                                TimeTableView tmTable = new TimeTableView();
-                                                tmTable.Unit = (string)config1["Unit"];
-                                                tmTable.Period = (string)config1["Period"];
-                                                tmTable.Semester = (string)config1["Semester"];
-                                                tmTable.Day_of_Week = (string)config1["DayofWeek"];
-                                                tmTable.Lecture_Room = (string)config1["Lecture_Room"];
-                                                tmTable.Lecturer = (string)config1["Lecturer_Name"];
-                                                tmTable.Campus = (string)config1["Campus_Code"];
-                                                tmTable.Section = (string)config1["Unit_Class"];
-                                                timeTable.Add(tmTable);
-                                                NotInTimeTable = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (NotInTimeTable)
-                    {
-                        return View("~/Views/Course/UnitsNotInTimeTable.cshtml", timeTable);
-                    }
-                    else
-                    {
-                        StudentCourseDetails stdDetail = new StudentCourseDetails();
-                        return View(stdDetail);
-                    }
+                    StudentCourseDetails stdDetail = new StudentCourseDetails();
+                    return View(stdDetail);
                 }
             }
             catch (Exception ex)
@@ -111,7 +41,326 @@ namespace New_Student_Portal.Controllers
                 return View("~/Views/Common/ErrorMessage.cshtml", error);
             }
         }
-        public ActionResult CourseRegistrationDetails()
+        //public ActionResult CourseRegistration()
+        //{
+        //    try
+        //    {
+        //        if (Session["Username"] == null)
+        //        {
+        //            return RedirectToAction("Login", "Login");
+        //        }
+        //        else
+        //        {
+        //            string RegNo = Session["Username"].ToString();
+        //            if (Session["CurrentSem"] == null)
+        //            {
+        //                Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+        //            }
+        //            if (Session["StudentDetails"] == null || Session["CurrentSem"].ToString() == "")
+        //            {
+        //                Session["StudentDetails"] = CommonClass.StudentProgrammeDetails(RegNo);
+        //            }
+        //            string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+        //            string[] s = (string[])Session["StudentDetails"];
+        //            if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+        //            {
+        //                Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+        //            }
+        //            string sem = Session["CurrentSem"].ToString();
+        //            bool NotInTimeTable = false;
+        //            string Campus = CommonClass.GetStudentCampus(RegNo);
+        //            string pageReg = "StudentUnits?$select=Unit,Unit_Description,Unit_Class_Code&$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "' and In_Timetable eq false&$format=json";
+        //            List<TimeTableView> timeTable = new List<TimeTableView>();
+        //            HttpWebResponse httpResponse = Credentials.GetOdataData(pageReg);
+        //            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+
+        //                var details = JObject.Parse(result);
+
+        //                if (details["value"].Count() > 0)
+        //                {
+        //                    foreach (JObject config in details["value"])
+        //                    {
+        //                        string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "'&$format=json";
+
+        //                        HttpWebResponse httpResponseTimeTable = Credentials.GetOdataData(pageTimetable);
+        //                        using (var streamReaderTimeTable = new StreamReader(httpResponseTimeTable.GetResponseStream()))
+        //                        {
+        //                            var resultTimeTable = streamReaderTimeTable.ReadToEnd();
+
+        //                            var detailsTimeTable = JObject.Parse(resultTimeTable);
+
+        //                            if (detailsTimeTable["value"].Count() > 0)
+        //                            {
+        //                                foreach (JObject config1 in detailsTimeTable["value"])
+        //                                {
+        //                                    if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+        //                                    {
+        //                                        TimeTableView tmTable = new TimeTableView();
+        //                                        tmTable.Unit = (string)config1["Unit"];
+        //                                        tmTable.Period = (string)config1["Period"];
+        //                                        tmTable.Semester = (string)config1["Semester"];
+        //                                        tmTable.Day_of_Week = (string)config1["DayofWeek"];
+        //                                        tmTable.Lecture_Room = (string)config1["Lecture_Room"];
+        //                                        tmTable.Lecturer = (string)config1["Lecturer_Name"];
+        //                                        tmTable.Campus = (string)config1["Campus_Code"];
+        //                                        tmTable.Section = (string)config1["Unit_Class"];
+        //                                        timeTable.Add(tmTable);
+        //                                        NotInTimeTable = true;
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            if (NotInTimeTable)
+        //            {
+        //                return View("~/Views/Course/UnitsNotInTimeTable.cshtml", timeTable);
+        //            }
+        //            else
+        //            {
+        //                StudentCourseDetails stdDetail = new StudentCourseDetails();
+        //                return View(stdDetail);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Error error = new Error();
+        //        error.Message = ex.Message.Replace("'", "");
+        //        return View("~/Views/Common/ErrorMessage.cshtml", error);
+        //    }
+        //}
+        //public ActionResult CourseRegistrationDetails()
+        //{
+        //    try
+        //    {
+        //        if (Session["Username"] == null)
+        //        {
+        //            return RedirectToAction("Login", "Login");
+        //        }
+        //        else
+        //        {
+        //            string RegNo = Session["Username"].ToString();
+        //            if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+        //            {
+        //                Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+        //            }
+
+        //            string sem = Session["CurrentSem"].ToString();
+        //            //string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+
+        //            #region Registered programmes
+        //            RegisteredProgrammes newR = new RegisteredProgrammes();
+        //            string pageReg = "CustomerList?$filter=No eq '" + RegNo + "'&$format=json";
+
+        //            HttpWebResponse httpResponseReg = Credentials.GetOdataData(pageReg);
+        //            using (var streamReader = new StreamReader(httpResponseReg.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+
+        //                var details = JObject.Parse(result);
+
+        //                foreach (JObject config in details["value"])
+        //                {
+        //                    newR.CurrentProg = (string)config["Current_Programme"];
+        //                    newR.CurrentProgDesc = (string)config["Programme_Name"];
+        //                    newR.OtherProg = (string)config["Other_Programme"];
+        //                    newR.OtherProgDesc = (string)config["Major_Description"];
+        //                    newR.SecondConc = (string)config["Concentration2"];
+        //                    newR.SecondConcDesc = (string)config["Second_Conc_Description"];
+        //                    newR.Minor = (string)config["Minor_Concentration"];
+        //                    newR.MinorDesc = (string)config["Minor_Description"];
+        //                }
+        //            }
+        //            #endregion
+        //            #region Unit Category
+        //            List<DropdownList> unitCList = new List<DropdownList>();
+        //            List<DropdownList> unitCList1 = new List<DropdownList>();
+        //            List<DropdownList> unitCList2 = new List<DropdownList>();
+        //            List<DropdownList> unitCList3 = new List<DropdownList>();
+
+        //            #region Current Prog
+        //            string pageResC = "UnitSubject?$select=Unit_Category&$filter=ProgrammeCode eq '" + newR.CurrentProg + "' and Unit_Category ne ''&$format=json";
+
+        //            HttpWebResponse httpResponseC = Credentials.GetOdataData(pageResC);
+        //            using (var streamReader = new StreamReader(httpResponseC.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+        //                var details = JObject.Parse(result);
+        //                foreach (JObject config in details["value"])
+        //                {
+        //                    DropdownList d = new DropdownList();
+        //                    d.Value = (string)config["Unit_Category"];
+        //                    d.Text = (string)config["Unit_Category"];
+        //                    unitCList.Add(d);
+        //                }
+        //            }
+        //            #endregion
+        //            if (newR.OtherProg != "")
+        //            {
+        //                #region Other Prog
+        //                string pageOtherProg = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.OtherProg + "' and Unit_Category ne ''&$format=json";
+
+        //                HttpWebResponse httpResponseOtherProg = Credentials.GetOdataData(pageOtherProg);
+        //                using (var streamReader = new StreamReader(httpResponseOtherProg.GetResponseStream()))
+        //                {
+        //                    var result = streamReader.ReadToEnd();
+        //                    var details = JObject.Parse(result);
+        //                    foreach (JObject config in details["value"])
+        //                    {
+        //                        DropdownList d = new DropdownList();
+        //                        d.Value = (string)config["Unit_Category"];
+        //                        d.Text = (string)config["Unit_Category"];
+        //                        unitCList1.Add(d);
+        //                    }
+        //                }
+        //                #endregion
+        //            }
+        //            if (newR.SecondConc != "")
+        //            {
+        //                #region Second Conc Prog
+        //                string pageSecondConc = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.SecondConc + "' and Unit_Category ne ''&$format=json";
+
+        //                HttpWebResponse httpResponseSecondConc = Credentials.GetOdataData(pageSecondConc);
+        //                using (var streamReader = new StreamReader(httpResponseSecondConc.GetResponseStream()))
+        //                {
+        //                    var result = streamReader.ReadToEnd();
+        //                    var details = JObject.Parse(result);
+        //                    foreach (JObject config in details["value"])
+        //                    {
+        //                        DropdownList d = new DropdownList();
+        //                        d.Value = (string)config["Unit_Category"];
+        //                        d.Text = (string)config["Unit_Category"];
+        //                        unitCList2.Add(d);
+        //                    }
+        //                }
+        //                #endregion
+        //            }
+        //            if (newR.Minor != "")
+        //            {
+        //                #region Minor Prog
+        //                string pageMinor = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.Minor + "' and Unit_Category ne ''&$format=json";
+
+        //                HttpWebResponse httpResponseMinor = Credentials.GetOdataData(pageMinor);
+        //                using (var streamReader = new StreamReader(httpResponseMinor.GetResponseStream()))
+        //                {
+        //                    var result = streamReader.ReadToEnd();
+        //                    var details = JObject.Parse(result);
+        //                    foreach (JObject config in details["value"])
+        //                    {
+        //                        DropdownList d = new DropdownList();
+        //                        d.Value = (string)config["Unit_Category"];
+        //                        d.Text = (string)config["Unit_Category"];
+        //                        unitCList3.Add(d);
+        //                    }
+        //                }
+        //                #endregion
+        //            }
+        //            #endregion
+        //            #region Course Reg
+        //            List<CourseReg> CReg = new List<CourseReg>();
+        //            string page = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Programme eq '" + newR.CurrentProg + "' and Semester eq '" + sem + "' and Reversed eq false&format=json";
+
+        //            HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+        //            using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+
+        //                var details = JObject.Parse(result);
+
+        //                foreach (JObject config in details["value"])
+        //                {
+        //                    CourseReg CR = new CourseReg();
+        //                    CR.RegID = (string)config["RegTransactonID"];
+        //                    CR.Programme = newR.CurrentProg;
+        //                    CR.Stage = (string)config["Stage"];
+        //                    CR.Semester = (string)config["Semester"];
+        //                    CR.Register_for = (string)config["Registerfor"];
+        //                    CR.Settlement_Type = (string)config["SettlementType"];
+        //                    CR.Registration_Date = (string)config["RegDate"];
+        //                    CR.UnitsTaken = (string)config["UnitsTaken"];
+        //                    CR.TotalBilled = (string)config["TotalBilled"];
+        //                    CReg.Add(CR);
+        //                }
+        //            }
+        //            #endregion
+        //            #region Basket Units
+        //            List<StudentUnits> BasketUnits = new List<StudentUnits>();
+        //            string pageBasket = "BasketUnits?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "' and Submitted eq false and Unit ne ''&$format=json";
+
+        //            HttpWebResponse httpResponseBasket = Credentials.GetOdataData(pageBasket);
+        //            using (var streamReader = new StreamReader(httpResponseBasket.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+
+        //                var details = JObject.Parse(result);
+
+        //                foreach (JObject config in details["value"])
+        //                {
+        //                    StudentUnits CR = new StudentUnits();
+        //                    CR.Programme = (string)config["Programme"];
+        //                    CR.Unit = (string)config["Unit"];
+        //                    CR.Unit_Name = (string)config["Unit_Name"];
+        //                    CR.Stage = (string)config["Stage"];
+        //                    CR.Semester = (string)config["Semester"];
+        //                    BasketUnits.Add(CR);
+        //                }
+        //            }
+        //            #endregion
+
+        //            if (Session["StudentDetails"] == null || Session["CurrentSem"].ToString() == "")
+        //            {
+        //                Session["StudentDetails"] = CommonClass.StudentProgrammeDetails(RegNo);
+        //            }
+        //            string[] s = (string[])Session["StudentDetails"];
+        //            string Hostel = CommonClass.GetHostelFromCourseReg(RegNo, sem);
+        //            StudentCourseRegistration StdCourseReg = new StudentCourseRegistration
+        //            {
+        //                ListOfCourseRegistration = CReg.OrderBy(x => x.Stage).ThenBy(n => n.Registration_Date),
+        //                ListOfStudentBasketUnits = BasketUnits,
+        //                RegProg = newR,
+        //                HostelCode = Hostel,
+        //                Campus = s[3],
+        //                ListOfUnitCategory = unitCList.Select(x =>
+        //                                       new SelectListItem()
+        //                                       {
+        //                                           Text = x.Text,
+        //                                           Value = x.Value
+        //                                       }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
+        //                ListOfUnitCategory1 = unitCList1.Select(x =>
+        //                                       new SelectListItem()
+        //                                       {
+        //                                           Text = x.Text,
+        //                                           Value = x.Value
+        //                                       }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
+        //                ListOfUnitCategory2 = unitCList2.Select(x =>
+        //                                        new SelectListItem()
+        //                                        {
+        //                                            Text = x.Text,
+        //                                            Value = x.Value
+        //                                        }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
+        //                ListOfUnitCategory3 = unitCList3.Select(x =>
+        //                                        new SelectListItem()
+        //                                        {
+        //                                            Text = x.Text,
+        //                                            Value = x.Value
+        //                                        }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList()
+        //            };
+
+        //            return PartialView("~/Views/Course/CourseRegistrationDetails.cshtml", StdCourseReg);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Error error = new Error();
+        //        error.Message = ex.Message.Replace("'", "");
+        //        return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+        //    }
+        //}
+        public ActionResult CourseRegistrationDetails(string RegT)
         {
             try
             {
@@ -124,7 +373,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
                     if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
 
                     string sem = Session["CurrentSem"].ToString();
@@ -151,16 +400,115 @@ namespace New_Student_Portal.Controllers
                             newR.SecondConcDesc = (string)config["Second_Conc_Description"];
                             newR.Minor = (string)config["Minor_Concentration"];
                             newR.MinorDesc = (string)config["Minor_Description"];
+                            newR.Programme_Option = (string)config["Programme_Option"];
                         }
                     }
                     #endregion
-                    #region Unit Category
-                    List<DropdownList> unitCList = new List<DropdownList>();
-                    List<DropdownList> unitCList1 = new List<DropdownList>();
-                    List<DropdownList> unitCList2 = new List<DropdownList>();
-                    List<DropdownList> unitCList3 = new List<DropdownList>();
 
+                    //#region Stage List
+                    //List<DropdownList> stageList = new List<DropdownList>();
+                    //string pageResC = "ProgrammeStages?$select=Code&$filter=Programme_Code eq '" + newR.CurrentProg + "'&$format=json";
+
+                    //HttpWebResponse httpResponseC = Credentials.GetOdataData(pageResC);
+                    //using (var streamReader = new StreamReader(httpResponseC.GetResponseStream()))
+                    //{
+                    //    var result = streamReader.ReadToEnd();
+                    //    var details = JObject.Parse(result);
+                    //    foreach (JObject config in details["value"])
+                    //    {
+                    //        DropdownList d = new DropdownList();
+                    //        d.Value = (string)config["Code"];
+                    //        d.Text = (string)config["Code"];
+                    //        stageList.Add(d);
+                    //    }
+                    //}
+                    //#endregion
+
+                    #region Unit Category
+                    //List<DropdownList> unitCList = new List<DropdownList>();
+                    //List<DropdownList> unitCList1 = new List<DropdownList>();
+                    //List<DropdownList> unitCList2 = new List<DropdownList>();
+                    //List<DropdownList> unitCList3 = new List<DropdownList>();
+
+                    //#region Current Prog
+                    //string pageResC = "UnitSubject?$select=Unit_Category&$filter=ProgrammeCode eq '" + newR.CurrentProg + "' and Unit_Category ne ''&$format=json";
+
+                    //HttpWebResponse httpResponseC = Credentials.GetOdataData(pageResC);
+                    //using (var streamReader = new StreamReader(httpResponseC.GetResponseStream()))
+                    //{
+                    //    var result = streamReader.ReadToEnd();
+                    //    var details = JObject.Parse(result);
+                    //    foreach (JObject config in details["value"])
+                    //    {
+                    //        DropdownList d = new DropdownList();
+                    //        d.Value = (string)config["Unit_Category"];
+                    //        d.Text = (string)config["Unit_Category"];
+                    //        unitCList.Add(d);
+                    //    }
+                    //}
+                    //#endregion
+                    //if (newR.OtherProg != "")
+                    //{
+                    //    #region Other Prog
+                    //    string pageOtherProg = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.OtherProg + "' and Unit_Category ne ''&$format=json";
+
+                    //    HttpWebResponse httpResponseOtherProg = Credentials.GetOdataData(pageOtherProg);
+                    //    using (var streamReader = new StreamReader(httpResponseOtherProg.GetResponseStream()))
+                    //    {
+                    //        var result = streamReader.ReadToEnd();
+                    //        var details = JObject.Parse(result);
+                    //        foreach (JObject config in details["value"])
+                    //        {
+                    //            DropdownList d = new DropdownList();
+                    //            d.Value = (string)config["Unit_Category"];
+                    //            d.Text = (string)config["Unit_Category"];
+                    //            unitCList1.Add(d);
+                    //        }
+                    //    }
+                    //    #endregion
+                    //}
+                    //if (newR.SecondConc != "")
+                    //{
+                    //    #region Second Conc Prog
+                    //    string pageSecondConc = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.SecondConc + "' and Unit_Category ne ''&$format=json";
+
+                    //    HttpWebResponse httpResponseSecondConc = Credentials.GetOdataData(pageSecondConc);
+                    //    using (var streamReader = new StreamReader(httpResponseSecondConc.GetResponseStream()))
+                    //    {
+                    //        var result = streamReader.ReadToEnd();
+                    //        var details = JObject.Parse(result);
+                    //        foreach (JObject config in details["value"])
+                    //        {
+                    //            DropdownList d = new DropdownList();
+                    //            d.Value = (string)config["Unit_Category"];
+                    //            d.Text = (string)config["Unit_Category"];
+                    //            unitCList2.Add(d);
+                    //        }
+                    //    }
+                    //    #endregion
+                    //}
+                    //if (newR.Minor != "")
+                    //{
+                    //    #region Minor Prog
+                    //    string pageMinor = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.Minor + "' and Unit_Category ne ''&$format=json";
+
+                    //    HttpWebResponse httpResponseMinor = Credentials.GetOdataData(pageMinor);
+                    //    using (var streamReader = new StreamReader(httpResponseMinor.GetResponseStream()))
+                    //    {
+                    //        var result = streamReader.ReadToEnd();
+                    //        var details = JObject.Parse(result);
+                    //        foreach (JObject config in details["value"])
+                    //        {
+                    //            DropdownList d = new DropdownList();
+                    //            d.Value = (string)config["Unit_Category"];
+                    //            d.Text = (string)config["Unit_Category"];
+                    //            unitCList3.Add(d);
+                    //        }
+                    //    }
+                    //    #endregion
+                    //}
                     #region Current Prog
+                    List<DropdownList> unitCList = new List<DropdownList>();
                     string pageResC = "UnitSubject?$select=Unit_Category&$filter=ProgrammeCode eq '" + newR.CurrentProg + "' and Unit_Category ne ''&$format=json";
 
                     HttpWebResponse httpResponseC = Credentials.GetOdataData(pageResC);
@@ -177,70 +525,10 @@ namespace New_Student_Portal.Controllers
                         }
                     }
                     #endregion
-                    if (newR.OtherProg != "")
-                    {
-                        #region Other Prog
-                        string pageOtherProg = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.OtherProg + "' and Unit_Category ne ''&$format=json";
-
-                        HttpWebResponse httpResponseOtherProg = Credentials.GetOdataData(pageOtherProg);
-                        using (var streamReader = new StreamReader(httpResponseOtherProg.GetResponseStream()))
-                        {
-                            var result = streamReader.ReadToEnd();
-                            var details = JObject.Parse(result);
-                            foreach (JObject config in details["value"])
-                            {
-                                DropdownList d = new DropdownList();
-                                d.Value = (string)config["Unit_Category"];
-                                d.Text = (string)config["Unit_Category"];
-                                unitCList1.Add(d);
-                            }
-                        }
-                        #endregion
-                    }
-                    if (newR.SecondConc != "")
-                    {
-                        #region Second Conc Prog
-                        string pageSecondConc = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.SecondConc + "' and Unit_Category ne ''&$format=json";
-
-                        HttpWebResponse httpResponseSecondConc = Credentials.GetOdataData(pageSecondConc);
-                        using (var streamReader = new StreamReader(httpResponseSecondConc.GetResponseStream()))
-                        {
-                            var result = streamReader.ReadToEnd();
-                            var details = JObject.Parse(result);
-                            foreach (JObject config in details["value"])
-                            {
-                                DropdownList d = new DropdownList();
-                                d.Value = (string)config["Unit_Category"];
-                                d.Text = (string)config["Unit_Category"];
-                                unitCList2.Add(d);
-                            }
-                        }
-                        #endregion
-                    }
-                    if (newR.Minor != "")
-                    {
-                        #region Minor Prog
-                        string pageMinor = "MajorsConcentrationUnits?$select=Unit_Category&$filter=Concentration_Code eq '" + newR.Minor + "' and Unit_Category ne ''&$format=json";
-
-                        HttpWebResponse httpResponseMinor = Credentials.GetOdataData(pageMinor);
-                        using (var streamReader = new StreamReader(httpResponseMinor.GetResponseStream()))
-                        {
-                            var result = streamReader.ReadToEnd();
-                            var details = JObject.Parse(result);
-                            foreach (JObject config in details["value"])
-                            {
-                                DropdownList d = new DropdownList();
-                                d.Value = (string)config["Unit_Category"];
-                                d.Text = (string)config["Unit_Category"];
-                                unitCList3.Add(d);
-                            }
-                        }
-                        #endregion
-                    }
                     #endregion
                     #region Course Reg
                     List<CourseReg> CReg = new List<CourseReg>();
-                    string page = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Programme eq '" + newR.CurrentProg + "' and Semester eq '" + sem + "' and Reversed eq false&format=json";
+                    string page = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Programme eq '" + newR.CurrentProg + "' and Reversed eq false&format=json";
 
                     HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -260,34 +548,12 @@ namespace New_Student_Portal.Controllers
                             CR.Settlement_Type = (string)config["SettlementType"];
                             CR.Registration_Date = (string)config["RegDate"];
                             CR.UnitsTaken = (string)config["UnitsTaken"];
+                            CR.UnpostedCharges = (string)config["UnPosted_Charges"];
                             CR.TotalBilled = (string)config["TotalBilled"];
                             CReg.Add(CR);
                         }
                     }
-                    #endregion
-                    #region Basket Units
-                    List<StudentUnits> BasketUnits = new List<StudentUnits>();
-                    string pageBasket = "BasketUnits?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "' and Submitted eq false and Unit ne ''&$format=json";
-
-                    HttpWebResponse httpResponseBasket = Credentials.GetOdataData(pageBasket);
-                    using (var streamReader = new StreamReader(httpResponseBasket.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            StudentUnits CR = new StudentUnits();
-                            CR.Programme = (string)config["Programme"];
-                            CR.Unit = (string)config["Unit"];
-                            CR.Unit_Name = (string)config["Unit_Name"];
-                            CR.Stage = (string)config["Stage"];
-                            CR.Semester = (string)config["Semester"];
-                            BasketUnits.Add(CR);
-                        }
-                    }
-                    #endregion
+                    #endregion                    
 
                     if (Session["StudentDetails"] == null || Session["CurrentSem"].ToString() == "")
                     {
@@ -298,34 +564,23 @@ namespace New_Student_Portal.Controllers
                     StudentCourseRegistration StdCourseReg = new StudentCourseRegistration
                     {
                         ListOfCourseRegistration = CReg.OrderBy(x => x.Stage).ThenBy(n => n.Registration_Date),
-                        ListOfStudentBasketUnits = BasketUnits,
+                        //ListOfStudentBasketUnits = BasketUnits,
                         RegProg = newR,
                         HostelCode = Hostel,
                         Campus = s[3],
+                        RegT = RegT,
+                        //ListOfStages = stageList.Select(x =>
+                        //                       new SelectListItem()
+                        //                       {
+                        //                           Text = x.Text,
+                        //                           Value = x.Value
+                        //                       }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList()
                         ListOfUnitCategory = unitCList.Select(x =>
                                                new SelectListItem()
                                                {
                                                    Text = x.Text,
                                                    Value = x.Value
                                                }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
-                        ListOfUnitCategory1 = unitCList1.Select(x =>
-                                               new SelectListItem()
-                                               {
-                                                   Text = x.Text,
-                                                   Value = x.Value
-                                               }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
-                        ListOfUnitCategory2 = unitCList2.Select(x =>
-                                                new SelectListItem()
-                                                {
-                                                    Text = x.Text,
-                                                    Value = x.Value
-                                                }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList(),
-                        ListOfUnitCategory3 = unitCList3.Select(x =>
-                                                new SelectListItem()
-                                                {
-                                                    Text = x.Text,
-                                                    Value = x.Value
-                                                }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList()
                     };
 
                     return PartialView("~/Views/Course/CourseRegistrationDetails.cshtml", StdCourseReg);
@@ -338,7 +593,67 @@ namespace New_Student_Portal.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
-        public ActionResult ViewStudentRegisteredUnits(StudentUnits Filters)
+        public ActionResult GetBasketUnitRegistration(string RegT)
+        {
+            try
+            {
+                string RegNo = Session["Username"].ToString();
+                if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+                {
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
+                }
+
+                string sem = Session["CurrentSem"].ToString();
+                #region Basket Units
+                List<StudentUnits> BasketUnits = new List<StudentUnits>();
+                if (RegT == "0")
+                {
+                    RegT = "Stage";
+                }
+                if (RegT == "1")
+                {
+                    RegT = "Unit/Subject";
+                }
+                if (RegT == "2")
+                {
+                    RegT = "Supplementary";
+                }
+                if (RegT == "3")
+                {
+                    RegT = "Retake";
+                }
+                string pageBasket = "BasketUnits?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "' and Submitted eq false and Unit ne ''&$format=json";
+
+                HttpWebResponse httpResponseBasket = Credentials.GetOdataData(pageBasket);
+                using (var streamReader = new StreamReader(httpResponseBasket.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    foreach (JObject config in details["value"])
+                    {
+                        StudentUnits CR = new StudentUnits();
+                        CR.Programme = (string)config["Programme"];
+                        CR.Unit = (string)config["Unit"];
+                        CR.Unit_Name = (string)config["Unit_Name"];
+                        CR.Stage = (string)config["Stage"];
+                        CR.Semester = (string)config["Semester"];
+                        BasketUnits.Add(CR);
+                    }
+                }
+                #endregion
+
+                return PartialView("~/Views/Course/Partial Views/BasketUnitList.cshtml", BasketUnits);
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.Message = ex.Message.Replace("'", "");
+                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+        }
+            public ActionResult ViewStudentRegisteredUnits(StudentUnits Filters)
         {
             try
             {
@@ -668,7 +983,7 @@ namespace New_Student_Portal.Controllers
         //         return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
         //     }
         // }
-        public ActionResult GetProgramUnits(string RegType, string Prog, string Stage, string Option)
+        public ActionResult GetProgramUnits(string RegType, string Prog,string UnitType, string Option)
         {
             try
             {
@@ -686,6 +1001,7 @@ namespace New_Student_Portal.Controllers
                     Error errormsg = new Error();
                     bool showClass = false;
                     bool succ = false;
+                    string Campus = CommonClass.GetStudentCampus(RegNo);
 
                     if (Session["Username"] == null)
                     {
@@ -704,11 +1020,11 @@ namespace New_Student_Portal.Controllers
                     bool QualifyFoRetake = false, QualifyForSupp = false, AllowSuppRetaleReg = false;
                     if (RegType == "2")
                     {
-                        QualifyForSupp = CommonClass.QualifyForSupplimentary(RegNo, Prog, Stage);
+                        QualifyForSupp = CommonClass.QualifyForSupplimentary(RegNo, Prog);
                     }
                     if (RegType == "3")
                     {
-                        QualifyFoRetake = CommonClass.QualifyForRetake(RegNo, Prog, Stage);
+                        QualifyFoRetake = CommonClass.QualifyForRetake(RegNo, Prog);
                     }
                     if (RegType == "2" || RegType == "3")
                     {
@@ -741,7 +1057,7 @@ namespace New_Student_Portal.Controllers
                         }
                         if ((RegType == "2") || (RegType == "3"))
                         {
-                            s = CommonClass.GetSupp_RetakeRegistration(RegNo, Sem, RegType, Stage);
+                            s = CommonClass.GetSupp_RetakeRegistration(RegNo, Sem, RegType);
                         }
                         if (s[0] == null || s[1] == null)
                         {
@@ -751,13 +1067,13 @@ namespace New_Student_Portal.Controllers
                                 {
                                     Option = "";
                                 }
-                                // succ = Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, Option);
+                                 //succ = Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, Option);
                                 s = CommonClass.CurrentCourseRegistration(RegNo, Sem, RegType);
                             }
                             if ((RegType == "2") || (RegType == "3"))
                             {
-                                succ = Credentials.ObjNav.StudentCourseRegistration(RegNo, Stage, Sem, Convert.ToInt32(RegType));
-                                s = CommonClass.GetSupp_RetakeRegistration(RegNo, Sem, RegType, Stage);
+                                succ = Credentials.ObjNav.StudentCourseRegistration(RegNo, "", Sem, Convert.ToInt32(RegType));
+                                s = CommonClass.GetSupp_RetakeRegistration(RegNo, Sem, RegType);
                             }
                         }
 
@@ -776,11 +1092,11 @@ namespace New_Student_Portal.Controllers
                                 string page = "";
                                 if (RegType == "2")
                                 {
-                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
+                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "'  and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
                                 }
                                 if (RegType == "3")
                                 {
-                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
+                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "'  and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
                                 }
                                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -805,58 +1121,302 @@ namespace New_Student_Portal.Controllers
                                 }
                                 #endregion
                             }
-                            else
+                            else if (UnitType == "FREE ELECTIVE")
                             {
-                                #region Programme Units    
-
-                                string Opt = "";
-                                if (Option != null)
+                                if (Option.IsNullOrWhiteSpace())
                                 {
-                                    Opt = Option;
-                                }
-                                ;
-                                string stage = CommonClass.GetStudentStage(RegNo);
-                                string page = "UnitsSubjects?$filter=Programme_Code eq '" + Prog + "' and Stage_Code eq '" + stage + "' and Old_Unit eq false &$format = json";
+                                    #region Programme Units                    
+                                    string page = "UnitSubject?$select=ProgrammeCode,Code,Desription,UnitType&$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and Only_Free_Unit eq true&$format=json";
 
-                                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                                {
-                                    var result = streamReader.ReadToEnd();
-
-                                    var details = JObject.Parse(result);
-
-                                    if (details["value"].Count() > 0)
+                                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                                     {
-                                        foreach (JObject config in details["value"])
+                                        var result = streamReader.ReadToEnd();
+
+                                        var details = JObject.Parse(result);
+
+                                        if (details["value"].Count() > 0)
                                         {
-                                            if (RegType == "3")
+                                            foreach (JObject config in details["value"])
                                             {
-                                                if (!StudentExistInStudentUnitBakset(RegNo, (string)config["Code"], Sem))
+                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["ProgrammeCode"], (string)config["Code"], Sem))
                                                 {
-                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
-                                                    NewUnit.Code = (string)config["Code"];
-                                                    NewUnit.Desription = (string)config["Desription"];
-                                                    CoreUnitSub.Add(NewUnit);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme_Code"], (string)config["Code"], Sem))
-                                                {
-                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
-                                                    NewUnit.Code = (string)config["Code"];
-                                                    NewUnit.Desription = (string)config["Desription"];
-                                                    NewUnit.CF = (string)config["Desription"];
-                                                    CoreUnitSub.Add(NewUnit);
+                                                    string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
+
+                                                    HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                                                    using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                                                    {
+                                                        var resultTmT = streamReaderTmT.ReadToEnd();
+
+                                                        var detailsTmT = JObject.Parse(resultTmT);
+
+                                                        if (detailsTmT["value"].Count() > 0)
+                                                        {
+                                                            foreach (JObject config1 in detailsTmT["value"])
+                                                            {
+                                                                if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+                                                                {
+                                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
+                                                                    bool HasPreUnit = false;
+                                                                    HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
+                                                                    NewUnit.Code = (string)config["Code"];
+                                                                    NewUnit.Desription = (string)config["Desription"];
+                                                                    NewUnit.Day = (string)config1["DayofWeek"];
+                                                                    NewUnit.Period = (string)config1["Period"];
+                                                                    NewUnit.Class = (string)config1["Unit_Class"];
+                                                                    NewUnit.Lec = (string)config1["Lecturer_Name"];
+                                                                    NewUnit.CF = (string)config1["No_of_Units"];
+                                                                    NewUnit.Campus = (string)config1["Campus_Code"];
+                                                                    NewUnit.UnitType = UnitType;
+                                                                    if (HasPreUnit)
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "N";
+                                                                    }
+                                                                    if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
+                                                                    {
+                                                                        NewUnit.ClassFull = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.ClassFull = "N";
+                                                                    }
+                                                                    CoreUnitSub.Add(NewUnit);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+                                    #endregion
                                 }
-                                #endregion
+                                else
+                                {
+                                    #region Programme Units                    
+                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and ProgrammeOption eq '" + Option + "' and Only_Free_Unit eq true&$format=json";
+
+                                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                                    {
+                                        var result = streamReader.ReadToEnd();
+
+                                        var details = JObject.Parse(result);
+
+                                        if (details["value"].Count() > 0)
+                                        {
+                                            foreach (JObject config in details["value"])
+                                            {
+                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["ProgrammeCode"], (string)config["Code"], Sem))
+                                                {
+                                                    string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
+
+                                                    HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                                                    using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                                                    {
+                                                        var resultTmT = streamReaderTmT.ReadToEnd();
+
+                                                        var detailsTmT = JObject.Parse(resultTmT);
+
+                                                        if (detailsTmT["value"].Count() > 0)
+                                                        {
+                                                            foreach (JObject config1 in detailsTmT["value"])
+                                                            {
+                                                                if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+                                                                {
+                                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
+                                                                    bool HasPreUnit = false;
+                                                                    HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
+                                                                    NewUnit.Code = (string)config["Code"];
+                                                                    NewUnit.Desription = (string)config["Desription"];
+                                                                    NewUnit.Day = (string)config1["DayofWeek"];
+                                                                    NewUnit.Period = (string)config1["Period"];
+                                                                    NewUnit.Class = (string)config1["Unit_Class"];
+                                                                    NewUnit.Lec = (string)config1["Lecturer_Name"];
+                                                                    NewUnit.CF = (string)config1["No_of_Units"];
+                                                                    NewUnit.Campus = (string)config1["Campus_Code"];
+                                                                    NewUnit.UnitType = UnitType;
+                                                                    if (HasPreUnit)
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "N";
+                                                                    }
+                                                                    if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
+                                                                    {
+                                                                        NewUnit.ClassFull = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.ClassFull = "N";
+                                                                    }
+                                                                    CoreUnitSub.Add(NewUnit);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
+                            }
+                            else
+                            {
+                                if (Option.IsNullOrWhiteSpace())
+                                {
+                                    #region Programme Units                    
+                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and OldUnit eq flase&$format=json";
+
+                                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                                    {
+                                        var result = streamReader.ReadToEnd();
+
+                                        var details = JObject.Parse(result);
+
+                                        if (details["value"].Count() > 0)
+                                        {
+                                            foreach (JObject config in details["value"])
+                                            {
+                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme"], (string)config["Code"], Sem))
+                                                {
+                                                    string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
+
+                                                    HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                                                    using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                                                    {
+                                                        var resultTmT = streamReaderTmT.ReadToEnd();
+
+                                                        var detailsTmT = JObject.Parse(resultTmT);
+
+                                                        if (detailsTmT["value"].Count() > 0)
+                                                        {
+                                                            foreach (JObject config1 in detailsTmT["value"])
+                                                            {
+                                                                if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+                                                                {
+                                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
+                                                                    bool HasPreUnit = false;
+                                                                    HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
+                                                                    NewUnit.Code = (string)config1["Unit"];
+                                                                    NewUnit.Desription = (string)config1["Unit_Description"];
+                                                                    NewUnit.Day = (string)config1["DayofWeek"];
+                                                                    NewUnit.Period = (string)config1["Period"];
+                                                                    NewUnit.Class = (string)config1["Unit_Class"];
+                                                                    NewUnit.Lec = (string)config1["Lecturer_Name"];
+                                                                    NewUnit.CF = (string)config1["No_of_Units"];
+                                                                    NewUnit.Campus = (string)config1["Campus_Code"];
+                                                                    NewUnit.UnitType = UnitType;
+                                                                    if (HasPreUnit)
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "N";
+                                                                    }
+                                                                    if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
+                                                                    {
+                                                                        NewUnit.ClassFull = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.ClassFull = "N";
+                                                                    }
+                                                                    CoreUnitSub.Add(NewUnit);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    #region Programme Units                    
+                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and ProgrammeOption eq '" + Option + "' and OldUnit eq false&$format=json";
+
+                                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                                    {
+                                        var result = streamReader.ReadToEnd();
+
+                                        var details = JObject.Parse(result);
+
+                                        if (details["value"].Count() > 0)
+                                        {
+                                            foreach (JObject config in details["value"])
+                                            {
+                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme"], (string)config["Code"], Sem))
+                                                {
+                                                    string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
+
+                                                    HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                                                    using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                                                    {
+                                                        var resultTmT = streamReaderTmT.ReadToEnd();
+
+                                                        var detailsTmT = JObject.Parse(resultTmT);
+
+                                                        if (detailsTmT["value"].Count() > 0)
+                                                        {
+                                                            foreach (JObject config1 in detailsTmT["value"])
+                                                            {
+                                                                if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+                                                                {
+                                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
+                                                                    bool HasPreUnit = false;
+                                                                    HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
+                                                                    NewUnit.Code = (string)config1["Unit"];
+                                                                    NewUnit.Desription = (string)config1["Unit_Description"];
+                                                                    NewUnit.Day = (string)config1["DayofWeek"];
+                                                                    NewUnit.Period = (string)config1["Period"];
+                                                                    NewUnit.Class = (string)config1["Unit_Class"];
+                                                                    NewUnit.Lec = (string)config1["Lecturer_Name"];
+                                                                    NewUnit.CF = (string)config1["No_of_Units"];
+                                                                    NewUnit.Campus = (string)config1["Campus_Code"];
+                                                                    NewUnit.UnitType = UnitType;
+                                                                    if (HasPreUnit)
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.HasPrelqUnit = "N";
+                                                                    }
+                                                                    if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
+                                                                    {
+                                                                        NewUnit.ClassFull = "Y";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        NewUnit.ClassFull = "N";
+                                                                    }
+                                                                    CoreUnitSub.Add(NewUnit);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
                             }
                             #region Maximum Courses
-                            string pageMax = "ProgrammeStages?$select=Maximum_Allowed_CF&$filter=Programme_Code eq '" + s[0] + "' and Code eq '" + s[1] + "'&format=json";
+                            string pageMax = "ProgrammeList?$select=MaxNoofCourses&$filter=Code eq '" + s[0] + "'&format=json";
 
                             HttpWebResponse httpResponseMax = Credentials.GetOdataData(pageMax);
                             using (var streamReader = new StreamReader(httpResponseMax.GetResponseStream()))
@@ -869,7 +1429,7 @@ namespace New_Student_Portal.Controllers
                                 {
                                     foreach (JObject config in details["value"])
                                     {
-                                        maxUnits = (int)config["Maximum_Allowed_CF"];
+                                        maxUnits = (int)config["MaxNoofCourses"];
                                     }
                                 }
                             }
@@ -898,7 +1458,6 @@ namespace New_Student_Portal.Controllers
                                 MaximumCourses = maxUnits,
                                 SelectedCourses = sUnits,
                                 RegT = RegType,
-                                Stage = Stage,
                                 ListOfCoreUnitsSubjects = CoreUnitSub.DistinctBy(x => new { x.Code, x.Day, x.Period, x.Class }).OrderBy(x => x.Code).ToList()
                             };
                             PartialViewPath = "~/Views/Course/GetProgramUnits.cshtml";
@@ -922,6 +1481,118 @@ namespace New_Student_Portal.Controllers
                 errormsg.Message = ex.Message.Replace("'", "");
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
             }
+        }
+        protected bool StudentExistInStudentUnitBakset(string stdNo, string Unit, string sem)
+        {
+            bool s = false;
+            try
+            {
+                string pageBasket = "BasketUnits?$filter=Student_No eq '" + stdNo + "' and Unit eq '" + Unit + "' and Semester eq '" + sem + "'&$format=json";
+
+                HttpWebResponse httpResponsebasket = Credentials.GetOdataData(pageBasket);
+                using (var streamReader = new StreamReader(httpResponsebasket.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        s = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return s;
+        }
+        public JsonResult GetProgrammeOptions(string Prog)
+        {
+            try
+            {
+                DropdownListValues OptionList = new DropdownListValues();
+                string RegNo = Session["Username"].ToString();
+                string Stage = GetStudentStage(RegNo);
+                #region
+                string page = "ProgrammeStages?$filter=ProgrammeCode eq '" + Prog + "' and Code eq '" + Stage + "' and AllowProgrammeOptions eq true&$format=json";
+
+                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        #region Option List
+                        List<DropdownList> OptionlList = new List<DropdownList>();
+                        string pageOpt = "ProgrammeOption?$filter=Programme_Code eq '" + Prog + "'&$format=json";
+
+                        HttpWebResponse httpResponseOpt = Credentials.GetOdataData(pageOpt);
+                        using (var streamReaderOpt = new StreamReader(httpResponseOpt.GetResponseStream()))
+                        {
+                            var resultOpt = streamReaderOpt.ReadToEnd();
+
+                            var detailsOpt = JObject.Parse(resultOpt);
+
+                            foreach (JObject config in detailsOpt["value"])
+                            {
+                                DropdownList ddl = new DropdownList();
+                                ddl.Value = (string)config["Code"];
+                                ddl.Text = (string)config["Code"];
+                                OptionlList.Add(ddl);
+                            }
+                        }
+                        #endregion
+                        OptionList = new DropdownListValues
+                        {
+                            ListOfValues = OptionlList.Select(x =>
+                                            new SelectListItem()
+                                            {
+                                                Text = x.Text,
+                                                Value = x.Value
+                                            }).ToList()
+                        };
+                    }
+                }
+                #endregion               
+                return Json(new { message = OptionList, success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public string GetStudentStage(string studentNumber)
+        {
+            string stage = "";
+            try
+            {
+                string page = "CustomerList2?$select=Current_Stage&$filter=No eq '" + studentNumber + "' &format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        foreach (JObject config in details["value"])
+                        {
+                            stage = (string)config["Current_Stage"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return stage;
         }
         protected bool GetClassCode(string RegNo)
         {
@@ -1288,32 +1959,6 @@ namespace New_Student_Portal.Controllers
             }
             return s;
         }
-        protected bool StudentExistInStudentUnitBakset(string stdNo, string Unit, string sem)
-        {
-            bool s = false;
-            try
-            {
-                string pageBasket = "BasketUnits?$filter=Student_No eq '" + stdNo + "' and Unit eq '" + Unit + "' and Semester eq '" + sem + "'&$format=json";
-
-                HttpWebResponse httpResponsebasket = Credentials.GetOdataData(pageBasket);
-                using (var streamReader = new StreamReader(httpResponsebasket.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    if (details["value"].Count() > 0)
-                    {
-                        s = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return s;
-        }
         [HttpPost]
         public JsonResult SaveSelectedUnits(List<UnitRegistration> UnitReg)
         {
@@ -1498,7 +2143,7 @@ namespace New_Student_Portal.Controllers
                     Prog = Filters.prog;
                 }
                 Credentials.ObjNav.DropStudentUnits(RegNo.Trim(), Filters.sem.Trim(), "", Prog, Filters.Unit.Trim(), false);
-                return Json(new { message = "Unit " + Filters.UnitName + " dropped successfully", success = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { message = "Unit " + Filters.Unit + " dropped successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

@@ -115,12 +115,12 @@ namespace New_Student_Portal.Models
             }
             return dtMenu;
         }
-               public static bool QualifyForSupplimentary(string RegNo, string Prog, string Stage)
+               public static bool QualifyForSupplimentary(string RegNo, string Prog)
         {
             bool b = false;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -139,12 +139,12 @@ namespace New_Student_Portal.Models
             }
             return b;
         }
-        public static bool QualifyForRetake(string RegNo, string Prog, string Stage)
+        public static bool QualifyForRetake(string RegNo, string Prog)
         {
             bool b = false;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -633,13 +633,13 @@ namespace New_Student_Portal.Models
             }
             return changed;
         }
-        public static string[] GetSupp_RetakeRegistration(string RegNo, string CurrSem, string RegT, string Stage)
+        public static string[] GetSupp_RetakeRegistration(string RegNo, string CurrSem, string RegT)
         {
             string[] dtMenu = new string[5];
             try
             {
                 string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and Registerfor eq '" + RegT + "' and Stage eq '" + Stage + "'&$format=json";
+                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and Registerfor eq '" + RegT + "'&$format=json";
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
                 {
