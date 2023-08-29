@@ -621,8 +621,13 @@
     }
     var RegisterSelectedUnits = function () {
         var regType = $("#RegType").children("option:selected").val();
+        var UnitCategory = $("#divStage").children("option:selected").val();
         if (regType == "") {
             Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
+            return;
+        }
+        else if (UnitCategory == "") {
+            Swal.fire('Warning', 'Kindly select the Unit Category', 'warning');
             return;
         }
         else {
@@ -642,6 +647,7 @@
                             HideProgress();
                             LoadCourseRegistrationDetails(regType);
                             Swal.fire('Success', data.message, 'success');
+
                         }
                     }
                     else {
@@ -720,10 +726,16 @@
         var x = document.getElementById("labelTitle");
         x.innerHTML = 'Course Statement';
         ShowProgress();
+        $.ajaxSetup({
+            cache: false
+        });
         $.ajax({
-            url: '@Url.Action("PrintCourseStatement", "Course")',
+            url: '@Url.Action("PrintCourseStatement", "ViewDocuments")',
             type: "POST",
-            //async: false,
+            datatype: "json",
+            cache: false,
+            contentType: "application/json; charset = utf-8",
+            processData: false,
             success: function (data) {
                 if (data.success == true) {
                     $('iframe').attr('src', data.message);

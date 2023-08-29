@@ -1040,7 +1040,6 @@
             <element minOccurs="1" maxOccurs="1" name="employee_No" type="string" />
             <element minOccurs="1" maxOccurs="1" name="dim1" type="string" />
             <element minOccurs="1" maxOccurs="1" name="dim2" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="dim3" type="string" />
             <element minOccurs="1" maxOccurs="1" name="course" type="string" />
             <element minOccurs="1" maxOccurs="1" name="courseDesc" type="string" />
             <element minOccurs="1" maxOccurs="1" name="category" type="int" />
@@ -1052,7 +1051,7 @@
             <element minOccurs="1" maxOccurs="1" name="cost" type="decimal" />
             <element minOccurs="1" maxOccurs="1" name="purpose" type="string" />
             <element minOccurs="1" maxOccurs="1" name="venue" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="sponorName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sponsorName" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -17800,7 +17799,7 @@
   </binding>
   <service name="WebPortal">
     <port name="WebPortal_Port" binding="tns:WebPortal_Binding">
-      <address location="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://maachah.negst.net:7047/AIU/WS/AIU%20LIVE/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

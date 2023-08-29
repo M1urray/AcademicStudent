@@ -1067,7 +1067,7 @@ namespace New_Student_Portal.Controllers
                                 {
                                     Option = "";
                                 }
-                                 //succ = Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, Option);
+                                succ = Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, Convert.ToInt32(RegType));
                                 s = CommonClass.CurrentCourseRegistration(RegNo, Sem, RegType);
                             }
                             if ((RegType == "2") || (RegType == "3"))
@@ -1273,7 +1273,7 @@ namespace New_Student_Portal.Controllers
                                 if (Option.IsNullOrWhiteSpace())
                                 {
                                     #region Programme Units                    
-                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and OldUnit eq flase&$format=json";
+                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and Unit_Category eq '" + UnitType + "' and OldUnit eq false&$format=json";
 
                                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -2056,7 +2056,7 @@ namespace New_Student_Portal.Controllers
 
                     if (Session["CurrentProgDetails"] == null)
                     {
-                        Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                        Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                     }
                     string[] s = (string[])Session["CurrentProgDetails"];
 
@@ -2081,6 +2081,7 @@ namespace New_Student_Portal.Controllers
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+
         private bool InsertPaymentPlan(string STDNo, string Sem, decimal StdBal)
         {
             bool s = false;

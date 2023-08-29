@@ -530,11 +530,9 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        
-        RegTypeChanged()
-        ShowBasketUnits()
         if (`@Model.RegT` == "") {
             $("#divBasket").show();
+            ShowBasketUnits();
         }
         else {
             $("#RegType").val(`@Model.RegT`);
@@ -544,13 +542,6 @@
         $("#divOption").hide();
     });
     var RegTypeChanged = function () {
-        
-        ShowBasketUnits()
-        var refTT = document.getElementById('RegType').value;
-        
-        if (refTT != null) {
-            ShowBasketUnits()
-        }
         var RegT = $("#RegType").children("option:selected").val();
         if (RegT == "0" || RegT == "2" || RegT == "3") {
             $("#divStage").show();
