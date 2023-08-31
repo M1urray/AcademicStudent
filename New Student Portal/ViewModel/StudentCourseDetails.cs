@@ -32,6 +32,7 @@ namespace New_Student_Portal.ViewModel
         public RegisteredProgrammes RegProg { get; set; }
         public IEnumerable<CourseReg> ListOfCourseRegistration { get; set; }
         public IEnumerable<StudentUnits> ListOfStudentBasketUnits { get; set; }
+        public List<SelectListItem> ListOfStages { get; set; }
         public List<SelectListItem> ListOfUnitCategory { get; set; }
         public List<SelectListItem> ListOfUnitCategory1 { get; set; }
         public List<SelectListItem> ListOfUnitCategory2 { get; set; }
@@ -50,6 +51,7 @@ namespace New_Student_Portal.ViewModel
         public string Registration_Date { get; set; }
         public string UnitsTaken { get; set; }
         public string TotalBilled { get; set; }
+        public string UnpostedCharges { get; set; }
         public string HostelCode { get; set; }
     }
     public class StudentUnits
@@ -63,13 +65,14 @@ namespace New_Student_Portal.ViewModel
         public string RegFor { get; set; }
         public string Section { get; set; }
         public string CF { get; set; }
+        public string CatMark { get; set; }
+        public string ExamMark { get; set; }
+        public string Grade { get; set; }
     }
     public class GetRegisteredUnit
     {
-        public string Code { get; set; }
         public string RegDeadlineDate { get; set; }
         public List<StudentUnits> ListOfRegUnit { get; set; }
-        public List<SelectListItem> ListOfSpecExmReasons { get; set; }
     }
     public class UnitRegistrationSummery
     {

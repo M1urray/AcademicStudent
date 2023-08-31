@@ -20,7 +20,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Welfare/MealBookingForm",
+            url: '@Url.Action("MealBookingForm", "Welfare")',
             success: function (data) {
                 $("#divMealBook").html(data);
                 HideProgress();
@@ -34,7 +34,7 @@
     var SubmitMealBooking = function () {
         ShowProgress();
         $.ajax({
-            url: "/Welfare/SubmitMealBooking",
+            url: '@Url.Action("SubmitMealBooking", "Welfare")',
             datatype: "json",
             type: "POST",
             contentType: "application/json; charset = utf-8",

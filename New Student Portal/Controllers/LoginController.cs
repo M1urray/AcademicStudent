@@ -35,8 +35,9 @@ namespace Student.Controllers
             try
             {
                 string Redirect = "";
-                string page = "CustomerList?$filter=No eq '" + UserName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
-               
+                string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";
+
+
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -63,7 +64,7 @@ namespace Student.Controllers
                                     if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
                                     {
                                         userModel.RoleName = "ALLUMINAE";
-                                        Redirect = "/Alumni/Dashboard";
+                                        Redirect = "A";
                                     }
                                     else
                                     {
@@ -76,7 +77,7 @@ namespace Student.Controllers
                                         {
                                             userModel.Full_Access = false;
                                         }
-                                        Redirect = "/Dashboard/Dashboard";
+                                        Redirect = "D";
                                     }
                                     string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
                                     FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
@@ -104,7 +105,7 @@ namespace Student.Controllers
                     }
                     else
                     {
-                        msg = "Unauthorised Login. Visit Registrar's Office";
+                        msg = "Unauthorised Login. Visit Admission Office";
                         success = false;
                     }
                 }
@@ -171,15 +172,23 @@ namespace Student.Controllers
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
                                         var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
                                         var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
-                                            "<BR/>Contact Email : admissions@daystar.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
+                                            "<BR/>Contact Email : icthelpdesk@kabarak.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
                                         var body = "Hi " + ret;
                                         body += "<br />";
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
                                         try
                                         {
-                                            CommonClass.SendEmailAlert(body, emailAddress, "DAYSTAR PORTAL RESET PASSWORD LINK");
-                                            msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
-                                            val = true;
+                                           Error err =  CommonClass.SendEmailAlert(body, emailAddress, "KABARAK PORTAL RESET PASSWORD LINK");
+                                            if (err.success)
+                                            {
+                                                msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
+                                                val = true;
+                                            }
+                                            else
+                                            {
+                                                msg = err.Message;
+                                                val = false;
+                                            }
                                         }
                                         catch (Exception ex)
                                         {
@@ -277,7 +286,8 @@ namespace Student.Controllers
                             if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
                             {
                                 userModel.RoleName = "ALLUMINAE";
-                                msg = "/Alumni/Dashboard";
+                                
+                                msg = "A"; 
                             }
                             else
                             {
@@ -290,7 +300,7 @@ namespace Student.Controllers
                                 {
                                     userModel.Full_Access = false;
                                 }
-                                msg = "/Dashboard/Dashboard";
+                                msg = "D";
                             }
                             string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
                             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,

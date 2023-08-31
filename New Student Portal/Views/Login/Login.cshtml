@@ -21,7 +21,7 @@
             <div class="auth-logo">
                 <a href="#" class="logo logo-dark text-center">
                     <span class="logo-lg">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="120" width="100%">
+                        <img src="~/assets/images/logo2.png" alt="" height="150" width="150">
                     </span>
                 </a>
             </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <p> <a href="/Login/ForgotPassword" class="text-muted ms-1">Forgot your password?</a></p>
+                <p> <a href="@Url.Action("ForgotPassword", "Login")" class="text-muted ms-1">Forgot your password?</a></p>
             </div> <!-- end col -->
         </div>
     </div> <!-- end card-body -->
@@ -83,14 +83,19 @@
                 Authedication.Password = password;
                 ShowProgress();
                 $.ajax({
-                    url: "/Login/LoginUser",
+                    url: '@Url.Action("LoginUser", "Login")',
                     datatype: "json",
                     type: "POST",
                     data: JSON.stringify({ userlogin: Authedication }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         if (data.success == true) {
-                            window.location = data.message;
+                            if (data.message == "A") {
+                                window.location = '@Url.Action("Dashboard", "Alumni")';
+                            }
+                            else {
+                                window.location = '@Url.Action("Dashboard", "Dashboard")';
+                            }
                         }
                         else {
                             HideProgress();

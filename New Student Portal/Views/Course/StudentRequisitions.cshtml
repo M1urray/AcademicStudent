@@ -60,23 +60,6 @@
         </div>
     </div>
 </div>
-@*//////////////////////Exam Card////////////////////////////*@
-<div class="modal fade" id="myModalEXMReport" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Exam Card</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4" id="modalBody">
-                <iframe id="iframe" style="width:100%;height:600px"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script type="text/javascript">
     $(document).ready(function () {
         LoadStudentRequistionList();
@@ -90,7 +73,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Course/StudentRequisitionList",
+            url: '@Url.Action("StudentRequisitionList", "Course")',
             success: function (data) {
                 $("#divRequisitionList").html(data);
                 HideProgress();
@@ -106,7 +89,7 @@
         x.innerHTML = 'New Requisition';
         ShowProgress();
         $.ajax({
-            url: "/Course/NewRequistion",
+            url: '@Url.Action("NewRequistion", "Course")',
             datatype: "json",
             type: "POST",
             contentType: "application/json; charset = utf-8",
@@ -128,7 +111,6 @@
         var Prog = $("#ddlProgramme").children("option:selected").val();
         var ProgConcMajor = $("#ddlConcentration").children("option:selected").val();
         var ProgTransit = $("#ddlProgrammeTransit").children("option:selected").val();
-        var ReasonForSpecialExm = $("#ddlSpcExmreason").children("option:selected").val();
         var NoOfCopies = "0";
         var ProgC = "";
         if (RegType == "9") {
@@ -145,10 +127,6 @@
         }
         else if ((RegType == "9") && (NoOfCopies == "0" || NoOfCopies == "")) {
             Swal.fire('Warning', 'Enter Number of Copies', 'warning');
-            return false;
-        }
-        else if (RegType == "8" && ReasonForSpecialExm == "") {
-            Swal.fire('Warning', 'Select Special Exam reason', 'warning');
             return false;
         }
         else if (RegType == "9" && ProgC == "") {
@@ -171,7 +149,7 @@
             Swal.fire('Warning', 'Select Programme you want to transit to', 'warning');
             return false;
         }
-        else if (Remarks == "" && RegType != "8") {
+        else if (Remarks == "") {
             Swal.fire('Warning', 'Give Reason for the requisition', 'warning');
             return false;
         }
@@ -259,80 +237,32 @@
                     Swal.fire('Warning', 'You have not selected any unit', 'warning');
                     return;
                 }
-                if (RegType == "8") {
-                    var filename1; var base64String1; var filetype1;
-                    var files1 = document.getElementById('fileReasonAttachment').files;
-                    if (files1.length) {
-                        var file1 = files1[0];
-                        var blob1 = file1.slice();
-                        filetype1 = file1.type;
-                        filename1 = file1.name;
-                        var reader1 = new FileReader();
-                        reader1.onloadend = function (evt) {
-                            if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-                                var cont1 = evt.target.result
-                                base64String1 = getB64Str(cont1);
-                            };
-                            ShowProgress();
-                            $.ajax({
-                                url: '@Url.Action("SaveStudentSpecialExam", "Course")',
-                                datatype: "json",
-                                type: "POST",
-                                data: JSON.stringify({ regData: StudentReqs, StdRegLines: StudentReqLines, base64Upload: base64String1, fileName: filename1, Extn: filetype1 }),
-                                contentType: "application/json; charset = utf-8",
-                                success: function (data) {
-                                    if (data.success == true) {
-                                        HideProgress();
-                                        LoadStudentRequistionList();
-                                        $("#myModalUnits").modal("hide");
-                                        Swal.fire('Success', data.message, 'success');
-                                    }
-                                    else {
-                                        HideProgress();
-                                        Swal.fire('Warning', data.message, 'warning');
-                                    }
-                                },
-                                error: function (erro) {
-                                    HideProgress();
-                                    Swal.fire('Error', erro.message, 'error');
-                                }
-                            });
-                        };
-                        reader1.readAsArrayBuffer(blob1);
-                    }
-                    else {
-                        Swal.fire('Warning', 'Attach reason for Special Exam', 'warning');
-                        return;
-                    }
-                }
-                else {
-                    ShowProgress();
-                    $.ajax({
-                         url: '@Url.Action("SaveStudentRequisitionWithLines", "Course")',
-                        datatype: "json",
-                        type: "POST",
-                        data: JSON.stringify({ regData: StudentReqs, StdRegLines: StudentReqLines }),
-                        contentType: "application/json; charset = utf-8",
-                        success: function (data) {
-                            if (data.success == true) {
-                                HideProgress();
-                                LoadStudentRequistionList();
-                                $("#myModalUnits").modal("hide");
-                                Swal.fire('Success', data.message, 'success');
-                            }
-                            else {
-                                HideProgress();
-                                Swal.fire('Error', data.message, 'error');
-                            }
-                        },
-                        error: function () {
-                            if (data.success == false) {
-                                HideProgress();
-                                Swal.fire('Error', data.message, 'error');
-                            }
+                ShowProgress();
+                $.ajax({
+                    url: '@Url.Action("SaveStudentRequisitionWithLines", "Course")',
+                    datatype: "json",
+                    type: "POST",
+                    data: JSON.stringify({ regData: StudentReqs, StdRegLines: StudentReqLines }),
+                    contentType: "application/json; charset = utf-8",
+                    success: function (data) {
+                        if (data.success == true) {
+                            HideProgress();
+                            LoadStudentRequistionList();
+                            $("#myModalUnits").modal("hide");
+                            Swal.fire('Success', data.message, 'success');
                         }
-                    });
-                }
+                        else {
+                            HideProgress();
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    },
+                    error: function () {
+                        if (data.success == false) {
+                            HideProgress();
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    }
+                });
             }
             else if (RegType == "17") {
                 var filename; var base64String; var filetype;
@@ -455,7 +385,7 @@
             else {
                 ShowProgress();
                 $.ajax({
-                    url: "/Course/SaveStudentRequisition",
+                    url: '@Url.Action("SaveStudentRequisition", "Course")',
                     datatype: "json",
                     type: "POST",
                     data: JSON.stringify({ regData: StudentReqs }),
@@ -482,12 +412,12 @@
             }
         }
     }
-    var ViewLines = function (DocNo, Status, RegT, Sta) {
+    var ViewLines = function (DocNo,Status,RegT) {
         var x = document.getElementById("labelT");
         x.innerHTML = 'Requisition Lines';
         ShowProgress();
         $.ajax({
-            url: "/Course/GetRequistionLines",
+            url: '@Url.Action("GetRequistionLines", "Course")',
             datatype: "json",
             data: JSON.stringify({ DocNo: DocNo, Status: Status, RegT: RegT }),
             type: "POST",
@@ -522,7 +452,7 @@
             data: JSON.stringify({ DocNo: DocNo }),
             contentType: "application/json; charset = utf-8",
             processData: false,
-            url: '/Common/DocumentApprovalTrail',
+            url: '@Url.Action("DocumentApprovalTrail", "Course")',
             success: function (data) {
                 $("#modalBody").html(data);
                 HideProgress();
@@ -544,7 +474,7 @@
             data: JSON.stringify({ DocNo: DocNo }),
             contentType: "application/json; charset = utf-8",
             processData: false,
-            url: '/Common/DocumentComments',
+            url: '@Url.Action("DocumentComments", "Common")',
             success: function (data) {
                 $("#modalBody").html(data);
                 HideProgress();
@@ -559,7 +489,7 @@
     var GetAdmissionLetters = function (DocNo) {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/AdmissionLetter',
+            url: '@Url.Action("AdmissionLetter", "ViewDocuments")',
             data: JSON.stringify({ AppNo: DocNo }),
             datatype: "json",
             type: "POST",
@@ -569,33 +499,6 @@
                 if (data.success == true) {
                     $('iframe').attr('src', data.message);
                     $("#myModalReport").modal("show");
-                    HideProgress();
-                }
-                else {
-                    Swal.fire('Warning', data.message, 'warning');
-                    HideProgress();
-                }
-
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    };
-    var GetExamCard = function (DocNo) {
-        ShowProgress();
-        $.ajax({
-            url: '/ViewDocuments/SpecialExamCard',
-            data: JSON.stringify({ DocNo: DocNo }),
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            type: "POST",
-            success: function (data) {
-                if (data.success == true) {
-                    $('iframe').attr('src', data.message);
-                    $("#myModalEXMReport").modal("show");
                     HideProgress();
                 }
                 else {

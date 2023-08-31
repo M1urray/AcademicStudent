@@ -31,6 +31,7 @@ namespace New_Student_Portal.ViewModel
         public string Student { get; set; }
         public string Sem { get; set; }
         public bool Billed { get; set; }
+        public bool Confirm_Booking { get; set; }
     }
     public class HostelList
     {

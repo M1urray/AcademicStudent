@@ -1,0 +1,114 @@
+﻿@model New_Student_Portal.ViewModel.RoomSpaces
+@{
+    ViewBag.Title = "Advance Booked Details";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<div class="modal-content">
+    <div class="modal-body pre-scrollable">
+        <div>           
+            <h4>Reserved Hostel Details</h4>
+            <hr />
+            <table align="center" runat="server">
+                <tr>
+                    <td><b>Student No:</b></td>
+                    <td>
+                        @Model.Student
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Semester:</b></td>
+                    <td>
+                        @Model.Sem
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Hostel Booked:</b></td>
+                    <td>
+                        @Model.HostelCode
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Room Number:</b></td>
+                    <td>
+                        @Model.RoomCode
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Space Number:</b></td>
+                    <td>
+                        @Model.SpaceCode
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Accomodation Fee:</b></td>
+                    <td>
+                        @Model.Cost
+                    </td>
+
+                </tr>
+            </table>
+            <hr />
+            @if (Model.Confirm_Booking)
+            { 
+                <div align="center">
+                    <button onclick="ConfirmHostelBooking();" class="btn btn-sm btn-danger">Confirm Hostel Booking</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var ConfirmHostelBooking = function () {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Confirm booking of this Hostel space",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Confirm!',
+            cancelButtonText: 'No, cancel!',
+            confirmButtonClass: 'btn btn-success mt-2',
+            cancelButtonClass: 'btn btn-danger ms-2 mt-2',
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                ShowProgress();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ConfirmHostelBooked", "Welfare")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success == true) {
+                            HideProgress();
+                            HostelBookingLink();
+                            Swal.fire('Success', data.message, 'success');
+                        }
+                        else {
+                            HideProgress();
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    },
+                    error: function (err) {
+                        HideProgress();
+                        Swal.fire('Error', err, 'error');
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: 'Cancelled',
+                    text: 'You space booking Confirmation has been cancelled',
+                    icon: 'error',
+                    confirmButtonColor: "#1abc9c",
+                });
+            }
+        });
+    };
+    var HostelBookingLink = function () {
+        ShowProgress();
+        window.location = '@Url.Action("HostelList", "Welfare")';
+    }
+</script>
+
