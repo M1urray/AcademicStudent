@@ -23,11 +23,53 @@ namespace New_Student_Portal.NAVWS {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WebPortal_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal")]
     public partial class WebPortal : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback isLastVisitOpenOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback unbookHostelOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateDashboardProfileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RequestAdmissionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RequestLabOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RequestRadiologyOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RequestReferralOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ReturnAmountInWordsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ReturnStudentOptionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SMSSendResetPassordOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SMSStffSendResetPassordOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveELearningEvaluationOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveEmailOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveEvaluationSuggestionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveGeneralEvaluationCommentsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveHRAppraisalSkillsCompetenceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveHostelBookingInterestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveLecturerEvaluationFormOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveObjectivesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveProfessionalBodyRequestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveSickoffOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveStudentEnquiryOperationCompleted;
         
@@ -38,6 +80,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback SaveUpdateHRAppraisalSkillsCompetenceOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveUpdateHRAppraisalSkillsDevelopmentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveVehicleOdometerOperationCompleted;
         
         private System.Threading.SendOrPostCallback SelectDiagnosisOperationCompleted;
         
@@ -78,6 +122,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback StockLevelOperationCompleted;
         
         private System.Threading.SendOrPostCallback StoreLinesExistsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback StorePayment2OperationCompleted;
         
         private System.Threading.SendOrPostCallback StorePaymentOperationCompleted;
         
@@ -141,11 +187,15 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback TransportRequisitionCreateOperationCompleted;
         
+        private System.Threading.SendOrPostCallback TransportTicketHasOdometerReadingOperationCompleted;
+        
         private System.Threading.SendOrPostCallback TutionFeeAmountOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateAcceptanceOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateApplicationPaymentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateCateringTokenOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateConceptReviewOperationCompleted;
         
@@ -217,6 +267,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback fnReturnNoSeriesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback fnSaveGraduation2OperationCompleted;
+        
         private System.Threading.SendOrPostCallback fnSaveGraduationOperationCompleted;
         
         private System.Threading.SendOrPostCallback fnSaveHRApplicantQualificiationOperationCompleted;
@@ -225,11 +277,35 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback fnSubmitExamResultsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback isLastVisitOpenOperationCompleted;
+        private System.Threading.SendOrPostCallback InsertApplicationOperationCompleted;
         
-        private System.Threading.SendOrPostCallback unbookHostelOperationCompleted;
+        private System.Threading.SendOrPostCallback InsertAppointmentOperationCompleted;
         
-        private System.Threading.SendOrPostCallback updateDashboardProfileOperationCompleted;
+        private System.Threading.SendOrPostCallback InsertClassListAttendanceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertConceptReviewOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertDiagnosisOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertDisabilityCertOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertDischargeSummaryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertDoctorsNotesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertDrugPrescribeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertEmergencyContactOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertEnquiryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertFoodMenuOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertHRTrainingParticipantsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertHistoryPresentIllnessOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertHostelOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertICTRequisitionLinesOperationCompleted;
         
@@ -256,6 +332,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback InsertMenuSalesHeaderOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertMenuSalesLineOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertMissingMarksOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertMoreSspDataOperationCompleted;
         
@@ -343,7 +421,11 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback LecturerEvaluationCreateOperationCompleted;
         
+        private System.Threading.SendOrPostCallback LecturerEvaluationHeader_1653951911OperationCompleted;
+        
         private System.Threading.SendOrPostCallback LecturerEvaluationHeaderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback MaintenanceRequestOperationCompleted;
         
         private System.Threading.SendOrPostCallback MarkRadiologyCompleteOperationCompleted;
         
@@ -433,6 +515,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback RegisterStudentUnitBasketOperationCompleted;
         
+        private System.Threading.SendOrPostCallback RegisterStudentUnits_ChukaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback RegisterStudentUnitsOperationCompleted;
         
         private System.Threading.SendOrPostCallback RejectLeaveApplicationOperationCompleted;
@@ -445,39 +529,13 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback RemoveTransportReqPassengerOperationCompleted;
         
-        private System.Threading.SendOrPostCallback RequestAdmissionOperationCompleted;
+        private System.Threading.SendOrPostCallback GeneralEvaluationCreate_799730578OperationCompleted;
         
-        private System.Threading.SendOrPostCallback RequestLabOperationCompleted;
+        private System.Threading.SendOrPostCallback GenerateAdmissionLetterOperationCompleted;
         
-        private System.Threading.SendOrPostCallback RequestRadiologyOperationCompleted;
+        private System.Threading.SendOrPostCallback GenerateAdmissionPrintoutOperationCompleted;
         
-        private System.Threading.SendOrPostCallback RequestReferralOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ReturnAmountInWordsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ReturnStudentOptionOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SMSSendResetPassordOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SMSStffSendResetPassordOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveELearningEvaluationOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveEmailOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveGeneralEvaluationCommentsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveHRAppraisalSkillsCompetenceOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveHostelBookingInterestOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveLecturerEvaluationFormOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveObjectivesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveProfessionalBodyRequestOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SaveSickoffOperationCompleted;
+        private System.Threading.SendOrPostCallback GenerateAdvanceHostelAllocationOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateAppraisalPrintoutOperationCompleted;
         
@@ -495,7 +553,13 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback GenerateDischargeSummaryPrintoutOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GenerateDriverTicketReportOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GenerateExamAttendanceListOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateFamilyBankTokenOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateFeesStructureByStageOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateFeesStructureOperationCompleted;
         
@@ -516,6 +580,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback GeneratePNineReportOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateParttimeClaimOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GeneratePaySlipReportChukaOperationCompleted;
         
         private System.Threading.SendOrPostCallback GeneratePaySlipReportKabuOperationCompleted;
         
@@ -541,6 +607,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback GenerateSickoffPrintoutOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GenerateSsupp_RetakeExamCardOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GenerateStudentAdmissionLetterOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentAuditOperationCompleted;
@@ -549,13 +617,19 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback GenerateStudentExamCardOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GenerateStudentLegacyStatementOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GenerateStudentProformaInvoiceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateStudentProformaInvoice_StageOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentProvisionalResultsOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentReportCardByProgOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentReportCardFilterOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateStudentReportCardFromBackLogOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentReportCardOperationCompleted;
         
@@ -595,6 +669,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback GetGraduationFeeOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetProfilePictureApplicantOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetProfilePictureStudentOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetProfilePictureOperationCompleted;
@@ -629,6 +705,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback HRCancelApprisalRequisitionOperationCompleted;
         
+        private System.Threading.SendOrPostCallback HRCancelFuelRechrageCardApplicationOperationCompleted;
+        
         private System.Threading.SendOrPostCallback HRCancelLeaveApplicationOperationCompleted;
         
         private System.Threading.SendOrPostCallback HRCancelPurchaseRequisitionOperationCompleted;
@@ -636,6 +714,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback HRCancelStoreRequisitionOperationCompleted;
         
         private System.Threading.SendOrPostCallback HRCancelTrainingRequisitionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback HRFuelRechargeCardApprovalRequestOperationCompleted;
         
         private System.Threading.SendOrPostCallback HRJobApplicantCreateOperationCompleted;
         
@@ -705,36 +785,6 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback InsertApplicantRefereeOperationCompleted;
         
-        private System.Threading.SendOrPostCallback InsertApplicationOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertAppointmentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertClassListAttendanceOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertConceptReviewOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertDiagnosisOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertDisabilityCertOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertDischargeSummaryOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertDoctorsNotesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertDrugPrescribeOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertEmergencyContactOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertEnquiryOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertFoodMenuOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertHRTrainingParticipantsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertHistoryPresentIllnessOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InsertHostelOperationCompleted;
-        
         private System.Threading.SendOrPostCallback AcademicRefereeOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddEmployeeQualificationsOperationCompleted;
@@ -802,6 +852,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback CheckFeePolicyOperationCompleted;
         
         private System.Threading.SendOrPostCallback CheckLabResultsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CheckTokenOperationCompleted;
         
         private System.Threading.SendOrPostCallback ClaimLinesExistsOperationCompleted;
         
@@ -961,13 +1013,11 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback FoodReqcancelRequestOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FuelRechargeCardOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FuelRequisitionOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GeneralEvaluationCreateOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GenerateAdmissionLetterOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GenerateAdmissionPrintoutOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GenerateAdvanceHostelAllocationOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -1008,6 +1058,69 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        public event isLastVisitOpenCompletedEventHandler isLastVisitOpenCompleted;
+        
+        /// <remarks/>
+        public event unbookHostelCompletedEventHandler unbookHostelCompleted;
+        
+        /// <remarks/>
+        public event updateDashboardProfileCompletedEventHandler updateDashboardProfileCompleted;
+        
+        /// <remarks/>
+        public event RequestAdmissionCompletedEventHandler RequestAdmissionCompleted;
+        
+        /// <remarks/>
+        public event RequestLabCompletedEventHandler RequestLabCompleted;
+        
+        /// <remarks/>
+        public event RequestRadiologyCompletedEventHandler RequestRadiologyCompleted;
+        
+        /// <remarks/>
+        public event RequestReferralCompletedEventHandler RequestReferralCompleted;
+        
+        /// <remarks/>
+        public event ReturnAmountInWordsCompletedEventHandler ReturnAmountInWordsCompleted;
+        
+        /// <remarks/>
+        public event ReturnStudentOptionCompletedEventHandler ReturnStudentOptionCompleted;
+        
+        /// <remarks/>
+        public event SMSSendResetPassordCompletedEventHandler SMSSendResetPassordCompleted;
+        
+        /// <remarks/>
+        public event SMSStffSendResetPassordCompletedEventHandler SMSStffSendResetPassordCompleted;
+        
+        /// <remarks/>
+        public event SaveELearningEvaluationCompletedEventHandler SaveELearningEvaluationCompleted;
+        
+        /// <remarks/>
+        public event SaveEmailCompletedEventHandler SaveEmailCompleted;
+        
+        /// <remarks/>
+        public event SaveEvaluationSuggestionsCompletedEventHandler SaveEvaluationSuggestionsCompleted;
+        
+        /// <remarks/>
+        public event SaveGeneralEvaluationCommentsCompletedEventHandler SaveGeneralEvaluationCommentsCompleted;
+        
+        /// <remarks/>
+        public event SaveHRAppraisalSkillsCompetenceCompletedEventHandler SaveHRAppraisalSkillsCompetenceCompleted;
+        
+        /// <remarks/>
+        public event SaveHostelBookingInterestCompletedEventHandler SaveHostelBookingInterestCompleted;
+        
+        /// <remarks/>
+        public event SaveLecturerEvaluationFormCompletedEventHandler SaveLecturerEvaluationFormCompleted;
+        
+        /// <remarks/>
+        public event SaveObjectivesCompletedEventHandler SaveObjectivesCompleted;
+        
+        /// <remarks/>
+        public event SaveProfessionalBodyRequestCompletedEventHandler SaveProfessionalBodyRequestCompleted;
+        
+        /// <remarks/>
+        public event SaveSickoffCompletedEventHandler SaveSickoffCompleted;
+        
+        /// <remarks/>
         public event SaveStudentEnquiryCompletedEventHandler SaveStudentEnquiryCompleted;
         
         /// <remarks/>
@@ -1021,6 +1134,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event SaveUpdateHRAppraisalSkillsDevelopmentCompletedEventHandler SaveUpdateHRAppraisalSkillsDevelopmentCompleted;
+        
+        /// <remarks/>
+        public event SaveVehicleOdometerCompletedEventHandler SaveVehicleOdometerCompleted;
         
         /// <remarks/>
         public event SelectDiagnosisCompletedEventHandler SelectDiagnosisCompleted;
@@ -1081,6 +1197,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event StoreLinesExistsCompletedEventHandler StoreLinesExistsCompleted;
+        
+        /// <remarks/>
+        public event StorePayment2CompletedEventHandler StorePayment2Completed;
         
         /// <remarks/>
         public event StorePaymentCompletedEventHandler StorePaymentCompleted;
@@ -1176,6 +1295,9 @@ namespace New_Student_Portal.NAVWS {
         public event TransportRequisitionCreateCompletedEventHandler TransportRequisitionCreateCompleted;
         
         /// <remarks/>
+        public event TransportTicketHasOdometerReadingCompletedEventHandler TransportTicketHasOdometerReadingCompleted;
+        
+        /// <remarks/>
         public event TutionFeeAmountCompletedEventHandler TutionFeeAmountCompleted;
         
         /// <remarks/>
@@ -1183,6 +1305,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event UpdateApplicationPaymentCompletedEventHandler UpdateApplicationPaymentCompleted;
+        
+        /// <remarks/>
+        public event UpdateCateringTokenCompletedEventHandler UpdateCateringTokenCompleted;
         
         /// <remarks/>
         public event UpdateConceptReviewCompletedEventHandler UpdateConceptReviewCompleted;
@@ -1290,6 +1415,9 @@ namespace New_Student_Portal.NAVWS {
         public event fnReturnNoSeriesCompletedEventHandler fnReturnNoSeriesCompleted;
         
         /// <remarks/>
+        public event fnSaveGraduation2CompletedEventHandler fnSaveGraduation2Completed;
+        
+        /// <remarks/>
         public event fnSaveGraduationCompletedEventHandler fnSaveGraduationCompleted;
         
         /// <remarks/>
@@ -1302,13 +1430,49 @@ namespace New_Student_Portal.NAVWS {
         public event fnSubmitExamResultsCompletedEventHandler fnSubmitExamResultsCompleted;
         
         /// <remarks/>
-        public event isLastVisitOpenCompletedEventHandler isLastVisitOpenCompleted;
+        public event InsertApplicationCompletedEventHandler InsertApplicationCompleted;
         
         /// <remarks/>
-        public event unbookHostelCompletedEventHandler unbookHostelCompleted;
+        public event InsertAppointmentCompletedEventHandler InsertAppointmentCompleted;
         
         /// <remarks/>
-        public event updateDashboardProfileCompletedEventHandler updateDashboardProfileCompleted;
+        public event InsertClassListAttendanceCompletedEventHandler InsertClassListAttendanceCompleted;
+        
+        /// <remarks/>
+        public event InsertConceptReviewCompletedEventHandler InsertConceptReviewCompleted;
+        
+        /// <remarks/>
+        public event InsertDiagnosisCompletedEventHandler InsertDiagnosisCompleted;
+        
+        /// <remarks/>
+        public event InsertDisabilityCertCompletedEventHandler InsertDisabilityCertCompleted;
+        
+        /// <remarks/>
+        public event InsertDischargeSummaryCompletedEventHandler InsertDischargeSummaryCompleted;
+        
+        /// <remarks/>
+        public event InsertDoctorsNotesCompletedEventHandler InsertDoctorsNotesCompleted;
+        
+        /// <remarks/>
+        public event InsertDrugPrescribeCompletedEventHandler InsertDrugPrescribeCompleted;
+        
+        /// <remarks/>
+        public event InsertEmergencyContactCompletedEventHandler InsertEmergencyContactCompleted;
+        
+        /// <remarks/>
+        public event InsertEnquiryCompletedEventHandler InsertEnquiryCompleted;
+        
+        /// <remarks/>
+        public event InsertFoodMenuCompletedEventHandler InsertFoodMenuCompleted;
+        
+        /// <remarks/>
+        public event InsertHRTrainingParticipantsCompletedEventHandler InsertHRTrainingParticipantsCompleted;
+        
+        /// <remarks/>
+        public event InsertHistoryPresentIllnessCompletedEventHandler InsertHistoryPresentIllnessCompleted;
+        
+        /// <remarks/>
+        public event InsertHostelCompletedEventHandler InsertHostelCompleted;
         
         /// <remarks/>
         public event InsertICTRequisitionLinesCompletedEventHandler InsertICTRequisitionLinesCompleted;
@@ -1348,6 +1512,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event InsertMenuSalesLineCompletedEventHandler InsertMenuSalesLineCompleted;
+        
+        /// <remarks/>
+        public event InsertMissingMarksCompletedEventHandler InsertMissingMarksCompleted;
         
         /// <remarks/>
         public event InsertMoreSspDataCompletedEventHandler InsertMoreSspDataCompleted;
@@ -1479,7 +1646,13 @@ namespace New_Student_Portal.NAVWS {
         public event LecturerEvaluationCreateCompletedEventHandler LecturerEvaluationCreateCompleted;
         
         /// <remarks/>
+        public event LecturerEvaluationHeader_1653951911CompletedEventHandler LecturerEvaluationHeader_1653951911Completed;
+        
+        /// <remarks/>
         public event LecturerEvaluationHeaderCompletedEventHandler LecturerEvaluationHeaderCompleted;
+        
+        /// <remarks/>
+        public event MaintenanceRequestCompletedEventHandler MaintenanceRequestCompleted;
         
         /// <remarks/>
         public event MarkRadiologyCompleteCompletedEventHandler MarkRadiologyCompleteCompleted;
@@ -1614,6 +1787,9 @@ namespace New_Student_Portal.NAVWS {
         public event RegisterStudentUnitBasketCompletedEventHandler RegisterStudentUnitBasketCompleted;
         
         /// <remarks/>
+        public event RegisterStudentUnits_ChukaCompletedEventHandler RegisterStudentUnits_ChukaCompleted;
+        
+        /// <remarks/>
         public event RegisterStudentUnitsCompletedEventHandler RegisterStudentUnitsCompleted;
         
         /// <remarks/>
@@ -1632,55 +1808,16 @@ namespace New_Student_Portal.NAVWS {
         public event RemoveTransportReqPassengerCompletedEventHandler RemoveTransportReqPassengerCompleted;
         
         /// <remarks/>
-        public event RequestAdmissionCompletedEventHandler RequestAdmissionCompleted;
+        public event GeneralEvaluationCreate_799730578CompletedEventHandler GeneralEvaluationCreate_799730578Completed;
         
         /// <remarks/>
-        public event RequestLabCompletedEventHandler RequestLabCompleted;
+        public event GenerateAdmissionLetterCompletedEventHandler GenerateAdmissionLetterCompleted;
         
         /// <remarks/>
-        public event RequestRadiologyCompletedEventHandler RequestRadiologyCompleted;
+        public event GenerateAdmissionPrintoutCompletedEventHandler GenerateAdmissionPrintoutCompleted;
         
         /// <remarks/>
-        public event RequestReferralCompletedEventHandler RequestReferralCompleted;
-        
-        /// <remarks/>
-        public event ReturnAmountInWordsCompletedEventHandler ReturnAmountInWordsCompleted;
-        
-        /// <remarks/>
-        public event ReturnStudentOptionCompletedEventHandler ReturnStudentOptionCompleted;
-        
-        /// <remarks/>
-        public event SMSSendResetPassordCompletedEventHandler SMSSendResetPassordCompleted;
-        
-        /// <remarks/>
-        public event SMSStffSendResetPassordCompletedEventHandler SMSStffSendResetPassordCompleted;
-        
-        /// <remarks/>
-        public event SaveELearningEvaluationCompletedEventHandler SaveELearningEvaluationCompleted;
-        
-        /// <remarks/>
-        public event SaveEmailCompletedEventHandler SaveEmailCompleted;
-        
-        /// <remarks/>
-        public event SaveGeneralEvaluationCommentsCompletedEventHandler SaveGeneralEvaluationCommentsCompleted;
-        
-        /// <remarks/>
-        public event SaveHRAppraisalSkillsCompetenceCompletedEventHandler SaveHRAppraisalSkillsCompetenceCompleted;
-        
-        /// <remarks/>
-        public event SaveHostelBookingInterestCompletedEventHandler SaveHostelBookingInterestCompleted;
-        
-        /// <remarks/>
-        public event SaveLecturerEvaluationFormCompletedEventHandler SaveLecturerEvaluationFormCompleted;
-        
-        /// <remarks/>
-        public event SaveObjectivesCompletedEventHandler SaveObjectivesCompleted;
-        
-        /// <remarks/>
-        public event SaveProfessionalBodyRequestCompletedEventHandler SaveProfessionalBodyRequestCompleted;
-        
-        /// <remarks/>
-        public event SaveSickoffCompletedEventHandler SaveSickoffCompleted;
+        public event GenerateAdvanceHostelAllocationCompletedEventHandler GenerateAdvanceHostelAllocationCompleted;
         
         /// <remarks/>
         public event GenerateAppraisalPrintoutCompletedEventHandler GenerateAppraisalPrintoutCompleted;
@@ -1707,7 +1844,16 @@ namespace New_Student_Portal.NAVWS {
         public event GenerateDischargeSummaryPrintoutCompletedEventHandler GenerateDischargeSummaryPrintoutCompleted;
         
         /// <remarks/>
+        public event GenerateDriverTicketReportCompletedEventHandler GenerateDriverTicketReportCompleted;
+        
+        /// <remarks/>
         public event GenerateExamAttendanceListCompletedEventHandler GenerateExamAttendanceListCompleted;
+        
+        /// <remarks/>
+        public event GenerateFamilyBankTokenCompletedEventHandler GenerateFamilyBankTokenCompleted;
+        
+        /// <remarks/>
+        public event GenerateFeesStructureByStageCompletedEventHandler GenerateFeesStructureByStageCompleted;
         
         /// <remarks/>
         public event GenerateFeesStructureCompletedEventHandler GenerateFeesStructureCompleted;
@@ -1738,6 +1884,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event GenerateParttimeClaimCompletedEventHandler GenerateParttimeClaimCompleted;
+        
+        /// <remarks/>
+        public event GeneratePaySlipReportChukaCompletedEventHandler GeneratePaySlipReportChukaCompleted;
         
         /// <remarks/>
         public event GeneratePaySlipReportKabuCompletedEventHandler GeneratePaySlipReportKabuCompleted;
@@ -1776,6 +1925,9 @@ namespace New_Student_Portal.NAVWS {
         public event GenerateSickoffPrintoutCompletedEventHandler GenerateSickoffPrintoutCompleted;
         
         /// <remarks/>
+        public event GenerateSsupp_RetakeExamCardCompletedEventHandler GenerateSsupp_RetakeExamCardCompleted;
+        
+        /// <remarks/>
         public event GenerateStudentAdmissionLetterCompletedEventHandler GenerateStudentAdmissionLetterCompleted;
         
         /// <remarks/>
@@ -1788,7 +1940,13 @@ namespace New_Student_Portal.NAVWS {
         public event GenerateStudentExamCardCompletedEventHandler GenerateStudentExamCardCompleted;
         
         /// <remarks/>
+        public event GenerateStudentLegacyStatementCompletedEventHandler GenerateStudentLegacyStatementCompleted;
+        
+        /// <remarks/>
         public event GenerateStudentProformaInvoiceCompletedEventHandler GenerateStudentProformaInvoiceCompleted;
+        
+        /// <remarks/>
+        public event GenerateStudentProformaInvoice_StageCompletedEventHandler GenerateStudentProformaInvoice_StageCompleted;
         
         /// <remarks/>
         public event GenerateStudentProvisionalResultsCompletedEventHandler GenerateStudentProvisionalResultsCompleted;
@@ -1798,6 +1956,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event GenerateStudentReportCardFilterCompletedEventHandler GenerateStudentReportCardFilterCompleted;
+        
+        /// <remarks/>
+        public event GenerateStudentReportCardFromBackLogCompletedEventHandler GenerateStudentReportCardFromBackLogCompleted;
         
         /// <remarks/>
         public event GenerateStudentReportCardCompletedEventHandler GenerateStudentReportCardCompleted;
@@ -1857,6 +2018,9 @@ namespace New_Student_Portal.NAVWS {
         public event GetGraduationFeeCompletedEventHandler GetGraduationFeeCompleted;
         
         /// <remarks/>
+        public event GetProfilePictureApplicantCompletedEventHandler GetProfilePictureApplicantCompleted;
+        
+        /// <remarks/>
         public event GetProfilePictureStudentCompletedEventHandler GetProfilePictureStudentCompleted;
         
         /// <remarks/>
@@ -1908,6 +2072,9 @@ namespace New_Student_Portal.NAVWS {
         public event HRCancelApprisalRequisitionCompletedEventHandler HRCancelApprisalRequisitionCompleted;
         
         /// <remarks/>
+        public event HRCancelFuelRechrageCardApplicationCompletedEventHandler HRCancelFuelRechrageCardApplicationCompleted;
+        
+        /// <remarks/>
         public event HRCancelLeaveApplicationCompletedEventHandler HRCancelLeaveApplicationCompleted;
         
         /// <remarks/>
@@ -1918,6 +2085,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event HRCancelTrainingRequisitionCompletedEventHandler HRCancelTrainingRequisitionCompleted;
+        
+        /// <remarks/>
+        public event HRFuelRechargeCardApprovalRequestCompletedEventHandler HRFuelRechargeCardApprovalRequestCompleted;
         
         /// <remarks/>
         public event HRJobApplicantCreateCompletedEventHandler HRJobApplicantCreateCompleted;
@@ -2022,51 +2192,6 @@ namespace New_Student_Portal.NAVWS {
         public event InsertApplicantRefereeCompletedEventHandler InsertApplicantRefereeCompleted;
         
         /// <remarks/>
-        public event InsertApplicationCompletedEventHandler InsertApplicationCompleted;
-        
-        /// <remarks/>
-        public event InsertAppointmentCompletedEventHandler InsertAppointmentCompleted;
-        
-        /// <remarks/>
-        public event InsertClassListAttendanceCompletedEventHandler InsertClassListAttendanceCompleted;
-        
-        /// <remarks/>
-        public event InsertConceptReviewCompletedEventHandler InsertConceptReviewCompleted;
-        
-        /// <remarks/>
-        public event InsertDiagnosisCompletedEventHandler InsertDiagnosisCompleted;
-        
-        /// <remarks/>
-        public event InsertDisabilityCertCompletedEventHandler InsertDisabilityCertCompleted;
-        
-        /// <remarks/>
-        public event InsertDischargeSummaryCompletedEventHandler InsertDischargeSummaryCompleted;
-        
-        /// <remarks/>
-        public event InsertDoctorsNotesCompletedEventHandler InsertDoctorsNotesCompleted;
-        
-        /// <remarks/>
-        public event InsertDrugPrescribeCompletedEventHandler InsertDrugPrescribeCompleted;
-        
-        /// <remarks/>
-        public event InsertEmergencyContactCompletedEventHandler InsertEmergencyContactCompleted;
-        
-        /// <remarks/>
-        public event InsertEnquiryCompletedEventHandler InsertEnquiryCompleted;
-        
-        /// <remarks/>
-        public event InsertFoodMenuCompletedEventHandler InsertFoodMenuCompleted;
-        
-        /// <remarks/>
-        public event InsertHRTrainingParticipantsCompletedEventHandler InsertHRTrainingParticipantsCompleted;
-        
-        /// <remarks/>
-        public event InsertHistoryPresentIllnessCompletedEventHandler InsertHistoryPresentIllnessCompleted;
-        
-        /// <remarks/>
-        public event InsertHostelCompletedEventHandler InsertHostelCompleted;
-        
-        /// <remarks/>
         public event AcademicRefereeCompletedEventHandler AcademicRefereeCompleted;
         
         /// <remarks/>
@@ -2167,6 +2292,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event CheckLabResultsCompletedEventHandler CheckLabResultsCompleted;
+        
+        /// <remarks/>
+        public event CheckTokenCompletedEventHandler CheckTokenCompleted;
         
         /// <remarks/>
         public event ClaimLinesExistsCompletedEventHandler ClaimLinesExistsCompleted;
@@ -2406,16 +2534,752 @@ namespace New_Student_Portal.NAVWS {
         public event FoodReqcancelRequestCompletedEventHandler FoodReqcancelRequestCompleted;
         
         /// <remarks/>
+        public event FuelRechargeCardCompletedEventHandler FuelRechargeCardCompleted;
+        
+        /// <remarks/>
+        public event FuelRequisitionCompletedEventHandler FuelRequisitionCompleted;
+        
+        /// <remarks/>
         public event GeneralEvaluationCreateCompletedEventHandler GeneralEvaluationCreateCompleted;
         
         /// <remarks/>
-        public event GenerateAdmissionLetterCompletedEventHandler GenerateAdmissionLetterCompleted;
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:isLastVisitOpen", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="isLastVisitOpen_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool isLastVisitOpen(string patientNo) {
+            object[] results = this.Invoke("isLastVisitOpen", new object[] {
+                        patientNo});
+            return ((bool)(results[0]));
+        }
         
         /// <remarks/>
-        public event GenerateAdmissionPrintoutCompletedEventHandler GenerateAdmissionPrintoutCompleted;
+        public void isLastVisitOpenAsync(string patientNo) {
+            this.isLastVisitOpenAsync(patientNo, null);
+        }
         
         /// <remarks/>
-        public event GenerateAdvanceHostelAllocationCompletedEventHandler GenerateAdvanceHostelAllocationCompleted;
+        public void isLastVisitOpenAsync(string patientNo, object userState) {
+            if ((this.isLastVisitOpenOperationCompleted == null)) {
+                this.isLastVisitOpenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisLastVisitOpenOperationCompleted);
+            }
+            this.InvokeAsync("isLastVisitOpen", new object[] {
+                        patientNo}, this.isLastVisitOpenOperationCompleted, userState);
+        }
+        
+        private void OnisLastVisitOpenOperationCompleted(object arg) {
+            if ((this.isLastVisitOpenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.isLastVisitOpenCompleted(this, new isLastVisitOpenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:unbookHostel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="unbookHostel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool unbookHostel(string hostel, string room, string space, string admission_no) {
+            object[] results = this.Invoke("unbookHostel", new object[] {
+                        hostel,
+                        room,
+                        space,
+                        admission_no});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void unbookHostelAsync(string hostel, string room, string space, string admission_no) {
+            this.unbookHostelAsync(hostel, room, space, admission_no, null);
+        }
+        
+        /// <remarks/>
+        public void unbookHostelAsync(string hostel, string room, string space, string admission_no, object userState) {
+            if ((this.unbookHostelOperationCompleted == null)) {
+                this.unbookHostelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnunbookHostelOperationCompleted);
+            }
+            this.InvokeAsync("unbookHostel", new object[] {
+                        hostel,
+                        room,
+                        space,
+                        admission_no}, this.unbookHostelOperationCompleted, userState);
+        }
+        
+        private void OnunbookHostelOperationCompleted(object arg) {
+            if ((this.unbookHostelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.unbookHostelCompleted(this, new unbookHostelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:updateDashboardProfile", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="updateDashboardProfile_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool updateDashboardProfile(int gender, string admNo) {
+            object[] results = this.Invoke("updateDashboardProfile", new object[] {
+                        gender,
+                        admNo});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateDashboardProfileAsync(int gender, string admNo) {
+            this.updateDashboardProfileAsync(gender, admNo, null);
+        }
+        
+        /// <remarks/>
+        public void updateDashboardProfileAsync(int gender, string admNo, object userState) {
+            if ((this.updateDashboardProfileOperationCompleted == null)) {
+                this.updateDashboardProfileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateDashboardProfileOperationCompleted);
+            }
+            this.InvokeAsync("updateDashboardProfile", new object[] {
+                        gender,
+                        admNo}, this.updateDashboardProfileOperationCompleted, userState);
+        }
+        
+        private void OnupdateDashboardProfileOperationCompleted(object arg) {
+            if ((this.updateDashboardProfileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateDashboardProfileCompleted(this, new updateDashboardProfileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestAdmission", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestAdmission_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RequestAdmission(string treatmentNo) {
+            this.Invoke("RequestAdmission", new object[] {
+                        treatmentNo});
+        }
+        
+        /// <remarks/>
+        public void RequestAdmissionAsync(string treatmentNo) {
+            this.RequestAdmissionAsync(treatmentNo, null);
+        }
+        
+        /// <remarks/>
+        public void RequestAdmissionAsync(string treatmentNo, object userState) {
+            if ((this.RequestAdmissionOperationCompleted == null)) {
+                this.RequestAdmissionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestAdmissionOperationCompleted);
+            }
+            this.InvokeAsync("RequestAdmission", new object[] {
+                        treatmentNo}, this.RequestAdmissionOperationCompleted, userState);
+        }
+        
+        private void OnRequestAdmissionOperationCompleted(object arg) {
+            if ((this.RequestAdmissionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RequestAdmissionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestLab", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestLab_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RequestLab(string treatmentNo) {
+            this.Invoke("RequestLab", new object[] {
+                        treatmentNo});
+        }
+        
+        /// <remarks/>
+        public void RequestLabAsync(string treatmentNo) {
+            this.RequestLabAsync(treatmentNo, null);
+        }
+        
+        /// <remarks/>
+        public void RequestLabAsync(string treatmentNo, object userState) {
+            if ((this.RequestLabOperationCompleted == null)) {
+                this.RequestLabOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestLabOperationCompleted);
+            }
+            this.InvokeAsync("RequestLab", new object[] {
+                        treatmentNo}, this.RequestLabOperationCompleted, userState);
+        }
+        
+        private void OnRequestLabOperationCompleted(object arg) {
+            if ((this.RequestLabCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RequestLabCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestRadiology", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestRadiology_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RequestRadiology(string treatmentNo) {
+            this.Invoke("RequestRadiology", new object[] {
+                        treatmentNo});
+        }
+        
+        /// <remarks/>
+        public void RequestRadiologyAsync(string treatmentNo) {
+            this.RequestRadiologyAsync(treatmentNo, null);
+        }
+        
+        /// <remarks/>
+        public void RequestRadiologyAsync(string treatmentNo, object userState) {
+            if ((this.RequestRadiologyOperationCompleted == null)) {
+                this.RequestRadiologyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestRadiologyOperationCompleted);
+            }
+            this.InvokeAsync("RequestRadiology", new object[] {
+                        treatmentNo}, this.RequestRadiologyOperationCompleted, userState);
+        }
+        
+        private void OnRequestRadiologyOperationCompleted(object arg) {
+            if ((this.RequestRadiologyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RequestRadiologyCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestReferral", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestReferral_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RequestReferral(string treatmentNo, string hospNo, string reffReasons, string reffRemarks) {
+            this.Invoke("RequestReferral", new object[] {
+                        treatmentNo,
+                        hospNo,
+                        reffReasons,
+                        reffRemarks});
+        }
+        
+        /// <remarks/>
+        public void RequestReferralAsync(string treatmentNo, string hospNo, string reffReasons, string reffRemarks) {
+            this.RequestReferralAsync(treatmentNo, hospNo, reffReasons, reffRemarks, null);
+        }
+        
+        /// <remarks/>
+        public void RequestReferralAsync(string treatmentNo, string hospNo, string reffReasons, string reffRemarks, object userState) {
+            if ((this.RequestReferralOperationCompleted == null)) {
+                this.RequestReferralOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestReferralOperationCompleted);
+            }
+            this.InvokeAsync("RequestReferral", new object[] {
+                        treatmentNo,
+                        hospNo,
+                        reffReasons,
+                        reffRemarks}, this.RequestReferralOperationCompleted, userState);
+        }
+        
+        private void OnRequestReferralOperationCompleted(object arg) {
+            if ((this.RequestReferralCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RequestReferralCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ReturnAmountInWords", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ReturnAmountInWords_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string ReturnAmountInWords(decimal amount) {
+            object[] results = this.Invoke("ReturnAmountInWords", new object[] {
+                        amount});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ReturnAmountInWordsAsync(decimal amount) {
+            this.ReturnAmountInWordsAsync(amount, null);
+        }
+        
+        /// <remarks/>
+        public void ReturnAmountInWordsAsync(decimal amount, object userState) {
+            if ((this.ReturnAmountInWordsOperationCompleted == null)) {
+                this.ReturnAmountInWordsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnAmountInWordsOperationCompleted);
+            }
+            this.InvokeAsync("ReturnAmountInWords", new object[] {
+                        amount}, this.ReturnAmountInWordsOperationCompleted, userState);
+        }
+        
+        private void OnReturnAmountInWordsOperationCompleted(object arg) {
+            if ((this.ReturnAmountInWordsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ReturnAmountInWordsCompleted(this, new ReturnAmountInWordsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ReturnStudentOption", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ReturnStudentOption_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string ReturnStudentOption(string studNo, string prog) {
+            object[] results = this.Invoke("ReturnStudentOption", new object[] {
+                        studNo,
+                        prog});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ReturnStudentOptionAsync(string studNo, string prog) {
+            this.ReturnStudentOptionAsync(studNo, prog, null);
+        }
+        
+        /// <remarks/>
+        public void ReturnStudentOptionAsync(string studNo, string prog, object userState) {
+            if ((this.ReturnStudentOptionOperationCompleted == null)) {
+                this.ReturnStudentOptionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnStudentOptionOperationCompleted);
+            }
+            this.InvokeAsync("ReturnStudentOption", new object[] {
+                        studNo,
+                        prog}, this.ReturnStudentOptionOperationCompleted, userState);
+        }
+        
+        private void OnReturnStudentOptionOperationCompleted(object arg) {
+            if ((this.ReturnStudentOptionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ReturnStudentOptionCompleted(this, new ReturnStudentOptionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string SMSSendResetPassord(string sTDNo, string newPassword) {
+            object[] results = this.Invoke("SMSSendResetPassord", new object[] {
+                        sTDNo,
+                        newPassword});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SMSSendResetPassordAsync(string sTDNo, string newPassword) {
+            this.SMSSendResetPassordAsync(sTDNo, newPassword, null);
+        }
+        
+        /// <remarks/>
+        public void SMSSendResetPassordAsync(string sTDNo, string newPassword, object userState) {
+            if ((this.SMSSendResetPassordOperationCompleted == null)) {
+                this.SMSSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSSendResetPassordOperationCompleted);
+            }
+            this.InvokeAsync("SMSSendResetPassord", new object[] {
+                        sTDNo,
+                        newPassword}, this.SMSSendResetPassordOperationCompleted, userState);
+        }
+        
+        private void OnSMSSendResetPassordOperationCompleted(object arg) {
+            if ((this.SMSSendResetPassordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SMSSendResetPassordCompleted(this, new SMSSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSStffSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string SMSStffSendResetPassord(string staffNo, string newPassword) {
+            object[] results = this.Invoke("SMSStffSendResetPassord", new object[] {
+                        staffNo,
+                        newPassword});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword) {
+            this.SMSStffSendResetPassordAsync(staffNo, newPassword, null);
+        }
+        
+        /// <remarks/>
+        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword, object userState) {
+            if ((this.SMSStffSendResetPassordOperationCompleted == null)) {
+                this.SMSStffSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSStffSendResetPassordOperationCompleted);
+            }
+            this.InvokeAsync("SMSStffSendResetPassord", new object[] {
+                        staffNo,
+                        newPassword}, this.SMSStffSendResetPassordOperationCompleted, userState);
+        }
+        
+        private void OnSMSStffSendResetPassordOperationCompleted(object arg) {
+            if ((this.SMSStffSendResetPassordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SMSStffSendResetPassordCompleted(this, new SMSStffSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveELearningEvaluation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveELearningEvaluation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveELearningEvaluation(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform) {
+            this.Invoke("SaveELearningEvaluation", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        e_LMaterial,
+                        e_LPlatform});
+        }
+        
+        /// <remarks/>
+        public void SaveELearningEvaluationAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform) {
+            this.SaveELearningEvaluationAsync(student_No, unitCode, semester, staff_Number, staff_Name, e_LMaterial, e_LPlatform, null);
+        }
+        
+        /// <remarks/>
+        public void SaveELearningEvaluationAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform, object userState) {
+            if ((this.SaveELearningEvaluationOperationCompleted == null)) {
+                this.SaveELearningEvaluationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveELearningEvaluationOperationCompleted);
+            }
+            this.InvokeAsync("SaveELearningEvaluation", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        e_LMaterial,
+                        e_LPlatform}, this.SaveELearningEvaluationOperationCompleted, userState);
+        }
+        
+        private void OnSaveELearningEvaluationOperationCompleted(object arg) {
+            if ((this.SaveELearningEvaluationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveELearningEvaluationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveEmail", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveEmail_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool SaveEmail(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category) {
+            object[] results = this.Invoke("SaveEmail", new object[] {
+                        subject,
+                        receiver,
+                        messageDesc1,
+                        messageDesc2,
+                        messageDesc3,
+                        messageDesc4,
+                        category});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveEmailAsync(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category) {
+            this.SaveEmailAsync(subject, receiver, messageDesc1, messageDesc2, messageDesc3, messageDesc4, category, null);
+        }
+        
+        /// <remarks/>
+        public void SaveEmailAsync(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category, object userState) {
+            if ((this.SaveEmailOperationCompleted == null)) {
+                this.SaveEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveEmailOperationCompleted);
+            }
+            this.InvokeAsync("SaveEmail", new object[] {
+                        subject,
+                        receiver,
+                        messageDesc1,
+                        messageDesc2,
+                        messageDesc3,
+                        messageDesc4,
+                        category}, this.SaveEmailOperationCompleted, userState);
+        }
+        
+        private void OnSaveEmailOperationCompleted(object arg) {
+            if ((this.SaveEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveEmailCompleted(this, new SaveEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveEvaluationSuggestions", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveEvaluationSuggestions_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveEvaluationSuggestions(string evaluationItem, string student_No, string semester, string suggestion) {
+            this.Invoke("SaveEvaluationSuggestions", new object[] {
+                        evaluationItem,
+                        student_No,
+                        semester,
+                        suggestion});
+        }
+        
+        /// <remarks/>
+        public void SaveEvaluationSuggestionsAsync(string evaluationItem, string student_No, string semester, string suggestion) {
+            this.SaveEvaluationSuggestionsAsync(evaluationItem, student_No, semester, suggestion, null);
+        }
+        
+        /// <remarks/>
+        public void SaveEvaluationSuggestionsAsync(string evaluationItem, string student_No, string semester, string suggestion, object userState) {
+            if ((this.SaveEvaluationSuggestionsOperationCompleted == null)) {
+                this.SaveEvaluationSuggestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveEvaluationSuggestionsOperationCompleted);
+            }
+            this.InvokeAsync("SaveEvaluationSuggestions", new object[] {
+                        evaluationItem,
+                        student_No,
+                        semester,
+                        suggestion}, this.SaveEvaluationSuggestionsOperationCompleted, userState);
+        }
+        
+        private void OnSaveEvaluationSuggestionsOperationCompleted(object arg) {
+            if ((this.SaveEvaluationSuggestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveEvaluationSuggestionsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveGeneralEvaluationComments", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveGeneralEvaluationComments_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveGeneralEvaluationComments(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4) {
+            this.Invoke("SaveGeneralEvaluationComments", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        sugge1,
+                        sugge2,
+                        sugge3,
+                        sugge4});
+        }
+        
+        /// <remarks/>
+        public void SaveGeneralEvaluationCommentsAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4) {
+            this.SaveGeneralEvaluationCommentsAsync(student_No, unitCode, semester, staff_Number, staff_Name, sugge1, sugge2, sugge3, sugge4, null);
+        }
+        
+        /// <remarks/>
+        public void SaveGeneralEvaluationCommentsAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4, object userState) {
+            if ((this.SaveGeneralEvaluationCommentsOperationCompleted == null)) {
+                this.SaveGeneralEvaluationCommentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveGeneralEvaluationCommentsOperationCompleted);
+            }
+            this.InvokeAsync("SaveGeneralEvaluationComments", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        sugge1,
+                        sugge2,
+                        sugge3,
+                        sugge4}, this.SaveGeneralEvaluationCommentsOperationCompleted, userState);
+        }
+        
+        private void OnSaveGeneralEvaluationCommentsOperationCompleted(object arg) {
+            if ((this.SaveGeneralEvaluationCommentsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveGeneralEvaluationCommentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveHRAppraisalSkillsCompetence" +
+            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveHRAppraisalSkillsCompetence_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveHRAppraisalSkillsCompetence(string docNo, string appType, string appraisalPeriod) {
+            this.Invoke("SaveHRAppraisalSkillsCompetence", new object[] {
+                        docNo,
+                        appType,
+                        appraisalPeriod});
+        }
+        
+        /// <remarks/>
+        public void SaveHRAppraisalSkillsCompetenceAsync(string docNo, string appType, string appraisalPeriod) {
+            this.SaveHRAppraisalSkillsCompetenceAsync(docNo, appType, appraisalPeriod, null);
+        }
+        
+        /// <remarks/>
+        public void SaveHRAppraisalSkillsCompetenceAsync(string docNo, string appType, string appraisalPeriod, object userState) {
+            if ((this.SaveHRAppraisalSkillsCompetenceOperationCompleted == null)) {
+                this.SaveHRAppraisalSkillsCompetenceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveHRAppraisalSkillsCompetenceOperationCompleted);
+            }
+            this.InvokeAsync("SaveHRAppraisalSkillsCompetence", new object[] {
+                        docNo,
+                        appType,
+                        appraisalPeriod}, this.SaveHRAppraisalSkillsCompetenceOperationCompleted, userState);
+        }
+        
+        private void OnSaveHRAppraisalSkillsCompetenceOperationCompleted(object arg) {
+            if ((this.SaveHRAppraisalSkillsCompetenceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveHRAppraisalSkillsCompetenceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveHostelBookingInterest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveHostelBookingInterest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveHostelBookingInterest(string stdNo, string sem, string hostel) {
+            this.Invoke("SaveHostelBookingInterest", new object[] {
+                        stdNo,
+                        sem,
+                        hostel});
+        }
+        
+        /// <remarks/>
+        public void SaveHostelBookingInterestAsync(string stdNo, string sem, string hostel) {
+            this.SaveHostelBookingInterestAsync(stdNo, sem, hostel, null);
+        }
+        
+        /// <remarks/>
+        public void SaveHostelBookingInterestAsync(string stdNo, string sem, string hostel, object userState) {
+            if ((this.SaveHostelBookingInterestOperationCompleted == null)) {
+                this.SaveHostelBookingInterestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveHostelBookingInterestOperationCompleted);
+            }
+            this.InvokeAsync("SaveHostelBookingInterest", new object[] {
+                        stdNo,
+                        sem,
+                        hostel}, this.SaveHostelBookingInterestOperationCompleted, userState);
+        }
+        
+        private void OnSaveHostelBookingInterestOperationCompleted(object arg) {
+            if ((this.SaveHostelBookingInterestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveHostelBookingInterestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveLecturerEvaluationForm", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveLecturerEvaluationForm_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveLecturerEvaluationForm(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem) {
+            this.Invoke("SaveLecturerEvaluationForm", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        evaluation_Question,
+                        evaluation_Category,
+                        programme,
+                        question_Score,
+                        section,
+                        evaluationItem});
+        }
+        
+        /// <remarks/>
+        public void SaveLecturerEvaluationFormAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem) {
+            this.SaveLecturerEvaluationFormAsync(student_No, unitCode, semester, staff_Number, staff_Name, evaluation_Question, evaluation_Category, programme, question_Score, section, evaluationItem, null);
+        }
+        
+        /// <remarks/>
+        public void SaveLecturerEvaluationFormAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem, object userState) {
+            if ((this.SaveLecturerEvaluationFormOperationCompleted == null)) {
+                this.SaveLecturerEvaluationFormOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveLecturerEvaluationFormOperationCompleted);
+            }
+            this.InvokeAsync("SaveLecturerEvaluationForm", new object[] {
+                        student_No,
+                        unitCode,
+                        semester,
+                        staff_Number,
+                        staff_Name,
+                        evaluation_Question,
+                        evaluation_Category,
+                        programme,
+                        question_Score,
+                        section,
+                        evaluationItem}, this.SaveLecturerEvaluationFormOperationCompleted, userState);
+        }
+        
+        private void OnSaveLecturerEvaluationFormOperationCompleted(object arg) {
+            if ((this.SaveLecturerEvaluationFormCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveLecturerEvaluationFormCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveObjectives", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveObjectives_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveObjectives(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section) {
+            this.Invoke("SaveObjectives", new object[] {
+                        appNo,
+                        appPeriod,
+                        objective,
+                        perfIndicator,
+                        target,
+                        timeLine,
+                        weight,
+                        objectiveNo,
+                        section});
+        }
+        
+        /// <remarks/>
+        public void SaveObjectivesAsync(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section) {
+            this.SaveObjectivesAsync(appNo, appPeriod, objective, perfIndicator, target, timeLine, weight, objectiveNo, section, null);
+        }
+        
+        /// <remarks/>
+        public void SaveObjectivesAsync(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section, object userState) {
+            if ((this.SaveObjectivesOperationCompleted == null)) {
+                this.SaveObjectivesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveObjectivesOperationCompleted);
+            }
+            this.InvokeAsync("SaveObjectives", new object[] {
+                        appNo,
+                        appPeriod,
+                        objective,
+                        perfIndicator,
+                        target,
+                        timeLine,
+                        weight,
+                        objectiveNo,
+                        section}, this.SaveObjectivesOperationCompleted, userState);
+        }
+        
+        private void OnSaveObjectivesOperationCompleted(object arg) {
+            if ((this.SaveObjectivesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveObjectivesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveProfessionalBodyRequest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveProfessionalBodyRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string SaveProfessionalBodyRequest(string staffNo, string profBody, decimal amount, string remarks, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime subscDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime expiryDate) {
+            object[] results = this.Invoke("SaveProfessionalBodyRequest", new object[] {
+                        staffNo,
+                        profBody,
+                        amount,
+                        remarks,
+                        subscDate,
+                        expiryDate});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveProfessionalBodyRequestAsync(string staffNo, string profBody, decimal amount, string remarks, System.DateTime subscDate, System.DateTime expiryDate) {
+            this.SaveProfessionalBodyRequestAsync(staffNo, profBody, amount, remarks, subscDate, expiryDate, null);
+        }
+        
+        /// <remarks/>
+        public void SaveProfessionalBodyRequestAsync(string staffNo, string profBody, decimal amount, string remarks, System.DateTime subscDate, System.DateTime expiryDate, object userState) {
+            if ((this.SaveProfessionalBodyRequestOperationCompleted == null)) {
+                this.SaveProfessionalBodyRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveProfessionalBodyRequestOperationCompleted);
+            }
+            this.InvokeAsync("SaveProfessionalBodyRequest", new object[] {
+                        staffNo,
+                        profBody,
+                        amount,
+                        remarks,
+                        subscDate,
+                        expiryDate}, this.SaveProfessionalBodyRequestOperationCompleted, userState);
+        }
+        
+        private void OnSaveProfessionalBodyRequestOperationCompleted(object arg) {
+            if ((this.SaveProfessionalBodyRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveProfessionalBodyRequestCompleted(this, new SaveProfessionalBodyRequestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveSickoff", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveSickoff_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveSickoff(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime nextAppointmentDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime startDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime endDate) {
+            this.Invoke("SaveSickoff", new object[] {
+                        treatmentNo,
+                        offdutydays,
+                        lightdutydays,
+                        comments,
+                        nextAppointmentDate,
+                        startDate,
+                        endDate});
+        }
+        
+        /// <remarks/>
+        public void SaveSickoffAsync(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, System.DateTime nextAppointmentDate, System.DateTime startDate, System.DateTime endDate) {
+            this.SaveSickoffAsync(treatmentNo, offdutydays, lightdutydays, comments, nextAppointmentDate, startDate, endDate, null);
+        }
+        
+        /// <remarks/>
+        public void SaveSickoffAsync(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, System.DateTime nextAppointmentDate, System.DateTime startDate, System.DateTime endDate, object userState) {
+            if ((this.SaveSickoffOperationCompleted == null)) {
+                this.SaveSickoffOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSickoffOperationCompleted);
+            }
+            this.InvokeAsync("SaveSickoff", new object[] {
+                        treatmentNo,
+                        offdutydays,
+                        lightdutydays,
+                        comments,
+                        nextAppointmentDate,
+                        startDate,
+                        endDate}, this.SaveSickoffOperationCompleted, userState);
+        }
+        
+        private void OnSaveSickoffOperationCompleted(object arg) {
+            if ((this.SaveSickoffCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveSickoffCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveStudentEnquiry", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveStudentEnquiry_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -2597,6 +3461,40 @@ namespace New_Student_Portal.NAVWS {
             if ((this.SaveUpdateHRAppraisalSkillsDevelopmentCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SaveUpdateHRAppraisalSkillsDevelopmentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveVehicleOdometer", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveVehicleOdometer_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SaveVehicleOdometer(string docNo, decimal odometerStart, decimal odometerEnd, decimal distance) {
+            this.Invoke("SaveVehicleOdometer", new object[] {
+                        docNo,
+                        odometerStart,
+                        odometerEnd,
+                        distance});
+        }
+        
+        /// <remarks/>
+        public void SaveVehicleOdometerAsync(string docNo, decimal odometerStart, decimal odometerEnd, decimal distance) {
+            this.SaveVehicleOdometerAsync(docNo, odometerStart, odometerEnd, distance, null);
+        }
+        
+        /// <remarks/>
+        public void SaveVehicleOdometerAsync(string docNo, decimal odometerStart, decimal odometerEnd, decimal distance, object userState) {
+            if ((this.SaveVehicleOdometerOperationCompleted == null)) {
+                this.SaveVehicleOdometerOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveVehicleOdometerOperationCompleted);
+            }
+            this.InvokeAsync("SaveVehicleOdometer", new object[] {
+                        docNo,
+                        odometerStart,
+                        odometerEnd,
+                        distance}, this.SaveVehicleOdometerOperationCompleted, userState);
+        }
+        
+        private void OnSaveVehicleOdometerOperationCompleted(object arg) {
+            if ((this.SaveVehicleOdometerCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveVehicleOdometerCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3231,6 +4129,50 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:StorePayment2", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="StorePayment2_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string StorePayment2(string reference, string bank, string student, decimal amount, string paymenttype, System.DateTime datev, string extdoc, string extdoc2) {
+            object[] results = this.Invoke("StorePayment2", new object[] {
+                        reference,
+                        bank,
+                        student,
+                        amount,
+                        paymenttype,
+                        datev,
+                        extdoc,
+                        extdoc2});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void StorePayment2Async(string reference, string bank, string student, decimal amount, string paymenttype, System.DateTime datev, string extdoc, string extdoc2) {
+            this.StorePayment2Async(reference, bank, student, amount, paymenttype, datev, extdoc, extdoc2, null);
+        }
+        
+        /// <remarks/>
+        public void StorePayment2Async(string reference, string bank, string student, decimal amount, string paymenttype, System.DateTime datev, string extdoc, string extdoc2, object userState) {
+            if ((this.StorePayment2OperationCompleted == null)) {
+                this.StorePayment2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnStorePayment2OperationCompleted);
+            }
+            this.InvokeAsync("StorePayment2", new object[] {
+                        reference,
+                        bank,
+                        student,
+                        amount,
+                        paymenttype,
+                        datev,
+                        extdoc,
+                        extdoc2}, this.StorePayment2OperationCompleted, userState);
+        }
+        
+        private void OnStorePayment2OperationCompleted(object arg) {
+            if ((this.StorePayment2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.StorePayment2Completed(this, new StorePayment2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:StorePayment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="StorePayment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string StorePayment(string reference, string bank, string student, decimal amount, string paymenttype, System.DateTime datev, string extdoc, string extdoc2) {
@@ -3704,7 +4646,7 @@ namespace New_Student_Portal.NAVWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:StudentRequisitionCreate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="StudentRequisitionCreate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string StudentRequisitionCreate(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval) {
+        public string StudentRequisitionCreate(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval, int noOfCopies, string returnSemester, int tDeferal) {
             object[] results = this.Invoke("StudentRequisitionCreate", new object[] {
                         student_No,
                         requisition_Type,
@@ -3715,17 +4657,20 @@ namespace New_Student_Portal.NAVWS {
                         campus,
                         weightedMean,
                         concentration,
-                        sendFApproval});
+                        sendFApproval,
+                        noOfCopies,
+                        returnSemester,
+                        tDeferal});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void StudentRequisitionCreateAsync(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval) {
-            this.StudentRequisitionCreateAsync(student_No, requisition_Type, remarks, programme, stage, semester, campus, weightedMean, concentration, sendFApproval, null);
+        public void StudentRequisitionCreateAsync(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval, int noOfCopies, string returnSemester, int tDeferal) {
+            this.StudentRequisitionCreateAsync(student_No, requisition_Type, remarks, programme, stage, semester, campus, weightedMean, concentration, sendFApproval, noOfCopies, returnSemester, tDeferal, null);
         }
         
         /// <remarks/>
-        public void StudentRequisitionCreateAsync(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval, object userState) {
+        public void StudentRequisitionCreateAsync(string student_No, int requisition_Type, string remarks, string programme, string stage, string semester, string campus, decimal weightedMean, string concentration, bool sendFApproval, int noOfCopies, string returnSemester, int tDeferal, object userState) {
             if ((this.StudentRequisitionCreateOperationCompleted == null)) {
                 this.StudentRequisitionCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnStudentRequisitionCreateOperationCompleted);
             }
@@ -3739,7 +4684,10 @@ namespace New_Student_Portal.NAVWS {
                         campus,
                         weightedMean,
                         concentration,
-                        sendFApproval}, this.StudentRequisitionCreateOperationCompleted, userState);
+                        sendFApproval,
+                        noOfCopies,
+                        returnSemester,
+                        tDeferal}, this.StudentRequisitionCreateOperationCompleted, userState);
         }
         
         private void OnStudentRequisitionCreateOperationCompleted(object arg) {
@@ -4091,23 +5039,25 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:TestRegistrationStartDate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="TestRegistrationStartDate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void TestRegistrationStartDate(string sem) {
+        public void TestRegistrationStartDate(string sem, string studNo) {
             this.Invoke("TestRegistrationStartDate", new object[] {
-                        sem});
+                        sem,
+                        studNo});
         }
         
         /// <remarks/>
-        public void TestRegistrationStartDateAsync(string sem) {
-            this.TestRegistrationStartDateAsync(sem, null);
+        public void TestRegistrationStartDateAsync(string sem, string studNo) {
+            this.TestRegistrationStartDateAsync(sem, studNo, null);
         }
         
         /// <remarks/>
-        public void TestRegistrationStartDateAsync(string sem, object userState) {
+        public void TestRegistrationStartDateAsync(string sem, string studNo, object userState) {
             if ((this.TestRegistrationStartDateOperationCompleted == null)) {
                 this.TestRegistrationStartDateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestRegistrationStartDateOperationCompleted);
             }
             this.InvokeAsync("TestRegistrationStartDate", new object[] {
-                        sem}, this.TestRegistrationStartDateOperationCompleted, userState);
+                        sem,
+                        studNo}, this.TestRegistrationStartDateOperationCompleted, userState);
         }
         
         private void OnTestRegistrationStartDateOperationCompleted(object arg) {
@@ -4405,6 +5355,37 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:TransportTicketHasOdometerReadi" +
+            "ng", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="TransportTicketHasOdometerReading_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool TransportTicketHasOdometerReading(string tranDoc) {
+            object[] results = this.Invoke("TransportTicketHasOdometerReading", new object[] {
+                        tranDoc});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void TransportTicketHasOdometerReadingAsync(string tranDoc) {
+            this.TransportTicketHasOdometerReadingAsync(tranDoc, null);
+        }
+        
+        /// <remarks/>
+        public void TransportTicketHasOdometerReadingAsync(string tranDoc, object userState) {
+            if ((this.TransportTicketHasOdometerReadingOperationCompleted == null)) {
+                this.TransportTicketHasOdometerReadingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTransportTicketHasOdometerReadingOperationCompleted);
+            }
+            this.InvokeAsync("TransportTicketHasOdometerReading", new object[] {
+                        tranDoc}, this.TransportTicketHasOdometerReadingOperationCompleted, userState);
+        }
+        
+        private void OnTransportTicketHasOdometerReadingOperationCompleted(object arg) {
+            if ((this.TransportTicketHasOdometerReadingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.TransportTicketHasOdometerReadingCompleted(this, new TransportTicketHasOdometerReadingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:TutionFeeAmount", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="TutionFeeAmount_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public decimal TutionFeeAmount(string custNo, string semester) {
@@ -4497,6 +5478,36 @@ namespace New_Student_Portal.NAVWS {
             if ((this.UpdateApplicationPaymentCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UpdateApplicationPaymentCompleted(this, new UpdateApplicationPaymentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateCateringToken", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="UpdateCateringToken_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateCateringToken(string studentNo, string myToken) {
+            this.Invoke("UpdateCateringToken", new object[] {
+                        studentNo,
+                        myToken});
+        }
+        
+        /// <remarks/>
+        public void UpdateCateringTokenAsync(string studentNo, string myToken) {
+            this.UpdateCateringTokenAsync(studentNo, myToken, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateCateringTokenAsync(string studentNo, string myToken, object userState) {
+            if ((this.UpdateCateringTokenOperationCompleted == null)) {
+                this.UpdateCateringTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateCateringTokenOperationCompleted);
+            }
+            this.InvokeAsync("UpdateCateringToken", new object[] {
+                        studentNo,
+                        myToken}, this.UpdateCateringTokenOperationCompleted, userState);
+        }
+        
+        private void OnUpdateCateringTokenOperationCompleted(object arg) {
+            if ((this.UpdateCateringTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateCateringTokenCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -5715,6 +6726,48 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:fnSaveGraduation2", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="fnSaveGraduation2_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string fnSaveGraduation2(string studentNo, string persEmail, string currProf, string company, string currPNo, bool gownRequired, string collectionCampus) {
+            object[] results = this.Invoke("fnSaveGraduation2", new object[] {
+                        studentNo,
+                        persEmail,
+                        currProf,
+                        company,
+                        currPNo,
+                        gownRequired,
+                        collectionCampus});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void fnSaveGraduation2Async(string studentNo, string persEmail, string currProf, string company, string currPNo, bool gownRequired, string collectionCampus) {
+            this.fnSaveGraduation2Async(studentNo, persEmail, currProf, company, currPNo, gownRequired, collectionCampus, null);
+        }
+        
+        /// <remarks/>
+        public void fnSaveGraduation2Async(string studentNo, string persEmail, string currProf, string company, string currPNo, bool gownRequired, string collectionCampus, object userState) {
+            if ((this.fnSaveGraduation2OperationCompleted == null)) {
+                this.fnSaveGraduation2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnfnSaveGraduation2OperationCompleted);
+            }
+            this.InvokeAsync("fnSaveGraduation2", new object[] {
+                        studentNo,
+                        persEmail,
+                        currProf,
+                        company,
+                        currPNo,
+                        gownRequired,
+                        collectionCampus}, this.fnSaveGraduation2OperationCompleted, userState);
+        }
+        
+        private void OnfnSaveGraduation2OperationCompleted(object arg) {
+            if ((this.fnSaveGraduation2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.fnSaveGraduation2Completed(this, new fnSaveGraduation2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:fnSaveGraduation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="fnSaveGraduation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string fnSaveGraduation(string studentNo, string persEmail, string currProf, string company, string currPNo, bool gownRequired, string collectionCampus) {
@@ -5870,100 +6923,644 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:isLastVisitOpen", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="isLastVisitOpen_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertApplication", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertApplication_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool isLastVisitOpen(string patientNo) {
-            object[] results = this.Invoke("isLastVisitOpen", new object[] {
-                        patientNo});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void isLastVisitOpenAsync(string patientNo) {
-            this.isLastVisitOpenAsync(patientNo, null);
-        }
-        
-        /// <remarks/>
-        public void isLastVisitOpenAsync(string patientNo, object userState) {
-            if ((this.isLastVisitOpenOperationCompleted == null)) {
-                this.isLastVisitOpenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisLastVisitOpenOperationCompleted);
-            }
-            this.InvokeAsync("isLastVisitOpen", new object[] {
-                        patientNo}, this.isLastVisitOpenOperationCompleted, userState);
-        }
-        
-        private void OnisLastVisitOpenOperationCompleted(object arg) {
-            if ((this.isLastVisitOpenCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.isLastVisitOpenCompleted(this, new isLastVisitOpenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:unbookHostel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="unbookHostel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool unbookHostel(string hostel, string room, string space, string admission_no) {
-            object[] results = this.Invoke("unbookHostel", new object[] {
-                        hostel,
-                        room,
-                        space,
-                        admission_no});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void unbookHostelAsync(string hostel, string room, string space, string admission_no) {
-            this.unbookHostelAsync(hostel, room, space, admission_no, null);
-        }
-        
-        /// <remarks/>
-        public void unbookHostelAsync(string hostel, string room, string space, string admission_no, object userState) {
-            if ((this.unbookHostelOperationCompleted == null)) {
-                this.unbookHostelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnunbookHostelOperationCompleted);
-            }
-            this.InvokeAsync("unbookHostel", new object[] {
-                        hostel,
-                        room,
-                        space,
-                        admission_no}, this.unbookHostelOperationCompleted, userState);
-        }
-        
-        private void OnunbookHostelOperationCompleted(object arg) {
-            if ((this.unbookHostelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.unbookHostelCompleted(this, new unbookHostelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:updateDashboardProfile", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="updateDashboardProfile_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool updateDashboardProfile(int gender, string admNo) {
-            object[] results = this.Invoke("updateDashboardProfile", new object[] {
+        public string InsertApplication(
+                    string surname, 
+                    string othernames, 
+                    string nationality, 
+                    string campus, 
+                    string programme, 
+                    string email, 
+                    string phone_number, 
+                    string intake, 
+                    string password, 
+                    int gender, 
+                    string id_number, 
+                    string indexNumber, 
+                    string study_mode, 
+                    [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dob, 
+                    int level, 
+                    string passport_no, 
+                    string kCSEMeanGrade, 
+                    string birthCertNo) {
+            object[] results = this.Invoke("InsertApplication", new object[] {
+                        surname,
+                        othernames,
+                        nationality,
+                        campus,
+                        programme,
+                        email,
+                        phone_number,
+                        intake,
+                        password,
                         gender,
-                        admNo});
+                        id_number,
+                        indexNumber,
+                        study_mode,
+                        dob,
+                        level,
+                        passport_no,
+                        kCSEMeanGrade,
+                        birthCertNo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InsertApplicationAsync(
+                    string surname, 
+                    string othernames, 
+                    string nationality, 
+                    string campus, 
+                    string programme, 
+                    string email, 
+                    string phone_number, 
+                    string intake, 
+                    string password, 
+                    int gender, 
+                    string id_number, 
+                    string indexNumber, 
+                    string study_mode, 
+                    System.DateTime dob, 
+                    int level, 
+                    string passport_no, 
+                    string kCSEMeanGrade, 
+                    string birthCertNo) {
+            this.InsertApplicationAsync(surname, othernames, nationality, campus, programme, email, phone_number, intake, password, gender, id_number, indexNumber, study_mode, dob, level, passport_no, kCSEMeanGrade, birthCertNo, null);
+        }
+        
+        /// <remarks/>
+        public void InsertApplicationAsync(
+                    string surname, 
+                    string othernames, 
+                    string nationality, 
+                    string campus, 
+                    string programme, 
+                    string email, 
+                    string phone_number, 
+                    string intake, 
+                    string password, 
+                    int gender, 
+                    string id_number, 
+                    string indexNumber, 
+                    string study_mode, 
+                    System.DateTime dob, 
+                    int level, 
+                    string passport_no, 
+                    string kCSEMeanGrade, 
+                    string birthCertNo, 
+                    object userState) {
+            if ((this.InsertApplicationOperationCompleted == null)) {
+                this.InsertApplicationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertApplicationOperationCompleted);
+            }
+            this.InvokeAsync("InsertApplication", new object[] {
+                        surname,
+                        othernames,
+                        nationality,
+                        campus,
+                        programme,
+                        email,
+                        phone_number,
+                        intake,
+                        password,
+                        gender,
+                        id_number,
+                        indexNumber,
+                        study_mode,
+                        dob,
+                        level,
+                        passport_no,
+                        kCSEMeanGrade,
+                        birthCertNo}, this.InsertApplicationOperationCompleted, userState);
+        }
+        
+        private void OnInsertApplicationOperationCompleted(object arg) {
+            if ((this.InsertApplicationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertApplicationCompleted(this, new InsertApplicationCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertAppointment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertAppointment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string InsertAppointment(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo) {
+            object[] results = this.Invoke("InsertAppointment", new object[] {
+                        patientType,
+                        patientNo,
+                        employeeNo,
+                        doctor,
+                        remark,
+                        settlement,
+                        insuranceNo,
+                        insuranceName,
+                        insMemberNo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InsertAppointmentAsync(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo) {
+            this.InsertAppointmentAsync(patientType, patientNo, employeeNo, doctor, remark, settlement, insuranceNo, insuranceName, insMemberNo, null);
+        }
+        
+        /// <remarks/>
+        public void InsertAppointmentAsync(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo, object userState) {
+            if ((this.InsertAppointmentOperationCompleted == null)) {
+                this.InsertAppointmentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertAppointmentOperationCompleted);
+            }
+            this.InvokeAsync("InsertAppointment", new object[] {
+                        patientType,
+                        patientNo,
+                        employeeNo,
+                        doctor,
+                        remark,
+                        settlement,
+                        insuranceNo,
+                        insuranceName,
+                        insMemberNo}, this.InsertAppointmentOperationCompleted, userState);
+        }
+        
+        private void OnInsertAppointmentOperationCompleted(object arg) {
+            if ((this.InsertAppointmentCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertAppointmentCompleted(this, new InsertAppointmentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertClassListAttendance", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertClassListAttendance_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertClassListAttendance(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus) {
+            this.Invoke("InsertClassListAttendance", new object[] {
+                        docNo,
+                        studentNo,
+                        attendance,
+                        prog,
+                        unit,
+                        semester,
+                        wkCode,
+                        lecturer,
+                        campus});
+        }
+        
+        /// <remarks/>
+        public void InsertClassListAttendanceAsync(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus) {
+            this.InsertClassListAttendanceAsync(docNo, studentNo, attendance, prog, unit, semester, wkCode, lecturer, campus, null);
+        }
+        
+        /// <remarks/>
+        public void InsertClassListAttendanceAsync(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus, object userState) {
+            if ((this.InsertClassListAttendanceOperationCompleted == null)) {
+                this.InsertClassListAttendanceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertClassListAttendanceOperationCompleted);
+            }
+            this.InvokeAsync("InsertClassListAttendance", new object[] {
+                        docNo,
+                        studentNo,
+                        attendance,
+                        prog,
+                        unit,
+                        semester,
+                        wkCode,
+                        lecturer,
+                        campus}, this.InsertClassListAttendanceOperationCompleted, userState);
+        }
+        
+        private void OnInsertClassListAttendanceOperationCompleted(object arg) {
+            if ((this.InsertClassListAttendanceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertClassListAttendanceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertConceptReview", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertConceptReview_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertConceptReview(string conceptNo, string staffNo) {
+            this.Invoke("InsertConceptReview", new object[] {
+                        conceptNo,
+                        staffNo});
+        }
+        
+        /// <remarks/>
+        public void InsertConceptReviewAsync(string conceptNo, string staffNo) {
+            this.InsertConceptReviewAsync(conceptNo, staffNo, null);
+        }
+        
+        /// <remarks/>
+        public void InsertConceptReviewAsync(string conceptNo, string staffNo, object userState) {
+            if ((this.InsertConceptReviewOperationCompleted == null)) {
+                this.InsertConceptReviewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertConceptReviewOperationCompleted);
+            }
+            this.InvokeAsync("InsertConceptReview", new object[] {
+                        conceptNo,
+                        staffNo}, this.InsertConceptReviewOperationCompleted, userState);
+        }
+        
+        private void OnInsertConceptReviewOperationCompleted(object arg) {
+            if ((this.InsertConceptReviewCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertConceptReviewCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDiagnosis", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDiagnosis_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertDiagnosis(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType) {
+            this.Invoke("InsertDiagnosis", new object[] {
+                        treamentNo,
+                        diagnosisNo,
+                        confirmed,
+                        patientNo,
+                        doctor,
+                        remarks,
+                        diagnosisType});
+        }
+        
+        /// <remarks/>
+        public void InsertDiagnosisAsync(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType) {
+            this.InsertDiagnosisAsync(treamentNo, diagnosisNo, confirmed, patientNo, doctor, remarks, diagnosisType, null);
+        }
+        
+        /// <remarks/>
+        public void InsertDiagnosisAsync(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType, object userState) {
+            if ((this.InsertDiagnosisOperationCompleted == null)) {
+                this.InsertDiagnosisOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDiagnosisOperationCompleted);
+            }
+            this.InvokeAsync("InsertDiagnosis", new object[] {
+                        treamentNo,
+                        diagnosisNo,
+                        confirmed,
+                        patientNo,
+                        doctor,
+                        remarks,
+                        diagnosisType}, this.InsertDiagnosisOperationCompleted, userState);
+        }
+        
+        private void OnInsertDiagnosisOperationCompleted(object arg) {
+            if ((this.InsertDiagnosisCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertDiagnosisCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDisabilityCert", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDisabilityCert_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertDisabilityCert(string app_no, string descr, string url, string typeofstudent) {
+            this.Invoke("InsertDisabilityCert", new object[] {
+                        app_no,
+                        descr,
+                        url,
+                        typeofstudent});
+        }
+        
+        /// <remarks/>
+        public void InsertDisabilityCertAsync(string app_no, string descr, string url, string typeofstudent) {
+            this.InsertDisabilityCertAsync(app_no, descr, url, typeofstudent, null);
+        }
+        
+        /// <remarks/>
+        public void InsertDisabilityCertAsync(string app_no, string descr, string url, string typeofstudent, object userState) {
+            if ((this.InsertDisabilityCertOperationCompleted == null)) {
+                this.InsertDisabilityCertOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDisabilityCertOperationCompleted);
+            }
+            this.InvokeAsync("InsertDisabilityCert", new object[] {
+                        app_no,
+                        descr,
+                        url,
+                        typeofstudent}, this.InsertDisabilityCertOperationCompleted, userState);
+        }
+        
+        private void OnInsertDisabilityCertOperationCompleted(object arg) {
+            if ((this.InsertDisabilityCertCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertDisabilityCertCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDischargeSummary", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDischargeSummary_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertDischargeSummary(string dischargeCode, int type, string description, string treatmentNo, string patientNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime reviewDate) {
+            this.Invoke("InsertDischargeSummary", new object[] {
+                        dischargeCode,
+                        type,
+                        description,
+                        treatmentNo,
+                        patientNo,
+                        reviewDate});
+        }
+        
+        /// <remarks/>
+        public void InsertDischargeSummaryAsync(string dischargeCode, int type, string description, string treatmentNo, string patientNo, System.DateTime reviewDate) {
+            this.InsertDischargeSummaryAsync(dischargeCode, type, description, treatmentNo, patientNo, reviewDate, null);
+        }
+        
+        /// <remarks/>
+        public void InsertDischargeSummaryAsync(string dischargeCode, int type, string description, string treatmentNo, string patientNo, System.DateTime reviewDate, object userState) {
+            if ((this.InsertDischargeSummaryOperationCompleted == null)) {
+                this.InsertDischargeSummaryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDischargeSummaryOperationCompleted);
+            }
+            this.InvokeAsync("InsertDischargeSummary", new object[] {
+                        dischargeCode,
+                        type,
+                        description,
+                        treatmentNo,
+                        patientNo,
+                        reviewDate}, this.InsertDischargeSummaryOperationCompleted, userState);
+        }
+        
+        private void OnInsertDischargeSummaryOperationCompleted(object arg) {
+            if ((this.InsertDischargeSummaryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertDischargeSummaryCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDoctorsNotes", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDoctorsNotes_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertDoctorsNotes(string treatmentNo, string patientNo, string notes, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime treatmentDate, string docUSER_ID) {
+            this.Invoke("InsertDoctorsNotes", new object[] {
+                        treatmentNo,
+                        patientNo,
+                        notes,
+                        treatmentDate,
+                        docUSER_ID});
+        }
+        
+        /// <remarks/>
+        public void InsertDoctorsNotesAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID) {
+            this.InsertDoctorsNotesAsync(treatmentNo, patientNo, notes, treatmentDate, docUSER_ID, null);
+        }
+        
+        /// <remarks/>
+        public void InsertDoctorsNotesAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID, object userState) {
+            if ((this.InsertDoctorsNotesOperationCompleted == null)) {
+                this.InsertDoctorsNotesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDoctorsNotesOperationCompleted);
+            }
+            this.InvokeAsync("InsertDoctorsNotes", new object[] {
+                        treatmentNo,
+                        patientNo,
+                        notes,
+                        treatmentDate,
+                        docUSER_ID}, this.InsertDoctorsNotesOperationCompleted, userState);
+        }
+        
+        private void OnInsertDoctorsNotesOperationCompleted(object arg) {
+            if ((this.InsertDoctorsNotesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertDoctorsNotesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDrugPrescribe", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDrugPrescribe_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertDrugPrescribe(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateposted) {
+            this.Invoke("InsertDrugPrescribe", new object[] {
+                        observationNo,
+                        drugNo,
+                        quantity,
+                        user,
+                        transacttyp,
+                        location,
+                        dateposted});
+        }
+        
+        /// <remarks/>
+        public void InsertDrugPrescribeAsync(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, System.DateTime dateposted) {
+            this.InsertDrugPrescribeAsync(observationNo, drugNo, quantity, user, transacttyp, location, dateposted, null);
+        }
+        
+        /// <remarks/>
+        public void InsertDrugPrescribeAsync(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, System.DateTime dateposted, object userState) {
+            if ((this.InsertDrugPrescribeOperationCompleted == null)) {
+                this.InsertDrugPrescribeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDrugPrescribeOperationCompleted);
+            }
+            this.InvokeAsync("InsertDrugPrescribe", new object[] {
+                        observationNo,
+                        drugNo,
+                        quantity,
+                        user,
+                        transacttyp,
+                        location,
+                        dateposted}, this.InsertDrugPrescribeOperationCompleted, userState);
+        }
+        
+        private void OnInsertDrugPrescribeOperationCompleted(object arg) {
+            if ((this.InsertDrugPrescribeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertDrugPrescribeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEmergencyContact", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertEmergencyContact_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool InsertEmergencyContact(string appNo, string contact_relationship, ref string contact_name, string contact_phonenumber, string contact_email) {
+            object[] results = this.Invoke("InsertEmergencyContact", new object[] {
+                        appNo,
+                        contact_relationship,
+                        contact_name,
+                        contact_phonenumber,
+                        contact_email});
+            contact_name = ((string)(results[1]));
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void updateDashboardProfileAsync(int gender, string admNo) {
-            this.updateDashboardProfileAsync(gender, admNo, null);
+        public void InsertEmergencyContactAsync(string appNo, string contact_relationship, string contact_name, string contact_phonenumber, string contact_email) {
+            this.InsertEmergencyContactAsync(appNo, contact_relationship, contact_name, contact_phonenumber, contact_email, null);
         }
         
         /// <remarks/>
-        public void updateDashboardProfileAsync(int gender, string admNo, object userState) {
-            if ((this.updateDashboardProfileOperationCompleted == null)) {
-                this.updateDashboardProfileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateDashboardProfileOperationCompleted);
+        public void InsertEmergencyContactAsync(string appNo, string contact_relationship, string contact_name, string contact_phonenumber, string contact_email, object userState) {
+            if ((this.InsertEmergencyContactOperationCompleted == null)) {
+                this.InsertEmergencyContactOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertEmergencyContactOperationCompleted);
             }
-            this.InvokeAsync("updateDashboardProfile", new object[] {
-                        gender,
-                        admNo}, this.updateDashboardProfileOperationCompleted, userState);
+            this.InvokeAsync("InsertEmergencyContact", new object[] {
+                        appNo,
+                        contact_relationship,
+                        contact_name,
+                        contact_phonenumber,
+                        contact_email}, this.InsertEmergencyContactOperationCompleted, userState);
         }
         
-        private void OnupdateDashboardProfileOperationCompleted(object arg) {
-            if ((this.updateDashboardProfileCompleted != null)) {
+        private void OnInsertEmergencyContactOperationCompleted(object arg) {
+            if ((this.InsertEmergencyContactCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateDashboardProfileCompleted(this, new updateDashboardProfileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.InsertEmergencyContactCompleted(this, new InsertEmergencyContactCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEnquiry", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertEnquiry_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool InsertEnquiry(string name, string email, string query, string phoneNumber) {
+            object[] results = this.Invoke("InsertEnquiry", new object[] {
+                        name,
+                        email,
+                        query,
+                        phoneNumber});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InsertEnquiryAsync(string name, string email, string query, string phoneNumber) {
+            this.InsertEnquiryAsync(name, email, query, phoneNumber, null);
+        }
+        
+        /// <remarks/>
+        public void InsertEnquiryAsync(string name, string email, string query, string phoneNumber, object userState) {
+            if ((this.InsertEnquiryOperationCompleted == null)) {
+                this.InsertEnquiryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertEnquiryOperationCompleted);
+            }
+            this.InvokeAsync("InsertEnquiry", new object[] {
+                        name,
+                        email,
+                        query,
+                        phoneNumber}, this.InsertEnquiryOperationCompleted, userState);
+        }
+        
+        private void OnInsertEnquiryOperationCompleted(object arg) {
+            if ((this.InsertEnquiryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertEnquiryCompleted(this, new InsertEnquiryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertFoodMenu", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertFoodMenu_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertFoodMenu(string menu, string studentNo, decimal qty) {
+            this.Invoke("InsertFoodMenu", new object[] {
+                        menu,
+                        studentNo,
+                        qty});
+        }
+        
+        /// <remarks/>
+        public void InsertFoodMenuAsync(string menu, string studentNo, decimal qty) {
+            this.InsertFoodMenuAsync(menu, studentNo, qty, null);
+        }
+        
+        /// <remarks/>
+        public void InsertFoodMenuAsync(string menu, string studentNo, decimal qty, object userState) {
+            if ((this.InsertFoodMenuOperationCompleted == null)) {
+                this.InsertFoodMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertFoodMenuOperationCompleted);
+            }
+            this.InvokeAsync("InsertFoodMenu", new object[] {
+                        menu,
+                        studentNo,
+                        qty}, this.InsertFoodMenuOperationCompleted, userState);
+        }
+        
+        private void OnInsertFoodMenuOperationCompleted(object arg) {
+            if ((this.InsertFoodMenuCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertFoodMenuCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHRTrainingParticipants", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHRTrainingParticipants_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertHRTrainingParticipants(string document_No, string empNo) {
+            this.Invoke("InsertHRTrainingParticipants", new object[] {
+                        document_No,
+                        empNo});
+        }
+        
+        /// <remarks/>
+        public void InsertHRTrainingParticipantsAsync(string document_No, string empNo) {
+            this.InsertHRTrainingParticipantsAsync(document_No, empNo, null);
+        }
+        
+        /// <remarks/>
+        public void InsertHRTrainingParticipantsAsync(string document_No, string empNo, object userState) {
+            if ((this.InsertHRTrainingParticipantsOperationCompleted == null)) {
+                this.InsertHRTrainingParticipantsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHRTrainingParticipantsOperationCompleted);
+            }
+            this.InvokeAsync("InsertHRTrainingParticipants", new object[] {
+                        document_No,
+                        empNo}, this.InsertHRTrainingParticipantsOperationCompleted, userState);
+        }
+        
+        private void OnInsertHRTrainingParticipantsOperationCompleted(object arg) {
+            if ((this.InsertHRTrainingParticipantsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertHRTrainingParticipantsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHistoryPresentIllness", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHistoryPresentIllness_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertHistoryPresentIllness(string treatmentNo, string patientNo, string notes, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime treatmentDate, string docUSER_ID) {
+            this.Invoke("InsertHistoryPresentIllness", new object[] {
+                        treatmentNo,
+                        patientNo,
+                        notes,
+                        treatmentDate,
+                        docUSER_ID});
+        }
+        
+        /// <remarks/>
+        public void InsertHistoryPresentIllnessAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID) {
+            this.InsertHistoryPresentIllnessAsync(treatmentNo, patientNo, notes, treatmentDate, docUSER_ID, null);
+        }
+        
+        /// <remarks/>
+        public void InsertHistoryPresentIllnessAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID, object userState) {
+            if ((this.InsertHistoryPresentIllnessOperationCompleted == null)) {
+                this.InsertHistoryPresentIllnessOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHistoryPresentIllnessOperationCompleted);
+            }
+            this.InvokeAsync("InsertHistoryPresentIllness", new object[] {
+                        treatmentNo,
+                        patientNo,
+                        notes,
+                        treatmentDate,
+                        docUSER_ID}, this.InsertHistoryPresentIllnessOperationCompleted, userState);
+        }
+        
+        private void OnInsertHistoryPresentIllnessOperationCompleted(object arg) {
+            if ((this.InsertHistoryPresentIllnessCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertHistoryPresentIllnessCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHostel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHostel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public int InsertHostel(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear) {
+            object[] results = this.Invoke("InsertHostel", new object[] {
+                        studentNo,
+                        spaceNo,
+                        hostelNo,
+                        roomNo,
+                        accomodationFee,
+                        semester,
+                        academicYear});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InsertHostelAsync(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear) {
+            this.InsertHostelAsync(studentNo, spaceNo, hostelNo, roomNo, accomodationFee, semester, academicYear, null);
+        }
+        
+        /// <remarks/>
+        public void InsertHostelAsync(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear, object userState) {
+            if ((this.InsertHostelOperationCompleted == null)) {
+                this.InsertHostelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHostelOperationCompleted);
+            }
+            this.InvokeAsync("InsertHostel", new object[] {
+                        studentNo,
+                        spaceNo,
+                        hostelNo,
+                        roomNo,
+                        accomodationFee,
+                        semester,
+                        academicYear}, this.InsertHostelOperationCompleted, userState);
+        }
+        
+        private void OnInsertHostelOperationCompleted(object arg) {
+            if ((this.InsertHostelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertHostelCompleted(this, new InsertHostelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -6612,6 +8209,46 @@ namespace New_Student_Portal.NAVWS {
             if ((this.InsertMenuSalesLineCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InsertMenuSalesLineCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertMissingMarks", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertMissingMarks_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertMissingMarks(string stdNo, string prog, string sem, string unit, decimal catMark, decimal examMark, string lec) {
+            this.Invoke("InsertMissingMarks", new object[] {
+                        stdNo,
+                        prog,
+                        sem,
+                        unit,
+                        catMark,
+                        examMark,
+                        lec});
+        }
+        
+        /// <remarks/>
+        public void InsertMissingMarksAsync(string stdNo, string prog, string sem, string unit, decimal catMark, decimal examMark, string lec) {
+            this.InsertMissingMarksAsync(stdNo, prog, sem, unit, catMark, examMark, lec, null);
+        }
+        
+        /// <remarks/>
+        public void InsertMissingMarksAsync(string stdNo, string prog, string sem, string unit, decimal catMark, decimal examMark, string lec, object userState) {
+            if ((this.InsertMissingMarksOperationCompleted == null)) {
+                this.InsertMissingMarksOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertMissingMarksOperationCompleted);
+            }
+            this.InvokeAsync("InsertMissingMarks", new object[] {
+                        stdNo,
+                        prog,
+                        sem,
+                        unit,
+                        catMark,
+                        examMark,
+                        lec}, this.InsertMissingMarksOperationCompleted, userState);
+        }
+        
+        private void OnInsertMissingMarksOperationCompleted(object arg) {
+            if ((this.InsertMissingMarksCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertMissingMarksCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -8757,9 +10394,10 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:LecturerEvaluationHeader", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="LecturerEvaluationHeader_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void LecturerEvaluationHeader(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions) {
-            this.Invoke("LecturerEvaluationHeader", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:LecturerEvaluationHeader_165395" +
+            "1911", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="LecturerEvaluationHeader_1653951911_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void LecturerEvaluationHeader_1653951911(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions) {
+            this.Invoke("LecturerEvaluationHeader_1653951911", new object[] {
                         studentNo,
                         unitCode,
                         semester,
@@ -8771,12 +10409,139 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        public void LecturerEvaluationHeaderAsync(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions) {
-            this.LecturerEvaluationHeaderAsync(studentNo, unitCode, semester, stage, lectureNo, programme, lecturerName, suggestions, null);
+        public void LecturerEvaluationHeader_1653951911Async(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions) {
+            this.LecturerEvaluationHeader_1653951911Async(studentNo, unitCode, semester, stage, lectureNo, programme, lecturerName, suggestions, null);
         }
         
         /// <remarks/>
-        public void LecturerEvaluationHeaderAsync(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions, object userState) {
+        public void LecturerEvaluationHeader_1653951911Async(string studentNo, string unitCode, string semester, string stage, string lectureNo, string programme, string lecturerName, string suggestions, object userState) {
+            if ((this.LecturerEvaluationHeader_1653951911OperationCompleted == null)) {
+                this.LecturerEvaluationHeader_1653951911OperationCompleted = new System.Threading.SendOrPostCallback(this.OnLecturerEvaluationHeader_1653951911OperationCompleted);
+            }
+            this.InvokeAsync("LecturerEvaluationHeader_1653951911", new object[] {
+                        studentNo,
+                        unitCode,
+                        semester,
+                        stage,
+                        lectureNo,
+                        programme,
+                        lecturerName,
+                        suggestions}, this.LecturerEvaluationHeader_1653951911OperationCompleted, userState);
+        }
+        
+        private void OnLecturerEvaluationHeader_1653951911OperationCompleted(object arg) {
+            if ((this.LecturerEvaluationHeader_1653951911Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LecturerEvaluationHeader_1653951911Completed(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:LecturerEvaluationHeader", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="LecturerEvaluationHeader_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void LecturerEvaluationHeader(
+                    string studentNo, 
+                    string unitCode, 
+                    string semester, 
+                    string stage, 
+                    string lectureNo, 
+                    string programme, 
+                    string lecturerName, 
+                    string suggestions, 
+                    int category, 
+                    bool courseOutline, 
+                    bool lectiurerNote, 
+                    bool assCats, 
+                    bool classDisc, 
+                    bool valuableFeedback, 
+                    bool requirePractical, 
+                    int libModeAccess, 
+                    int libFreq, 
+                    bool libAskHelp, 
+                    bool books, 
+                    bool dbElectronics, 
+                    bool journalMagazine, 
+                    bool newspaper, 
+                    string otherLibMaterial) {
+            this.Invoke("LecturerEvaluationHeader", new object[] {
+                        studentNo,
+                        unitCode,
+                        semester,
+                        stage,
+                        lectureNo,
+                        programme,
+                        lecturerName,
+                        suggestions,
+                        category,
+                        courseOutline,
+                        lectiurerNote,
+                        assCats,
+                        classDisc,
+                        valuableFeedback,
+                        requirePractical,
+                        libModeAccess,
+                        libFreq,
+                        libAskHelp,
+                        books,
+                        dbElectronics,
+                        journalMagazine,
+                        newspaper,
+                        otherLibMaterial});
+        }
+        
+        /// <remarks/>
+        public void LecturerEvaluationHeaderAsync(
+                    string studentNo, 
+                    string unitCode, 
+                    string semester, 
+                    string stage, 
+                    string lectureNo, 
+                    string programme, 
+                    string lecturerName, 
+                    string suggestions, 
+                    int category, 
+                    bool courseOutline, 
+                    bool lectiurerNote, 
+                    bool assCats, 
+                    bool classDisc, 
+                    bool valuableFeedback, 
+                    bool requirePractical, 
+                    int libModeAccess, 
+                    int libFreq, 
+                    bool libAskHelp, 
+                    bool books, 
+                    bool dbElectronics, 
+                    bool journalMagazine, 
+                    bool newspaper, 
+                    string otherLibMaterial) {
+            this.LecturerEvaluationHeaderAsync(studentNo, unitCode, semester, stage, lectureNo, programme, lecturerName, suggestions, category, courseOutline, lectiurerNote, assCats, classDisc, valuableFeedback, requirePractical, libModeAccess, libFreq, libAskHelp, books, dbElectronics, journalMagazine, newspaper, otherLibMaterial, null);
+        }
+        
+        /// <remarks/>
+        public void LecturerEvaluationHeaderAsync(
+                    string studentNo, 
+                    string unitCode, 
+                    string semester, 
+                    string stage, 
+                    string lectureNo, 
+                    string programme, 
+                    string lecturerName, 
+                    string suggestions, 
+                    int category, 
+                    bool courseOutline, 
+                    bool lectiurerNote, 
+                    bool assCats, 
+                    bool classDisc, 
+                    bool valuableFeedback, 
+                    bool requirePractical, 
+                    int libModeAccess, 
+                    int libFreq, 
+                    bool libAskHelp, 
+                    bool books, 
+                    bool dbElectronics, 
+                    bool journalMagazine, 
+                    bool newspaper, 
+                    string otherLibMaterial, 
+                    object userState) {
             if ((this.LecturerEvaluationHeaderOperationCompleted == null)) {
                 this.LecturerEvaluationHeaderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLecturerEvaluationHeaderOperationCompleted);
             }
@@ -8788,13 +10553,147 @@ namespace New_Student_Portal.NAVWS {
                         lectureNo,
                         programme,
                         lecturerName,
-                        suggestions}, this.LecturerEvaluationHeaderOperationCompleted, userState);
+                        suggestions,
+                        category,
+                        courseOutline,
+                        lectiurerNote,
+                        assCats,
+                        classDisc,
+                        valuableFeedback,
+                        requirePractical,
+                        libModeAccess,
+                        libFreq,
+                        libAskHelp,
+                        books,
+                        dbElectronics,
+                        journalMagazine,
+                        newspaper,
+                        otherLibMaterial}, this.LecturerEvaluationHeaderOperationCompleted, userState);
         }
         
         private void OnLecturerEvaluationHeaderOperationCompleted(object arg) {
             if ((this.LecturerEvaluationHeaderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LecturerEvaluationHeaderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:MaintenanceRequest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="MaintenanceRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string MaintenanceRequest(
+                    int maintenanceType, 
+                    string vehicle, 
+                    string vendor, 
+                    [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateTaken, 
+                    int fuelType, 
+                    decimal fuelQuantity, 
+                    decimal price, 
+                    string department, 
+                    string respCenter, 
+                    string station, 
+                    decimal odometerRead, 
+                    string employeeNo, 
+                    string maintenanceDescription, 
+                    string driver, 
+                    decimal coolant, 
+                    decimal batterywater, 
+                    decimal wheelBalancing, 
+                    decimal wheelAlignment) {
+            object[] results = this.Invoke("MaintenanceRequest", new object[] {
+                        maintenanceType,
+                        vehicle,
+                        vendor,
+                        dateTaken,
+                        fuelType,
+                        fuelQuantity,
+                        price,
+                        department,
+                        respCenter,
+                        station,
+                        odometerRead,
+                        employeeNo,
+                        maintenanceDescription,
+                        driver,
+                        coolant,
+                        batterywater,
+                        wheelBalancing,
+                        wheelAlignment});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void MaintenanceRequestAsync(
+                    int maintenanceType, 
+                    string vehicle, 
+                    string vendor, 
+                    System.DateTime dateTaken, 
+                    int fuelType, 
+                    decimal fuelQuantity, 
+                    decimal price, 
+                    string department, 
+                    string respCenter, 
+                    string station, 
+                    decimal odometerRead, 
+                    string employeeNo, 
+                    string maintenanceDescription, 
+                    string driver, 
+                    decimal coolant, 
+                    decimal batterywater, 
+                    decimal wheelBalancing, 
+                    decimal wheelAlignment) {
+            this.MaintenanceRequestAsync(maintenanceType, vehicle, vendor, dateTaken, fuelType, fuelQuantity, price, department, respCenter, station, odometerRead, employeeNo, maintenanceDescription, driver, coolant, batterywater, wheelBalancing, wheelAlignment, null);
+        }
+        
+        /// <remarks/>
+        public void MaintenanceRequestAsync(
+                    int maintenanceType, 
+                    string vehicle, 
+                    string vendor, 
+                    System.DateTime dateTaken, 
+                    int fuelType, 
+                    decimal fuelQuantity, 
+                    decimal price, 
+                    string department, 
+                    string respCenter, 
+                    string station, 
+                    decimal odometerRead, 
+                    string employeeNo, 
+                    string maintenanceDescription, 
+                    string driver, 
+                    decimal coolant, 
+                    decimal batterywater, 
+                    decimal wheelBalancing, 
+                    decimal wheelAlignment, 
+                    object userState) {
+            if ((this.MaintenanceRequestOperationCompleted == null)) {
+                this.MaintenanceRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnMaintenanceRequestOperationCompleted);
+            }
+            this.InvokeAsync("MaintenanceRequest", new object[] {
+                        maintenanceType,
+                        vehicle,
+                        vendor,
+                        dateTaken,
+                        fuelType,
+                        fuelQuantity,
+                        price,
+                        department,
+                        respCenter,
+                        station,
+                        odometerRead,
+                        employeeNo,
+                        maintenanceDescription,
+                        driver,
+                        coolant,
+                        batterywater,
+                        wheelBalancing,
+                        wheelAlignment}, this.MaintenanceRequestOperationCompleted, userState);
+        }
+        
+        private void OnMaintenanceRequestOperationCompleted(object arg) {
+            if ((this.MaintenanceRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.MaintenanceRequestCompleted(this, new MaintenanceRequestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -9540,7 +11439,7 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:PrintClassList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="PrintClassList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void PrintClassList(string prog, string unit, string stage, string sem, string classCode, string campus, string filenameFromApp) {
+        public void PrintClassList(string prog, string unit, string stage, string sem, string classCode, string campus, int docType, string filenameFromApp) {
             this.Invoke("PrintClassList", new object[] {
                         prog,
                         unit,
@@ -9548,16 +11447,17 @@ namespace New_Student_Portal.NAVWS {
                         sem,
                         classCode,
                         campus,
+                        docType,
                         filenameFromApp});
         }
         
         /// <remarks/>
-        public void PrintClassListAsync(string prog, string unit, string stage, string sem, string classCode, string campus, string filenameFromApp) {
-            this.PrintClassListAsync(prog, unit, stage, sem, classCode, campus, filenameFromApp, null);
+        public void PrintClassListAsync(string prog, string unit, string stage, string sem, string classCode, string campus, int docType, string filenameFromApp) {
+            this.PrintClassListAsync(prog, unit, stage, sem, classCode, campus, docType, filenameFromApp, null);
         }
         
         /// <remarks/>
-        public void PrintClassListAsync(string prog, string unit, string stage, string sem, string classCode, string campus, string filenameFromApp, object userState) {
+        public void PrintClassListAsync(string prog, string unit, string stage, string sem, string classCode, string campus, int docType, string filenameFromApp, object userState) {
             if ((this.PrintClassListOperationCompleted == null)) {
                 this.PrintClassListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPrintClassListOperationCompleted);
             }
@@ -9568,6 +11468,7 @@ namespace New_Student_Portal.NAVWS {
                         sem,
                         classCode,
                         campus,
+                        docType,
                         filenameFromApp}, this.PrintClassListOperationCompleted, userState);
         }
         
@@ -10241,6 +12142,42 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RegisterStudentUnits_Chuka", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RegisterStudentUnits_Chuka_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool RegisterStudentUnits_Chuka(string studentNo, string semester, int regF, bool backOfficeUser) {
+            object[] results = this.Invoke("RegisterStudentUnits_Chuka", new object[] {
+                        studentNo,
+                        semester,
+                        regF,
+                        backOfficeUser});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RegisterStudentUnits_ChukaAsync(string studentNo, string semester, int regF, bool backOfficeUser) {
+            this.RegisterStudentUnits_ChukaAsync(studentNo, semester, regF, backOfficeUser, null);
+        }
+        
+        /// <remarks/>
+        public void RegisterStudentUnits_ChukaAsync(string studentNo, string semester, int regF, bool backOfficeUser, object userState) {
+            if ((this.RegisterStudentUnits_ChukaOperationCompleted == null)) {
+                this.RegisterStudentUnits_ChukaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRegisterStudentUnits_ChukaOperationCompleted);
+            }
+            this.InvokeAsync("RegisterStudentUnits_Chuka", new object[] {
+                        studentNo,
+                        semester,
+                        regF,
+                        backOfficeUser}, this.RegisterStudentUnits_ChukaOperationCompleted, userState);
+        }
+        
+        private void OnRegisterStudentUnits_ChukaOperationCompleted(object arg) {
+            if ((this.RegisterStudentUnits_ChukaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RegisterStudentUnits_ChukaCompleted(this, new RegisterStudentUnits_ChukaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RegisterStudentUnits", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RegisterStudentUnits_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool RegisterStudentUnits(string studentNo, string semester, string stage, string program, int reg_Type, bool backOfficeUser) {
@@ -10435,609 +12372,148 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestAdmission", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestAdmission_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RequestAdmission(string treatmentNo) {
-            this.Invoke("RequestAdmission", new object[] {
-                        treatmentNo});
-        }
-        
-        /// <remarks/>
-        public void RequestAdmissionAsync(string treatmentNo) {
-            this.RequestAdmissionAsync(treatmentNo, null);
-        }
-        
-        /// <remarks/>
-        public void RequestAdmissionAsync(string treatmentNo, object userState) {
-            if ((this.RequestAdmissionOperationCompleted == null)) {
-                this.RequestAdmissionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestAdmissionOperationCompleted);
-            }
-            this.InvokeAsync("RequestAdmission", new object[] {
-                        treatmentNo}, this.RequestAdmissionOperationCompleted, userState);
-        }
-        
-        private void OnRequestAdmissionOperationCompleted(object arg) {
-            if ((this.RequestAdmissionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RequestAdmissionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestLab", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestLab_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RequestLab(string treatmentNo) {
-            this.Invoke("RequestLab", new object[] {
-                        treatmentNo});
-        }
-        
-        /// <remarks/>
-        public void RequestLabAsync(string treatmentNo) {
-            this.RequestLabAsync(treatmentNo, null);
-        }
-        
-        /// <remarks/>
-        public void RequestLabAsync(string treatmentNo, object userState) {
-            if ((this.RequestLabOperationCompleted == null)) {
-                this.RequestLabOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestLabOperationCompleted);
-            }
-            this.InvokeAsync("RequestLab", new object[] {
-                        treatmentNo}, this.RequestLabOperationCompleted, userState);
-        }
-        
-        private void OnRequestLabOperationCompleted(object arg) {
-            if ((this.RequestLabCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RequestLabCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestRadiology", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestRadiology_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RequestRadiology(string treatmentNo) {
-            this.Invoke("RequestRadiology", new object[] {
-                        treatmentNo});
-        }
-        
-        /// <remarks/>
-        public void RequestRadiologyAsync(string treatmentNo) {
-            this.RequestRadiologyAsync(treatmentNo, null);
-        }
-        
-        /// <remarks/>
-        public void RequestRadiologyAsync(string treatmentNo, object userState) {
-            if ((this.RequestRadiologyOperationCompleted == null)) {
-                this.RequestRadiologyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestRadiologyOperationCompleted);
-            }
-            this.InvokeAsync("RequestRadiology", new object[] {
-                        treatmentNo}, this.RequestRadiologyOperationCompleted, userState);
-        }
-        
-        private void OnRequestRadiologyOperationCompleted(object arg) {
-            if ((this.RequestRadiologyCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RequestRadiologyCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:RequestReferral", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="RequestReferral_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RequestReferral(string treatmentNo, string hospNo, string reffReasons, string reffRemarks) {
-            this.Invoke("RequestReferral", new object[] {
-                        treatmentNo,
-                        hospNo,
-                        reffReasons,
-                        reffRemarks});
-        }
-        
-        /// <remarks/>
-        public void RequestReferralAsync(string treatmentNo, string hospNo, string reffReasons, string reffRemarks) {
-            this.RequestReferralAsync(treatmentNo, hospNo, reffReasons, reffRemarks, null);
-        }
-        
-        /// <remarks/>
-        public void RequestReferralAsync(string treatmentNo, string hospNo, string reffReasons, string reffRemarks, object userState) {
-            if ((this.RequestReferralOperationCompleted == null)) {
-                this.RequestReferralOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestReferralOperationCompleted);
-            }
-            this.InvokeAsync("RequestReferral", new object[] {
-                        treatmentNo,
-                        hospNo,
-                        reffReasons,
-                        reffRemarks}, this.RequestReferralOperationCompleted, userState);
-        }
-        
-        private void OnRequestReferralOperationCompleted(object arg) {
-            if ((this.RequestReferralCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RequestReferralCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ReturnAmountInWords", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ReturnAmountInWords_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string ReturnAmountInWords(decimal amount) {
-            object[] results = this.Invoke("ReturnAmountInWords", new object[] {
-                        amount});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ReturnAmountInWordsAsync(decimal amount) {
-            this.ReturnAmountInWordsAsync(amount, null);
-        }
-        
-        /// <remarks/>
-        public void ReturnAmountInWordsAsync(decimal amount, object userState) {
-            if ((this.ReturnAmountInWordsOperationCompleted == null)) {
-                this.ReturnAmountInWordsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnAmountInWordsOperationCompleted);
-            }
-            this.InvokeAsync("ReturnAmountInWords", new object[] {
-                        amount}, this.ReturnAmountInWordsOperationCompleted, userState);
-        }
-        
-        private void OnReturnAmountInWordsOperationCompleted(object arg) {
-            if ((this.ReturnAmountInWordsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ReturnAmountInWordsCompleted(this, new ReturnAmountInWordsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ReturnStudentOption", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ReturnStudentOption_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string ReturnStudentOption(string studNo, string prog) {
-            object[] results = this.Invoke("ReturnStudentOption", new object[] {
-                        studNo,
-                        prog});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ReturnStudentOptionAsync(string studNo, string prog) {
-            this.ReturnStudentOptionAsync(studNo, prog, null);
-        }
-        
-        /// <remarks/>
-        public void ReturnStudentOptionAsync(string studNo, string prog, object userState) {
-            if ((this.ReturnStudentOptionOperationCompleted == null)) {
-                this.ReturnStudentOptionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReturnStudentOptionOperationCompleted);
-            }
-            this.InvokeAsync("ReturnStudentOption", new object[] {
-                        studNo,
-                        prog}, this.ReturnStudentOptionOperationCompleted, userState);
-        }
-        
-        private void OnReturnStudentOptionOperationCompleted(object arg) {
-            if ((this.ReturnStudentOptionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ReturnStudentOptionCompleted(this, new ReturnStudentOptionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SMSSendResetPassord(string sTDNo, string newPassword) {
-            object[] results = this.Invoke("SMSSendResetPassord", new object[] {
-                        sTDNo,
-                        newPassword});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SMSSendResetPassordAsync(string sTDNo, string newPassword) {
-            this.SMSSendResetPassordAsync(sTDNo, newPassword, null);
-        }
-        
-        /// <remarks/>
-        public void SMSSendResetPassordAsync(string sTDNo, string newPassword, object userState) {
-            if ((this.SMSSendResetPassordOperationCompleted == null)) {
-                this.SMSSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSSendResetPassordOperationCompleted);
-            }
-            this.InvokeAsync("SMSSendResetPassord", new object[] {
-                        sTDNo,
-                        newPassword}, this.SMSSendResetPassordOperationCompleted, userState);
-        }
-        
-        private void OnSMSSendResetPassordOperationCompleted(object arg) {
-            if ((this.SMSSendResetPassordCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SMSSendResetPassordCompleted(this, new SMSSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSStffSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SMSStffSendResetPassord(string staffNo, string newPassword) {
-            object[] results = this.Invoke("SMSStffSendResetPassord", new object[] {
-                        staffNo,
-                        newPassword});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword) {
-            this.SMSStffSendResetPassordAsync(staffNo, newPassword, null);
-        }
-        
-        /// <remarks/>
-        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword, object userState) {
-            if ((this.SMSStffSendResetPassordOperationCompleted == null)) {
-                this.SMSStffSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSStffSendResetPassordOperationCompleted);
-            }
-            this.InvokeAsync("SMSStffSendResetPassord", new object[] {
-                        staffNo,
-                        newPassword}, this.SMSStffSendResetPassordOperationCompleted, userState);
-        }
-        
-        private void OnSMSStffSendResetPassordOperationCompleted(object arg) {
-            if ((this.SMSStffSendResetPassordCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SMSStffSendResetPassordCompleted(this, new SMSStffSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveELearningEvaluation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveELearningEvaluation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveELearningEvaluation(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform) {
-            this.Invoke("SaveELearningEvaluation", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GeneralEvaluationCreate_7997305" +
+            "78", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GeneralEvaluationCreate_799730578_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GeneralEvaluationCreate_799730578(string student_No, string semester, string evaluation_Question, string evaluation_Category, decimal question_Score, int category, int section, int subSection) {
+            this.Invoke("GeneralEvaluationCreate_799730578", new object[] {
                         student_No,
-                        unitCode,
                         semester,
-                        staff_Number,
-                        staff_Name,
-                        e_LMaterial,
-                        e_LPlatform});
+                        evaluation_Question,
+                        evaluation_Category,
+                        question_Score,
+                        category,
+                        section,
+                        subSection});
         }
         
         /// <remarks/>
-        public void SaveELearningEvaluationAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform) {
-            this.SaveELearningEvaluationAsync(student_No, unitCode, semester, staff_Number, staff_Name, e_LMaterial, e_LPlatform, null);
+        public void GeneralEvaluationCreate_799730578Async(string student_No, string semester, string evaluation_Question, string evaluation_Category, decimal question_Score, int category, int section, int subSection) {
+            this.GeneralEvaluationCreate_799730578Async(student_No, semester, evaluation_Question, evaluation_Category, question_Score, category, section, subSection, null);
         }
         
         /// <remarks/>
-        public void SaveELearningEvaluationAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, bool e_LMaterial, bool e_LPlatform, object userState) {
-            if ((this.SaveELearningEvaluationOperationCompleted == null)) {
-                this.SaveELearningEvaluationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveELearningEvaluationOperationCompleted);
+        public void GeneralEvaluationCreate_799730578Async(string student_No, string semester, string evaluation_Question, string evaluation_Category, decimal question_Score, int category, int section, int subSection, object userState) {
+            if ((this.GeneralEvaluationCreate_799730578OperationCompleted == null)) {
+                this.GeneralEvaluationCreate_799730578OperationCompleted = new System.Threading.SendOrPostCallback(this.OnGeneralEvaluationCreate_799730578OperationCompleted);
             }
-            this.InvokeAsync("SaveELearningEvaluation", new object[] {
+            this.InvokeAsync("GeneralEvaluationCreate_799730578", new object[] {
                         student_No,
-                        unitCode,
                         semester,
-                        staff_Number,
-                        staff_Name,
-                        e_LMaterial,
-                        e_LPlatform}, this.SaveELearningEvaluationOperationCompleted, userState);
+                        evaluation_Question,
+                        evaluation_Category,
+                        question_Score,
+                        category,
+                        section,
+                        subSection}, this.GeneralEvaluationCreate_799730578OperationCompleted, userState);
         }
         
-        private void OnSaveELearningEvaluationOperationCompleted(object arg) {
-            if ((this.SaveELearningEvaluationCompleted != null)) {
+        private void OnGeneralEvaluationCreate_799730578OperationCompleted(object arg) {
+            if ((this.GeneralEvaluationCreate_799730578Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveELearningEvaluationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GeneralEvaluationCreate_799730578Completed(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveEmail", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveEmail_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdmissionLetter", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdmissionLetter_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool SaveEmail(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category) {
-            object[] results = this.Invoke("SaveEmail", new object[] {
-                        subject,
-                        receiver,
-                        messageDesc1,
-                        messageDesc2,
-                        messageDesc3,
-                        messageDesc4,
-                        category});
+        public bool GenerateAdmissionLetter(string admissionNumber, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateAdmissionLetter", new object[] {
+                        admissionNumber,
+                        filenameFromApp});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void SaveEmailAsync(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category) {
-            this.SaveEmailAsync(subject, receiver, messageDesc1, messageDesc2, messageDesc3, messageDesc4, category, null);
+        public void GenerateAdmissionLetterAsync(string admissionNumber, string filenameFromApp) {
+            this.GenerateAdmissionLetterAsync(admissionNumber, filenameFromApp, null);
         }
         
         /// <remarks/>
-        public void SaveEmailAsync(string subject, string receiver, string messageDesc1, string messageDesc2, string messageDesc3, string messageDesc4, int category, object userState) {
-            if ((this.SaveEmailOperationCompleted == null)) {
-                this.SaveEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveEmailOperationCompleted);
+        public void GenerateAdmissionLetterAsync(string admissionNumber, string filenameFromApp, object userState) {
+            if ((this.GenerateAdmissionLetterOperationCompleted == null)) {
+                this.GenerateAdmissionLetterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdmissionLetterOperationCompleted);
             }
-            this.InvokeAsync("SaveEmail", new object[] {
-                        subject,
-                        receiver,
-                        messageDesc1,
-                        messageDesc2,
-                        messageDesc3,
-                        messageDesc4,
-                        category}, this.SaveEmailOperationCompleted, userState);
+            this.InvokeAsync("GenerateAdmissionLetter", new object[] {
+                        admissionNumber,
+                        filenameFromApp}, this.GenerateAdmissionLetterOperationCompleted, userState);
         }
         
-        private void OnSaveEmailOperationCompleted(object arg) {
-            if ((this.SaveEmailCompleted != null)) {
+        private void OnGenerateAdmissionLetterOperationCompleted(object arg) {
+            if ((this.GenerateAdmissionLetterCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveEmailCompleted(this, new SaveEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateAdmissionLetterCompleted(this, new GenerateAdmissionLetterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveGeneralEvaluationComments", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveGeneralEvaluationComments_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveGeneralEvaluationComments(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4) {
-            this.Invoke("SaveGeneralEvaluationComments", new object[] {
-                        student_No,
-                        unitCode,
-                        semester,
-                        staff_Number,
-                        staff_Name,
-                        sugge1,
-                        sugge2,
-                        sugge3,
-                        sugge4});
-        }
-        
-        /// <remarks/>
-        public void SaveGeneralEvaluationCommentsAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4) {
-            this.SaveGeneralEvaluationCommentsAsync(student_No, unitCode, semester, staff_Number, staff_Name, sugge1, sugge2, sugge3, sugge4, null);
-        }
-        
-        /// <remarks/>
-        public void SaveGeneralEvaluationCommentsAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string sugge1, string sugge2, string sugge3, string sugge4, object userState) {
-            if ((this.SaveGeneralEvaluationCommentsOperationCompleted == null)) {
-                this.SaveGeneralEvaluationCommentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveGeneralEvaluationCommentsOperationCompleted);
-            }
-            this.InvokeAsync("SaveGeneralEvaluationComments", new object[] {
-                        student_No,
-                        unitCode,
-                        semester,
-                        staff_Number,
-                        staff_Name,
-                        sugge1,
-                        sugge2,
-                        sugge3,
-                        sugge4}, this.SaveGeneralEvaluationCommentsOperationCompleted, userState);
-        }
-        
-        private void OnSaveGeneralEvaluationCommentsOperationCompleted(object arg) {
-            if ((this.SaveGeneralEvaluationCommentsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveGeneralEvaluationCommentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveHRAppraisalSkillsCompetence" +
-            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveHRAppraisalSkillsCompetence_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveHRAppraisalSkillsCompetence(string docNo, string appType, string appraisalPeriod) {
-            this.Invoke("SaveHRAppraisalSkillsCompetence", new object[] {
-                        docNo,
-                        appType,
-                        appraisalPeriod});
-        }
-        
-        /// <remarks/>
-        public void SaveHRAppraisalSkillsCompetenceAsync(string docNo, string appType, string appraisalPeriod) {
-            this.SaveHRAppraisalSkillsCompetenceAsync(docNo, appType, appraisalPeriod, null);
-        }
-        
-        /// <remarks/>
-        public void SaveHRAppraisalSkillsCompetenceAsync(string docNo, string appType, string appraisalPeriod, object userState) {
-            if ((this.SaveHRAppraisalSkillsCompetenceOperationCompleted == null)) {
-                this.SaveHRAppraisalSkillsCompetenceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveHRAppraisalSkillsCompetenceOperationCompleted);
-            }
-            this.InvokeAsync("SaveHRAppraisalSkillsCompetence", new object[] {
-                        docNo,
-                        appType,
-                        appraisalPeriod}, this.SaveHRAppraisalSkillsCompetenceOperationCompleted, userState);
-        }
-        
-        private void OnSaveHRAppraisalSkillsCompetenceOperationCompleted(object arg) {
-            if ((this.SaveHRAppraisalSkillsCompetenceCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveHRAppraisalSkillsCompetenceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveHostelBookingInterest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveHostelBookingInterest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveHostelBookingInterest(string stdNo, string sem, string hostel) {
-            this.Invoke("SaveHostelBookingInterest", new object[] {
-                        stdNo,
-                        sem,
-                        hostel});
-        }
-        
-        /// <remarks/>
-        public void SaveHostelBookingInterestAsync(string stdNo, string sem, string hostel) {
-            this.SaveHostelBookingInterestAsync(stdNo, sem, hostel, null);
-        }
-        
-        /// <remarks/>
-        public void SaveHostelBookingInterestAsync(string stdNo, string sem, string hostel, object userState) {
-            if ((this.SaveHostelBookingInterestOperationCompleted == null)) {
-                this.SaveHostelBookingInterestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveHostelBookingInterestOperationCompleted);
-            }
-            this.InvokeAsync("SaveHostelBookingInterest", new object[] {
-                        stdNo,
-                        sem,
-                        hostel}, this.SaveHostelBookingInterestOperationCompleted, userState);
-        }
-        
-        private void OnSaveHostelBookingInterestOperationCompleted(object arg) {
-            if ((this.SaveHostelBookingInterestCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveHostelBookingInterestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveLecturerEvaluationForm", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveLecturerEvaluationForm_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveLecturerEvaluationForm(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem) {
-            this.Invoke("SaveLecturerEvaluationForm", new object[] {
-                        student_No,
-                        unitCode,
-                        semester,
-                        staff_Number,
-                        staff_Name,
-                        evaluation_Question,
-                        evaluation_Category,
-                        programme,
-                        question_Score,
-                        section,
-                        evaluationItem});
-        }
-        
-        /// <remarks/>
-        public void SaveLecturerEvaluationFormAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem) {
-            this.SaveLecturerEvaluationFormAsync(student_No, unitCode, semester, staff_Number, staff_Name, evaluation_Question, evaluation_Category, programme, question_Score, section, evaluationItem, null);
-        }
-        
-        /// <remarks/>
-        public void SaveLecturerEvaluationFormAsync(string student_No, string unitCode, string semester, string staff_Number, string staff_Name, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, int section, string evaluationItem, object userState) {
-            if ((this.SaveLecturerEvaluationFormOperationCompleted == null)) {
-                this.SaveLecturerEvaluationFormOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveLecturerEvaluationFormOperationCompleted);
-            }
-            this.InvokeAsync("SaveLecturerEvaluationForm", new object[] {
-                        student_No,
-                        unitCode,
-                        semester,
-                        staff_Number,
-                        staff_Name,
-                        evaluation_Question,
-                        evaluation_Category,
-                        programme,
-                        question_Score,
-                        section,
-                        evaluationItem}, this.SaveLecturerEvaluationFormOperationCompleted, userState);
-        }
-        
-        private void OnSaveLecturerEvaluationFormOperationCompleted(object arg) {
-            if ((this.SaveLecturerEvaluationFormCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveLecturerEvaluationFormCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveObjectives", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveObjectives_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveObjectives(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section) {
-            this.Invoke("SaveObjectives", new object[] {
-                        appNo,
-                        appPeriod,
-                        objective,
-                        perfIndicator,
-                        target,
-                        timeLine,
-                        weight,
-                        objectiveNo,
-                        section});
-        }
-        
-        /// <remarks/>
-        public void SaveObjectivesAsync(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section) {
-            this.SaveObjectivesAsync(appNo, appPeriod, objective, perfIndicator, target, timeLine, weight, objectiveNo, section, null);
-        }
-        
-        /// <remarks/>
-        public void SaveObjectivesAsync(string appNo, string appPeriod, string objective, string perfIndicator, string target, int timeLine, decimal weight, int objectiveNo, int section, object userState) {
-            if ((this.SaveObjectivesOperationCompleted == null)) {
-                this.SaveObjectivesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveObjectivesOperationCompleted);
-            }
-            this.InvokeAsync("SaveObjectives", new object[] {
-                        appNo,
-                        appPeriod,
-                        objective,
-                        perfIndicator,
-                        target,
-                        timeLine,
-                        weight,
-                        objectiveNo,
-                        section}, this.SaveObjectivesOperationCompleted, userState);
-        }
-        
-        private void OnSaveObjectivesOperationCompleted(object arg) {
-            if ((this.SaveObjectivesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveObjectivesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveProfessionalBodyRequest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveProfessionalBodyRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdmissionPrintout", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdmissionPrintout_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SaveProfessionalBodyRequest(string staffNo, string profBody, decimal amount, string remarks, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime subscDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime expiryDate) {
-            object[] results = this.Invoke("SaveProfessionalBodyRequest", new object[] {
-                        staffNo,
-                        profBody,
-                        amount,
-                        remarks,
-                        subscDate,
-                        expiryDate});
+        public string GenerateAdmissionPrintout(string treatmentNo, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateAdmissionPrintout", new object[] {
+                        treatmentNo,
+                        filenameFromApp});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void SaveProfessionalBodyRequestAsync(string staffNo, string profBody, decimal amount, string remarks, System.DateTime subscDate, System.DateTime expiryDate) {
-            this.SaveProfessionalBodyRequestAsync(staffNo, profBody, amount, remarks, subscDate, expiryDate, null);
+        public void GenerateAdmissionPrintoutAsync(string treatmentNo, string filenameFromApp) {
+            this.GenerateAdmissionPrintoutAsync(treatmentNo, filenameFromApp, null);
         }
         
         /// <remarks/>
-        public void SaveProfessionalBodyRequestAsync(string staffNo, string profBody, decimal amount, string remarks, System.DateTime subscDate, System.DateTime expiryDate, object userState) {
-            if ((this.SaveProfessionalBodyRequestOperationCompleted == null)) {
-                this.SaveProfessionalBodyRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveProfessionalBodyRequestOperationCompleted);
+        public void GenerateAdmissionPrintoutAsync(string treatmentNo, string filenameFromApp, object userState) {
+            if ((this.GenerateAdmissionPrintoutOperationCompleted == null)) {
+                this.GenerateAdmissionPrintoutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdmissionPrintoutOperationCompleted);
             }
-            this.InvokeAsync("SaveProfessionalBodyRequest", new object[] {
-                        staffNo,
-                        profBody,
-                        amount,
-                        remarks,
-                        subscDate,
-                        expiryDate}, this.SaveProfessionalBodyRequestOperationCompleted, userState);
-        }
-        
-        private void OnSaveProfessionalBodyRequestOperationCompleted(object arg) {
-            if ((this.SaveProfessionalBodyRequestCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveProfessionalBodyRequestCompleted(this, new SaveProfessionalBodyRequestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SaveSickoff", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SaveSickoff_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SaveSickoff(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime nextAppointmentDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime startDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime endDate) {
-            this.Invoke("SaveSickoff", new object[] {
+            this.InvokeAsync("GenerateAdmissionPrintout", new object[] {
                         treatmentNo,
-                        offdutydays,
-                        lightdutydays,
-                        comments,
-                        nextAppointmentDate,
-                        startDate,
-                        endDate});
+                        filenameFromApp}, this.GenerateAdmissionPrintoutOperationCompleted, userState);
         }
         
-        /// <remarks/>
-        public void SaveSickoffAsync(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, System.DateTime nextAppointmentDate, System.DateTime startDate, System.DateTime endDate) {
-            this.SaveSickoffAsync(treatmentNo, offdutydays, lightdutydays, comments, nextAppointmentDate, startDate, endDate, null);
-        }
-        
-        /// <remarks/>
-        public void SaveSickoffAsync(string treatmentNo, decimal offdutydays, decimal lightdutydays, string comments, System.DateTime nextAppointmentDate, System.DateTime startDate, System.DateTime endDate, object userState) {
-            if ((this.SaveSickoffOperationCompleted == null)) {
-                this.SaveSickoffOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSickoffOperationCompleted);
-            }
-            this.InvokeAsync("SaveSickoff", new object[] {
-                        treatmentNo,
-                        offdutydays,
-                        lightdutydays,
-                        comments,
-                        nextAppointmentDate,
-                        startDate,
-                        endDate}, this.SaveSickoffOperationCompleted, userState);
-        }
-        
-        private void OnSaveSickoffOperationCompleted(object arg) {
-            if ((this.SaveSickoffCompleted != null)) {
+        private void OnGenerateAdmissionPrintoutOperationCompleted(object arg) {
+            if ((this.GenerateAdmissionPrintoutCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveSickoffCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateAdmissionPrintoutCompleted(this, new GenerateAdmissionPrintoutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdvanceHostelAllocation" +
+            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdvanceHostelAllocation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateAdvanceHostelAllocation(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt) {
+            this.Invoke("GenerateAdvanceHostelAllocation", new object[] {
+                        studentNo,
+                        sem,
+                        hostelNo,
+                        roomNo,
+                        spaceNo,
+                        amt});
+        }
+        
+        /// <remarks/>
+        public void GenerateAdvanceHostelAllocationAsync(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt) {
+            this.GenerateAdvanceHostelAllocationAsync(studentNo, sem, hostelNo, roomNo, spaceNo, amt, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateAdvanceHostelAllocationAsync(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt, object userState) {
+            if ((this.GenerateAdvanceHostelAllocationOperationCompleted == null)) {
+                this.GenerateAdvanceHostelAllocationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdvanceHostelAllocationOperationCompleted);
+            }
+            this.InvokeAsync("GenerateAdvanceHostelAllocation", new object[] {
+                        studentNo,
+                        sem,
+                        hostelNo,
+                        roomNo,
+                        spaceNo,
+                        amt}, this.GenerateAdvanceHostelAllocationOperationCompleted, userState);
+        }
+        
+        private void OnGenerateAdvanceHostelAllocationOperationCompleted(object arg) {
+            if ((this.GenerateAdvanceHostelAllocationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateAdvanceHostelAllocationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -11217,10 +12693,12 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateClearanceReport", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateClearanceReport_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateClearanceReport(string student, string filenameFromApp) {
-            this.Invoke("GenerateClearanceReport", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateClearanceReport(string student, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateClearanceReport", new object[] {
                         student,
                         filenameFromApp});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -11241,7 +12719,7 @@ namespace New_Student_Portal.NAVWS {
         private void OnGenerateClearanceReportOperationCompleted(object arg) {
             if ((this.GenerateClearanceReportCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateClearanceReportCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateClearanceReportCompleted(this, new GenerateClearanceReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -11319,6 +12797,36 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateDriverTicketReport", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateDriverTicketReport_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateDriverTicketReport(string transDoc, string filenameFromApp) {
+            this.Invoke("GenerateDriverTicketReport", new object[] {
+                        transDoc,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateDriverTicketReportAsync(string transDoc, string filenameFromApp) {
+            this.GenerateDriverTicketReportAsync(transDoc, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateDriverTicketReportAsync(string transDoc, string filenameFromApp, object userState) {
+            if ((this.GenerateDriverTicketReportOperationCompleted == null)) {
+                this.GenerateDriverTicketReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateDriverTicketReportOperationCompleted);
+            }
+            this.InvokeAsync("GenerateDriverTicketReport", new object[] {
+                        transDoc,
+                        filenameFromApp}, this.GenerateDriverTicketReportOperationCompleted, userState);
+        }
+        
+        private void OnGenerateDriverTicketReportOperationCompleted(object arg) {
+            if ((this.GenerateDriverTicketReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateDriverTicketReportCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateExamAttendanceList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateExamAttendanceList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GenerateExamAttendanceList(string prog, string unit, string stage, string sem, string classCode, string campusCode, string filenameFromApp) {
             this.Invoke("GenerateExamAttendanceList", new object[] {
@@ -11355,6 +12863,68 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateExamAttendanceListCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateExamAttendanceListCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateFamilyBankToken", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateFamilyBankToken_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateFamilyBankToken(bool value) {
+            object[] results = this.Invoke("GenerateFamilyBankToken", new object[] {
+                        value});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GenerateFamilyBankTokenAsync(bool value) {
+            this.GenerateFamilyBankTokenAsync(value, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateFamilyBankTokenAsync(bool value, object userState) {
+            if ((this.GenerateFamilyBankTokenOperationCompleted == null)) {
+                this.GenerateFamilyBankTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateFamilyBankTokenOperationCompleted);
+            }
+            this.InvokeAsync("GenerateFamilyBankToken", new object[] {
+                        value}, this.GenerateFamilyBankTokenOperationCompleted, userState);
+        }
+        
+        private void OnGenerateFamilyBankTokenOperationCompleted(object arg) {
+            if ((this.GenerateFamilyBankTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateFamilyBankTokenCompleted(this, new GenerateFamilyBankTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateFeesStructureByStage", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateFeesStructureByStage_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateFeesStructureByStage(string student_No, string stage, string filenameFromApp) {
+            this.Invoke("GenerateFeesStructureByStage", new object[] {
+                        student_No,
+                        stage,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateFeesStructureByStageAsync(string student_No, string stage, string filenameFromApp) {
+            this.GenerateFeesStructureByStageAsync(student_No, stage, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateFeesStructureByStageAsync(string student_No, string stage, string filenameFromApp, object userState) {
+            if ((this.GenerateFeesStructureByStageOperationCompleted == null)) {
+                this.GenerateFeesStructureByStageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateFeesStructureByStageOperationCompleted);
+            }
+            this.InvokeAsync("GenerateFeesStructureByStage", new object[] {
+                        student_No,
+                        stage,
+                        filenameFromApp}, this.GenerateFeesStructureByStageOperationCompleted, userState);
+        }
+        
+        private void OnGenerateFeesStructureByStageOperationCompleted(object arg) {
+            if ((this.GenerateFeesStructureByStageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateFeesStructureByStageCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -11708,6 +13278,40 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateParttimeClaimCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateParttimeClaimCompleted(this, new GenerateParttimeClaimCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GeneratePaySlipReportChuka", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GeneratePaySlipReportChuka_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GeneratePaySlipReportChuka(string employeeNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime period, string filenameFromApp) {
+            object[] results = this.Invoke("GeneratePaySlipReportChuka", new object[] {
+                        employeeNo,
+                        period,
+                        filenameFromApp});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GeneratePaySlipReportChukaAsync(string employeeNo, System.DateTime period, string filenameFromApp) {
+            this.GeneratePaySlipReportChukaAsync(employeeNo, period, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GeneratePaySlipReportChukaAsync(string employeeNo, System.DateTime period, string filenameFromApp, object userState) {
+            if ((this.GeneratePaySlipReportChukaOperationCompleted == null)) {
+                this.GeneratePaySlipReportChukaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGeneratePaySlipReportChukaOperationCompleted);
+            }
+            this.InvokeAsync("GeneratePaySlipReportChuka", new object[] {
+                        employeeNo,
+                        period,
+                        filenameFromApp}, this.GeneratePaySlipReportChukaOperationCompleted, userState);
+        }
+        
+        private void OnGeneratePaySlipReportChukaOperationCompleted(object arg) {
+            if ((this.GeneratePaySlipReportChukaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GeneratePaySlipReportChukaCompleted(this, new GeneratePaySlipReportChukaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -12115,6 +13719,40 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateSsupp_RetakeExamCard", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateSsupp_RetakeExamCard_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateSsupp_RetakeExamCard(string student_No, string sem, int regF, string filenameFromApp) {
+            this.Invoke("GenerateSsupp_RetakeExamCard", new object[] {
+                        student_No,
+                        sem,
+                        regF,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateSsupp_RetakeExamCardAsync(string student_No, string sem, int regF, string filenameFromApp) {
+            this.GenerateSsupp_RetakeExamCardAsync(student_No, sem, regF, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateSsupp_RetakeExamCardAsync(string student_No, string sem, int regF, string filenameFromApp, object userState) {
+            if ((this.GenerateSsupp_RetakeExamCardOperationCompleted == null)) {
+                this.GenerateSsupp_RetakeExamCardOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateSsupp_RetakeExamCardOperationCompleted);
+            }
+            this.InvokeAsync("GenerateSsupp_RetakeExamCard", new object[] {
+                        student_No,
+                        sem,
+                        regF,
+                        filenameFromApp}, this.GenerateSsupp_RetakeExamCardOperationCompleted, userState);
+        }
+        
+        private void OnGenerateSsupp_RetakeExamCardOperationCompleted(object arg) {
+            if ((this.GenerateSsupp_RetakeExamCardCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateSsupp_RetakeExamCardCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentAdmissionLetter", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentAdmissionLetter_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool GenerateStudentAdmissionLetter(string admissionNumber, string filenameFromApp) {
@@ -12239,6 +13877,36 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentLegacyStatement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentLegacyStatement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateStudentLegacyStatement(string student_No, string filenameFromApp) {
+            this.Invoke("GenerateStudentLegacyStatement", new object[] {
+                        student_No,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentLegacyStatementAsync(string student_No, string filenameFromApp) {
+            this.GenerateStudentLegacyStatementAsync(student_No, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentLegacyStatementAsync(string student_No, string filenameFromApp, object userState) {
+            if ((this.GenerateStudentLegacyStatementOperationCompleted == null)) {
+                this.GenerateStudentLegacyStatementOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentLegacyStatementOperationCompleted);
+            }
+            this.InvokeAsync("GenerateStudentLegacyStatement", new object[] {
+                        student_No,
+                        filenameFromApp}, this.GenerateStudentLegacyStatementOperationCompleted, userState);
+        }
+        
+        private void OnGenerateStudentLegacyStatementOperationCompleted(object arg) {
+            if ((this.GenerateStudentLegacyStatementCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateStudentLegacyStatementCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentProformaInvoice", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentProformaInvoice_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void GenerateStudentProformaInvoice(string studentNo, string semester, string filenameFromApp) {
             this.Invoke("GenerateStudentProformaInvoice", new object[] {
@@ -12267,6 +13935,39 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateStudentProformaInvoiceCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateStudentProformaInvoiceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentProformaInvoice_" +
+            "Stage", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentProformaInvoice_Stage_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateStudentProformaInvoice_Stage(string studentNo, string semester, string filenameFromApp) {
+            this.Invoke("GenerateStudentProformaInvoice_Stage", new object[] {
+                        studentNo,
+                        semester,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentProformaInvoice_StageAsync(string studentNo, string semester, string filenameFromApp) {
+            this.GenerateStudentProformaInvoice_StageAsync(studentNo, semester, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentProformaInvoice_StageAsync(string studentNo, string semester, string filenameFromApp, object userState) {
+            if ((this.GenerateStudentProformaInvoice_StageOperationCompleted == null)) {
+                this.GenerateStudentProformaInvoice_StageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentProformaInvoice_StageOperationCompleted);
+            }
+            this.InvokeAsync("GenerateStudentProformaInvoice_Stage", new object[] {
+                        studentNo,
+                        semester,
+                        filenameFromApp}, this.GenerateStudentProformaInvoice_StageOperationCompleted, userState);
+        }
+        
+        private void OnGenerateStudentProformaInvoice_StageOperationCompleted(object arg) {
+            if ((this.GenerateStudentProformaInvoice_StageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateStudentProformaInvoice_StageCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -12366,6 +14067,37 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateStudentReportCardFilterCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateStudentReportCardFilterCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentReportCardFromBa" +
+            "ckLog", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentReportCardFromBackLog_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateStudentReportCardFromBackLog(string student_No, string filenameFromApp) {
+            this.Invoke("GenerateStudentReportCardFromBackLog", new object[] {
+                        student_No,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentReportCardFromBackLogAsync(string student_No, string filenameFromApp) {
+            this.GenerateStudentReportCardFromBackLogAsync(student_No, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentReportCardFromBackLogAsync(string student_No, string filenameFromApp, object userState) {
+            if ((this.GenerateStudentReportCardFromBackLogOperationCompleted == null)) {
+                this.GenerateStudentReportCardFromBackLogOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentReportCardFromBackLogOperationCompleted);
+            }
+            this.InvokeAsync("GenerateStudentReportCardFromBackLog", new object[] {
+                        student_No,
+                        filenameFromApp}, this.GenerateStudentReportCardFromBackLogOperationCompleted, userState);
+        }
+        
+        private void OnGenerateStudentReportCardFromBackLogOperationCompleted(object arg) {
+            if ((this.GenerateStudentReportCardFromBackLogCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateStudentReportCardFromBackLogCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -12965,6 +14697,36 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePictureApplicant", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GetProfilePictureApplicant_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GetProfilePictureApplicant(string appNo) {
+            object[] results = this.Invoke("GetProfilePictureApplicant", new object[] {
+                        appNo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetProfilePictureApplicantAsync(string appNo) {
+            this.GetProfilePictureApplicantAsync(appNo, null);
+        }
+        
+        /// <remarks/>
+        public void GetProfilePictureApplicantAsync(string appNo, object userState) {
+            if ((this.GetProfilePictureApplicantOperationCompleted == null)) {
+                this.GetProfilePictureApplicantOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetProfilePictureApplicantOperationCompleted);
+            }
+            this.InvokeAsync("GetProfilePictureApplicant", new object[] {
+                        appNo}, this.GetProfilePictureApplicantOperationCompleted, userState);
+        }
+        
+        private void OnGetProfilePictureApplicantOperationCompleted(object arg) {
+            if ((this.GetProfilePictureApplicantCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetProfilePictureApplicantCompleted(this, new GetProfilePictureApplicantCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePictureStudent", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GetProfilePictureStudent_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string GetProfilePictureStudent(string studentNo) {
@@ -13500,6 +15262,35 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:HRCancelFuelRechrageCardApplica" +
+            "tion", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="HRCancelFuelRechrageCardApplication_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void HRCancelFuelRechrageCardApplication(string appNo) {
+            this.Invoke("HRCancelFuelRechrageCardApplication", new object[] {
+                        appNo});
+        }
+        
+        /// <remarks/>
+        public void HRCancelFuelRechrageCardApplicationAsync(string appNo) {
+            this.HRCancelFuelRechrageCardApplicationAsync(appNo, null);
+        }
+        
+        /// <remarks/>
+        public void HRCancelFuelRechrageCardApplicationAsync(string appNo, object userState) {
+            if ((this.HRCancelFuelRechrageCardApplicationOperationCompleted == null)) {
+                this.HRCancelFuelRechrageCardApplicationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHRCancelFuelRechrageCardApplicationOperationCompleted);
+            }
+            this.InvokeAsync("HRCancelFuelRechrageCardApplication", new object[] {
+                        appNo}, this.HRCancelFuelRechrageCardApplicationOperationCompleted, userState);
+        }
+        
+        private void OnHRCancelFuelRechrageCardApplicationOperationCompleted(object arg) {
+            if ((this.HRCancelFuelRechrageCardApplicationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.HRCancelFuelRechrageCardApplicationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:HRCancelLeaveApplication", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="HRCancelLeaveApplication_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void HRCancelLeaveApplication(string appNo) {
             this.Invoke("HRCancelLeaveApplication", new object[] {
@@ -13608,6 +15399,35 @@ namespace New_Student_Portal.NAVWS {
             if ((this.HRCancelTrainingRequisitionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.HRCancelTrainingRequisitionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:HRFuelRechargeCardApprovalReque" +
+            "st", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="HRFuelRechargeCardApprovalRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void HRFuelRechargeCardApprovalRequest(string reqNo) {
+            this.Invoke("HRFuelRechargeCardApprovalRequest", new object[] {
+                        reqNo});
+        }
+        
+        /// <remarks/>
+        public void HRFuelRechargeCardApprovalRequestAsync(string reqNo) {
+            this.HRFuelRechargeCardApprovalRequestAsync(reqNo, null);
+        }
+        
+        /// <remarks/>
+        public void HRFuelRechargeCardApprovalRequestAsync(string reqNo, object userState) {
+            if ((this.HRFuelRechargeCardApprovalRequestOperationCompleted == null)) {
+                this.HRFuelRechargeCardApprovalRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHRFuelRechargeCardApprovalRequestOperationCompleted);
+            }
+            this.InvokeAsync("HRFuelRechargeCardApprovalRequest", new object[] {
+                        reqNo}, this.HRFuelRechargeCardApprovalRequestOperationCompleted, userState);
+        }
+        
+        private void OnHRFuelRechargeCardApprovalRequestOperationCompleted(object arg) {
+            if ((this.HRFuelRechargeCardApprovalRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.HRFuelRechargeCardApprovalRequestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -14699,7 +16519,7 @@ namespace New_Student_Portal.NAVWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ImprestRequisitionCreate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ImprestRequisitionCreate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string ImprestRequisitionCreate(string employee_No, string dim1, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo) {
+        public string ImprestRequisitionCreate(string employee_No, string dim1, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime activityCompletionDate) {
             object[] results = this.Invoke("ImprestRequisitionCreate", new object[] {
                         employee_No,
                         dim1,
@@ -14710,17 +16530,18 @@ namespace New_Student_Portal.NAVWS {
                         responsibilityCenter,
                         userID,
                         dim4,
-                        phoneNo});
+                        phoneNo,
+                        activityCompletionDate});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void ImprestRequisitionCreateAsync(string employee_No, string dim1, System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo) {
-            this.ImprestRequisitionCreateAsync(employee_No, dim1, date_Required, dim2, dim3, description, responsibilityCenter, userID, dim4, phoneNo, null);
+        public void ImprestRequisitionCreateAsync(string employee_No, string dim1, System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo, System.DateTime activityCompletionDate) {
+            this.ImprestRequisitionCreateAsync(employee_No, dim1, date_Required, dim2, dim3, description, responsibilityCenter, userID, dim4, phoneNo, activityCompletionDate, null);
         }
         
         /// <remarks/>
-        public void ImprestRequisitionCreateAsync(string employee_No, string dim1, System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo, object userState) {
+        public void ImprestRequisitionCreateAsync(string employee_No, string dim1, System.DateTime date_Required, string dim2, string dim3, string description, string responsibilityCenter, string userID, string dim4, string phoneNo, System.DateTime activityCompletionDate, object userState) {
             if ((this.ImprestRequisitionCreateOperationCompleted == null)) {
                 this.ImprestRequisitionCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnImprestRequisitionCreateOperationCompleted);
             }
@@ -14734,7 +16555,8 @@ namespace New_Student_Portal.NAVWS {
                         responsibilityCenter,
                         userID,
                         dim4,
-                        phoneNo}, this.ImprestRequisitionCreateOperationCompleted, userState);
+                        phoneNo,
+                        activityCompletionDate}, this.ImprestRequisitionCreateOperationCompleted, userState);
         }
         
         private void OnImprestRequisitionCreateOperationCompleted(object arg) {
@@ -14851,9 +16673,10 @@ namespace New_Student_Portal.NAVWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InserClassAtteHeader", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InserClassAtteHeader_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InserClassAtteHeader(string progra, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section) {
+        public string InserClassAtteHeader(string progra, string stage, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section) {
             object[] results = this.Invoke("InserClassAtteHeader", new object[] {
                         progra,
+                        stage,
                         unit,
                         semester,
                         wkCode,
@@ -14865,17 +16688,18 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        public void InserClassAtteHeaderAsync(string progra, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section) {
-            this.InserClassAtteHeaderAsync(progra, unit, semester, wkCode, lecturer, campus, dayCode, section, null);
+        public void InserClassAtteHeaderAsync(string progra, string stage, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section) {
+            this.InserClassAtteHeaderAsync(progra, stage, unit, semester, wkCode, lecturer, campus, dayCode, section, null);
         }
         
         /// <remarks/>
-        public void InserClassAtteHeaderAsync(string progra, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section, object userState) {
+        public void InserClassAtteHeaderAsync(string progra, string stage, string unit, string semester, string wkCode, string lecturer, string campus, string dayCode, string section, object userState) {
             if ((this.InserClassAtteHeaderOperationCompleted == null)) {
                 this.InserClassAtteHeaderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInserClassAtteHeaderOperationCompleted);
             }
             this.InvokeAsync("InserClassAtteHeader", new object[] {
                         progra,
+                        stage,
                         unit,
                         semester,
                         wkCode,
@@ -15185,648 +17009,6 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertApplication", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertApplication_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InsertApplication(
-                    string surname, 
-                    string othernames, 
-                    string nationality, 
-                    string campus, 
-                    string programme, 
-                    string email, 
-                    string phone_number, 
-                    string intake, 
-                    string password, 
-                    int gender, 
-                    string id_number, 
-                    string indexNumber, 
-                    string study_mode, 
-                    [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dob, 
-                    int level, 
-                    string passport_no, 
-                    string kCSEMeanGrade, 
-                    string birthCertNo) {
-            object[] results = this.Invoke("InsertApplication", new object[] {
-                        surname,
-                        othernames,
-                        nationality,
-                        campus,
-                        programme,
-                        email,
-                        phone_number,
-                        intake,
-                        password,
-                        gender,
-                        id_number,
-                        indexNumber,
-                        study_mode,
-                        dob,
-                        level,
-                        passport_no,
-                        kCSEMeanGrade,
-                        birthCertNo});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertApplicationAsync(
-                    string surname, 
-                    string othernames, 
-                    string nationality, 
-                    string campus, 
-                    string programme, 
-                    string email, 
-                    string phone_number, 
-                    string intake, 
-                    string password, 
-                    int gender, 
-                    string id_number, 
-                    string indexNumber, 
-                    string study_mode, 
-                    System.DateTime dob, 
-                    int level, 
-                    string passport_no, 
-                    string kCSEMeanGrade, 
-                    string birthCertNo) {
-            this.InsertApplicationAsync(surname, othernames, nationality, campus, programme, email, phone_number, intake, password, gender, id_number, indexNumber, study_mode, dob, level, passport_no, kCSEMeanGrade, birthCertNo, null);
-        }
-        
-        /// <remarks/>
-        public void InsertApplicationAsync(
-                    string surname, 
-                    string othernames, 
-                    string nationality, 
-                    string campus, 
-                    string programme, 
-                    string email, 
-                    string phone_number, 
-                    string intake, 
-                    string password, 
-                    int gender, 
-                    string id_number, 
-                    string indexNumber, 
-                    string study_mode, 
-                    System.DateTime dob, 
-                    int level, 
-                    string passport_no, 
-                    string kCSEMeanGrade, 
-                    string birthCertNo, 
-                    object userState) {
-            if ((this.InsertApplicationOperationCompleted == null)) {
-                this.InsertApplicationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertApplicationOperationCompleted);
-            }
-            this.InvokeAsync("InsertApplication", new object[] {
-                        surname,
-                        othernames,
-                        nationality,
-                        campus,
-                        programme,
-                        email,
-                        phone_number,
-                        intake,
-                        password,
-                        gender,
-                        id_number,
-                        indexNumber,
-                        study_mode,
-                        dob,
-                        level,
-                        passport_no,
-                        kCSEMeanGrade,
-                        birthCertNo}, this.InsertApplicationOperationCompleted, userState);
-        }
-        
-        private void OnInsertApplicationOperationCompleted(object arg) {
-            if ((this.InsertApplicationCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertApplicationCompleted(this, new InsertApplicationCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertAppointment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertAppointment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InsertAppointment(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo) {
-            object[] results = this.Invoke("InsertAppointment", new object[] {
-                        patientType,
-                        patientNo,
-                        employeeNo,
-                        doctor,
-                        remark,
-                        settlement,
-                        insuranceNo,
-                        insuranceName,
-                        insMemberNo});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertAppointmentAsync(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo) {
-            this.InsertAppointmentAsync(patientType, patientNo, employeeNo, doctor, remark, settlement, insuranceNo, insuranceName, insMemberNo, null);
-        }
-        
-        /// <remarks/>
-        public void InsertAppointmentAsync(int patientType, string patientNo, string employeeNo, string doctor, string remark, int settlement, string insuranceNo, string insuranceName, string insMemberNo, object userState) {
-            if ((this.InsertAppointmentOperationCompleted == null)) {
-                this.InsertAppointmentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertAppointmentOperationCompleted);
-            }
-            this.InvokeAsync("InsertAppointment", new object[] {
-                        patientType,
-                        patientNo,
-                        employeeNo,
-                        doctor,
-                        remark,
-                        settlement,
-                        insuranceNo,
-                        insuranceName,
-                        insMemberNo}, this.InsertAppointmentOperationCompleted, userState);
-        }
-        
-        private void OnInsertAppointmentOperationCompleted(object arg) {
-            if ((this.InsertAppointmentCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertAppointmentCompleted(this, new InsertAppointmentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertClassListAttendance", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertClassListAttendance_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertClassListAttendance(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus) {
-            this.Invoke("InsertClassListAttendance", new object[] {
-                        docNo,
-                        studentNo,
-                        attendance,
-                        prog,
-                        unit,
-                        semester,
-                        wkCode,
-                        lecturer,
-                        campus});
-        }
-        
-        /// <remarks/>
-        public void InsertClassListAttendanceAsync(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus) {
-            this.InsertClassListAttendanceAsync(docNo, studentNo, attendance, prog, unit, semester, wkCode, lecturer, campus, null);
-        }
-        
-        /// <remarks/>
-        public void InsertClassListAttendanceAsync(string docNo, string studentNo, int attendance, string prog, string unit, string semester, string wkCode, string lecturer, string campus, object userState) {
-            if ((this.InsertClassListAttendanceOperationCompleted == null)) {
-                this.InsertClassListAttendanceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertClassListAttendanceOperationCompleted);
-            }
-            this.InvokeAsync("InsertClassListAttendance", new object[] {
-                        docNo,
-                        studentNo,
-                        attendance,
-                        prog,
-                        unit,
-                        semester,
-                        wkCode,
-                        lecturer,
-                        campus}, this.InsertClassListAttendanceOperationCompleted, userState);
-        }
-        
-        private void OnInsertClassListAttendanceOperationCompleted(object arg) {
-            if ((this.InsertClassListAttendanceCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertClassListAttendanceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertConceptReview", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertConceptReview_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertConceptReview(string conceptNo, string staffNo) {
-            this.Invoke("InsertConceptReview", new object[] {
-                        conceptNo,
-                        staffNo});
-        }
-        
-        /// <remarks/>
-        public void InsertConceptReviewAsync(string conceptNo, string staffNo) {
-            this.InsertConceptReviewAsync(conceptNo, staffNo, null);
-        }
-        
-        /// <remarks/>
-        public void InsertConceptReviewAsync(string conceptNo, string staffNo, object userState) {
-            if ((this.InsertConceptReviewOperationCompleted == null)) {
-                this.InsertConceptReviewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertConceptReviewOperationCompleted);
-            }
-            this.InvokeAsync("InsertConceptReview", new object[] {
-                        conceptNo,
-                        staffNo}, this.InsertConceptReviewOperationCompleted, userState);
-        }
-        
-        private void OnInsertConceptReviewOperationCompleted(object arg) {
-            if ((this.InsertConceptReviewCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertConceptReviewCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDiagnosis", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDiagnosis_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertDiagnosis(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType) {
-            this.Invoke("InsertDiagnosis", new object[] {
-                        treamentNo,
-                        diagnosisNo,
-                        confirmed,
-                        patientNo,
-                        doctor,
-                        remarks,
-                        diagnosisType});
-        }
-        
-        /// <remarks/>
-        public void InsertDiagnosisAsync(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType) {
-            this.InsertDiagnosisAsync(treamentNo, diagnosisNo, confirmed, patientNo, doctor, remarks, diagnosisType, null);
-        }
-        
-        /// <remarks/>
-        public void InsertDiagnosisAsync(string treamentNo, string diagnosisNo, bool confirmed, string patientNo, string doctor, string remarks, int diagnosisType, object userState) {
-            if ((this.InsertDiagnosisOperationCompleted == null)) {
-                this.InsertDiagnosisOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDiagnosisOperationCompleted);
-            }
-            this.InvokeAsync("InsertDiagnosis", new object[] {
-                        treamentNo,
-                        diagnosisNo,
-                        confirmed,
-                        patientNo,
-                        doctor,
-                        remarks,
-                        diagnosisType}, this.InsertDiagnosisOperationCompleted, userState);
-        }
-        
-        private void OnInsertDiagnosisOperationCompleted(object arg) {
-            if ((this.InsertDiagnosisCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertDiagnosisCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDisabilityCert", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDisabilityCert_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertDisabilityCert(string app_no, string descr, string url, string typeofstudent) {
-            this.Invoke("InsertDisabilityCert", new object[] {
-                        app_no,
-                        descr,
-                        url,
-                        typeofstudent});
-        }
-        
-        /// <remarks/>
-        public void InsertDisabilityCertAsync(string app_no, string descr, string url, string typeofstudent) {
-            this.InsertDisabilityCertAsync(app_no, descr, url, typeofstudent, null);
-        }
-        
-        /// <remarks/>
-        public void InsertDisabilityCertAsync(string app_no, string descr, string url, string typeofstudent, object userState) {
-            if ((this.InsertDisabilityCertOperationCompleted == null)) {
-                this.InsertDisabilityCertOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDisabilityCertOperationCompleted);
-            }
-            this.InvokeAsync("InsertDisabilityCert", new object[] {
-                        app_no,
-                        descr,
-                        url,
-                        typeofstudent}, this.InsertDisabilityCertOperationCompleted, userState);
-        }
-        
-        private void OnInsertDisabilityCertOperationCompleted(object arg) {
-            if ((this.InsertDisabilityCertCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertDisabilityCertCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDischargeSummary", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDischargeSummary_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertDischargeSummary(string dischargeCode, int type, string description, string treatmentNo, string patientNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime reviewDate) {
-            this.Invoke("InsertDischargeSummary", new object[] {
-                        dischargeCode,
-                        type,
-                        description,
-                        treatmentNo,
-                        patientNo,
-                        reviewDate});
-        }
-        
-        /// <remarks/>
-        public void InsertDischargeSummaryAsync(string dischargeCode, int type, string description, string treatmentNo, string patientNo, System.DateTime reviewDate) {
-            this.InsertDischargeSummaryAsync(dischargeCode, type, description, treatmentNo, patientNo, reviewDate, null);
-        }
-        
-        /// <remarks/>
-        public void InsertDischargeSummaryAsync(string dischargeCode, int type, string description, string treatmentNo, string patientNo, System.DateTime reviewDate, object userState) {
-            if ((this.InsertDischargeSummaryOperationCompleted == null)) {
-                this.InsertDischargeSummaryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDischargeSummaryOperationCompleted);
-            }
-            this.InvokeAsync("InsertDischargeSummary", new object[] {
-                        dischargeCode,
-                        type,
-                        description,
-                        treatmentNo,
-                        patientNo,
-                        reviewDate}, this.InsertDischargeSummaryOperationCompleted, userState);
-        }
-        
-        private void OnInsertDischargeSummaryOperationCompleted(object arg) {
-            if ((this.InsertDischargeSummaryCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertDischargeSummaryCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDoctorsNotes", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDoctorsNotes_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertDoctorsNotes(string treatmentNo, string patientNo, string notes, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime treatmentDate, string docUSER_ID) {
-            this.Invoke("InsertDoctorsNotes", new object[] {
-                        treatmentNo,
-                        patientNo,
-                        notes,
-                        treatmentDate,
-                        docUSER_ID});
-        }
-        
-        /// <remarks/>
-        public void InsertDoctorsNotesAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID) {
-            this.InsertDoctorsNotesAsync(treatmentNo, patientNo, notes, treatmentDate, docUSER_ID, null);
-        }
-        
-        /// <remarks/>
-        public void InsertDoctorsNotesAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID, object userState) {
-            if ((this.InsertDoctorsNotesOperationCompleted == null)) {
-                this.InsertDoctorsNotesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDoctorsNotesOperationCompleted);
-            }
-            this.InvokeAsync("InsertDoctorsNotes", new object[] {
-                        treatmentNo,
-                        patientNo,
-                        notes,
-                        treatmentDate,
-                        docUSER_ID}, this.InsertDoctorsNotesOperationCompleted, userState);
-        }
-        
-        private void OnInsertDoctorsNotesOperationCompleted(object arg) {
-            if ((this.InsertDoctorsNotesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertDoctorsNotesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertDrugPrescribe", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertDrugPrescribe_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertDrugPrescribe(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateposted) {
-            this.Invoke("InsertDrugPrescribe", new object[] {
-                        observationNo,
-                        drugNo,
-                        quantity,
-                        user,
-                        transacttyp,
-                        location,
-                        dateposted});
-        }
-        
-        /// <remarks/>
-        public void InsertDrugPrescribeAsync(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, System.DateTime dateposted) {
-            this.InsertDrugPrescribeAsync(observationNo, drugNo, quantity, user, transacttyp, location, dateposted, null);
-        }
-        
-        /// <remarks/>
-        public void InsertDrugPrescribeAsync(string observationNo, string drugNo, int quantity, string user, string transacttyp, string location, System.DateTime dateposted, object userState) {
-            if ((this.InsertDrugPrescribeOperationCompleted == null)) {
-                this.InsertDrugPrescribeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertDrugPrescribeOperationCompleted);
-            }
-            this.InvokeAsync("InsertDrugPrescribe", new object[] {
-                        observationNo,
-                        drugNo,
-                        quantity,
-                        user,
-                        transacttyp,
-                        location,
-                        dateposted}, this.InsertDrugPrescribeOperationCompleted, userState);
-        }
-        
-        private void OnInsertDrugPrescribeOperationCompleted(object arg) {
-            if ((this.InsertDrugPrescribeCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertDrugPrescribeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEmergencyContact", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertEmergencyContact_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool InsertEmergencyContact(string appNo, string contact_relationship, ref string contact_name, string contact_phonenumber, string contact_email) {
-            object[] results = this.Invoke("InsertEmergencyContact", new object[] {
-                        appNo,
-                        contact_relationship,
-                        contact_name,
-                        contact_phonenumber,
-                        contact_email});
-            contact_name = ((string)(results[1]));
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertEmergencyContactAsync(string appNo, string contact_relationship, string contact_name, string contact_phonenumber, string contact_email) {
-            this.InsertEmergencyContactAsync(appNo, contact_relationship, contact_name, contact_phonenumber, contact_email, null);
-        }
-        
-        /// <remarks/>
-        public void InsertEmergencyContactAsync(string appNo, string contact_relationship, string contact_name, string contact_phonenumber, string contact_email, object userState) {
-            if ((this.InsertEmergencyContactOperationCompleted == null)) {
-                this.InsertEmergencyContactOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertEmergencyContactOperationCompleted);
-            }
-            this.InvokeAsync("InsertEmergencyContact", new object[] {
-                        appNo,
-                        contact_relationship,
-                        contact_name,
-                        contact_phonenumber,
-                        contact_email}, this.InsertEmergencyContactOperationCompleted, userState);
-        }
-        
-        private void OnInsertEmergencyContactOperationCompleted(object arg) {
-            if ((this.InsertEmergencyContactCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertEmergencyContactCompleted(this, new InsertEmergencyContactCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEnquiry", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertEnquiry_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool InsertEnquiry(string name, string email, string query, string phoneNumber) {
-            object[] results = this.Invoke("InsertEnquiry", new object[] {
-                        name,
-                        email,
-                        query,
-                        phoneNumber});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertEnquiryAsync(string name, string email, string query, string phoneNumber) {
-            this.InsertEnquiryAsync(name, email, query, phoneNumber, null);
-        }
-        
-        /// <remarks/>
-        public void InsertEnquiryAsync(string name, string email, string query, string phoneNumber, object userState) {
-            if ((this.InsertEnquiryOperationCompleted == null)) {
-                this.InsertEnquiryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertEnquiryOperationCompleted);
-            }
-            this.InvokeAsync("InsertEnquiry", new object[] {
-                        name,
-                        email,
-                        query,
-                        phoneNumber}, this.InsertEnquiryOperationCompleted, userState);
-        }
-        
-        private void OnInsertEnquiryOperationCompleted(object arg) {
-            if ((this.InsertEnquiryCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertEnquiryCompleted(this, new InsertEnquiryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertFoodMenu", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertFoodMenu_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertFoodMenu(string menu, string studentNo, decimal qty) {
-            this.Invoke("InsertFoodMenu", new object[] {
-                        menu,
-                        studentNo,
-                        qty});
-        }
-        
-        /// <remarks/>
-        public void InsertFoodMenuAsync(string menu, string studentNo, decimal qty) {
-            this.InsertFoodMenuAsync(menu, studentNo, qty, null);
-        }
-        
-        /// <remarks/>
-        public void InsertFoodMenuAsync(string menu, string studentNo, decimal qty, object userState) {
-            if ((this.InsertFoodMenuOperationCompleted == null)) {
-                this.InsertFoodMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertFoodMenuOperationCompleted);
-            }
-            this.InvokeAsync("InsertFoodMenu", new object[] {
-                        menu,
-                        studentNo,
-                        qty}, this.InsertFoodMenuOperationCompleted, userState);
-        }
-        
-        private void OnInsertFoodMenuOperationCompleted(object arg) {
-            if ((this.InsertFoodMenuCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertFoodMenuCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHRTrainingParticipants", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHRTrainingParticipants_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertHRTrainingParticipants(string document_No, string empNo) {
-            this.Invoke("InsertHRTrainingParticipants", new object[] {
-                        document_No,
-                        empNo});
-        }
-        
-        /// <remarks/>
-        public void InsertHRTrainingParticipantsAsync(string document_No, string empNo) {
-            this.InsertHRTrainingParticipantsAsync(document_No, empNo, null);
-        }
-        
-        /// <remarks/>
-        public void InsertHRTrainingParticipantsAsync(string document_No, string empNo, object userState) {
-            if ((this.InsertHRTrainingParticipantsOperationCompleted == null)) {
-                this.InsertHRTrainingParticipantsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHRTrainingParticipantsOperationCompleted);
-            }
-            this.InvokeAsync("InsertHRTrainingParticipants", new object[] {
-                        document_No,
-                        empNo}, this.InsertHRTrainingParticipantsOperationCompleted, userState);
-        }
-        
-        private void OnInsertHRTrainingParticipantsOperationCompleted(object arg) {
-            if ((this.InsertHRTrainingParticipantsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertHRTrainingParticipantsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHistoryPresentIllness", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHistoryPresentIllness_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void InsertHistoryPresentIllness(string treatmentNo, string patientNo, string notes, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime treatmentDate, string docUSER_ID) {
-            this.Invoke("InsertHistoryPresentIllness", new object[] {
-                        treatmentNo,
-                        patientNo,
-                        notes,
-                        treatmentDate,
-                        docUSER_ID});
-        }
-        
-        /// <remarks/>
-        public void InsertHistoryPresentIllnessAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID) {
-            this.InsertHistoryPresentIllnessAsync(treatmentNo, patientNo, notes, treatmentDate, docUSER_ID, null);
-        }
-        
-        /// <remarks/>
-        public void InsertHistoryPresentIllnessAsync(string treatmentNo, string patientNo, string notes, System.DateTime treatmentDate, string docUSER_ID, object userState) {
-            if ((this.InsertHistoryPresentIllnessOperationCompleted == null)) {
-                this.InsertHistoryPresentIllnessOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHistoryPresentIllnessOperationCompleted);
-            }
-            this.InvokeAsync("InsertHistoryPresentIllness", new object[] {
-                        treatmentNo,
-                        patientNo,
-                        notes,
-                        treatmentDate,
-                        docUSER_ID}, this.InsertHistoryPresentIllnessOperationCompleted, userState);
-        }
-        
-        private void OnInsertHistoryPresentIllnessOperationCompleted(object arg) {
-            if ((this.InsertHistoryPresentIllnessCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertHistoryPresentIllnessCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertHostel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertHostel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public int InsertHostel(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear) {
-            object[] results = this.Invoke("InsertHostel", new object[] {
-                        studentNo,
-                        spaceNo,
-                        hostelNo,
-                        roomNo,
-                        accomodationFee,
-                        semester,
-                        academicYear});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertHostelAsync(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear) {
-            this.InsertHostelAsync(studentNo, spaceNo, hostelNo, roomNo, accomodationFee, semester, academicYear, null);
-        }
-        
-        /// <remarks/>
-        public void InsertHostelAsync(string studentNo, string spaceNo, string hostelNo, string roomNo, decimal accomodationFee, string semester, string academicYear, object userState) {
-            if ((this.InsertHostelOperationCompleted == null)) {
-                this.InsertHostelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertHostelOperationCompleted);
-            }
-            this.InvokeAsync("InsertHostel", new object[] {
-                        studentNo,
-                        spaceNo,
-                        hostelNo,
-                        roomNo,
-                        accomodationFee,
-                        semester,
-                        academicYear}, this.InsertHostelOperationCompleted, userState);
-        }
-        
-        private void OnInsertHostelOperationCompleted(object arg) {
-            if ((this.InsertHostelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertHostelCompleted(this, new InsertHostelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:AcademicReferee", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="AcademicReferee_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool AcademicReferee(string no, string name, string address, string email, string type) {
@@ -15907,27 +17089,29 @@ namespace New_Student_Portal.NAVWS {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:AllowAutobilling", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="AllowAutobilling_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool AllowAutobilling(string stdNo, string sem, bool backOfficeUser) {
+        public bool AllowAutobilling(string stdNo, string sem, int regFor, bool backOfficeUser) {
             object[] results = this.Invoke("AllowAutobilling", new object[] {
                         stdNo,
                         sem,
+                        regFor,
                         backOfficeUser});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void AllowAutobillingAsync(string stdNo, string sem, bool backOfficeUser) {
-            this.AllowAutobillingAsync(stdNo, sem, backOfficeUser, null);
+        public void AllowAutobillingAsync(string stdNo, string sem, int regFor, bool backOfficeUser) {
+            this.AllowAutobillingAsync(stdNo, sem, regFor, backOfficeUser, null);
         }
         
         /// <remarks/>
-        public void AllowAutobillingAsync(string stdNo, string sem, bool backOfficeUser, object userState) {
+        public void AllowAutobillingAsync(string stdNo, string sem, int regFor, bool backOfficeUser, object userState) {
             if ((this.AllowAutobillingOperationCompleted == null)) {
                 this.AllowAutobillingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllowAutobillingOperationCompleted);
             }
             this.InvokeAsync("AllowAutobilling", new object[] {
                         stdNo,
                         sem,
+                        regFor,
                         backOfficeUser}, this.AllowAutobillingOperationCompleted, userState);
         }
         
@@ -16946,6 +18130,36 @@ namespace New_Student_Portal.NAVWS {
             if ((this.CheckLabResultsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CheckLabResultsCompleted(this, new CheckLabResultsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:CheckToken", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="CheckToken_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool CheckToken(string token) {
+            object[] results = this.Invoke("CheckToken", new object[] {
+                        token});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CheckTokenAsync(string token) {
+            this.CheckTokenAsync(token, null);
+        }
+        
+        /// <remarks/>
+        public void CheckTokenAsync(string token, object userState) {
+            if ((this.CheckTokenOperationCompleted == null)) {
+                this.CheckTokenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckTokenOperationCompleted);
+            }
+            this.InvokeAsync("CheckToken", new object[] {
+                        token}, this.CheckTokenOperationCompleted, userState);
+        }
+        
+        private void OnCheckTokenOperationCompleted(object arg) {
+            if ((this.CheckTokenCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CheckTokenCompleted(this, new CheckTokenCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -19580,8 +20794,98 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:FuelRechargeCard", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="FuelRechargeCard_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FuelRechargeCard(string driver, string vehicle, decimal amountConsumed) {
+            object[] results = this.Invoke("FuelRechargeCard", new object[] {
+                        driver,
+                        vehicle,
+                        amountConsumed});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FuelRechargeCardAsync(string driver, string vehicle, decimal amountConsumed) {
+            this.FuelRechargeCardAsync(driver, vehicle, amountConsumed, null);
+        }
+        
+        /// <remarks/>
+        public void FuelRechargeCardAsync(string driver, string vehicle, decimal amountConsumed, object userState) {
+            if ((this.FuelRechargeCardOperationCompleted == null)) {
+                this.FuelRechargeCardOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFuelRechargeCardOperationCompleted);
+            }
+            this.InvokeAsync("FuelRechargeCard", new object[] {
+                        driver,
+                        vehicle,
+                        amountConsumed}, this.FuelRechargeCardOperationCompleted, userState);
+        }
+        
+        private void OnFuelRechargeCardOperationCompleted(object arg) {
+            if ((this.FuelRechargeCardCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FuelRechargeCardCompleted(this, new FuelRechargeCardCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:FuelRequisition", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="FuelRequisition_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FuelRequisition(int requisitionType, string vehicle, string vendor, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateTaken, int fuelType, decimal fuelQuantity, decimal price, string department, string respCenter, string station, decimal odometerRead, string employeeNo, string description, string driver) {
+            object[] results = this.Invoke("FuelRequisition", new object[] {
+                        requisitionType,
+                        vehicle,
+                        vendor,
+                        dateTaken,
+                        fuelType,
+                        fuelQuantity,
+                        price,
+                        department,
+                        respCenter,
+                        station,
+                        odometerRead,
+                        employeeNo,
+                        description,
+                        driver});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FuelRequisitionAsync(int requisitionType, string vehicle, string vendor, System.DateTime dateTaken, int fuelType, decimal fuelQuantity, decimal price, string department, string respCenter, string station, decimal odometerRead, string employeeNo, string description, string driver) {
+            this.FuelRequisitionAsync(requisitionType, vehicle, vendor, dateTaken, fuelType, fuelQuantity, price, department, respCenter, station, odometerRead, employeeNo, description, driver, null);
+        }
+        
+        /// <remarks/>
+        public void FuelRequisitionAsync(int requisitionType, string vehicle, string vendor, System.DateTime dateTaken, int fuelType, decimal fuelQuantity, decimal price, string department, string respCenter, string station, decimal odometerRead, string employeeNo, string description, string driver, object userState) {
+            if ((this.FuelRequisitionOperationCompleted == null)) {
+                this.FuelRequisitionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFuelRequisitionOperationCompleted);
+            }
+            this.InvokeAsync("FuelRequisition", new object[] {
+                        requisitionType,
+                        vehicle,
+                        vendor,
+                        dateTaken,
+                        fuelType,
+                        fuelQuantity,
+                        price,
+                        department,
+                        respCenter,
+                        station,
+                        odometerRead,
+                        employeeNo,
+                        description,
+                        driver}, this.FuelRequisitionOperationCompleted, userState);
+        }
+        
+        private void OnFuelRequisitionOperationCompleted(object arg) {
+            if ((this.FuelRequisitionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FuelRequisitionCompleted(this, new FuelRequisitionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GeneralEvaluationCreate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GeneralEvaluationCreate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GeneralEvaluationCreate(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection) {
+        public void GeneralEvaluationCreate(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection, string evaluationItem) {
             this.Invoke("GeneralEvaluationCreate", new object[] {
                         student_No,
                         semester,
@@ -19592,16 +20896,17 @@ namespace New_Student_Portal.NAVWS {
                         question_Name,
                         category,
                         section,
-                        subSection});
+                        subSection,
+                        evaluationItem});
         }
         
         /// <remarks/>
-        public void GeneralEvaluationCreateAsync(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection) {
-            this.GeneralEvaluationCreateAsync(student_No, semester, evaluation_Question, evaluation_Category, programme, question_Score, question_Name, category, section, subSection, null);
+        public void GeneralEvaluationCreateAsync(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection, string evaluationItem) {
+            this.GeneralEvaluationCreateAsync(student_No, semester, evaluation_Question, evaluation_Category, programme, question_Score, question_Name, category, section, subSection, evaluationItem, null);
         }
         
         /// <remarks/>
-        public void GeneralEvaluationCreateAsync(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection, object userState) {
+        public void GeneralEvaluationCreateAsync(string student_No, string semester, string evaluation_Question, string evaluation_Category, string programme, decimal question_Score, string question_Name, int category, int section, int subSection, string evaluationItem, object userState) {
             if ((this.GeneralEvaluationCreateOperationCompleted == null)) {
                 this.GeneralEvaluationCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGeneralEvaluationCreateOperationCompleted);
             }
@@ -19615,116 +20920,14 @@ namespace New_Student_Portal.NAVWS {
                         question_Name,
                         category,
                         section,
-                        subSection}, this.GeneralEvaluationCreateOperationCompleted, userState);
+                        subSection,
+                        evaluationItem}, this.GeneralEvaluationCreateOperationCompleted, userState);
         }
         
         private void OnGeneralEvaluationCreateOperationCompleted(object arg) {
             if ((this.GeneralEvaluationCreateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GeneralEvaluationCreateCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdmissionLetter", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdmissionLetter_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool GenerateAdmissionLetter(string admissionNumber, string filenameFromApp) {
-            object[] results = this.Invoke("GenerateAdmissionLetter", new object[] {
-                        admissionNumber,
-                        filenameFromApp});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GenerateAdmissionLetterAsync(string admissionNumber, string filenameFromApp) {
-            this.GenerateAdmissionLetterAsync(admissionNumber, filenameFromApp, null);
-        }
-        
-        /// <remarks/>
-        public void GenerateAdmissionLetterAsync(string admissionNumber, string filenameFromApp, object userState) {
-            if ((this.GenerateAdmissionLetterOperationCompleted == null)) {
-                this.GenerateAdmissionLetterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdmissionLetterOperationCompleted);
-            }
-            this.InvokeAsync("GenerateAdmissionLetter", new object[] {
-                        admissionNumber,
-                        filenameFromApp}, this.GenerateAdmissionLetterOperationCompleted, userState);
-        }
-        
-        private void OnGenerateAdmissionLetterOperationCompleted(object arg) {
-            if ((this.GenerateAdmissionLetterCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateAdmissionLetterCompleted(this, new GenerateAdmissionLetterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdmissionPrintout", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdmissionPrintout_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string GenerateAdmissionPrintout(string treatmentNo, string filenameFromApp) {
-            object[] results = this.Invoke("GenerateAdmissionPrintout", new object[] {
-                        treatmentNo,
-                        filenameFromApp});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GenerateAdmissionPrintoutAsync(string treatmentNo, string filenameFromApp) {
-            this.GenerateAdmissionPrintoutAsync(treatmentNo, filenameFromApp, null);
-        }
-        
-        /// <remarks/>
-        public void GenerateAdmissionPrintoutAsync(string treatmentNo, string filenameFromApp, object userState) {
-            if ((this.GenerateAdmissionPrintoutOperationCompleted == null)) {
-                this.GenerateAdmissionPrintoutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdmissionPrintoutOperationCompleted);
-            }
-            this.InvokeAsync("GenerateAdmissionPrintout", new object[] {
-                        treatmentNo,
-                        filenameFromApp}, this.GenerateAdmissionPrintoutOperationCompleted, userState);
-        }
-        
-        private void OnGenerateAdmissionPrintoutOperationCompleted(object arg) {
-            if ((this.GenerateAdmissionPrintoutCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateAdmissionPrintoutCompleted(this, new GenerateAdmissionPrintoutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateAdvanceHostelAllocation" +
-            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateAdvanceHostelAllocation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateAdvanceHostelAllocation(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt) {
-            this.Invoke("GenerateAdvanceHostelAllocation", new object[] {
-                        studentNo,
-                        sem,
-                        hostelNo,
-                        roomNo,
-                        spaceNo,
-                        amt});
-        }
-        
-        /// <remarks/>
-        public void GenerateAdvanceHostelAllocationAsync(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt) {
-            this.GenerateAdvanceHostelAllocationAsync(studentNo, sem, hostelNo, roomNo, spaceNo, amt, null);
-        }
-        
-        /// <remarks/>
-        public void GenerateAdvanceHostelAllocationAsync(string studentNo, string sem, string hostelNo, string roomNo, string spaceNo, decimal amt, object userState) {
-            if ((this.GenerateAdvanceHostelAllocationOperationCompleted == null)) {
-                this.GenerateAdvanceHostelAllocationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAdvanceHostelAllocationOperationCompleted);
-            }
-            this.InvokeAsync("GenerateAdvanceHostelAllocation", new object[] {
-                        studentNo,
-                        sem,
-                        hostelNo,
-                        roomNo,
-                        spaceNo,
-                        amt}, this.GenerateAdvanceHostelAllocationOperationCompleted, userState);
-        }
-        
-        private void OnGenerateAdvanceHostelAllocationOperationCompleted(object arg) {
-            if ((this.GenerateAdvanceHostelAllocationCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateAdvanceHostelAllocationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -19748,31 +20951,317 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void isLastVisitOpenCompletedEventHandler(object sender, isLastVisitOpenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class isLastVisitOpenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal isLastVisitOpenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void unbookHostelCompletedEventHandler(object sender, unbookHostelCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class unbookHostelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal unbookHostelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void updateDashboardProfileCompletedEventHandler(object sender, updateDashboardProfileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateDashboardProfileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateDashboardProfileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RequestAdmissionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RequestLabCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RequestRadiologyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RequestReferralCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ReturnAmountInWordsCompletedEventHandler(object sender, ReturnAmountInWordsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ReturnAmountInWordsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ReturnAmountInWordsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ReturnStudentOptionCompletedEventHandler(object sender, ReturnStudentOptionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ReturnStudentOptionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ReturnStudentOptionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SMSSendResetPassordCompletedEventHandler(object sender, SMSSendResetPassordCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SMSSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SMSSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SMSStffSendResetPassordCompletedEventHandler(object sender, SMSStffSendResetPassordCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SMSStffSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SMSStffSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveELearningEvaluationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveEmailCompletedEventHandler(object sender, SaveEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveEvaluationSuggestionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveGeneralEvaluationCommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveHRAppraisalSkillsCompetenceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveHostelBookingInterestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveLecturerEvaluationFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveObjectivesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveProfessionalBodyRequestCompletedEventHandler(object sender, SaveProfessionalBodyRequestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveProfessionalBodyRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveProfessionalBodyRequestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveSickoffCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SaveStudentEnquiryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SaveUpdateHRAppraisalDutiesRespCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SaveUpdateHRAppraisalObjectiveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SaveUpdateHRAppraisalSkillsCompetenceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SaveUpdateHRAppraisalSkillsDevelopmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void SaveVehicleOdometerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SelectDiagnosisCompletedEventHandler(object sender, SelectDiagnosisCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SelectDiagnosisCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19794,19 +21283,19 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendApprovalEmailAlertCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendConceptForApprovalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendEmailCompletedEventHandler(object sender, SendEmailCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SendEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19836,63 +21325,63 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendEmailsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendGraduationDocForApprovalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendImpSurrenderForApprovalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendLeaveApplicationForApprovalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendToTheatreCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SendtoDischargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SetPictureCustomerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SetPictureKuccpsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SetPictureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StaffClaimRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StaffClaimRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StaffClaimRequisitionLinesInsertCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StaffClaimUpdateLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StaffClearanceRequestCompletedEventHandler(object sender, StaffClearanceRequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StaffClearanceRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19914,11 +21403,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StockLevelCompletedEventHandler(object sender, StockLevelCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StockLevelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19940,11 +21429,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreLinesExistsCompletedEventHandler(object sender, StoreLinesExistsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StoreLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19966,11 +21455,37 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void StorePayment2CompletedEventHandler(object sender, StorePayment2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class StorePayment2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal StorePayment2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StorePaymentCompletedEventHandler(object sender, StorePaymentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StorePaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -19992,11 +21507,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreRequisitionApprovalRequestCompletedEventHandler(object sender, StoreRequisitionApprovalRequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StoreRequisitionApprovalRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20018,11 +21533,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreRequisitionCreateCompletedEventHandler(object sender, StoreRequisitionCreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StoreRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20044,27 +21559,27 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StoreRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentClearanceCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentCourseRegistrationCompletedEventHandler(object sender, StudentCourseRegistrationCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StudentCourseRegistrationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20086,15 +21601,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentDeferralRequisitionCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentForgotPasswordCompletedEventHandler(object sender, StudentForgotPasswordCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StudentForgotPasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20116,15 +21631,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentMemberOfCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentPromotionCompletedEventHandler(object sender, StudentPromotionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StudentPromotionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20146,15 +21661,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRequisitionCreateCompletedEventHandler(object sender, StudentRequisitionCreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StudentRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20176,27 +21691,27 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRequisitionLinesCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentRetakenChargesCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentSelfPromotionCompletedEventHandler(object sender, StudentSelfPromotionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StudentSelfPromotionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20218,19 +21733,19 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void StudentsReportsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SubmitFoodRequestLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SubmitFoodRequestCompletedEventHandler(object sender, SubmitFoodRequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SubmitFoodRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20252,11 +21767,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void SubmitRetakeResitUnitsCompletedEventHandler(object sender, SubmitRetakeResitUnitsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SubmitRetakeResitUnitsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20278,11 +21793,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TakeStudentToRegistrationCompletedEventHandler(object sender, TakeStudentToRegistrationCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TakeStudentToRegistrationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20304,15 +21819,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TestRegistrationStartDateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TestStudentTableConflictCompletedEventHandler(object sender, TestStudentTableConflictCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestStudentTableConflictCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20334,15 +21849,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TrainingRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TrainingRequisitionCreateCompletedEventHandler(object sender, TrainingRequisitionCreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TrainingRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20364,11 +21879,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TransportLinesExistsCompletedEventHandler(object sender, TransportLinesExistsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransportLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20390,15 +21905,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TransportRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TransportRequisitionCreateCompletedEventHandler(object sender, TransportRequisitionCreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransportRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20420,11 +21935,37 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void TransportTicketHasOdometerReadingCompletedEventHandler(object sender, TransportTicketHasOdometerReadingCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class TransportTicketHasOdometerReadingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal TransportTicketHasOdometerReadingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void TutionFeeAmountCompletedEventHandler(object sender, TutionFeeAmountCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TutionFeeAmountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20446,11 +21987,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateAcceptanceCompletedEventHandler(object sender, UpdateAcceptanceCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateAcceptanceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20472,11 +22013,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateApplicationPaymentCompletedEventHandler(object sender, UpdateApplicationPaymentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateApplicationPaymentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20498,35 +22039,39 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void UpdateCateringTokenCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateConceptReviewCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateDocqueCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateDoctorNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateEmployeeInformationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateFoodRequestLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateImprestHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateKuccpsPasswordCompletedEventHandler(object sender, UpdateKuccpsPasswordCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateKuccpsPasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20548,15 +22093,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateLecturerUnitCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdatePasswordTokenCompletedEventHandler(object sender, UpdatePasswordTokenCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdatePasswordTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20578,23 +22123,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdatePurchaseRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateRegisterdUnitsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateResidencyCompletedEventHandler(object sender, UpdateResidencyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateResidencyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20616,15 +22161,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateScoreCardPeerReviewerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateSspPasswordCompletedEventHandler(object sender, UpdateSspPasswordCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateSspPasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20646,43 +22191,43 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStaffClaimsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStaffPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStoreRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStudentInformaionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStudentPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UpdateStudentThesisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void UploadAttachedDocumentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ValidateApplicationFormHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ValidateBiometricsCompletedEventHandler(object sender, ValidateBiometricsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ValidateBiometricsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20704,23 +22249,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ValidateCourseReggistrationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ValidateCourseRegistrationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ValidateStartDateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void bookHostelCompletedEventHandler(object sender, bookHostelCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class bookHostelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20742,11 +22287,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void cancelRequestCompletedEventHandler(object sender, cancelRequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class cancelRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20768,11 +22313,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void createAppraisalDocumentCompletedEventHandler(object sender, createAppraisalDocumentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class createAppraisalDocumentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20794,15 +22339,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnDeleteQualificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnGetUserImprestAccountCompletedEventHandler(object sender, fnGetUserImprestAccountCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class fnGetUserImprestAccountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20824,15 +22369,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnImprestSurrenderLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnImprestSurrenderCompletedEventHandler(object sender, fnImprestSurrenderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class fnImprestSurrenderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20854,11 +22399,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnReturnNoSeriesCompletedEventHandler(object sender, fnReturnNoSeriesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class fnReturnNoSeriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20880,11 +22425,37 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void fnSaveGraduation2CompletedEventHandler(object sender, fnSaveGraduation2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class fnSaveGraduation2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal fnSaveGraduation2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnSaveGraduationCompletedEventHandler(object sender, fnSaveGraduationCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class fnSaveGraduationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -20906,2421 +22477,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnSaveHRApplicantQualificiationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnSubmitExamPassFailCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void fnSubmitExamResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void isLastVisitOpenCompletedEventHandler(object sender, isLastVisitOpenCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class isLastVisitOpenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal isLastVisitOpenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void unbookHostelCompletedEventHandler(object sender, unbookHostelCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class unbookHostelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal unbookHostelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void updateDashboardProfileCompletedEventHandler(object sender, updateDashboardProfileCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateDashboardProfileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal updateDashboardProfileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertICTRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertICULinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertImmunizationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertImprestAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertInjectionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertKuccpsStudentDataCompletedEventHandler(object sender, InsertKuccpsStudentDataCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertKuccpsStudentDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertKuccpsStudentDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertLabLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertLabResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertLecExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertLinksCompletedEventHandler(object sender, InsertLinksCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertLinksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertLinksCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertMedicalReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertMenuSalesHeaderCompletedEventHandler(object sender, InsertMenuSalesHeaderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertMenuSalesHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertMenuSalesHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertMenuSalesLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertMoreSspDataCompletedEventHandler(object sender, InsertMoreSspDataCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertMoreSspDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertMoreSspDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertNonResidenceInformationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertNurseNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertObservationInjectionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertObservationProcessCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertObservationSignsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertObservationSymptonsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertObservationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertOperationalNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertParttimeLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertParttimerHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPatChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPatientWalkinCompletedEventHandler(object sender, InsertPatientWalkinCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertPatientWalkinCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertPatientWalkinCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPatientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPharmacyLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPrescriptionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertProgrammeOptionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertPurchaseAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertQualificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertRadiologyLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertRadiologyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertRecordIDCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertReferralCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertScolorshipCompletedEventHandler(object sender, InsertScolorshipCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertScolorshipCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertScolorshipCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertSpecialExamMarkCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStaffClaimAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStaffClaimsCompletedEventHandler(object sender, InsertStaffClaimsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertStaffClaimsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertStaffClaimsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStoreAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStudentPaymentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStudentSponsorshipApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertStudentThesisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTheatreFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTimetableProjectionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTransferHeaderCompletedEventHandler(object sender, InsertTransferHeaderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertTransferHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertTransferHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTransferLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTransportReqPassengerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTreatLabCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTreatTheatreCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTreatmentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTriageNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertTutionWaiverCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void JoinBSGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void LecturerEvaluationCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void LecturerEvaluationHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void MarkRadiologyCompleteCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void MarkTreatmentCompleteCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void MealBookingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ModifyExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void OnlineClearanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void OnlineStaffClearanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostAttendanceListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostConsumablesItemsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostDeletedExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostDrugIssuanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostHostelCharge2CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostHostelChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostHostelCharge_1057114528CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostItemsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostMenuSalesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostPharmacyReturnCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostStudentChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostStudentChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostStudentTransferCompletedEventHandler(object sender, PostStudentTransferCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PostStudentTransferCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal PostStudentTransferCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PostTransferChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrescribeDrugsInpatientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrescribeDrugsTriageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrescribeDrugsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintClassListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintCourseStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintHostelClearanceFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintHostelInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintResidentialFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PrintVoteBookBalanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ProcessUloadedMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ProfessionalBodyReqApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ProfessionalBodyReqcancelRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ProgrammeUnitOnOfferCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchaseRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchaseRequisitionCreateCompletedEventHandler(object sender, PurchaseRequisitionCreateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PurchaseRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal PurchaseRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchaseRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchaseRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchaseRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void PurchasesLinesExistsCompletedEventHandler(object sender, PurchasesLinesExistsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PurchasesLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal PurchasesLinesExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RefreshPaymentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RefreshStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RegisstratioDeadLineForIndividualCompletedEventHandler(object sender, RegisstratioDeadLineForIndividualCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class RegisstratioDeadLineForIndividualCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal RegisstratioDeadLineForIndividualCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RegisstratioDeadLineCompletedEventHandler(object sender, RegisstratioDeadLineCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class RegisstratioDeadLineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal RegisstratioDeadLineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.DateTime Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.DateTime)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RegisterStudentUnitBasketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RegisterStudentUnitsCompletedEventHandler(object sender, RegisterStudentUnitsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class RegisterStudentUnitsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal RegisterStudentUnitsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RejectLeaveApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RemoveCasualPaymentRequestLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RemoveFoodRequestLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RemoveHRTrainingParticipantsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RemoveTransportReqPassengerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RequestAdmissionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RequestLabCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RequestRadiologyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void RequestReferralCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ReturnAmountInWordsCompletedEventHandler(object sender, ReturnAmountInWordsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ReturnAmountInWordsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ReturnAmountInWordsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ReturnStudentOptionCompletedEventHandler(object sender, ReturnStudentOptionCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ReturnStudentOptionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ReturnStudentOptionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SMSSendResetPassordCompletedEventHandler(object sender, SMSSendResetPassordCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SMSSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SMSSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SMSStffSendResetPassordCompletedEventHandler(object sender, SMSStffSendResetPassordCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SMSStffSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SMSStffSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveELearningEvaluationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveEmailCompletedEventHandler(object sender, SaveEmailCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SaveEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SaveEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveGeneralEvaluationCommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveHRAppraisalSkillsCompetenceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveHostelBookingInterestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveLecturerEvaluationFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveObjectivesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveProfessionalBodyRequestCompletedEventHandler(object sender, SaveProfessionalBodyRequestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SaveProfessionalBodyRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SaveProfessionalBodyRequestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void SaveSickoffCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateAppraisalPrintoutCompletedEventHandler(object sender, GenerateAppraisalPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateAppraisalPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateAppraisalPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateAwardListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateClaimFormReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateClassListReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateClassificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateClearanceReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateConsolidatedMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateDischargeSummaryPrintoutCompletedEventHandler(object sender, GenerateDischargeSummaryPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateDischargeSummaryPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateDischargeSummaryPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateExamAttendanceListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateFeesStructureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateHostelAllocationKABUCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateHostelAllocationWithCateringChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateHostelAllocationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateInvoiceCompletedEventHandler(object sender, GenerateInvoiceCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateInvoiceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateInvoiceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateInvoicebyVisitCompletedEventHandler(object sender, GenerateInvoicebyVisitCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateInvoicebyVisitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateInvoicebyVisitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateLabResultsCompletedEventHandler(object sender, GenerateLabResultsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateLabResultsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateLabResultsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateNurseCardexCompletedEventHandler(object sender, GenerateNurseCardexCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateNurseCardexCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateNurseCardexCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneratePNineReportCompletedEventHandler(object sender, GeneratePNineReportCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GeneratePNineReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GeneratePNineReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateParttimeClaimCompletedEventHandler(object sender, GenerateParttimeClaimCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateParttimeClaimCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateParttimeClaimCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneratePaySlipReportKabuCompletedEventHandler(object sender, GeneratePaySlipReportKabuCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GeneratePaySlipReportKabuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GeneratePaySlipReportKabuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneratePaySlipReportCompletedEventHandler(object sender, GeneratePaySlipReportCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GeneratePaySlipReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GeneratePaySlipReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneratePhysioPrintoutCompletedEventHandler(object sender, GeneratePhysioPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GeneratePhysioPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GeneratePhysioPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneratePrescriptionPrintoutCompletedEventHandler(object sender, GeneratePrescriptionPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GeneratePrescriptionPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GeneratePrescriptionPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateProvisionalAdmissionLetterCompletedEventHandler(object sender, GenerateProvisionalAdmissionLetterCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateProvisionalAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateProvisionalAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateRadiologyPrintoutCompletedEventHandler(object sender, GenerateRadiologyPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateRadiologyPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateRadiologyPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateReceiptCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateReferralPrintoutCompletedEventHandler(object sender, GenerateReferralPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateReferralPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateReferralPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateRejectionLetterCompletedEventHandler(object sender, GenerateRejectionLetterCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateRejectionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateRejectionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateScoreSheetCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateSenateSummaryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateSickoffPrintoutCompletedEventHandler(object sender, GenerateSickoffPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateSickoffPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateSickoffPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentAdmissionLetterCompletedEventHandler(object sender, GenerateStudentAdmissionLetterCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateStudentAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateStudentAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentExamCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentProformaInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentProvisionalResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentReportCardByProgCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentReportCardFilterCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentResultSlipCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentSemesterInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentStatementTestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentThesisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentTransferFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateTheatreNotesCompletedEventHandler(object sender, GenerateTheatreNotesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateTheatreNotesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateTheatreNotesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateTreatmentHistoPrintoutCompletedEventHandler(object sender, GenerateTreatmentHistoPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateTreatmentHistoPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateTreatmentHistoPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetAdmissionFeesCompletedEventHandler(object sender, GetAdmissionFeesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetAdmissionFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetAdmissionFeesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public decimal Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((decimal)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetApplicationFeeAmountCompletedEventHandler(object sender, GetApplicationFeeAmountCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetApplicationFeeAmountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetApplicationFeeAmountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public decimal Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((decimal)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public string progCode {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetDefaultExamcategoryUnitCompletedEventHandler(object sender, GetDefaultExamcategoryUnitCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetDefaultExamcategoryUnitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetDefaultExamcategoryUnitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetDocumentAttachmentCompletedEventHandler(object sender, GetDocumentAttachmentCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetDocumentAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetDocumentAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetExamCategoryCompletedEventHandler(object sender, GetExamCategoryCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetExamCategoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetExamCategoryCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetFirstYearFeeStructureCompletedEventHandler(object sender, GetFirstYearFeeStructureCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetFirstYearFeeStructureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetFirstYearFeeStructureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public decimal Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((decimal)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetGradeNewCompletedEventHandler(object sender, GetGradeNewCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetGradeNewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetGradeNewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetGradeCompletedEventHandler(object sender, GetGradeCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetGradeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetGradeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetGraduationFeeCompletedEventHandler(object sender, GetGraduationFeeCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetGraduationFeeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetGraduationFeeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public decimal Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((decimal)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetProfilePictureStudentCompletedEventHandler(object sender, GetProfilePictureStudentCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetProfilePictureStudentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetProfilePictureStudentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetProfilePictureCompletedEventHandler(object sender, GetProfilePictureCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetProfilePictureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetProfilePictureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GetStageCompletedEventHandler(object sender, GetStageCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetStageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetStageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HMISLoginCompletedEventHandler(object sender, HMISLoginCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HMISLoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HMISLoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalGeneralCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalObjectiveCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalObjectiveRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalObjectiveReviewCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalObjectiveReviewCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalObjectiveSupRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalSkillsCompetenceCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalSkillsCompetenceRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRAppraisalSkillsDevelopmentCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCanceImprestRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCanceImprestSurrenderRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCanceStaffClaimRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCancelApprisalRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCancelLeaveApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCancelPurchaseRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCancelStoreRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRCancelTrainingRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRJobApplicantCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRJobApplicantUpdateComCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRJobApplicantUpdateContactCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRJobApplicantUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRJobApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRLeaveApplicationUpdateCompletedEventHandler(object sender, HRLeaveApplicationUpdateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HRLeaveApplicationUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HRLeaveApplicationUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRLeaveApplicationCompletedEventHandler(object sender, HRLeaveApplicationCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HRLeaveApplicationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HRLeaveApplicationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRLeaveApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRStaffMovementApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRStaffMovementReleaseCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRStaffRequisitionCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRSupervisorAppraisalSkillsCompetenceRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRTrainingParticipantsExistsCompletedEventHandler(object sender, HRTrainingParticipantsExistsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HRTrainingParticipantsExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HRTrainingParticipantsExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRUpdateLeaveApplicationCompletedEventHandler(object sender, HRUpdateLeaveApplicationCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HRUpdateLeaveApplicationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HRUpdateLeaveApplicationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRWaiverApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HRWaiverCancelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void HasPaidApplicationFeeCompletedEventHandler(object sender, HasPaidApplicationFeeCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HasPaidApplicationFeeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal HasPaidApplicationFeeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ICTRequisitionCreateCompletedEventHandler(object sender, ICTRequisitionCreateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ICTRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ICTRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImportStaffProfilePictureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImportStudentProfilePictureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestLinesExistsCompletedEventHandler(object sender, ImprestLinesExistsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ImprestLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ImprestLinesExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestRequisitionCreateCompletedEventHandler(object sender, ImprestRequisitionCreateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ImprestRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ImprestRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestRequisitionLinesCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void ImprestRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InserClassAtteHeaderCompletedEventHandler(object sender, InserClassAtteHeaderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InserClassAtteHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InserClassAtteHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InserStudentResidencyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertActualImprestLineAmountCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertAdmissionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertApplicantCurrentEmpCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertApplicantEmpHistCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertApplicantQualificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void InsertApplicantRefereeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertApplicationCompletedEventHandler(object sender, InsertApplicationCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InsertApplicationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23342,11 +22515,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertAppointmentCompletedEventHandler(object sender, InsertAppointmentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InsertAppointmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23368,39 +22541,39 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertClassListAttendanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertConceptReviewCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertDiagnosisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertDisabilityCertCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertDischargeSummaryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertDoctorsNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertDrugPrescribeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertEmergencyContactCompletedEventHandler(object sender, InsertEmergencyContactCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InsertEmergencyContactCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23430,11 +22603,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertEnquiryCompletedEventHandler(object sender, InsertEnquiryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InsertEnquiryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23456,23 +22629,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertFoodMenuCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertHRTrainingParticipantsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertHistoryPresentIllnessCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void InsertHostelCompletedEventHandler(object sender, InsertHostelCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InsertHostelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23494,11 +22667,2383 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertICTRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertICULinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertImmunizationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertImprestAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertInjectionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertKuccpsStudentDataCompletedEventHandler(object sender, InsertKuccpsStudentDataCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertKuccpsStudentDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertKuccpsStudentDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertLabLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertLabResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertLecExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertLinksCompletedEventHandler(object sender, InsertLinksCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertLinksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertLinksCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertMedicalReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertMenuSalesHeaderCompletedEventHandler(object sender, InsertMenuSalesHeaderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertMenuSalesHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertMenuSalesHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertMenuSalesLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertMissingMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertMoreSspDataCompletedEventHandler(object sender, InsertMoreSspDataCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertMoreSspDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertMoreSspDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertNonResidenceInformationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertNurseNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertObservationInjectionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertObservationProcessCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertObservationSignsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertObservationSymptonsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertObservationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertOperationalNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertParttimeLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertParttimerHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPatChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPatientWalkinCompletedEventHandler(object sender, InsertPatientWalkinCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertPatientWalkinCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertPatientWalkinCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPatientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPharmacyLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPrescriptionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertProgrammeOptionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertPurchaseAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertQualificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertRadiologyLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertRadiologyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertRecordIDCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertReferralCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertScolorshipCompletedEventHandler(object sender, InsertScolorshipCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertScolorshipCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertScolorshipCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertSpecialExamMarkCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStaffClaimAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStaffClaimsCompletedEventHandler(object sender, InsertStaffClaimsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertStaffClaimsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertStaffClaimsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStoreAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStudentPaymentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStudentSponsorshipApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertStudentThesisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTheatreFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTimetableProjectionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTransferHeaderCompletedEventHandler(object sender, InsertTransferHeaderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertTransferHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertTransferHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTransferLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTransportReqPassengerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTreatLabCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTreatTheatreCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTreatmentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTriageNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertTutionWaiverCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void JoinBSGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void LecturerEvaluationCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void LecturerEvaluationHeader_1653951911CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void LecturerEvaluationHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void MaintenanceRequestCompletedEventHandler(object sender, MaintenanceRequestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class MaintenanceRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal MaintenanceRequestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void MarkRadiologyCompleteCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void MarkTreatmentCompleteCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void MealBookingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ModifyExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void OnlineClearanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void OnlineStaffClearanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostAttendanceListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostConsumablesItemsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostDeletedExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostDrugIssuanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostHostelCharge2CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostHostelChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostHostelCharge_1057114528CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostItemsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostMenuSalesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostPharmacyReturnCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostStudentChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostStudentChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostStudentTransferCompletedEventHandler(object sender, PostStudentTransferCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PostStudentTransferCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PostStudentTransferCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PostTransferChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrescribeDrugsInpatientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrescribeDrugsTriageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrescribeDrugsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintClassListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintCourseStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintHostelClearanceFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintHostelInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintResidentialFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PrintVoteBookBalanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ProcessUloadedMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ProfessionalBodyReqApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ProfessionalBodyReqcancelRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ProgrammeUnitOnOfferCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchaseRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchaseRequisitionCreateCompletedEventHandler(object sender, PurchaseRequisitionCreateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PurchaseRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PurchaseRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchaseRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchaseRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchaseRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void PurchasesLinesExistsCompletedEventHandler(object sender, PurchasesLinesExistsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PurchasesLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PurchasesLinesExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RefreshPaymentPlanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RefreshStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RegisstratioDeadLineForIndividualCompletedEventHandler(object sender, RegisstratioDeadLineForIndividualCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegisstratioDeadLineForIndividualCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RegisstratioDeadLineForIndividualCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RegisstratioDeadLineCompletedEventHandler(object sender, RegisstratioDeadLineCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegisstratioDeadLineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RegisstratioDeadLineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.DateTime Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.DateTime)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RegisterStudentUnitBasketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RegisterStudentUnits_ChukaCompletedEventHandler(object sender, RegisterStudentUnits_ChukaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegisterStudentUnits_ChukaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RegisterStudentUnits_ChukaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RegisterStudentUnitsCompletedEventHandler(object sender, RegisterStudentUnitsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegisterStudentUnitsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RegisterStudentUnitsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RejectLeaveApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RemoveCasualPaymentRequestLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RemoveFoodRequestLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RemoveHRTrainingParticipantsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void RemoveTransportReqPassengerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneralEvaluationCreate_799730578CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateAdmissionLetterCompletedEventHandler(object sender, GenerateAdmissionLetterCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateAdmissionPrintoutCompletedEventHandler(object sender, GenerateAdmissionPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateAdmissionPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateAdmissionPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateAdvanceHostelAllocationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateAppraisalPrintoutCompletedEventHandler(object sender, GenerateAppraisalPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateAppraisalPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateAppraisalPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateAwardListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateClaimFormReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateClassListReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateClassificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateClearanceReportCompletedEventHandler(object sender, GenerateClearanceReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateClearanceReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateClearanceReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateConsolidatedMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateDischargeSummaryPrintoutCompletedEventHandler(object sender, GenerateDischargeSummaryPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateDischargeSummaryPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateDischargeSummaryPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateDriverTicketReportCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateExamAttendanceListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateFamilyBankTokenCompletedEventHandler(object sender, GenerateFamilyBankTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateFamilyBankTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateFamilyBankTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateFeesStructureByStageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateFeesStructureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateHostelAllocationKABUCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateHostelAllocationWithCateringChargeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateHostelAllocationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateInvoiceCompletedEventHandler(object sender, GenerateInvoiceCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateInvoiceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateInvoiceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateInvoicebyVisitCompletedEventHandler(object sender, GenerateInvoicebyVisitCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateInvoicebyVisitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateInvoicebyVisitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateLabResultsCompletedEventHandler(object sender, GenerateLabResultsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateLabResultsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateLabResultsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateNurseCardexCompletedEventHandler(object sender, GenerateNurseCardexCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateNurseCardexCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateNurseCardexCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePNineReportCompletedEventHandler(object sender, GeneratePNineReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePNineReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePNineReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateParttimeClaimCompletedEventHandler(object sender, GenerateParttimeClaimCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateParttimeClaimCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateParttimeClaimCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePaySlipReportChukaCompletedEventHandler(object sender, GeneratePaySlipReportChukaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePaySlipReportChukaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePaySlipReportChukaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePaySlipReportKabuCompletedEventHandler(object sender, GeneratePaySlipReportKabuCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePaySlipReportKabuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePaySlipReportKabuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePaySlipReportCompletedEventHandler(object sender, GeneratePaySlipReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePaySlipReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePaySlipReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePhysioPrintoutCompletedEventHandler(object sender, GeneratePhysioPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePhysioPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePhysioPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneratePrescriptionPrintoutCompletedEventHandler(object sender, GeneratePrescriptionPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GeneratePrescriptionPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GeneratePrescriptionPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateProvisionalAdmissionLetterCompletedEventHandler(object sender, GenerateProvisionalAdmissionLetterCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateProvisionalAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateProvisionalAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateRadiologyPrintoutCompletedEventHandler(object sender, GenerateRadiologyPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateRadiologyPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateRadiologyPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateReceiptCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateReferralPrintoutCompletedEventHandler(object sender, GenerateReferralPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateReferralPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateReferralPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateRejectionLetterCompletedEventHandler(object sender, GenerateRejectionLetterCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateRejectionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateRejectionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateScoreSheetCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateSenateSummaryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateSickoffPrintoutCompletedEventHandler(object sender, GenerateSickoffPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateSickoffPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateSickoffPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateSsupp_RetakeExamCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentAdmissionLetterCompletedEventHandler(object sender, GenerateStudentAdmissionLetterCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentChargesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentExamCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentLegacyStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentProformaInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentProformaInvoice_StageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentProvisionalResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentReportCardByProgCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentReportCardFilterCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentReportCardFromBackLogCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentResultSlipCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentResultsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentSemesterInvoiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentStatementTestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentThesisCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateStudentTransferFormCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateTheatreNotesCompletedEventHandler(object sender, GenerateTheatreNotesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateTheatreNotesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateTheatreNotesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GenerateTreatmentHistoPrintoutCompletedEventHandler(object sender, GenerateTreatmentHistoPrintoutCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateTreatmentHistoPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateTreatmentHistoPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetAdmissionFeesCompletedEventHandler(object sender, GetAdmissionFeesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAdmissionFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAdmissionFeesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetApplicationFeeAmountCompletedEventHandler(object sender, GetApplicationFeeAmountCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetApplicationFeeAmountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetApplicationFeeAmountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string progCode {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetDefaultExamcategoryUnitCompletedEventHandler(object sender, GetDefaultExamcategoryUnitCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetDefaultExamcategoryUnitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetDefaultExamcategoryUnitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetDocumentAttachmentCompletedEventHandler(object sender, GetDocumentAttachmentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetDocumentAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetDocumentAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetExamCategoryCompletedEventHandler(object sender, GetExamCategoryCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetExamCategoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetExamCategoryCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetFirstYearFeeStructureCompletedEventHandler(object sender, GetFirstYearFeeStructureCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetFirstYearFeeStructureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetFirstYearFeeStructureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetGradeNewCompletedEventHandler(object sender, GetGradeNewCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetGradeNewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetGradeNewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetGradeCompletedEventHandler(object sender, GetGradeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetGradeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetGradeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetGraduationFeeCompletedEventHandler(object sender, GetGraduationFeeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetGraduationFeeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetGraduationFeeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetProfilePictureApplicantCompletedEventHandler(object sender, GetProfilePictureApplicantCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetProfilePictureApplicantCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetProfilePictureApplicantCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetProfilePictureStudentCompletedEventHandler(object sender, GetProfilePictureStudentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetProfilePictureStudentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetProfilePictureStudentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetProfilePictureCompletedEventHandler(object sender, GetProfilePictureCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetProfilePictureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetProfilePictureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetStageCompletedEventHandler(object sender, GetStageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetStageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetStageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HMISLoginCompletedEventHandler(object sender, HMISLoginCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HMISLoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HMISLoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalGeneralCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalObjectiveCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalObjectiveRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalObjectiveReviewCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalObjectiveReviewCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalObjectiveSupRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalSkillsCompetenceCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalSkillsCompetenceRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRAppraisalSkillsDevelopmentCommenstCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCanceImprestRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCanceImprestSurrenderRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCanceStaffClaimRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelApprisalRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelFuelRechrageCardApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelLeaveApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelPurchaseRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelStoreRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRCancelTrainingRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRFuelRechargeCardApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRJobApplicantCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRJobApplicantUpdateComCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRJobApplicantUpdateContactCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRJobApplicantUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRJobApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRLeaveApplicationUpdateCompletedEventHandler(object sender, HRLeaveApplicationUpdateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HRLeaveApplicationUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HRLeaveApplicationUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRLeaveApplicationCompletedEventHandler(object sender, HRLeaveApplicationCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HRLeaveApplicationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HRLeaveApplicationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRLeaveApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRStaffMovementApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRStaffMovementReleaseCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRStaffRequisitionCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRSupervisorAppraisalSkillsCompetenceRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRTrainingParticipantsExistsCompletedEventHandler(object sender, HRTrainingParticipantsExistsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HRTrainingParticipantsExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HRTrainingParticipantsExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRUpdateLeaveApplicationCompletedEventHandler(object sender, HRUpdateLeaveApplicationCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HRUpdateLeaveApplicationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HRUpdateLeaveApplicationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRWaiverApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HRWaiverCancelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void HasPaidApplicationFeeCompletedEventHandler(object sender, HasPaidApplicationFeeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HasPaidApplicationFeeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HasPaidApplicationFeeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ICTRequisitionCreateCompletedEventHandler(object sender, ICTRequisitionCreateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ICTRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ICTRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImportStaffProfilePictureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImportStudentProfilePictureCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestLinesExistsCompletedEventHandler(object sender, ImprestLinesExistsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ImprestLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ImprestLinesExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestRequisitionCreateCompletedEventHandler(object sender, ImprestRequisitionCreateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ImprestRequisitionCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ImprestRequisitionCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestRequisitionLinesCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestRequistionLineUpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImprestRequsitionRemoveLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InserClassAtteHeaderCompletedEventHandler(object sender, InserClassAtteHeaderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InserClassAtteHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InserClassAtteHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InserStudentResidencyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertActualImprestLineAmountCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertAdmissionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertApplicantCurrentEmpCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertApplicantEmpHistCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertApplicantQualificationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void InsertApplicantRefereeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AcademicRefereeCompletedEventHandler(object sender, AcademicRefereeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AcademicRefereeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23520,15 +25065,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AddEmployeeQualificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AllowAutobillingCompletedEventHandler(object sender, AllowAutobillingCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AllowAutobillingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23550,55 +25095,55 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApplicantDocsInsertCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApplicationFeesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApplicationHeaderCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AppraisalRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AppraisalRequisitionOpenToCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApprovalDocumentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApproveLeaveApplicationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ApproveStudentRequisitionLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AssignLecturerUnitCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AssignLecturerUnit_97992468CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AssignTransportRequisitionDriverCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AuthenticateStudentCompletedEventHandler(object sender, AuthenticateStudentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuthenticateStudentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23620,23 +25165,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void AutoAdmittStudentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void BackLogMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void BankTransactionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CalcEndDateCompletedEventHandler(object sender, CalcEndDateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CalcEndDateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23658,11 +25203,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CalcReturnDateCompletedEventHandler(object sender, CalcReturnDateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CalcReturnDateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23684,11 +25229,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CalculateParttimerClaimCategoryCompletedEventHandler(object sender, CalculateParttimerClaimCategoryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CalculateParttimerClaimCategoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23710,11 +25255,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CalculateParttimerClaimCompletedEventHandler(object sender, CalculateParttimerClaimCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CalculateParttimerClaimCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23736,19 +25281,19 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CanceTransportRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CancelMarkEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CancelStudentRequisitionCompletedEventHandler(object sender, CancelStudentRequisitionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelStudentRequisitionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23770,11 +25315,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CasualLinesExistsCompletedEventHandler(object sender, CasualLinesExistsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CasualLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23796,15 +25341,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CasualPaymentApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CasualPaymentRequestHeaderCompletedEventHandler(object sender, CasualPaymentRequestHeaderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CasualPaymentRequestHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23826,23 +25371,23 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CasualPaymentRequestLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CasualPaymentcancelRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CheckClaimBudgetCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CheckCurrSemCompletedEventHandler(object sender, CheckCurrSemCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CheckCurrSemCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23864,11 +25409,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CheckFeePolicyCompletedEventHandler(object sender, CheckFeePolicyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CheckFeePolicyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23890,11 +25435,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CheckLabResultsCompletedEventHandler(object sender, CheckLabResultsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CheckLabResultsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23916,11 +25461,37 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void CheckTokenCompletedEventHandler(object sender, CheckTokenCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CheckTokenCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CheckTokenCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ClaimLinesExistsCompletedEventHandler(object sender, ClaimLinesExistsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ClaimLinesExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23942,35 +25513,35 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ClearImprestSurrenderLineReceiptCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ClearUnitFromTimetableCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CollectionDateForCertificateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ConfirmExamEntrySetupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ConfirmHostelAllocationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ConfirmHostelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CopyRecordLinksCompletedEventHandler(object sender, CopyRecordLinksCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CopyRecordLinksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -23992,11 +25563,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountAppointmentsCompletedEventHandler(object sender, CountAppointmentsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountAppointmentsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24018,11 +25589,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountApprovalsCompletedEventHandler(object sender, CountApprovalsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountApprovalsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24044,11 +25615,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountDoctorQueCompletedEventHandler(object sender, CountDoctorQueCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountDoctorQueCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24070,11 +25641,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountDoctorsVisitsCompletedEventHandler(object sender, CountDoctorsVisitsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountDoctorsVisitsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24096,11 +25667,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountDoctorsCompletedEventHandler(object sender, CountDoctorsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountDoctorsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24122,11 +25693,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountLabVisitsCompletedEventHandler(object sender, CountLabVisitsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountLabVisitsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24148,11 +25719,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountNewPatientsCompletedEventHandler(object sender, CountNewPatientsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountNewPatientsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24174,11 +25745,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountPatientTypeCompletedEventHandler(object sender, CountPatientTypeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountPatientTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24200,11 +25771,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountPharmacyCompletedEventHandler(object sender, CountPharmacyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountPharmacyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24226,11 +25797,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CountRadiologyrequestCompletedEventHandler(object sender, CountRadiologyrequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CountRadiologyrequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24252,11 +25823,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CourseRegistrationExistCompletedEventHandler(object sender, CourseRegistrationExistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CourseRegistrationExistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24278,19 +25849,19 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CreateBSGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CreateDCFActivityCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CreateNewPharmacyCompletedEventHandler(object sender, CreateNewPharmacyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateNewPharmacyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24312,123 +25883,123 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CreateStudentApprovalTemplateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CuetomeApproveStaffClearanceRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomApprovalEntryAdditionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomApprovalEntryClearanceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomApprovalEntryDeanCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomApprovalEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomHRCancelPurchaseRequisitionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void CustomPurchaseRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DelegateDocumentApprovalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteAdmissiontreatLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteDiagnosistreatLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteDoctorsNotesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteDocumentAttachmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteEmployeeQualificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteExamSetupEntryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteFacultyStaffAppraisalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteFoodMenuCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteHRAppraisalDutiesRespCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteHRAppraisalObjectiveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteHRAppraisalSkillsCompetenceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteHRAppraisalSkillsDevelopmentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteLabtreatLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteLecturerUnitCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeletePharmacyLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeletePrescriptionAdmissionDrugCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeletePrescriptiontreatLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteRadiologytreatLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DeleteSubmittedUnitsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DetermineIfIncludesNonWorkingCompletedEventHandler(object sender, DetermineIfIncludesNonWorkingCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DetermineIfIncludesNonWorkingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24458,11 +26029,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DetermineIfIsNonWorkingCompletedEventHandler(object sender, DetermineIfIsNonWorkingCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DetermineIfIsNonWorkingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24500,11 +26071,11 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DetermineLeaveReturnDateCompletedEventHandler(object sender, DetermineLeaveReturnDateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DetermineLeaveReturnDateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24526,35 +26097,35 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DipatchtoDoctorCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DispatchToDirectAdmissionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DispatchToLabCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DispatchToPharmacyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DispatchToPhysioCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DispatchToRadiologyCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DocumentApprovalsCompletedEventHandler(object sender, DocumentApprovalsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DocumentApprovalsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24576,43 +26147,43 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DocumentRejectionCommentLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DocumentRejectionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DropStudentUnitsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void DropUnitBasketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ELECTElectionResultLineCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ELECTElectionResultLineRemoveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void EditLecturerUnitCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void EmailHRRetireNotifCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void EmploymentHistoryCompletedEventHandler(object sender, EmploymentHistoryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EmploymentHistoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24634,15 +26205,15 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void EnterRowMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ExitInterviewHeaderCompletedEventHandler(object sender, ExitInterviewHeaderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExitInterviewHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24664,27 +26235,27 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ExitInterviewQuestionairCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ExitInterviewReasonsForLeavingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FacultyStaffAppraisalRatingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FacultyStaffAppraisalCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FeesStructureCompletedEventHandler(object sender, FeesStructureCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class FeesStructureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -24706,60 +26277,30 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FnUpdateEmployeeInfoCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FoodReqApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void FoodReqcancelRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GeneralEvaluationCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void FuelRechargeCardCompletedEventHandler(object sender, FuelRechargeCardCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateAdmissionLetterCompletedEventHandler(object sender, GenerateAdmissionLetterCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateAdmissionLetterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FuelRechargeCardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GenerateAdmissionLetterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateAdmissionPrintoutCompletedEventHandler(object sender, GenerateAdmissionPrintoutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GenerateAdmissionPrintoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GenerateAdmissionPrintoutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal FuelRechargeCardCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -24774,8 +26315,34 @@ namespace New_Student_Portal.NAVWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateAdvanceHostelAllocationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void FuelRequisitionCompletedEventHandler(object sender, FuelRequisitionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FuelRequisitionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FuelRequisitionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GeneralEvaluationCreateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

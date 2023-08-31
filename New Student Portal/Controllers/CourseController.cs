@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using New_Student_Portal.CustomSecurity;
@@ -464,7 +465,7 @@ namespace New_Student_Portal.Controllers
             {
                 if (Session["Username"] == null)
                 {
-                    return RedirectToAction("Login", "L.ogin");
+                    return RedirectToAction("Login", "Login");
                 }
                 else
                 {
@@ -490,7 +491,7 @@ namespace New_Student_Portal.Controllers
 
                     Sem = Session["CurrentSem"].ToString();
 
-                    Credentials.ObjNav.TestRegistrationStartDate(Sem);
+                    //Credentials.ObjNav.TestRegistrationStartDate(Sem,RegNo);
                     string[] s = CommonClass.CurrentCourseRegistration(RegNo, Sem);
                     if (s[0] == null || s[1] == null)
                     {
@@ -1572,8 +1573,8 @@ namespace New_Student_Portal.Controllers
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
-                Credentials.ObjNav.LecturerEvaluationHeader(RegNo, Lec.Unit, Sem, s[1], Lec.LecNo,
-                    s[0], Lec.LecName, Lec.Comments);
+                //Credentials.ObjNav.LecturerEvaluationHeader(RegNo, Lec.Unit, Sem, s[1], Lec.LecNo,
+                //    s[0], Lec.LecName, Lec.Comments);
                 foreach (var c in lecQuiz)
                 {
                     string[] que = c.Quiz.Trim().Split('.');
