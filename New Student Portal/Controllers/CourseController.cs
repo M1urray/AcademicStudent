@@ -2074,7 +2074,7 @@ namespace New_Student_Portal.Controllers
                         msg = "Units Registered successfully";
                     }
                 }
-                return Json(new { message = msg, success = true, Redirect = Redirect }, JsonRequestBehavior.AllowGet);
+                return Json(new { message = msg, success = true, Redirect }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

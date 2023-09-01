@@ -486,7 +486,7 @@
                     <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
                     <select class="form-select" id="RegType" name="RegType" onchange="ShowBasketUnits();">
                         
-                        <option value="0" selected>Normal</option>
+                        <option value="1" selected>Normal</option>
                         <option value="2">Supplementary</option>
                         <option value="3">Retake</option>
                     </select>
@@ -543,7 +543,7 @@
     });
     var RegTypeChanged = function () {
         var RegT = $("#RegType").children("option:selected").val();
-        if (RegT == "0" || RegT == "2" || RegT == "3") {
+        if (RegT == "1" || RegT == "2" || RegT == "3") {
             $("#divStage").show();
         }
         else {
@@ -557,8 +557,7 @@
             $("#divBasket").hide();
         }
         else {
-            if (RegT == "0" || RegT == "2" || RegT == "3") {
-                
+            if (RegT == "1" || RegT == "2" || RegT == "3") {
                 $("#divStage").show();
             }
             else {
