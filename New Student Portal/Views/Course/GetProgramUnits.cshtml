@@ -77,12 +77,36 @@
     <hr />
     <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits(`@Model.RegT`);" />
 </div>
+@* <script type="text/javascript"> *@
+@*     $(document).ready(function () { *@
+@*         var varID = 0; *@
+@*         $(':checkbox').on('change', function () { *@
+@*             if ($(this).prop('checked') == true) { *@
+@* *@
+@*                 //////////Test Maximum Reached///////////////////// *@
+@*                 var TotalSelected = 0; *@
+@*                 $('input:checkbox:checked').each(function () { *@
+@*                     TotalSelected += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val()); *@
+@*                 }); *@
+@* *@
+@*                 TotalSelected = TotalSelected + parseInt(@Model.SelectedCourses); *@
+@* *@
+@*                 if (TotalSelected > parseInt(@Model.MaximumCourses)) { *@
+@*                     Swal.fire('Warning', 'You have reached maximum number of Credits. Maximum allowed is ' +@Model.MaximumCourses+' Credits', 'warning'); *@
+@*                     $(this).closest('tr').find(':checkbox').prop('checked', false); *@
+@*                     return; *@
+@*                 } *@
+@*             } *@
+@*         }); *@
+@*     }); *@
+@* </script> *@
 <script type="text/javascript">
     $(document).ready(function () {
         var varID = 0;
+        var totalCheckboxes = $(':checkbox').length;
+
         $(':checkbox').on('change', function () {
             if ($(this).prop('checked') == true) {
-
                 //////////Test Maximum Reached/////////////////////
                 var TotalSelected = 0;
                 $('input:checkbox:checked').each(function () {
@@ -92,12 +116,21 @@
                 TotalSelected = TotalSelected + parseInt(@Model.SelectedCourses);
 
                 if (TotalSelected > parseInt(@Model.MaximumCourses)) {
-                    Swal.fire('Warning', 'You have reached maximum number of Credits. Maximum allowed is ' +@Model.MaximumCourses+' Credits', 'warning');
+                    Swal.fire('Warning', 'You have reached the maximum number of Credits. Maximum allowed is ' +@Model.MaximumCourses+' Credits', 'warning');
                     $(this).closest('tr').find(':checkbox').prop('checked', false);
-                    return;
                 }
             }
+
+            // Check if all checkboxes are checked
+            if ($(':checkbox:checked').length === totalCheckboxes) {
+                $('#btnSaving').prop('disabled', false);
+            } else {
+                $('#btnSaving').prop('disabled', true);
+            }
         });
+
+        // Initially disable the submit button
+        $('#btnSaving').prop('disabled', true);
     });
 </script>
 
