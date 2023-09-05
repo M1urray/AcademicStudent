@@ -1208,7 +1208,7 @@ namespace New_Student_Portal.Controllers
                     }
                     string[] s = (string[])Session["StudentDetails"];
                     string sem = Session["CurrentSem"].ToString();
-                    string Campus = CommonClass.GetStudentCampus(RegNo);
+                    string campus = CommonClass.GetStudentCampus(RegNo);
 
                     string pageReg = "StudentUnits?$select=Unit,Unit_Description,Unit_Class_Code,Campus&$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
 
@@ -1223,8 +1223,8 @@ namespace New_Student_Portal.Controllers
                         {
                             foreach (JObject config in details["value"])
                             {
-                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "'&$format=json";
-                                //string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "' and Campus_Code eq '" + Campus + "'&$format=json";
+                                // string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "'&$format=json";
+                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "' and Campus_Code eq '" + campus + "'&$format=json";
 
                                 HttpWebResponse httpResponseTimeTable = Credentials.GetOdataData(pageTimetable);
                                 using (var streamReaderTimeTable = new StreamReader(httpResponseTimeTable.GetResponseStream()))
@@ -1243,10 +1243,10 @@ namespace New_Student_Portal.Controllers
                                             tmTable.Unit = (string)config1["Unit"];
                                             tmTable.Period = (string)config1["Period"];
                                             tmTable.Semester = (string)config1["Semester"];
-                                            tmTable.Day_of_Week = (string)config1["Day_of_Week"];
-                                            tmTable.Lecture_Room = (string)config1["Lecture_Room"];
+                                            tmTable.Day_of_Week = (string)config1["DayofWeek"];
+                                            tmTable.Lecture_Room = (string)config1["LectureRoom"];
                                             tmTable.Lecturer = CommonClass.GetEmployeeName((string)config1["Lecturer"]);
-                                            tmTable.Campus = (string)config1["AuxiliaryIndex3"];
+                                            tmTable.Campus = (string)config1["Campus_Code"];
                                             tmTable.Section = (string)config1["AuxiliaryIndex1"];
                                             tmTable.Registered = "Registered";
                                             timeTableR.Add(tmTable);
