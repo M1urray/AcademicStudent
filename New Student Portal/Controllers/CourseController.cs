@@ -653,7 +653,7 @@ namespace New_Student_Portal.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
-            public ActionResult ViewStudentRegisteredUnits(StudentUnits Filters)
+        public ActionResult ViewStudentRegisteredUnits(StudentUnits Filters)
         {
             try
             {
@@ -983,7 +983,7 @@ namespace New_Student_Portal.Controllers
         //         return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
         //     }
         // }
-        public ActionResult GetProgramUnits(string RegType, string Prog,string UnitType, string Option)
+        public ActionResult GetProgramUnits(string RegType, string Prog, string UnitType, string Option)
         {
             try
             {
@@ -1067,7 +1067,7 @@ namespace New_Student_Portal.Controllers
                                 {
                                     Option = "";
                                 }
-                                succ = Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, Convert.ToInt32(RegType));
+                                succ = Credentials.ObjNav.StudentPromotion(RegNo, Convert.ToInt32(RegType), "", 0);
                                 s = CommonClass.CurrentCourseRegistration(RegNo, Sem, RegType);
                             }
                             if ((RegType == "2") || (RegType == "3"))
@@ -1516,7 +1516,7 @@ namespace New_Student_Portal.Controllers
                 string RegNo = Session["Username"].ToString();
                 string Stage = GetStudentStage(RegNo);
                 #region
-                string page = "ProgrammeStages?$filter=ProgrammeCode eq '" + Prog + "' and Code eq '" + Stage + "' and AllowProgrammeOptions eq true&$format=json";
+                string page = "ProgrammeStages?$filter=ProgrammeCode eq '" + Prog + "'  and AllowProgrammeOptions eq true&$format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -1831,7 +1831,7 @@ namespace New_Student_Portal.Controllers
 
                     if (Session["CurrentProgDetails"] == null)
                     {
-                        Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                        Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                     }
                     string[] s = (string[])Session["CurrentProgDetails"];
 
@@ -1979,7 +1979,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
                 int i = 0;
@@ -2615,7 +2615,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
@@ -3438,7 +3438,7 @@ namespace New_Student_Portal.Controllers
                                         Details.Phone_No = (string)config["Phone_No"];
                                         Details.Address = (string)config["Address"];
                                         Details.E_Mail = (string)config["E_Mail"];
-                                        ProgCode = (string)config["Programme_Name"];                                        
+                                        ProgCode = (string)config["Programme_Name"];
                                         Details.Prog = ProgCode;
                                         Details.ProgName = (string)config["Programme_Name"];
                                         Details.MadeRequest = false;
@@ -3725,7 +3725,7 @@ namespace New_Student_Portal.Controllers
                     return View("~/Views/Course/ClearanceApprovalEntries.cshtml", newDoc);
                 }
                 else
-                { 
+                {
                     bool ClearanceAllowed = CommonClass.AllowClearanceApplication();
                     if (ClearanceAllowed)
                     {
@@ -4266,7 +4266,7 @@ namespace New_Student_Portal.Controllers
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem,"0");
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
                 int i = 0;
