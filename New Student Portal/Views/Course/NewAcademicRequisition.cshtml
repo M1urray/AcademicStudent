@@ -4,48 +4,33 @@
         <div class="row">
             <div class="col-md-12">
                 <span style="font-weight: bold">Choose the Type of Requisition</span>
-                <div><select class="form-select" id="ReqType" name="RegType" onchange="ShowRequiredDiv()">
-    <option value="">--Select Requisition Type--</option>
-    @if (Model.SettlementT != "KUCCPS")
-    {
-        <option value="1">Campus Transfer</option>
-        <option value="2">Change of Major</option>
-    }
-    <option value="3">Deferment Request</option>
-    <option value="4">Re-Admission After Deferment</option>
-    <option value="5">Re-Admission After Suspension</option>
-    <option value="8">Special Exams</option>
-    <option value="9">Official Transcript</option>
-    <option value="11">Request to add or drop a unit</option>
-    <option value="12">Programme Minor</option>
-    <option value="13">Double Major</option>
-    <option value="14">Double Concentration</option>
-    <option value="16"> Missing Grade</option>
-    <option value="17">Exemption</option>
-    <option value="18">Exam Challenge</option>
-    <option value="19">Transit To Next Programme Level</option>
-    <option value="20">Withdrawal</option>
-    <option value="21">Change of Mode of Study</option>
-    <option value="22">Add or Drop Unit</option>
-    <option value="23">Show course appeal due to failure to sit for exams</option>
-    <option value="24">Request to resit failed examinations units.</option>
-    <option value="25">Request to retake a course</option>
-    <option value="26">Request for re-admission</option>
-    <option value="27"> Clearance – Inter School Transfer and before Graduation</option>
-    <option value="28">Request for attachment letters</option>
-    <option value="29">Request for correction of Names</option>
-    <option value="30">Request for Insurance Letters</option>
-    <option value="31">Recommendation/completion letters.</option>
-    <option value="32">Request for Lost ID Replacement.</option>
-    <option value="33">Request for caution money during clearance.</option>
-    <option value="34">Deferment Forms</option>
-    <option value="36">Request for late registration of units</option>
-    <option value="37">Request to print unofficial transcript</option>
-    <option value="38">Request to change mode of study</option>
-    <option value="39">Exam challenge requisition</option>
-    <option value="40">Request for letter of completion</option>
-    <option value="41">Application for scholarship requisition</option>
-</select></div>
+                <div>
+                    <select class="form-select" id="ReqType" name="RegType" onchange="ShowRequiredDiv()">
+                        <option value="">--Select Requisition Type--</option>
+                        @if (Model.SettlementT != "KUCCPS")
+                        {
+                            <option value="1">Campus Transfer</option>
+                            <option value="2">Change of Major</option>
+                        }
+                        <option value="21">Credit Transfer</option>
+                        <option value="22">Late Registration</option>
+                        <option value="11">Request to add or drop a unit</option>
+                        <option value="8">Special Exams</option>
+                        @* <option value="3">Deferment Request</option> *@
+                        @* <option value="4">Re-Admission After Deferment</option> *@
+                        @* <option value="5">Re-Admission After Suspension</option> *@
+                        <option value="9">Official Transcript</option>
+                        @* <option value="12">Programme Minor</option> *@
+                        @* <option value="13">Double Major</option> *@
+                        @* <option value="14">Double Concentration</option> *@
+                        <option value="16"> Missing Grade</option>
+                        @* <option value="17">Exemption</option> *@
+                        @* <option value="18">Exam Challenge</option> *@
+                        @* <option value="19">Transit To Next Programme Level</option> *@
+                        <option value="20">Withdrawal</option>
+
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -280,6 +265,46 @@
                     contentType: false,
                     processData: false,
                     url: "/Course/GetProgrammeTransit",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "21") {
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/CreditTransfer",
+                    success: function (data) {
+                        $("#divRegUnits").html(data);
+                        HideProgress();
+                    },
+                    error: function () {
+                        HideProgress();
+                        alert("There is some problem to process your request. Please try after some time");
+                    }
+                });
+            }
+            else if (regType == "22") {
+                $("#DivReqData").show();
+                ShowProgress();
+                $.ajax({
+                    async: true,
+                    type: "GET",
+                    dataType: 'HTML',
+                    contentType: false,
+                    processData: false,
+                    url: "/Course/LateRegistration",
                     success: function (data) {
                         $("#divRegUnits").html(data);
                         HideProgress();

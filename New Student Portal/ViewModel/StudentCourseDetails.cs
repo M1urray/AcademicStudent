@@ -87,4 +87,21 @@ namespace New_Student_Portal.ViewModel
         public string RegType { get; set; }
         public List<SelectListItem> ListOfConcentration { get; set; }
     }
+
+    public class CreditTransfer
+    {
+        public string Code { get; set; }
+        public string StudentNo { get; set; }
+        public string  Programme { get; set; }
+        public string PreviousLevel { get; set; }
+        public List<PreviousUniversity> ListOfUniversities {get; set; }
+        public List<SelectListItem> ListOfConcentration { get; set; }
+
+    }
+
+    public class PreviousUniversity
+    {
+        public string Code { get; set; }
+        public string SchoolName { get; set; }
+    }
 }

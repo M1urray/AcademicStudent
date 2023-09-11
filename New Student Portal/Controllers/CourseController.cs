@@ -4608,6 +4608,139 @@ namespace New_Student_Portal.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
+
+        public ActionResult CreditTransfer()
+        {
+            try
+            {
+                if (Session["Username"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    string RegNo = Session["Username"].ToString();
+
+                    List<DropdownList> ProgUnitList = new List<DropdownList>();
+                    string Prog = CommonClass.GetStudentRegisteredProgramme(Session["Username"].ToString());
+                    ProgUnitList = GetProgrammeUnits(Prog);
+
+                   CreditTransfer creditTransfer = new CreditTransfer
+                    {
+                        Code="",
+                        StudentNo = Session["Username"].ToString(),
+                        Programme = Prog,
+                        ListOfConcentration = ProgUnitList.Select(x =>
+                            new SelectListItem()
+                            {
+                                Text = x.Text,
+                                Value = x.Value
+                            }).DistinctBy(x => x.Value).ToList()
+                    };
+                    return PartialView("~/Views/Course/Partial Views/CreditTransfer.cshtml", creditTransfer);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.Message = ex.Message.Replace("'", "");
+                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+        }
+        public ActionResult LateRegistration()
+        {
+            try
+            {
+                if (Session["Username"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+
+                string RegNo = Session["Username"].ToString();
+
+                List<DropdownList> ProgUnitList = new List<DropdownList>();
+
+                string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                List<StudentUnits> regUnits = new List<StudentUnits>();
+
+                string Sem = "";
+                if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+                {
+                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                }
+
+                Sem = Session["CurrentSem"].ToString();
+
+                Credentials.ObjNav.RefreshStudentAudit(RegNo);
+
+                #region Programme Units
+
+                string page =
+                    "StudentUnitsAudit?$select=Programme,Unit,Description,UnitType&$filter=StudentNo eq '" + RegNo +
+                    "' and Concentration eq '" + Prog + "' and Progress_Status eq 'Future'&$format=json";
+
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        foreach (JObject config in details["value"])
+                        {
+                            if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme"],
+                                    (string)config["Unit"], Sem))
+                            {
+                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] +
+                                                       "' and Semester eq '" + Sem + "'&$format=json";
+
+                                HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                                using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                                {
+                                    var resultTmT = streamReaderTmT.ReadToEnd();
+
+                                    var detailsTmT = JObject.Parse(resultTmT);
+
+                                    if (detailsTmT["value"].Count() > 0)
+                                    {
+                                        foreach (JObject config1 in detailsTmT["value"])
+                                        {
+                                            DropdownList unit = new DropdownList();
+                                            unit.Text = (string)config1["Unit"] + " - " +
+                                                        (string)config1["Unit_Description"];
+                                            unit.Value = (string)config1["Unit"];
+                                            ProgUnitList.Add(unit);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+
+                ProgrammeConcentration ProgConc = new ProgrammeConcentration
+                {
+                    Code = "",
+                    ListOfConcentration = ProgUnitList.Select(x =>
+                        new SelectListItem()
+                        {
+                            Text = x.Text,
+                            Value = x.Value
+                        }).DistinctBy(x => x.Value).ToList()
+                };
+                return PartialView("~/Views/Course/Partial Views/LateRegistration.cshtml", ProgConc);
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.Message = ex.Message.Replace("'", "");
+                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+        }
         #endregion
     }
 }
