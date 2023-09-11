@@ -120,7 +120,7 @@ namespace New_Student_Portal.Models
             bool b = false;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Programme eq '" + Prog + "' and Register_for eq 'Unit/Subject' and Failed eq true and Supp_Taken eq false&$format=json";
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -144,7 +144,7 @@ namespace New_Student_Portal.Models
             bool b = false;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Programme eq '" + Prog + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
