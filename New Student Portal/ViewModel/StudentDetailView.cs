@@ -46,6 +46,7 @@ namespace New_Student_Portal.ViewModel
         public string BSGroup { get; set; }
         public bool IsDCFLeader { get; set; }
         public string DCFGroup { get; set; }
+        public string ModeOfStudy { get; set; }
         public List<DisplinaryCases> DisplinaryCases { get; set; }
         public ListOfInternalMemos ListInternalMemos { get; set; }
         public Bs BstudyDetails { get; set; }

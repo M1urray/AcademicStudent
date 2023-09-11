@@ -73,6 +73,7 @@ namespace Student.Controllers
                             Details.Credit_Amount = (decimal)config["Credit_Amount"];
                             Details.RegUnits = RegUnits;
                             Details.AttemptedUnits = (string)config["Completed_Units"];
+                            Details.ModeOfStudy = (string)config["Mode_of_Study"];
                             //if ((decimal)config["Completed_Units"] > 0)
                             //{
                             //    Details.GPA = (Math.Round(((decimal)config["Programme_GPA_Points"] / ((decimal)config["Completed_Units"] + (decimal)config["Exempted_Units"])), 2)).ToString();

@@ -143,6 +143,7 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Gender)</span>
                             </div>
                         </div>
+                        
                     </div> <!-- end col -->
                     <div class="col-sm-6 col-md-6">
                         <div class="row mb-3">
@@ -169,6 +170,7 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Campus)</span>
                             </div>
                         </div>
+                        
                     </div> <!-- end col -->
                     @if (Model.Qualify_For_Catering)
                     {
@@ -249,6 +251,12 @@
                                 </div>
                             </div>
                         }
+                        <div class="row mb-3">
+                            <label class="col-md-5"> Mode Of Study</label>
+                            <div class="col-md-7">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ModeOfStudy)</span>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label class="col-md-5"> Completed Units</label>
                             <div class="col-md-7">
