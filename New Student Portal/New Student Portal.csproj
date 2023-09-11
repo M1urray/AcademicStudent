@@ -679,6 +679,8 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Course\Partial Views\CreditTransfer.cshtml" />
+    <Content Include="Views\Course\Partial Views\LateRegistration.cshtml" />
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>

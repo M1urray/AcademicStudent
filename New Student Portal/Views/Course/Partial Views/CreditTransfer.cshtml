@@ -1,0 +1,91 @@
+﻿@model New_Student_Portal.ViewModel.CreditTransfer
+<style>
+    .hide {
+        display: none;
+    }
+
+    tbody {
+        background-color: white;
+        color: black;
+    }
+
+    tfoot {
+        background-color: white;
+    }
+</style>
+<div style="background-color:#a5a0a0;color:black">
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <span style="font-weight:bold"><label>Previous Campus</label></span>
+            <textarea class="form-control" id="txtCampus"></textarea>
+        </div>
+        <div class="col-md-6">
+            <span style="font-weight: bold">Previous Program Level</span>
+            <select class="form-select" id="Category" name="Category">
+                <option value="">--Select Category--</option>
+                <option value="Certificate">Certificate</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Undergraduate">Degree</option>
+                <option value="Masters">Masters</option>
+                <option value="PHD">PHD</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+       
+        <div class="col-md-6">
+            <span style="font-weight:bold"><label>Previous Programme</label></span>
+            <textarea class="form-control" id="txtProgramme"></textarea>
+        </div>
+    </div>
+    <hr />
+<div class="pre-scrollable">
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+        <tr>
+            <th>Course from former College/University</th>
+            <th>AIU Programme</th>
+            <th>Code</th>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Credit Hrs</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <input type="text" name="FromCollegeUniversity" />
+            </td>
+            @{
+                @
+    {
+        foreach (var item in Model.ListOfConcentration)
+        {
+            <td>
+
+                @Html.DropDownListFor(model => model.Code, Model.ListOfConcentration, "--select Option--", new { @class = "form-select", id = "ddlUnit" })
+            </td>
+        }
+    }
+            }
+
+            <td>
+                <input type="text" name="Code" />
+            </td>
+            <td>
+                <input type="text" name="Course" />
+            </td>
+            <td>
+                <input type="text" name="Grade" />
+            </td>
+            <td>
+                <input type="text" name="CreditHrs" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br />
+</div>
+</div>
+
