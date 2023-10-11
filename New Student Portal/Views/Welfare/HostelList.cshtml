@@ -72,7 +72,7 @@
 <script type="text/javascript">
     var LoadHostelRoomList = function (HostelCode, HostelName) {
         ShowProgress();
-        window.location = "/Welfare/HostelRoomList?HostelCode=" + HostelCode + "&HostelName=" + HostelName;
+        window.location = '@Url.Action("HostelRoomList", "Welfare")?HostelCode=' + HostelCode + '&HostelName=' + HostelName;
     }
 </script>
 

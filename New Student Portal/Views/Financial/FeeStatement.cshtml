@@ -10,8 +10,8 @@
     }
 
     tfoot {
-        background-color: #a7001a;
-        color: #f5e2bc;
+        background-color: #051936;
+        color: #cbcc32;
     }
 </style>
 <div class="card">
@@ -135,7 +135,7 @@
     var PrintFeeStatement = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/FeeStatement',
+            url: '@Url.Action("FeeStatement", "ViewDocuments")',
             type: "POST",
             success: function (data) {
                 if (data.success == true) {

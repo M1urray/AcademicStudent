@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal" filename="WebPortal.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://74.124.24.233:6223/Colleges/WS/ROYAL/Codeunit/webportal" filename="webportal.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

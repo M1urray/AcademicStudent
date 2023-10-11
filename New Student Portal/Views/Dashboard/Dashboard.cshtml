@@ -56,7 +56,7 @@
     }
 
     .card-header, .card-title {
-        background-color: #d10e2c;
+        background-color: #f2d8d8;
     }
 
     .card-title {
@@ -65,32 +65,6 @@
         padding-left: 10px;
     }
 </style>
-@if (Model.DisplinaryCases.Count() > 0)
-{
-    <div class="row">
-        <div class="col-md-12">
-            @foreach (var c in Model.DisplinaryCases)
-            {
-                <table class="table table-hover" style="border:2px solid Black">
-                    <thead style="background-color:black;color:white">
-                        <tr>
-                            <th>Displinary Remarks</th>
-                            <th>Return Date</th>
-                        </tr>
-                    </thead>
-                    <tbody style="color:red">
-                        <tr>
-                            <td>
-                                <img src="~/assets/images/NEW2.gif" /> @c.Remarks
-                            </td>
-                            <td>@c.EndDate</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-        </div>
-    </div>
-}
 <div class="card">
     <h4 class="card-title">Basic information</h4>
     <div class="card-body">
@@ -106,11 +80,11 @@
                     {
                         if (Model.Gender == "Female")
                         {
-                            <img src="~/img/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                         else
                         {
-                            <img src="~/img/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                     }
                 }
@@ -199,7 +173,7 @@
                         <div class="row mb-3">
                             <label class="col-md-2"></label>
                             <div class="col-md-8">
-                                <button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>
+                                @*<button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>*@
                             </div>
                             <label class="col-md-2"></label>
                         </div>
@@ -221,52 +195,19 @@
                             <div class="col-md-7">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ProgName)</span>
                             </div>
-                        </div>
-                        @if (Model.OtherProg != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Other Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.OtherProg)</span>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.SecondConc != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Double Concentration</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.SecondConc)</span>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Minor != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Minor Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Minor)</span>
-                                </div>
-                            </div>
-                        }
+                        </div>                       
                         <div class="row mb-3">
-                            <label class="col-md-5"> Completed Units</label>
+                            <label class="col-md-5"> Attempted Units</label>
                             <div class="col-md-7">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.AttemptedUnits)</span>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-md-5"> GPA</label>
+                            <label class="col-md-5"> Registered Units</label>
                             <div class="col-md-7">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.GPA)</span>
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.RegUnits)</span>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-md-5">Academic Status</label>
-                            <div class="col-md-7">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.AcademicStatus)</span>
-                            </div>
-                        </div>
+                        </div>                        
                     </div> <!-- end col -->
                 </div> <!-- end row -->
             </div> <!-- end card-body -->
@@ -362,7 +303,7 @@
         </div> <!-- end card-->
     </div>
 </div>
-
+<hr />
 @*//////////////////////Modal////////////////////////////*@
 <div id="myModalUnits" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -397,6 +338,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        LoadNotifications();
         if ('@Model.BSGroup' == "") {
             $("#lblJoinBS").text("Join Bible Study(BS) Group");
         }
@@ -404,8 +346,29 @@
             $("#lblJoinBS").text("Bible Study(BS) Group Details");
         }
         $("#lblToken").text(`@Model.Cat_Token`);
-        MyBSInformation();
     });
+    var LoadNotifications = function () {
+         if (parseInt(`@Model.NotfCount`) > 0) {
+             ShowProgress();
+             $.ajax({
+                async: false,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                url: '@Url.Action("NotificationMessages", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBodyNot").html(data);
+                    $("#myModalNotif").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        }
+    };
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
         if (Type == "CurrReg") {
@@ -432,63 +395,23 @@
             }
         });
     }
-    var MyBSInformation = function () {
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: 'HTML',
-            url: '@Url.Action("GetBsDetailForm", "Dashboard")',
-            success: function (data) {
-                $("#divBs").html(data);
-                HideProgress();
-                LoadNotifications();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var LoadNotifications = function () {
-         if (parseInt(`@Model.NotfCount`) > 0) {
-             ShowProgress();
-             $.ajax({
-                async: false,
-                type: "GET",
-                dataType: 'HTML',
-                contentType: false,
-                processData: false,
-                url: '@Url.Action("NotificationMessages", "Common")',
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBodyNot").html(data);
-                    $("#myModalNotif").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var BSDetails = function (BsG) {
+    var BSDetails = function () {
         var x = document.getElementById("labelT");
         var url;
-        if (BsG != "") {
-            x.innerHTML = 'Bible Study Details';
+        if (`@Model.BSGroup` != "") {
+            x.innerHTML = 'Bible Study(BS) Details';
             url = "/Dashboard/GetBSDetails";
         }
         else {
-            x.innerHTML = 'Join a Bible Study(BSG)';
-           url = "/Dashboard/JoinBSGroup";
+            x.innerHTML = 'Join a Bible Study(BS)';
+            url = "/Dashboard/JoinBSGroup";
         }
         ShowProgress();
         $.ajax({
             url: url,
             datatype: "json",
             type: "POST",
-            data: JSON.stringify({ BSG: BsG }),
+            data: JSON.stringify({ BSG:`@Model.BSGroup`  }),
             contentType: "application/json; charset = utf-8",
             success: function (data) {
                 HideProgress();
@@ -629,9 +552,8 @@
                 contentType: "application/json; charset = utf-8",
                 success: function (data) {
                     HideProgress();
-                    MyBSInformation();
-                    $("#myModalUnits").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
+                    CreateDocument('BS');
+                   MSemesterdelodelSwal.fire('Success', data.message, 'success');
                 },
                 error: function () {
                     HideProgress();
@@ -639,31 +561,6 @@
                 }
             });
         }
-    }
-    var RequestToBeBSLeader = function () {
-        var url;
-        if (`@Model.LeadershipOption` == "Request Against A Group") {
-            url = "/Dashboard/JoinBSGroupAgainstGroup";
-        }
-        else {
-            url = "/Dashboard/RequestBsGroupLeader";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                MyBSInformation();
-                Swal.fire('Success', data.message, 'success');
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
     }
     var SubmitCreatedDocument = function (Type) {
         var Code = $("#txtCode").val();
@@ -751,7 +648,7 @@
                 dataType: 'HTML',
                 contentType: "application/json; charset = utf-8",
                 data: JSON.stringify({ Sem: Sem }),
-                url: "/Common/GetAcademicCalender",
+                url: '@Url.Action("GetAcademicCalender", "Common")',
                 success: function (data) {
                     HideProgress();
                     $("#modalBody").html(data);
@@ -790,7 +687,7 @@
             datatype: "json",
             type: "POST",
             contentType: "application/json; charset = utf-8",
-            url: "/Dashboard/GenerateNewCateringToken",
+            url: '@Url.Action("GenerateNewCateringToken", "Dashboard")',
             success: function (data) {
                 if (data.success == true) {
                     HideProgress();
@@ -808,12 +705,12 @@
             }
         });
     };
-    var ViewAttachment = function (tbl, No, Id, fName, ext) {
+     var ViewAttachment = function (tbl, No, Id, fName, ext) {
         $.ajaxSetup({ cache: false });
         ShowProgress();
         $.ajax({
             cache: false,
-            url: "/Common/DocumentAttachmentview",
+            url: '@Url.Action("DocumentAttachmentview", "Common")',
             type: "POST",
             datatype: "json",
             cache: false,

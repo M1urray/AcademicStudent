@@ -58,7 +58,7 @@
             data: JSON.stringify({ HostelCode: Hostel }),
             contentType: "application/json; charset = utf-8",
             processData: false,
-            url: '/Welfare/HostelBlockRooms',
+            url: '@Url.Action("HostelBlockRooms", "Welfare")',
             success: function (data) {
                 $("#divRoomList").html(data);
                 HideProgress();
@@ -71,12 +71,12 @@
     }
     var HostelBookingLink = function () {
         ShowProgress();
-        window.location = "/Welfare/HostelList";
+        window.location = '@Url.Action("HostelList", "Welfare")';
     }
     var LoadRoomSpaces = function (HostelCode, RoomCode, cost) {
         ShowProgress();
         $.ajax({
-            url: "/Welfare/RoomSpacesList",
+            url: '@Url.Action("RoomSpacesList", "Welfare")',
             datatype: "json",
             type: "POST",
             data: JSON.stringify({ HostelCode: HostelCode, RoomCode: RoomCode, Cost: cost }),
@@ -113,7 +113,7 @@
                 RoomSpaces.Cost = cost;
                 $.ajax({
                     type: "POST",
-                    url: "/Welfare/SaveSelectedSpace",
+                    url: '@Url.Action("SaveSelectedSpace", "Welfare")',
                     data: JSON.stringify({ spaceDetails: RoomSpaces }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -141,7 +141,7 @@
                     confirmButtonColor: "#1abc9c",
                 });
             }
-        });        
+        });
     }
 </script>
 

@@ -7,7 +7,7 @@
 
     string userRole = currentUser.RoleName;
     bool fullAccess = currentUser.Full_Access;
-    bool PrintExam = false, AllowExamCard = false, AllowEval = false, AllowApplication = false, AllowGradAppl = false;
+    bool PrintExam = false, AllowExamCard = false, AllowEval = false;
     string UserName = "";
     string ProfilePicBase64 = "", gender = "", imgSrc = "";
     int CountNotif = 0;
@@ -22,7 +22,7 @@
         string Sem = "";
         if (Session["CurrentSem"] == null)
         {
-            Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+            Session["CurrentSem"] = CommonClass.CurrentSemester("");
         }
 
         Sem = Session["CurrentSem"].ToString();
@@ -42,12 +42,10 @@
         }
         bool[] s = CommonClass.LecEvaluationAllowed(Sem);
         AllowExamCard = s[0];
-        AllowApplication = CommonClass.AllowGradClearanceApplication(StdNo);
-        AllowGradAppl = CommonClass.AllowGraduationApplication(StdNo);
         AllowEval = s[1];
         if (Session["FullName"] == null)
         {
-            UserName = New_Student_Portal.Models.CommonClass.GetStudentName(Session["Username"].ToString());
+            UserName = CommonClass.GetStudentName(Session["Username"].ToString());
         }
         else
         {
@@ -85,10 +83,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <title>AFRICA INTERNATIONAL UNIVERSITY | Student Portal</title>
+    <title>RBS | Student Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="AFRICA INTERNATIONAL UNIVERSITY Student Portal" name="description" />
-    <meta content="AFRICA INTERNATIONAL UNIVERSITY" name="DSL" />
+    <meta content="RBS Student Portal" name="description" />
+    <meta content="RBS" name="DSL" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="~/assets/images/favicon.ico">
@@ -110,7 +108,7 @@
     <link href="~/CSS/Loader.css" rel="stylesheet" />
     <div class="loading" align="center" id="divLoader">
         <br />
-        <img src="~/assets/images/ajax-loader2.gif" alt="" height="150" width="150" />
+        <img src="~/assets/images/ajax-loader.gif" alt="" height="150" width="150" />
     </div>
     <!-- Begin page -->
     <div id="wrapper">
@@ -164,12 +162,12 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown">
                             <!-- item-->
-                            <a href="/Dashboard/Dashboard" class="dropdown-item notify-item">
+                            <a href="#" onclick="DashBoardLink('@userRole');" class="dropdown-item notify-item">
                                 <i class="ri-user-fill"></i>
                                 <span>Profile</span>
                             </a>
                             <!-- item-->
-                            <a href="/Login/Login" class="dropdown-item notify-item">
+                            <a href="@Url.Action("Login", "Login")" class="dropdown-item notify-item">
                                 <i class="ri-logout-box-line"></i>
                                 <span>Logout</span>
                             </a>
@@ -178,13 +176,13 @@
                 </ul>
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="/Dashboard/Dashboard" class="logo logo-dark text-center">
+                    <a href="#" onclick="DashBoardLink('@userRole');" class="logo logo-dark text-center">
                         <span class="logo-sm">
                             <img src="~/assets/images/logo2.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Minton</span> -->
                         </span>
                         <span class="logo-lg">
-                            <img src="~/assets/images/retina_logo3.png" alt="" height="20">
+                            <img src="~/assets/images/logo2.png" alt="" height="20">
                             <!-- <span class="logo-lg-text-light">M</span> -->
                         </span>
                     </a>
@@ -217,12 +215,12 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="/Dashboard/Dashboard" class="logo logo-light text-center">
+                <a href="#" onclick="DashBoardLink('@userRole');" class="logo logo-light text-center">
                     <span class="logo-sm">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="64">
+                        <img src="~/assets/images/Logo2.png" alt="" height="64">
                     </span>
                     <span class="logo-lg">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="60">
+                        <img src="~/assets/images/Logo2.png" alt="" height="60">
                     </span>
                 </a>
             </div>
@@ -256,7 +254,7 @@
                                 <span>Profile</span>
                             </a>
                             <!-- item-->
-                            <a href="/login/Login" class="dropdown-item notify-item">
+                            <a href="@Url.Action("Login", "Login")" class="dropdown-item notify-item">
                                 <i class="fe-log-out me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -278,23 +276,17 @@
                         {
                             <li class="menu-title mt-2">Self Service</li>
                             <li>
-                                <a href="#" onclick="AlumniAcademicRequisitionLink();">
-                                    <i class="ri-git-pull-request-fill"></i>
-                                    <span>Academic Requisition</span>
+                                <a href="#" onclick="ApplicationIsntuctionLink();">
+                                    <i class="ri-information-fill"></i>
+                                    <span>Application Instructions</span>
                                 </a>
                             </li>
-                            @*<li>
-                                    <a href="#" onclick="ApplicationIsntuctionLink();">
-                                        <i class="ri-information-fill"></i>
-                                        <span>Application Instructions</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="ApplicationListLink();">
-                                        <i class="ri-input-cursor-move"></i>
-                                        <span>Application List</span>
-                                    </a>
-                                </li>*@
+                            <li>
+                                <a href="#" onclick="ApplicationListLink();">
+                                    <i class="ri-input-cursor-move"></i>
+                                    <span>Application List</span>
+                                </a>
+                            </li>
 
                         }
                         else
@@ -315,46 +307,33 @@
                                     </a>
                                 </li>
                             }
-                            <li>
-                                <a href="#" onclick="AcademicRequisitionLink();">
-                                    <i class="ri-git-pull-request-fill"></i>
-                                    <span>Academic Requisition</span>
-                                </a>
-                            </li>
-                            //if (AllowGradAppl)
-                            //{
-                            <li>
-                                <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
-                                    <i class="fa fa-graduation-cap"></i>
-                                    <span>Graduation Request</span>
-                                </a>
-                            </li>
-                            <li> <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
-                                        <i class="ri-shopping-bag-fill"></i>
-                                        <span>Clearance Request</span> 
-                                     </a> 
-                                 </li>
-                            if (fullAccess && AllowEval)
-                            {
-                                <li>
-                                    <a href="#" onclick="LecturerEvaluationLink();">
-                                        <i class="ri-clapperboard-fill"></i>
-                                        <span>Course Evaluation</span>
-                                    </a>
-                                </li>
-                            }
                             @*<li>
-                                <a href="#" onclick="EnquiryLink();">
-                                    <i class="ri-question-answer-fill"></i>
-                                    <span>General Complaint</span>
-                                </a>
-                            </li>*@
-                            <li>
-                                <a href="#" onclick="StudentAuditLink();">
-                                    <i class="ri-pushpin-fill"></i>
-                                    <span>Student Audit</span>
-                                </a>
-                            </li>
+                                    <a href="#" onclick="AcademicRequisitionLink();">
+                                        <i class="ri-git-pull-request-fill"></i>
+                                        <span>Academic Requisition</span>
+                                    </a>
+                                </li>*@
+                            @*if (fullAccess)
+                                {
+                                    <li>
+                                        <a href="#" onclick="LecturerEvaluationLink();">
+                                            <i class="ri-clapperboard-fill"></i>
+                                            <span>Course Evaluation</span>
+                                        </a>
+                                    </li>
+                                }*@
+                            @*<li>
+                                    <a href="#" onclick="EnquiryLink();">
+                                        <i class="ri-question-answer-fill"></i>
+                                        <span>General Complain</span>
+                                    </a>
+                                </li>*@
+                            @*<li>
+                                    <a href="#" onclick="StudentAuditLink();">
+                                        <i class="ri-pushpin-fill"></i>
+                                        <span>Student Audit</span>
+                                    </a>
+                                </li>*@
                             <li class="menu-title mt-2">Financials</li>
                             <li>
                                 <a href="#" onclick="FeeStatementLink();">
@@ -368,36 +347,43 @@
                                     <span>Receipts</span>
                                 </a>
                             </li>
+                            @*if (fullAccess)
+                                {
+                                    <li>
+                                        <a href="#" onclick="SemProformaLink();">
+                                            <i class="ri-folder-received-fill"></i>
+                                            <span>Semester Proforma</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="PaymentPlanLink();">
+                                            <i class="ri-paypal-fill"></i>
+                                            <span>Payment Plan</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="PayFees();">
+                                            <i class="ri-money-dollar-box-fill"></i>
+                                            <span>Pay Fees</span>
+                                        </a>
+                                    </li>
+                                }*@
                             if (fullAccess)
                             {
-                                <li>
-                                    <a href="#" onclick="SemProformaLink();">
-                                        <i class="ri-folder-received-fill"></i>
-                                        <span>Semester Proforma</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="PaymentPlanLink();">
-                                        <i class="ri-paypal-fill"></i>
-                                        <span>Payment Plan</span>
-                                    </a>
-                                </li>
-                            }
-                            if (fullAccess)
-                            {
-                                <li class="menu-title mt-2">Welfare</li>
-                                <li>
-                                    <a href="#" onclick="HostelBookingLink();">
-                                        <i class="ri-hotel-bed-fill"></i>
-                                        <span>Hostel Booking</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="MealBookingLink();">
-                                        <i class="ri-menu-add-fill"></i>
-                                        <span>Meal Booking</span>
-                                    </a>
-                                </li>
+                                @*<li class="menu-title mt-2">Accommondation</li>
+                                    <li>
+                                        <a href="#" onclick="HostelBookingLink();">
+                                            <i class="ri-hotel-bed-fill"></i>
+                                            <span>Hostel Booking</span>
+                                        </a>
+                                    </li>*@
+                                @*<li>
+                                        <a href="#" onclick="MealBookingLink();">
+                                            <i class="ri-menu-add-fill"></i>
+                                            <span>Meal Booking</span>
+                                        </a>
+                                    </li>*@
+
                                 @*<li>
                                         <a href="#" onclick="ClubsSocietiesLink();">
                                             <i class="ri-football-fill"></i>
@@ -410,19 +396,19 @@
                                 <li class="menu-title mt-2">Examination</li>
                                 if (AllowExamCard)
                                 {
-                                    <li>
+                                <li>
                                         <a href="#" onclick="ExamCardLink();">
                                             <i class="ri-download-fill"></i>
                                             <span>Exam Card</span>
                                         </a>
                                     </li>
-                                }
-                                <li>
-                                    <a href="#" onclick="ProvisionalResultsLink();">
-                                        <i class="ri-download-cloud-fill"></i>
-                                        <span>Transcipt</span>
-                                    </a>
-                                </li>
+                                    }
+                                    <li>
+                                        <a href="#" onclick="ProvisionalResultsLink();">
+                                            <i class="ri-download-cloud-fill"></i>
+                                            <span>Transcript</span>
+                                        </a>
+                                    </li>
                             }
                         }
                         <li class="menu-title mt-2">Settings</li>
@@ -535,106 +521,104 @@
         var DashBoardLink = function (userRole) {
             ShowProgress();
             if (userRole == "ALLUMINAE") {
-                window.location = "/Alumni/Dashboard";
+                window.location = '@Url.Action("Dashboard", "Alumni")';
             }
             else {
-                window.location = "/Dashboard/Dashboard";
+                window.location = '@Url.Action("Dashboard", "Dashboard")';
             }
         }
         //current student Links/////////////////
         var CourseRegistrationLink = function () {
             ShowProgress();
-            window.location = "/Course/CourseRegistration";
+            window.location = '@Url.Action("CourseRegistration", "Course")';
         }
         var FeeStatementLink = function () {
-            debugger
             ShowProgress();
-            window.location = "/Financial/FeeStatement";
+            window.location = '@Url.Action("FeeStatement", "Financial")';
         }
         var ReceiptsLink = function () {
             ShowProgress();
-            window.location = "/Financial/Receipts";
+            window.location = '@Url.Action("Receipts", "Financial")';
+        }
+        var PayFees = function () {
+            ShowProgress();
+            window.location = '@Url.Action("PayFees", "Financial")';
         }
         var SemProformaLink = function () {
             ShowProgress();
-            window.location = "/ViewDocuments/ViewDocuments?DocT=SEMPROFINV";
+            window.location = '@Url.Action("ViewDocuments", "ViewDocuments")?DocT=SEMPROFINV';
         }
         var PaymentPlanLink = function () {
             ShowProgress();
-            window.location = "/Financial/PaymentPlan";
+            window.location = '@Url.Action("PaymentPlan", "Financial")';
         }
         var TimeTableLink = function () {
             ShowProgress();
-            window.location = "/Course/StudentTimeTable";
+            window.location = '@Url.Action("StudentTimeTable", "Course")';
         }
         var AcademicRequisitionLink = function () {
             ShowProgress();
-            window.location = "/Course/StudentRequisitions";
+            window.location = '@Url.Action("StudentRequisitions", "Course")';
         }
         var LecturerEvaluationLink = function () {
             ShowProgress();
-            window.location = "/Course/LecturerEvaluation";
+            window.location = '@Url.Action("LecturerEvaluation", "Course")';
         }
         var GraduationRequestLink = function () {
             ShowProgress();
-            window.location = "/Course/GraduationRequest";
+            window.location = '@Url.Action("GraduationRequest", "Course")';
         }
         var ClearanceRequestLink = function () {
             ShowProgress();
-            window.location = "/Course/ClearanceRequest";
+            window.location = '@Url.Action("ClearanceRequest", "Course")';
         }
         var EnquiryLink = function () {
             ShowProgress();
-            window.location = "/Course/StudentEnquiryList";
+            window.location = '@Url.Action("StudentEnquiryList", "Course")';
         }
         var SponsorshipRequisitionLink = function () {
             ShowProgress();
-            window.location = "/Welfare/SponsorshipApplication";
+            window.location = '@Url.Action("SponsorshipApplication", "Course")';
         }
         var HostelBookingLink = function () {
             ShowProgress();
-            window.location = "/Welfare/HostelList";
+            window.location = '@Url.Action("HostelList", "Welfare")';
         }
         var MealBookingLink = function () {
             ShowProgress();
-            window.location = "/Welfare/MealBooking";
+            window.location = '@Url.Action("MealBooking", "Welfare")';
         }
         var ClubsSocietiesLink = function () {
             ShowProgress();
-            window.location = "/Welfare/ClubsSociety";
+            window.location = '@Url.Action("ClubsSociety", "Welfare")';
         }
         var ExamCardLink = function () {
             ShowProgress();
-            window.location = "/ViewDocuments/ViewDocuments?DocT=EXAMCARD";
+            window.location = '@Url.Action("ViewDocuments", "ViewDocuments")?DocT=EXAMCARD';
         }
         var ProvisionalResultsLink = function () {
             ShowProgress();
-            //window.location = "/ExamResults/ProvisionalResults";
-            window.location = "/ViewDocuments/ViewDocuments?DocT=RESULTS";
+            window.location = '@Url.Action("ViewDocuments", "ViewDocuments")?DocT=RESULTS';
         }
         var StudentAuditLink = function () {
             ShowProgress();
-            window.location = "/ViewDocuments/ViewDocuments?DocT=STDAUDIT";
+            window.location = '@Url.Action("ViewDocuments", "ViewDocuments")?DocT=STDAUDIT';
         }
         //end current student Links/////////////////
 
         //Alluminae Links////////////////////
-        var AlumniAcademicRequisitionLink = function () {
-            ShowProgress();
-            window.location = "/Alumni/StudentRequisitions";
-        }
         var ApplicationIsntuctionLink = function () {
             ShowProgress();
-            window.location = "/Alumni/OnlineApplicationInstructions";
+            window.location = '@Url.Action("OnlineApplicationInstructions", "Alumni")';
         }
         var ApplicationListLink = function () {
             ShowProgress();
-            window.location = "/Alumni/ProgrammApplicationList";
+            window.location = '@Url.Action("ProgrammApplicationList", "Alumni")';
         }
         //end Alluminae Links/////////////////
         var ChangePasswordLink = function () {
             ShowProgress();
-            window.location = "/Settings/ChangePassword";
+            window.location = '@Url.Action("ChangePassword", "Settings")';
         }
     </script>
 </body>

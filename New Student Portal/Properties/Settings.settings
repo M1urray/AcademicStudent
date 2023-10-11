@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="New_Student_Portal.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="New_Student_Portal_NAVWS_WebPortal" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal</Value>
+    <Setting Name="New_Student_Portal_NAVWS_webportal" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://74.124.24.233:6223/Colleges/WS/ROYAL/Codeunit/webportal</Value>
     </Setting>
   </Settings>
 </SettingsFile>

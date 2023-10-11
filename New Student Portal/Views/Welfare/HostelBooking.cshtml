@@ -41,7 +41,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Welfare/HostelAccommondation",
+            url: '@Url.Action("HostelAccommondation", "Welfare")',
             success: function (data) {
                 $("#divHostelBooking").html(data);
                 $('#ddlRoom').empty().append('<option selected="selected" value="0">--Select Room--</option>');
@@ -97,7 +97,7 @@
                     ShowProgress();
                     $.ajax({
                         type: "POST",
-                        url: "/Welfare/SaveSelectedSpace",
+                        url: '@Url.Action("SaveSelectedSpace", "Welfare")',
                         data: JSON.stringify(BookedSpaceDetails),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -133,7 +133,7 @@
             cache: false
         });
         $.ajax({
-            url: '/Welfare/PrintHostelInvoice',
+            url: '@Url.Action("PrintHostelInvoice", "Welfare")',
             type: "POST",
             datatype: "json",
             cache: false,
@@ -163,7 +163,7 @@
             cache: false
         });
         $.ajax({
-            url: '/Welfare/PrintHostelClearanceForm',
+            url: '@Url.Action("PrintHostelClearanceForm", "Welfare")',
             type: "POST",
             datatype: "json",
             cache: false,

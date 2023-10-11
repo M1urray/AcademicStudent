@@ -49,7 +49,7 @@
             $("#ddlProgramme option").remove();
             $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
 
-            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
+            $.getJSON('@Url.Action("GetEnrolledProgrammes", "ViewDocuments")',
                 function (data) {
                     $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
                     $.each(data.ListOfValues, function () {
@@ -67,7 +67,7 @@
     var GetSemesterInvoice = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/SemesterProformaInvoice',
+            url: '@Url.Action("SemesterProformaInvoice", "ViewDocuments")',
             type: "POST",
             async: false,
             success: function (data) {
@@ -90,7 +90,7 @@
     var PrintExamCard = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ExamCard',
+            url: '@Url.Action("ExamCard", "ViewDocuments")',
             type: "POST",
             async: false,
             success: function (data) {
@@ -124,7 +124,7 @@
                 var results = regex.exec(location.search);
                 return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
             }
-            
+
             if (DocType == "RESULTS") {
                 PrintProvissionalResults(Prog);
             }
@@ -136,7 +136,7 @@
     var PrintProvissionalResults = function (Prog) {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ProvisionalResults',
+            url: '@Url.Action("ProvisionalResults", "ViewDocuments")',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -161,7 +161,7 @@
     var GetStudentAudit = function (Prog) {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/GenerateStudentAudit',
+            url: '@Url.Action("GenerateStudentAudit", "ViewDocuments")',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",

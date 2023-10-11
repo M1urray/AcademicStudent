@@ -29,7 +29,7 @@
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Financial/GetSponsorshipApplications",
+            url: '@Url.Action("GetSponsorshipApplications", "Financial")',
             success: function (data) {
                 $("#divSponsorhsipApp").html(data);
                 HideProgress();
