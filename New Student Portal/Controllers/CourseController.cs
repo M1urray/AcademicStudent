@@ -1018,14 +1018,14 @@ namespace New_Student_Portal.Controllers
 
                     Credentials.ObjNav.TestRegistrationStartDate(Sem, RegNo);
                     bool QualifyFoRetake = false, QualifyForSupp = false, AllowSuppRetaleReg = false;
-                    if (RegType == "2")
+                    if (RegType == "2" || RegType == "3")
                     {
                         QualifyForSupp = CommonClass.QualifyForSupplimentary(RegNo, Prog);
                     }
-                    if (RegType == "3")
-                    {
-                        QualifyFoRetake = CommonClass.QualifyForRetake(RegNo, Prog);
-                    }
+                    //if (RegType == "3" || RegType == "3")
+                    //{
+                    //    QualifyFoRetake = CommonClass.QualifyForRetake(RegNo, Prog);
+                    //}
                     if (RegType == "2" || RegType == "3")
                     {
                         AllowSuppRetaleReg = CommonClass.AllowSupp_Special(Sem);
@@ -1036,18 +1036,18 @@ namespace New_Student_Portal.Controllers
                         ErrM.Message = "Registration of Supplimentary/Retakes not allowed at the moment";
                         return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", ErrM);
                     }
-                    if (RegType == "2" && !QualifyForSupp)
+                    if ((RegType == "2" || RegType == "3") && !QualifyForSupp)
                     {
                         Error ErrM = new Error();
-                        ErrM.Message = "You do not qualify for Supplimentary registration";
+                        ErrM.Message = "You do not qualify for Retake/Supplimentary registration";
                         return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", ErrM);
                     }
-                    else if (RegType == "3" && !QualifyFoRetake)
-                    {
-                        Error ErrM = new Error();
-                        ErrM.Message = "You do not qualify for Retake registration";
-                        return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", ErrM);
-                    }
+                    //else if (RegType == "3" && !QualifyFoRetake)
+                    //{
+                    //    Error ErrM = new Error();
+                    //    ErrM.Message = "You do not qualify for Retake registration";
+                    //    return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", ErrM);
+                    //}
                     else
                     {
                         string[] s = new string[5];
@@ -1090,14 +1090,8 @@ namespace New_Student_Portal.Controllers
                             {
                                 #region Programme Units 
                                 string page = "";
-                                if (RegType == "2")
-                                {
-                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "'  and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
-                                }
-                                if (RegType == "3")
-                                {
-                                    page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "'  and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
-                                }
+                                //page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Failed eq true and Supp_Taken eq false&$format=json";
+                                page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Programme eq '" + Prog + "' and Failed eq true and Supp_Taken eq false&$format=json";
                                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                                 {
@@ -1959,8 +1953,62 @@ namespace New_Student_Portal.Controllers
             }
             return s;
         }
+        //[HttpPost]
+        //public JsonResult SaveSelectedUnits(List<UnitRegistration> UnitReg)
+        //{
+        //    try
+        //    {
+        //        if (Session["Username"] == null)
+        //        {
+        //            Response.Redirect(Url.Action("Login", "Login"));
+        //        }
+        //        string RegNo = Session["Username"].ToString();
+        //        string Sem = "";
+        //        if (Session["CurrentSem"] == null)
+        //        {
+        //            Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+        //        }
+
+        //        Sem = Session["CurrentSem"].ToString();
+
+        //        if (Session["CurrentProgDetails"] == null)
+        //        {
+        //            Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
+        //        }
+        //        string[] s = (string[])Session["CurrentProgDetails"];
+        //        int i = 0;
+        //        foreach (var c in UnitReg)
+        //        {
+        //            string ClassCode = "", Campus = "", Day = "", Period = "";
+        //            string d = c.UnitCode.Trim();
+        //            if (c.ClassCode != null)
+        //            {
+        //                ClassCode = c.ClassCode.Trim();
+        //            }
+        //            if (c.Campus != null)
+        //            {
+        //                Campus = c.Campus.Trim();
+        //            }
+        //            if (c.Period != null)
+        //            {
+        //                Period = c.Period.Trim();
+        //            }
+        //            if (c.Day != null)
+        //            {
+        //                Day = c.Day.Trim();
+        //            }
+        //            Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, 1, ClassCode, Campus, Day, Period);
+        //            i++;
+        //        }
+        //        return Json(new { message = i.ToString() + " Units Selected successfully", success = true }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
         [HttpPost]
-        public JsonResult SaveSelectedUnits(List<UnitRegistration> UnitReg)
+        public JsonResult SaveSelectedUnits(List<UnitRegistration> UnitReg, string RegT)
         {
             try
             {
@@ -1982,6 +2030,7 @@ namespace New_Student_Portal.Controllers
                     Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
+                string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
                 int i = 0;
                 foreach (var c in UnitReg)
                 {
@@ -2003,7 +2052,15 @@ namespace New_Student_Portal.Controllers
                     {
                         Day = c.Day.Trim();
                     }
-                    Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, 1, ClassCode, Campus, Day, Period);
+                    if ((RegT == "2") || (RegT == "3"))
+                    {
+                        Credentials.ObjNav.SubmitRetakeResitUnits(RegNo, d, "", Sem, Convert.ToInt32(RegT), "");
+                    }
+                    else
+                    {
+                        //Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, Convert.ToInt32(RegT), ClassCode, Campus, Day, Period, s[1]);
+                        Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, Convert.ToInt32(RegT), ClassCode, Campus, Day, Period);
+                    }
                     i++;
                 }
                 return Json(new { message = i.ToString() + " Units Selected successfully", success = true }, JsonRequestBehavior.AllowGet);

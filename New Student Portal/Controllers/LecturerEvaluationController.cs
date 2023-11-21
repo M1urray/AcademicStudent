@@ -119,7 +119,7 @@ namespace New_Student_Portal.Controllers
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
-                Credentials.ObjNav.SaveGeneralEvaluationComments(RegNo, Unit, Sem, StaffNo, "", sug1, sug2, sug3, sug4);
+                Credentials.ObjNav.SaveGeneralEvaluationComments(RegNo, Unit, Sem, StaffNo, "", "", "", "", sug4);
 
                 return Json(new { message = "Unit " + UnitName + " Evaluated successfully", success = true }, JsonRequestBehavior.AllowGet);
             }

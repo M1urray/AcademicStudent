@@ -7,24 +7,26 @@
                 <div>
                     <select class="form-select" id="ReqType" name="RegType" onchange="ShowRequiredDiv()">
                         <option value="">--Select Requisition Type--</option>
-                        @if (Model.SettlementT != "KUCCPS")
+                        @*@if (Model.SettlementT != "KUCCPS")
                         {
                             <option value="1">Campus Transfer</option>
-                            <option value="2">Change of Major</option>
-                        }
-                        <option value="21">Credit Transfer</option>
-                        <option value="22">Late Registration</option>
+
+                        }*@
+                        <option value="2">Change of Programme</option>
+                        <option value="17">Credit Transfer</option>
+                        @*<option value="21">Credit Transfer</option>*@
+                        @*<option value="22">Late Registration</option>*@
                         <option value="11">Request to add or drop a unit</option>
                         <option value="8">Special Exams</option>
                         @* <option value="3">Deferment Request</option> *@
-                        @* <option value="4">Re-Admission After Deferment</option> *@
-                        @* <option value="5">Re-Admission After Suspension</option> *@
+                        <option value="4">Re-Admission After Deferment</option>
+                        <option value="5">Re-Admission After Suspension</option>
                         <option value="9">Official Transcript</option>
                         @* <option value="12">Programme Minor</option> *@
                         @* <option value="13">Double Major</option> *@
                         @* <option value="14">Double Concentration</option> *@
                         <option value="16"> Missing Grade</option>
-                        @* <option value="17">Exemption</option> *@
+
                         @* <option value="18">Exam Challenge</option> *@
                         @* <option value="19">Transit To Next Programme Level</option> *@
                         <option value="20">Withdrawal</option>

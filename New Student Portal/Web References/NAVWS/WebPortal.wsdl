@@ -2,6 +2,20 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WebPortal" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ValidateCourseRegistration">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="stdNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ValidateCourseRegistration_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="ValidateStartDate">
         <complexType>
           <sequence>
@@ -855,6 +869,23 @@
           <sequence />
         </complexType>
       </element>
+      <element name="StudentSelfPromotionWithResidence">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="stdNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="studProg" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="regF" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="residence" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="StudentSelfPromotionWithResidence_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="StudentSelfPromotion">
         <complexType>
           <sequence>
@@ -1614,20 +1645,6 @@
         </complexType>
       </element>
       <element name="ValidateCourseReggistration_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="ValidateCourseRegistration">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="stdNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="ValidateCourseRegistration_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -8102,6 +8119,12 @@
       </element>
     </schema>
   </types>
+  <message name="ValidateCourseRegistration">
+    <part name="parameters" element="tns:ValidateCourseRegistration" />
+  </message>
+  <message name="ValidateCourseRegistration_Result">
+    <part name="parameters" element="tns:ValidateCourseRegistration_Result" />
+  </message>
   <message name="ValidateStartDate">
     <part name="parameters" element="tns:ValidateStartDate" />
   </message>
@@ -8420,6 +8443,12 @@
   <message name="StudentRetakenChargesCreate_Result">
     <part name="parameters" element="tns:StudentRetakenChargesCreate_Result" />
   </message>
+  <message name="StudentSelfPromotionWithResidence">
+    <part name="parameters" element="tns:StudentSelfPromotionWithResidence" />
+  </message>
+  <message name="StudentSelfPromotionWithResidence_Result">
+    <part name="parameters" element="tns:StudentSelfPromotionWithResidence_Result" />
+  </message>
   <message name="StudentSelfPromotion">
     <part name="parameters" element="tns:StudentSelfPromotion" />
   </message>
@@ -8701,12 +8730,6 @@
   </message>
   <message name="ValidateCourseReggistration_Result">
     <part name="parameters" element="tns:ValidateCourseReggistration_Result" />
-  </message>
-  <message name="ValidateCourseRegistration">
-    <part name="parameters" element="tns:ValidateCourseRegistration" />
-  </message>
-  <message name="ValidateCourseRegistration_Result">
-    <part name="parameters" element="tns:ValidateCourseRegistration_Result" />
   </message>
   <message name="PostAttendanceList">
     <part name="parameters" element="tns:PostAttendanceList" />
@@ -11163,6 +11186,10 @@
     <part name="parameters" element="tns:DeleteHRAppraisalDutiesResp_Result" />
   </message>
   <portType name="WebPortal_Port">
+    <operation name="ValidateCourseRegistration">
+      <input name="ValidateCourseRegistration" message="tns:ValidateCourseRegistration" />
+      <output name="ValidateCourseRegistration_Result" message="tns:ValidateCourseRegistration_Result" />
+    </operation>
     <operation name="ValidateStartDate">
       <input name="ValidateStartDate" message="tns:ValidateStartDate" />
       <output name="ValidateStartDate_Result" message="tns:ValidateStartDate_Result" />
@@ -11375,6 +11402,10 @@
       <input name="StudentRetakenChargesCreate" message="tns:StudentRetakenChargesCreate" />
       <output name="StudentRetakenChargesCreate_Result" message="tns:StudentRetakenChargesCreate_Result" />
     </operation>
+    <operation name="StudentSelfPromotionWithResidence">
+      <input name="StudentSelfPromotionWithResidence" message="tns:StudentSelfPromotionWithResidence" />
+      <output name="StudentSelfPromotionWithResidence_Result" message="tns:StudentSelfPromotionWithResidence_Result" />
+    </operation>
     <operation name="StudentSelfPromotion">
       <input name="StudentSelfPromotion" message="tns:StudentSelfPromotion" />
       <output name="StudentSelfPromotion_Result" message="tns:StudentSelfPromotion_Result" />
@@ -11562,10 +11593,6 @@
     <operation name="ValidateCourseReggistration">
       <input name="ValidateCourseReggistration" message="tns:ValidateCourseReggistration" />
       <output name="ValidateCourseReggistration_Result" message="tns:ValidateCourseReggistration_Result" />
-    </operation>
-    <operation name="ValidateCourseRegistration">
-      <input name="ValidateCourseRegistration" message="tns:ValidateCourseRegistration" />
-      <output name="ValidateCourseRegistration_Result" message="tns:ValidateCourseRegistration_Result" />
     </operation>
     <operation name="PostAttendanceList">
       <input name="PostAttendanceList" message="tns:PostAttendanceList" />
@@ -13206,6 +13233,15 @@
   </portType>
   <binding name="WebPortal_Binding" type="tns:WebPortal_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ValidateCourseRegistration">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateCourseRegistration" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ValidateCourseRegistration">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ValidateCourseRegistration_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="ValidateStartDate">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateStartDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="ValidateStartDate">
@@ -13683,6 +13719,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="StudentSelfPromotionWithResidence">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:StudentSelfPromotionWithResidence" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="StudentSelfPromotionWithResidence">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="StudentSelfPromotionWithResidence_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="StudentSelfPromotion">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:StudentSelfPromotion" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="StudentSelfPromotion">
@@ -14103,15 +14148,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="ValidateCourseReggistration_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="ValidateCourseRegistration">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateCourseRegistration" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="ValidateCourseRegistration">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="ValidateCourseRegistration_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

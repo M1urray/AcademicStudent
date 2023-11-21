@@ -47,9 +47,9 @@ namespace New_Student_Portal.Controllers
                             FD.Posting_Date = (string)config["Posting_Date"];
                             FD.Document_No = (string)config["Document_No"];
                             FD.Description = (string)config["Description"];
-                            FD.Debit_Amount = (string)config["Debit_Amount"];
-                            FD.Credit_Amount = (string)config["Credit_Amount"];
-                            FD.RunnningBal = (string)config["Amount"];
+                            FD.Debit_Amount = (string)config["Debit_Amount__LCY"];
+                            FD.Credit_Amount = (string)config["Credit_Amount__LCY"];
+                            FD.RunnningBal = (string)config["Amount__LCY"];
                             FDetails.Add(FD);
                         }
                     }
@@ -92,7 +92,7 @@ namespace New_Student_Portal.Controllers
                             RC.Receipt_No = (string)config["Receipt_No"];
                             RC.Date = (string)config["Date"];
                             RC.Payment_Mode = (string)config["Payment_Mode"];
-                            RC.Amount = (string)config["Amount"];
+                            RC.Amount = (string)config["Amount_LCY"];
                             RCDetails.Add(RC);
                         }
                     }

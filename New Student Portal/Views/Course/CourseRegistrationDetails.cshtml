@@ -485,8 +485,8 @@
                 <div class="col-md-4">
                     <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
                     <select class="form-select" id="RegType" name="RegType" onchange="ShowBasketUnits();">
-                        
-                        <option value="1" selected>Normal</option>
+                        <option value="">--Registration Type--</option>
+                        <option value="1">Normal</option>
                         <option value="2">Supplementary</option>
                         <option value="3">Retake</option>
                     </select>
@@ -538,7 +538,7 @@
             $("#RegType").val(`@Model.RegT`);
             LoadBasketUnits(`@Model.RegT`);
         }
-        //$("#divStage").hide();
+        $("#divStage").hide();
         $("#divOption").hide();
     });
     var RegTypeChanged = function () {
@@ -555,9 +555,10 @@
         
         if (RegT == "") {
             $("#divBasket").hide();
+            $("#divOption").hide();
         }
         else {
-            if (RegT == "1" || RegT == "2" || RegT == "3") {
+            if (RegT == "1") {
                 $("#divStage").show();
             }
             else {

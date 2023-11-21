@@ -19,13 +19,13 @@
     else
     {
         string StdNo = Session["Username"].ToString();
-        string Sem = "";
-        if (Session["CurrentSem"] == null)
+        string Sem = Session["CurrentSem"].ToString();
+        if (Sem=="")
         {
-            Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+            Sem= CommonClass.CurrentSemester(StdNo);
         }
 
-        Sem = Session["CurrentSem"].ToString();
+        Session["CurrentSem"] = Sem;
         string RegDeadlineDate = CommonClass.RegistrationDeadline(Sem);
         CountNotif = CommonClass.GetDocumentCount();
         if (RegDeadlineDate != "")
@@ -284,17 +284,17 @@
                                 </a>
                             </li>
                             @*<li>
-                                    <a href="#" onclick="ApplicationIsntuctionLink();">
-                                        <i class="ri-information-fill"></i>
-                                        <span>Application Instructions</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="ApplicationListLink();">
-                                        <i class="ri-input-cursor-move"></i>
-                                        <span>Application List</span>
-                                    </a>
-                                </li>*@
+                <a href="#" onclick="ApplicationIsntuctionLink();">
+                    <i class="ri-information-fill"></i>
+                    <span>Application Instructions</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="ApplicationListLink();">
+                    <i class="ri-input-cursor-move"></i>
+                    <span>Application List</span>
+                </a>
+            </li>*@
 
                         }
                         else
@@ -321,39 +321,43 @@
                                     <span>Academic Requisition</span>
                                 </a>
                             </li>
-                            //if (AllowGradAppl)
-                            //{
-                            <li>
-                                <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
-                                    <i class="fa fa-graduation-cap"></i>
-                                    <span>Graduation Request</span>
-                                </a>
-                            </li>
-                            <li> <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
-                                        <i class="ri-shopping-bag-fill"></i>
-                                        <span>Clearance Request</span> 
-                                     </a> 
-                                 </li>
-                            if (fullAccess && AllowEval)
+
+                            if (AllowGradAppl)
                             {
                                 <li>
-                                    <a href="#" onclick="LecturerEvaluationLink();">
-                                        <i class="ri-clapperboard-fill"></i>
-                                        <span>Course Evaluation</span>
+                                    <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
+                                        <i class="fa fa-graduation-cap"></i>
+                                        <span>Graduation Request</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
+                                        <i class="ri-shopping-bag-fill"></i>
+                                        <span>Clearance Request</span>
+                                    </a>
+                                </li>
+
+                            }
+                            if (AllowApplication)
+                            { 
+                                <li>
+                                    <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
+                                        <i class="ri-shopping-bag-fill"></i>
+                                        <span>Clearance Request</span>
                                     </a>
                                 </li>
                             }
                             @*<li>
-                                <a href="#" onclick="EnquiryLink();">
-                                    <i class="ri-question-answer-fill"></i>
-                                    <span>General Complaint</span>
-                                </a>
-                            </li>*@
+                <a href="#" onclick="EnquiryLink();">
+                    <i class="ri-question-answer-fill"></i>
+                    <span>General Complaint</span>
+                </a>
+            </li>*@
                             <li>
-                                <a href="#" onclick="StudentAuditLink();">
-                                    <i class="ri-pushpin-fill"></i>
-                                    <span>Student Audit</span>
-                                </a>
+                            <a href="#" onclick="StudentAuditLink();">
+                                <i class="ri-pushpin-fill"></i>
+                                <span>Student Audit</span>
+                            </a>
                             </li>
                             <li class="menu-title mt-2">Financials</li>
                             <li>
@@ -399,15 +403,24 @@
                                     </a>
                                 </li>
                                 @*<li>
-                                        <a href="#" onclick="ClubsSocietiesLink();">
-                                            <i class="ri-football-fill"></i>
-                                            <span>Clubs & Society</span>
-                                        </a>
-                                    </li>*@
+                    <a href="#" onclick="ClubsSocietiesLink();">
+                        <i class="ri-football-fill"></i>
+                        <span>Clubs & Society</span>
+                    </a>
+                </li>*@
                             }
                             if (fullAccess)
                             {
                                 <li class="menu-title mt-2">Examination</li>
+                                if (AllowEval)
+                                {
+                                    <li>
+                                        <a href="#" onclick="LecturerEvaluationLink();">
+                                            <i class="ri-clapperboard-fill"></i>
+                                            <span>Course Evaluation</span>
+                                        </a>
+                                    </li>
+                                }
                                 if (AllowExamCard)
                                 {
                                     <li>
@@ -417,13 +430,15 @@
                                         </a>
                                     </li>
                                 }
-                                <li>
-                                    <a href="#" onclick="ProvisionalResultsLink();">
-                                        <i class="ri-download-cloud-fill"></i>
-                                        <span>Transcipt</span>
-                                    </a>
-                                </li>
                             }
+
+                            <li>
+                                <a href="#" onclick="ProvisionalResultsLink();">
+                                    <i class="ri-download-cloud-fill"></i>
+                                    <span>Transcipt</span>
+                                </a>
+                            </li>
+
                         }
                         <li class="menu-title mt-2">Settings</li>
                         <li>

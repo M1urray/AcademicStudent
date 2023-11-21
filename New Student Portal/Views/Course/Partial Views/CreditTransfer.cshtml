@@ -13,7 +13,6 @@
         background-color: white;
     }
 </style>
-<div style="background-color:#a5a0a0;color:black">
     <br />
     <div class="row">
         <div class="col-md-6">
@@ -53,39 +52,30 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <input type="text" name="FromCollegeUniversity" />
-            </td>
-            @{
-                @
-    {
-        foreach (var item in Model.ListOfConcentration)
-        {
-            <td>
-
-                @Html.DropDownListFor(model => model.Code, Model.ListOfConcentration, "--select Option--", new { @class = "form-select", id = "ddlUnit" })
-            </td>
-        }
-    }
-            }
-
-            <td>
-                <input type="text" name="Code" />
-            </td>
-            <td>
-                <input type="text" name="Course" />
-            </td>
-            <td>
-                <input type="text" name="Grade" />
-            </td>
-            <td>
-                <input type="text" name="CreditHrs" />
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <input type="text" name="FromCollegeUniversity" />
+                </td>
+                @{
+                    <td>
+                        @Html.DropDownListFor(model => model.Code, Model.ListOfConcentration, "--select Option--", new { @class = "form-select", id = "ddlUnit" })
+                    </td>   
+                }
+                <td>
+                    <input type="text" name="Code" />
+                </td>
+                <td>
+                    <input type="text" name="Course" />
+                </td>
+                <td>
+                    <input type="text" name="Grade" />
+                </td>
+                <td>
+                    <input type="text" name="CreditHrs" />
+                </td>
+            </tr>
         </tbody>
     </table>
     <br />
-</div>
 </div>
 

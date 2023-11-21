@@ -29,6 +29,8 @@ namespace New_Student_Portal.NAVWS {
     [System.Web.Services.WebServiceBindingAttribute(Name="WebPortal_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal")]
     public partial class WebPortal : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback ValidateCourseRegistrationOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ValidateStartDateOperationCompleted;
         
         private System.Threading.SendOrPostCallback bookHostelOperationCompleted;
@@ -135,6 +137,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback StudentRetakenChargesCreateOperationCompleted;
         
+        private System.Threading.SendOrPostCallback StudentSelfPromotionWithResidenceOperationCompleted;
+        
         private System.Threading.SendOrPostCallback StudentSelfPromotionOperationCompleted;
         
         private System.Threading.SendOrPostCallback StudentsReportsOperationCompleted;
@@ -228,8 +232,6 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback ValidateBiometricsOperationCompleted;
         
         private System.Threading.SendOrPostCallback ValidateCourseReggistrationOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ValidateCourseRegistrationOperationCompleted;
         
         private System.Threading.SendOrPostCallback PostAttendanceListOperationCompleted;
         
@@ -1088,6 +1090,9 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        public event ValidateCourseRegistrationCompletedEventHandler ValidateCourseRegistrationCompleted;
+        
+        /// <remarks/>
         public event ValidateStartDateCompletedEventHandler ValidateStartDateCompleted;
         
         /// <remarks/>
@@ -1247,6 +1252,9 @@ namespace New_Student_Portal.NAVWS {
         public event StudentRetakenChargesCreateCompletedEventHandler StudentRetakenChargesCreateCompleted;
         
         /// <remarks/>
+        public event StudentSelfPromotionWithResidenceCompletedEventHandler StudentSelfPromotionWithResidenceCompleted;
+        
+        /// <remarks/>
         public event StudentSelfPromotionCompletedEventHandler StudentSelfPromotionCompleted;
         
         /// <remarks/>
@@ -1386,9 +1394,6 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event ValidateCourseReggistrationCompletedEventHandler ValidateCourseReggistrationCompleted;
-        
-        /// <remarks/>
-        public event ValidateCourseRegistrationCompletedEventHandler ValidateCourseRegistrationCompleted;
         
         /// <remarks/>
         public event PostAttendanceListCompletedEventHandler PostAttendanceListCompleted;
@@ -2616,6 +2621,38 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event DeleteHRAppraisalDutiesRespCompletedEventHandler DeleteHRAppraisalDutiesRespCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateCourseRegistration", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ValidateCourseRegistration_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ValidateCourseRegistration(string stdNo, string prog, string semester) {
+            this.Invoke("ValidateCourseRegistration", new object[] {
+                        stdNo,
+                        prog,
+                        semester});
+        }
+        
+        /// <remarks/>
+        public void ValidateCourseRegistrationAsync(string stdNo, string prog, string semester) {
+            this.ValidateCourseRegistrationAsync(stdNo, prog, semester, null);
+        }
+        
+        /// <remarks/>
+        public void ValidateCourseRegistrationAsync(string stdNo, string prog, string semester, object userState) {
+            if ((this.ValidateCourseRegistrationOperationCompleted == null)) {
+                this.ValidateCourseRegistrationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateCourseRegistrationOperationCompleted);
+            }
+            this.InvokeAsync("ValidateCourseRegistration", new object[] {
+                        stdNo,
+                        prog,
+                        semester}, this.ValidateCourseRegistrationOperationCompleted, userState);
+        }
+        
+        private void OnValidateCourseRegistrationOperationCompleted(object arg) {
+            if ((this.ValidateCourseRegistrationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ValidateCourseRegistrationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateStartDate", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ValidateStartDate_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -4495,6 +4532,43 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:StudentSelfPromotionWithResiden" +
+            "ce", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="StudentSelfPromotionWithResidence_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool StudentSelfPromotionWithResidence(string stdNo, string studProg, int regF, int residence) {
+            object[] results = this.Invoke("StudentSelfPromotionWithResidence", new object[] {
+                        stdNo,
+                        studProg,
+                        regF,
+                        residence});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void StudentSelfPromotionWithResidenceAsync(string stdNo, string studProg, int regF, int residence) {
+            this.StudentSelfPromotionWithResidenceAsync(stdNo, studProg, regF, residence, null);
+        }
+        
+        /// <remarks/>
+        public void StudentSelfPromotionWithResidenceAsync(string stdNo, string studProg, int regF, int residence, object userState) {
+            if ((this.StudentSelfPromotionWithResidenceOperationCompleted == null)) {
+                this.StudentSelfPromotionWithResidenceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnStudentSelfPromotionWithResidenceOperationCompleted);
+            }
+            this.InvokeAsync("StudentSelfPromotionWithResidence", new object[] {
+                        stdNo,
+                        studProg,
+                        regF,
+                        residence}, this.StudentSelfPromotionWithResidenceOperationCompleted, userState);
+        }
+        
+        private void OnStudentSelfPromotionWithResidenceOperationCompleted(object arg) {
+            if ((this.StudentSelfPromotionWithResidenceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.StudentSelfPromotionWithResidenceCompleted(this, new StudentSelfPromotionWithResidenceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:StudentSelfPromotion", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="StudentSelfPromotion_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool StudentSelfPromotion(string stdNo, string studProg, int regF) {
@@ -6187,38 +6261,6 @@ namespace New_Student_Portal.NAVWS {
             if ((this.ValidateCourseReggistrationCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ValidateCourseReggistrationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ValidateCourseRegistration", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ValidateCourseRegistration_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ValidateCourseRegistration(string stdNo, string prog, string semester) {
-            this.Invoke("ValidateCourseRegistration", new object[] {
-                        stdNo,
-                        prog,
-                        semester});
-        }
-        
-        /// <remarks/>
-        public void ValidateCourseRegistrationAsync(string stdNo, string prog, string semester) {
-            this.ValidateCourseRegistrationAsync(stdNo, prog, semester, null);
-        }
-        
-        /// <remarks/>
-        public void ValidateCourseRegistrationAsync(string stdNo, string prog, string semester, object userState) {
-            if ((this.ValidateCourseRegistrationOperationCompleted == null)) {
-                this.ValidateCourseRegistrationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateCourseRegistrationOperationCompleted);
-            }
-            this.InvokeAsync("ValidateCourseRegistration", new object[] {
-                        stdNo,
-                        prog,
-                        semester}, this.ValidateCourseRegistrationOperationCompleted, userState);
-        }
-        
-        private void OnValidateCourseRegistrationOperationCompleted(object arg) {
-            if ((this.ValidateCourseRegistrationCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ValidateCourseRegistrationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -21351,6 +21393,10 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void ValidateCourseRegistrationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void ValidateStartDateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -22091,6 +22137,32 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void StudentSelfPromotionWithResidenceCompletedEventHandler(object sender, StudentSelfPromotionWithResidenceCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class StudentSelfPromotionWithResidenceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal StudentSelfPromotionWithResidenceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void StudentSelfPromotionCompletedEventHandler(object sender, StudentSelfPromotionCompletedEventArgs e);
     
     /// <remarks/>
@@ -22672,10 +22744,6 @@ namespace New_Student_Portal.NAVWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void ValidateCourseReggistrationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void ValidateCourseRegistrationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]

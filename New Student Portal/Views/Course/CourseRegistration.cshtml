@@ -498,7 +498,7 @@
             Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
             return;
         }
-        else if ((UnitType == "") && (regType == "0" || regType == "2" || regType=="3")) {
+        else if ((UnitType == "") && regType == "0") {
             Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
             return;
         }
@@ -547,13 +547,18 @@
             }
         });
     }
-    var SubmitSelectedUnits = function (RegT,Stage) {
+    var SubmitSelectedUnits = function (RegT) {
         var UnitReg = new Array();
+        var regType = $("#RegType").children("option:selected").val();
         $("#tblProgUnit tbody tr").each(function () {
             var row = $(this);
             if (row.find('input[type="checkbox"]').is(':checked')) {
                 var Unit = {};
                 Unit.UnitCode = row.find("td").eq(1).html();
+                Unit.ClassCode = row.find("td").eq(2).html();
+                Unit.Day = row.find("td").eq(4).html();
+                Unit.Period = row.find("td").eq(5).html();
+                Unit.Campus = row.find("td").eq(6).html();
                 UnitReg.push(Unit);
             }
         });
@@ -566,7 +571,7 @@
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("SaveSelectedUnits", "Course")',
-                data: JSON.stringify({ UnitReg: UnitReg, RegT: RegT, Stage:Stage }),
+                data: JSON.stringify({ UnitReg: UnitReg, RegT: regType }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {

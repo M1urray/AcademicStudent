@@ -193,7 +193,7 @@
                             }
                         });
                     }
-                    if (proceed) {
+                    if (proceed && (@Model.RegT == "0" || @Model.RegT == "1")) {
                         $('tbody tr').has(':checkbox:checked').each(function () {
                             var row = $(this);
                             var varID2 = $(this).find("input[type=checkbox]").prop("id");

@@ -90,7 +90,7 @@ namespace New_Student_Portal.Models
                 string page = "";
                 if (RegT == "0" || RegT == "1")
                 {
-                    page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and (Registerfor eq 'Stage' or Registerfor eq 'Unit/Subject')&$format=json";
+                    page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No,Student_Residence&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
                 }
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -115,12 +115,12 @@ namespace New_Student_Portal.Models
             }
             return dtMenu;
         }
-               public static bool QualifyForSupplimentary(string RegNo, string Prog)
+        public static bool QualifyForSupplimentary(string RegNo, string Prog)
         {
             bool b = false;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Programme eq '" + Prog + "' and Register_for eq 'Unit/Subject' and Failed eq true and Supp_Taken eq false&$format=json";
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Programme eq '" + Prog + "' and Failed eq true and Supp_Taken eq false&$format=json";
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -695,7 +695,7 @@ namespace New_Student_Portal.Models
             bool[] allow = new bool[2];
             try
             {
-                string page = "SemesterList?$select=Allow_Exam_Card_Generation,Allow_Lecturer_Evaluation&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
+                string page = "SemesterList?$select=Allow_Exam_Card_Generation,Allow_Lecturer_Evaluation62672&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -708,7 +708,7 @@ namespace New_Student_Portal.Models
                     foreach (JObject config in details["value"])
                     {
                         allow[0] = (bool)config["Allow_Exam_Card_Generation"];
-                        allow[1] = (bool)config["Allow_Lecturer_Evaluation"];
+                        allow[1] = (bool)config["Allow_Lecturer_Evaluation62672"];
                     }
                 }
             }
