@@ -731,13 +731,13 @@
     <Content Include="Views\Common\Notification.cshtml" />
     <Content Include="Uploads\Jan 2022 semester plan.pdf" />
     <Content Include="Views\ViewDocuments\DocumentViewResults.cshtml" />
+    <Content Include="Views\Common\GetNotice.cshtml" />
+    <Content Include="Views\Common\GetImportantDepartments.cshtml" />
+    <Content Include="Views\Course\GetBonusCourse.cshtml" />
     <Content Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Common\GetNotice.cshtml" />
-    <Content Include="Views\Common\GetImportantDepartments.cshtml" />
-    <Content Include="Views\Course\GetBonusCourse.cshtml" />
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -747,10 +747,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://erp.dsl.ke:3031/MIBS/WS/MIBS/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://erp.dsl.ke:3031/MIBS/WS/MIBS/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

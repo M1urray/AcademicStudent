@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="New_Student_Portal_NAVWS_WebPortal" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://erp.dsl.ke:7333/MIBS/WS/MIBS/Codeunit/WebPortal</Value>
+      <Value Profile="(Default)">http://erp.dsl.ke:3031/MIBS/WS/MIBS/Codeunit/WebPortal</Value>
     </Setting>
   </Settings>
 </SettingsFile>
