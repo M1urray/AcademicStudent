@@ -134,12 +134,6 @@ namespace New_Student_Portal.Controllers
                         //return PartialView("~/Views/Financial/Payment Plan/PaymentPlanData.cshtml", PPlan.OrderBy(x => x.InstallNo));
                     }
                     return PartialView("~/Views/Financial/Payment Plan/PaymentPlanData.cshtml", PPlan.OrderBy(x => x.InstallNo));
-                    //else
-                    //{
-                    //    SemeterEndDate enddate = new SemeterEndDate();
-                    //    enddate.SemEndDate = semEndDate;
-                    //    return PartialView("~/Views/Financial/Payment Plan/PaymentPlanForm.cshtml", enddate);
-                    //}
                 }
             }
             else

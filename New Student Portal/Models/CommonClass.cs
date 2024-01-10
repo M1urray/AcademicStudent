@@ -455,7 +455,7 @@ namespace New_Student_Portal.Models
             bool changed = false;
             try
             {
-                Credentials.ObjNav.UpdateStudentPassword(User, password, true);
+                Credentials.ObjNav.UpdateStudentPassword(User, password);
                 changed = true;
             }
             catch (Exception ex)

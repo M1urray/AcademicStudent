@@ -81,31 +81,6 @@ namespace New_Student_Portal.Controllers
             return File(fullPath, "application/octet-stream", fileName);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult CourseDocumentAttachmentview(int tblID, string No, int ID, string fileName, string ext)
-        {
-            try
-            {
-                bool success = false, view = false;
-                string msg = "";
-                string Attachment = Credentials.GetCourseDocumentAttachmet(tblID, No);
-
-                string fName = fileName + "." + ext;
-                Byte[] bytes = Convert.FromBase64String(Attachment);
-                string path = Server.MapPath("~/Uploads/" + fName);
-                Credentials.DownloadAttachment(path, bytes);
-                msg = fName;
-                view = false;
-                success = true;
-
-                return Json(new { message = msg, success, view }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false, view = false }, JsonRequestBehavior.AllowGet);
-                ;
-            }
-        }
 
         public ActionResult GetNotice()
         {

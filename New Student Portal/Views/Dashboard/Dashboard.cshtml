@@ -92,16 +92,23 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Name)</span>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label class="col-md-4"> ID No</label>
-                            <div class="col-md-8">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ID_No)</span>
-                            </div>
-                        </div>
+                        @* <div class="row mb-3"> *@
+                        @*     <label class="col-md-4"> ID No</label> *@
+                        @*     <div class="col-md-8"> *@
+                        @*         <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ID_No)</span> *@
+                        @*     </div> *@
+                        @* </div> *@
+                        
                         <div class="row mb-3">
                             <label class="col-md-4">Gender</label>
                             <div class="col-md-8">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Gender)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Leadership Position</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Position)</span>
                             </div>
                         </div>
                     </div> <!-- end col -->
@@ -124,12 +131,7 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Date_Of_Birth)</span>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label class="col-md-4"> Leadership Position</label>
-                            <div class="col-md-8">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Position)</span>
-                            </div>
-                        </div>
+                        
                         <div class="row mb-3">
                             <label class="col-md-4"> Mode of Study</label>
                             <div class="col-md-8">
@@ -142,6 +144,7 @@
         </div>
     </div> <!-- end card-body -->
 </div> <!-- end card-->
+<hr/>
 <div class="row">
     <div class="col-md-3 col-md-6">
         <div class="card">
@@ -150,12 +153,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-12">
-                        <div class="row mb-3">
-                            <label class="col-md-5">Course Guide</label>
-                            <div class="col-md-7">
-                                <a href="#" class="btn btn-sm btn-success" onclick="GetDocumentAttachments('@Model.Prog');">Get Course Guide</a>
-                            </div>
-                        </div>
+                        
                         <div class="row mb-3">
                             <label class="col-md-5">Programme</label>
                             <div class="col-md-7">
@@ -222,92 +220,7 @@
         </div> <!-- end card-->
     </div>
 </div>
-@if (Model.ClassAttendance != null && Model.ClassAttendance.Count > 0)
-{
-    <hr />
-    <div class="row">
-        <div class="col-md-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title mb-3">Class Attendance</h4>
-                    <hr />
-                    <div class="row">
-                        @foreach (var item in Model.ClassAttendance)
-                        {
-                            <div class="col-12">
-                                <b>@Html.DisplayFor(model => item.Unit) - @Html.DisplayFor(model => item.Description)</b>
-                                <div class="progress mb-0">
-                                    <div class="progress-bar" role="progressbar" style="width: @(item.PercAtte + "%");" aria-valuenow="@item.PercAtte" aria-valuemin="0" aria-valuemax="100">@(item.PercAtte)%</div>
-                                </div>
-                            </div> <!-- end col -->
-                        }
-                    </div> <!-- end row -->
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div>
-    </div>
-}
 <hr />
-<div class="row">
-    <div class="col-md-12 col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title mb-3">Important Documents</h4>
-                <hr />
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-bordered dt-responsive nowrap">
-                            <thead style="color:white;background-color:black;">
-                                <tr>
-                                    <th width="5%">#</th>
-                                    <th width="45%">File Name</th>
-                                    <th width="40%">Remarks</th>
-                                    <th width="10%">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    if (Model.ListInternalMemos.ListOfIntMemos != null && Model.ListInternalMemos.ListOfIntMemos.Count > 0)
-                                    {
-                                        if (Model.ListInternalMemos.hasFiles)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.ListInternalMemos.ListOfIntMemos)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>@item.FileName</td>
-                                                    <td>@item.Remarks</td>
-                                                    <td> <button id="btnview" class="btn btn-sm btn-danger btnPadding" onclick="ViewAttachment('@item.TabelID','@item.No','@item.ID','@item.FileName','@item.FileExt');">View Document</button></td>
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            foreach (var item in Model.ListInternalMemos.ListOfIntMemos)
-                                            {
-                                                <tr>
-                                                    <td colspan="4">@item.FileName</td>
-                                                </tr>
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="4" style="color:Red">No Internal Memos found</td>
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div>
-</div>
 <!--/////////////////notification/////////////////////-->
 <div id="myModalNotif" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -326,7 +239,6 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        LoadNotifications();
     });
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
@@ -354,119 +266,9 @@
             }
         });
     }
-    var LoadNotifications = function () {
-         if (parseInt(`@Model.NotfCount`) > 0) {
-             ShowProgress();
-             $.ajax({
-                async: false,
-                type: "GET",
-                dataType: 'HTML',
-                contentType: false,
-                processData: false,
-                url: '@Url.Action("NotificationMessages", "Common")',
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBodyNot").html(data);
-                    $("#myModalNotif").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
     var DownLoadFile = function (fileName) {
         window.location = '@Url.Action("Download", "Dashboard")?fileName=' + fileName;
         Swal.fire('Success', 'Document Downloaded successfully.', 'success');
-    };
-    var ViewAttachment = function (tbl, No, Id, fName, ext) {
-        $.ajaxSetup({ cache: false });
-        ShowProgress();
-        $.ajax({
-            cache: false,
-            url: '@Url.Action("DocumentAttachmentview", "Common")',
-            type: "POST",
-            datatype: "json",
-            cache: false,
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            data: JSON.stringify({ tblID: tbl, No: No, ID: Id, fileName: fName, ext: ext }),
-            success: function (data) {
-                if (data.success == true) {
-                    if (data.view == true) {
-                        var viewer = $("#modalAttachmentBody");
-                        if (ext == "pdf") {
-                            PDFObject.embed("data:application/" + ext + ";base64," + data.message + "", viewer);
-                        }
-                        if (ext == "png" || ext == "jpg") {
-                            PDFObject.embed("data:image/" + ext + ";base64," + data.message + "", viewer);
-                        }
-                        $("#myModalAttachment").modal("show");
-                        HideProgress();
-                    }
-                    else {
-                        window.location = '@Url.Action("AttachmentDownload", "Common")?fileName=' + data.message;
-                        Swal.fire('Success', 'Document Downloaded successfully', 'success');
-                        HideProgress();
-                    }
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    };
-
-    var GetDocumentAttachments = function (DocNo) {
-        $.ajaxSetup({ cache: false });
-        ShowProgress();
-        var fName = "Course_Guide";
-        var ext = "pdf";
-        var Id = "1";
-        $.ajax({
-            cache: false,
-            url: '@Url.Action("CourseDocumentAttachmentview", "Common")',
-            type: "POST",
-            datatype: "json",
-            cache: false,
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            data: JSON.stringify({ tblID: 70134769, No: DocNo, ID: Id, fileName: fName, ext: ext }),
-            success: function (data) {
-                if (data.success == true) {
-                    if (data.view == true) {
-                        var viewer = $("#modalAttachmentBody");
-                        if (ext == "pdf") {
-                            PDFObject.embed("data:application/" + ext + ";base64," + data.message + "", viewer);
-                        }
-                        if (ext == "png" || ext == "jpg") {
-                            PDFObject.embed("data:image/" + ext + ";base64," + data.message + "", viewer);
-                        }
-                        $("#myModalAttachment").modal("show");
-                        HideProgress();
-                    }
-                    else {
-                        window.location = '@Url.Action("AttachmentDownload", "Common")?fileName=' + data.message;
-                        Swal.fire('Success', 'Document Downloaded successfully', 'success');
-                        HideProgress();
-                    }
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
     };
 </script>
 

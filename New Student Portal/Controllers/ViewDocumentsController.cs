@@ -112,7 +112,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
 
                     string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.GenerateSemesterTranscript(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf", Semester, Programme);
+                    // Credentials.ObjNav.GenerateSemesterTranscript(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf", Semester, Programme);
                     filename = "PROVISIONAL RESULTS-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -195,7 +195,7 @@ namespace New_Student_Portal.Controllers
                     string SettlementType = Session["SettlementType"].ToString();
                     string filename = StudentNo.Replace("/", "");
 
-                    Credentials.ObjNav.GenerateFeeStructureReport(Prog, SettlementType,StudentNo, "FEESTRUCTURE-" + filename + ".pdf");
+                    // Credentials.ObjNav.GenerateFeeStructureReport(Prog, SettlementType,StudentNo, "FEESTRUCTURE-" + filename + ".pdf");
                     filename = "FEESTRUCTURE-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);

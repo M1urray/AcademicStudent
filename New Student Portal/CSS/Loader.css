@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #f5e2bc;
+    /* background-color: #f5e2bc; */
     z-index: 1000 !important;
     opacity: 0.8;
     filter: alpha(opacity=80);

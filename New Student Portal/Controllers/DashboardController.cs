@@ -75,14 +75,6 @@ namespace Student.Controllers
                         Details.Campus = (string)config["Global_Dimension_1_Code"] ;
                         Details.Stage = (string)config["Current_Stage"];
                         Details.Position = (string)config["Leadership_Position"];
-                        if ((decimal)config["Completed_Units"] > 0)
-                        {
-                            Details.GPA = (Math.Round(((decimal)config["Programme_GPA_Points"] / (decimal)config["Completed_Units"]), 2)).ToString();
-                        }
-                        else
-                        {
-                            Details.GPA = "0";
-                        }
                         Details.ProfilePic = CommonClass.ProfilePicture(RegNo);
                         Details.Prog = (string)config["Current_Programme"];
                         Details.ProgName = (string)config["Programme_Name"];

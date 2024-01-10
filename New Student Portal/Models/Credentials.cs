@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Configuration;
 using System.Net;
 using New_Student_Portal.NAVWS;
@@ -70,18 +67,18 @@ namespace New_Student_Portal.Models
             File.WriteAllBytes(path, bytes);
         }
 
-        public static string GetCourseDocumentAttachmet(int TblID, string DocNo)
-        {
-            string PicString = "";
-            try
-            {
-                PicString = ObjNav.GetDocumentAttachmentCourse(TblID, DocNo);
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return PicString;
-        }
+        // public static string GetCourseDocumentAttachmet(int TblID, string DocNo)
+        // {
+        //     string PicString = "";
+        //     try
+        //     {
+        //         PicString = ObjNav.GetDocumentAttachmentCourse(TblID, DocNo);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         ex.Data.Clear();
+        //     }
+        //     return PicString;
+        // }
     }
 }
