@@ -77,7 +77,226 @@
             }
         });
     }
+    var SubmitEvaluationForm = function () {     
+
+        if ($('input[name=Ans21]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 4', 'warning');
+            return;
+        }
+        if ($('input[name=Ans22]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 5', 'warning');
+            return;
+        }
+        if ($('input[name=Ans23]').is(':checked')) {
+            $("#TB2 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB2 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 6', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans31]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 7', 'warning');
+            return;
+        }
+        if ($('input[name=Ans32]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 8', 'warning');
+            return;
+        }
+        if ($('input[name=Ans33]').is(':checked')) {
+            $("#TB3 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB3 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 9', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans41]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 10', 'warning');
+            return;
+        }
+        if ($('input[name=Ans42]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 11', 'warning');
+            return;
+        }
+        if ($('input[name=Ans43]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 12', 'warning');
+            return;
+        }
+        if ($('input[name=Ans44]').is(':checked')) {
+            $("#TB4 > tbody > tr:nth-child(4)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB4 > tbody > tr:nth-child(4)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 13', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans51]').is(':checked')) {
+            $("#TB5 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB5 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 14', 'warning');
+            return;
+        }
+        if ($('input[name=Ans52]').is(':checked')) {
+            $("#TB5 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB5 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 15', 'warning');
+            return;
+        }
+
+        if ($('input[name=Ans61]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(1)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(1)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 16', 'warning');
+            return;
+        }
+        if ($('input[name=Ans62]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(2)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(2)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 17', 'warning');
+            return;
+        }
+        if ($('input[name=Ans63]').is(':checked')) {
+            $("#TB6 > tbody > tr:nth-child(3)").removeClass("rowFocus");
+        }
+        else {
+            $("#TB6 > tbody > tr:nth-child(3)").addClass("rowFocus");
+            Swal.fire('Warning', 'Answer question 18', 'warning');
+            return;
+        }
+        var comment = $("#txtComments").val().replace(/(\r\n|\n|\r)/gm, " ");
+        if (comment == "") {
+            Swal.fire('Warning', 'Give general comments', 'warning');
+            return;
+        }
+
+        var LecName = $("#lblLecturerName").text();
+        var LecNo = $("#lblLectNo").text();
+        var LecUnit = $("#lblUnitCode").text();
+        var LecUnitName = $("#lblUnitName").text();
+
+        var Lecturer = {};
+        Lecturer.LecName = LecName;
+        Lecturer.LecNo = LecNo;
+        Lecturer.Unit = LecUnit;
+        Lecturer.UnitName = LecUnitName;
+        Lecturer.Comments = comment;
+
+        var LecEval = new Array();
+        $("#TB1 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 1;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB2 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 2;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans2" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB3 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 3;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans3" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB4 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 4;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans4" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB5 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 5;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans5" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        $("#TB6 tbody tr").each(function (index) {
+            var row = $(this);
+            var EvalQuiz = {};
+            EvalQuiz.QuizCategory = 6;
+            EvalQuiz.Quiz = row.find("td:eq(0)").text().trim();
+            EvalQuiz.Score = $("input[name=Ans6" + (index + 1) + "]:checked").val();
+            LecEval.push(EvalQuiz);
+        });
+        ShowProgress();
+        $.ajax({
+            type: "POST",
+            url: "/Course/SaveEvalueatedUnit",
+            data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.success == true) {
+                    HideProgress();
+                    LoadCurrentRegisteredUnits();
+                    $("#myModalLecturerEvaluationForm").modal("hide");
+                    Swal.fire('Success', data.message, 'success');
+                }
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Error', data.message, 'error');
+            }
+        });
+    };
     var CompleteEvaluation = function (Unit, UnitName, StaffNo) {
+        debugger
         var sug1 = $("#txtContrb").val();
         var sug2 = $("#txtImprivents").val();
         var sug3 = $("#txtOtherComment").val();

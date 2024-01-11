@@ -57,7 +57,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                   
                     @{
                         if (Model.ListOfCoreUnitsSubjects != null && Model.ListOfCoreUnitsSubjects.Count() > 0)
                         {
@@ -117,7 +117,7 @@
     <hr />
     <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits('@ClassCodeNeeded');" />
 </div>
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(document).ready(function () {
         var varID = 0;
         $(':checkbox').on('change', function () {
@@ -274,5 +274,5 @@
             }
         });
     });
-</script>
+</script>*@
 

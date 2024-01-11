@@ -1,0 +1,158 @@
+﻿@model New_Student_Portal.ViewModel.StudentDetailView
+@using New_Student_Portal.Models;
+@{
+    ViewBag.Title = "Payment of Fees";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+
+    string StudentNo = "", Balance = "0.00";
+    if (Model.Balance != 0)
+    {
+        Balance = Convert.ToDecimal(Model.Balance).ToString("#,##0.00");
+    }
+
+    if (Session["username"] == null)
+    {
+        Response.Redirect(Url.Action("Login", "Login"));
+    }
+    else
+    {
+        StudentNo = Session["username"].ToString();
+    }
+}
+<style>
+    thead {
+        background-color: black;
+        color: white;
+    }
+
+    .card, .card-title {
+        color: white
+    }
+
+    .card-header, .card-title {
+        background-color: #192f59;
+    }
+
+    .card-title {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+</style>
+<div class="card">
+    <h4 class="card-title">Payment Information</h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-12 col-lg-12">
+                <div class="row modal-dialog-scrollable">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="row mb-3">
+                            <label class="col-md-4">Reg. No</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.No)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Name</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Name)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> ID No</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ID_No)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4">Gender</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Gender)</span>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                    <div class="col-sm-6 col-md-6">
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Address</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Address)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4">Email</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.E_Mail)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Date Of Birth</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Date_Of_Birth)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4"> Campus</label>
+                            <div class="col-md-8">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Campus)</span>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                    <hr />
+                    <div class="row">
+                        <div class="row mb-3">
+                            <label class="col-md-3"> Current Balance</label>
+                            <div class="col-md-3">
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Balance)</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-md-3"> Amount to Pay</label>
+                            <div class="col-md-3">
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <form id="payment_form" action="payment_confirmation.aspx" method="post">
+                        <input type="hidden" name="access_key" value="<REPLACE WITH ACCESS KEY>">
+                        <input type="hidden" name="profile_id" value="<REPLACE WITH PROFILE ID>">
+                        <input type="hidden" name="transaction_uuid" value="<% Response.Write(getUUID()); %>">
+                        <input type="hidden" name="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency">
+                        <input type="hidden" name="unsigned_field_names">
+                        <input type="hidden" name="signed_date_time" value="<% Response.Write(getUTCDateTime()); %>">
+                        <input type="hidden" name="locale" value="en">
+                        <input type="hidden" name="transaction_type" value="VISA">
+                        <input type="hidden" name="reference_number" value="@StudentNo">
+                        <input type="hidden" name="currency" value="KES">
+                        <div class="col-md-3">
+                            <input type="text" name="amount" class="form-control">
+                        </div>
+
+                        <input type="submit" id="submit" name="submit" value="Pay via VISA" />
+                        <script type="text/javascript" src="Scripts/payment_form.js"></script>
+                    </form>
+                        <hr />
+                        @*<div class="col-sm-4 col-md-4">
+                            <hr />
+                            <div class="row mb-3">
+                                <label class="col-md-2"></label>
+                                <div class="col-md-8">
+                                    <button class="btn btn-sm btn-success form-control" onclick="AcademicCalender('@Model.Semester');">Get Academic Calender</button>
+                                </div>
+                                <label class="col-md-2"></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <hr />
+                            <div class="row mb-3">
+                                <label class="col-md-2"></label>
+                                <div class="col-md-8">
+                                    <button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>
+                                </div>
+                                <label class="col-md-2"></label>
+                            </div>
+                        </div>*@
+                </div> <!-- end row -->
+            </div>
+        </div>
+    </div> <!-- end card-body -->
+</div> <!-- end card-->

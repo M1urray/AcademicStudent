@@ -33,7 +33,7 @@ namespace Student.Controllers
                     string AttempUnits = "0";
                     if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
 
                     string sem = Session["CurrentSem"].ToString();
@@ -73,22 +73,20 @@ namespace Student.Controllers
                             Details.Credit_Amount = (decimal)config["Credit_Amount"];
                             Details.RegUnits = RegUnits;
                             Details.AttemptedUnits = (string)config["Completed_Units"];
-                            //if ((decimal)config["Completed_Units"] > 0)
-                            //{
-                            //    Details.GPA = (Math.Round(((decimal)config["Programme_GPA_Points"] / ((decimal)config["Completed_Units"] + (decimal)config["Exempted_Units"])), 2)).ToString();
-                            //}
-                            //else
-                            //{
-                            //    Details.GPA = "0";
-                            //}
-                            Details.GPA = Math.Round((decimal)config["Cumm_GPA"], 2).ToString();
+                            if ((decimal)config["Completed_Units"] > 0)
+                            {
+                                Details.GPA = (Math.Round(((decimal)config["Programme_GPA_Points"] / (decimal)config["Completed_Units"]), 2)).ToString();
+                            }
+                            else
+                            {
+                                Details.GPA = "0";
+                            }
 
-                            //GroupLeader glD = GetBSGroup(RegNo, sem);
-                            //Details.IsBsLeader = glD.IsBSLeader;
-                            //Details.BSGroup = glD.BsGroup;
-
-                            //Details.IsDCFLeader = glD.IsBSLeader;
-                            //Details.DCFGroup = glD.DCFGroup;
+                            GroupLeader glD = GetBSGroup(RegNo, sem);
+                            Details.IsBsLeader = glD.IsBSLeader;
+                            Details.BSGroup = glD.BsGroup;
+                            Details.IsDCFLeader = glD.IsBSLeader;
+                            Details.DCFGroup = glD.DCFGroup;
                             Details.ProfilePic = CommonClass.ProfilePicture(RegNo);
                             Details.ProgName = (string)config["Programme_Name"];
                             if ((string)config["Territory_Code"] == "")
@@ -99,7 +97,7 @@ namespace Student.Controllers
                             {
                                 Details.Cat_Token = (string)config["Territory_Code"];
                             }
-                            Details.Qualify_For_Catering = (bool)config["Tax_Liable"];
+                            Details.Qualify_For_Catering = false;//onfig["Tax_Liable"];
                             if ((string)config["Major_Description"] != "")
                             {
                                 Details.OtherProg = (string)config["Major_Description"];
@@ -125,13 +123,11 @@ namespace Student.Controllers
                                 Details.Minor = "";
                             }
                             Details.Semester = sem;
-                            Details.DisplinaryCases = GetDisplinaryCase();
+                            Details.DisplinaryCases = null; ;// GetDisplinaryCase();
                             Details.AcademicStatus = CommonClass.StudentStatusDescription((string)config["Academic_Status"]);
-                            Details.NotfCount = CommonClass.GetDocumentCount();
-                            Details.ListInternalMemos = ImportantDocuments(RegNo);
-                            Details.BstudyDetails = GetBSGroupDetails(RegNo, sem);
-                            Details.AcademicStatus = CommonClass.StudentStatusDescription((string)config["Academic_Status"]);
-                            Details.LeadershipOption = CommonClass.LeadershipOption();
+                            Details.NotfCount = 0;// CommonClass.GetDocumentCount();
+                            Details.ListInternalMemos = null;// ImportantDocuments(RegNo);
+                            Details.BstudyDetails = null;// GetBSGroupDetails(RegNo, sem);
                         }
                     }
                     return View(Details);
@@ -177,132 +173,143 @@ namespace Student.Controllers
                                     foreach (JObject config1 in details1["value"])
                                     {
                                         DocumentAttachment docAttList = new DocumentAttachment();
-                                        if ((string)config1["Department"] != "" && (string)config1["School"] != "" && (string)config1["Campus"] != "")
-                                        {
-                                            if ((string)config1["Department"] == s[1] && (string)config1["School"] == s[2] && (string)config1["Campus"] == s[0])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else if ((string)config1["Department"] != "" && (string)config1["School"] != "" && (string)config1["Campus"] == "")
-                                        {
-                                            if ((string)config1["Department"] == s[1] && (string)config1["School"] == s[2])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
+                                        //if ((string)config1["Department"] != "" && (string)config1["School"] != "" && (string)config1["Campus"] != "")
+                                        //{
+                                        //    if ((string)config1["Department"] == s[1] && (string)config1["School"] == s[2] && (string)config1["Campus"] == s[0])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else if ((string)config1["Department"] != "" && (string)config1["School"] != "" && (string)config1["Campus"] == "")
+                                        //{
+                                        //    if ((string)config1["Department"] == s[1] && (string)config1["School"] == s[2])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
 
-                                        }
-                                        else if ((string)config1["Department"] != "" && (string)config1["School"] == "" && (string)config1["Campus"] != "")
-                                        {
-                                            if ((string)config1["Department"] == s[1] && (string)config1["Campus"] == s[0])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else if ((string)config1["Department"] == "" && (string)config1["School"] != "" && (string)config1["Campus"] != "")
-                                        {
-                                            if ((string)config1["School"] == s[2] && (string)config1["Campus"] == s[0])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else if ((string)config1["Department"] != "" && (string)config1["School"] == "" && (string)config1["Campus"] == "")
-                                        {
-                                            if ((string)config1["Department"] == s[1])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else if ((string)config1["Department"] == "" && (string)config1["School"] != "" && (string)config1["Campus"] == "")
-                                        {
-                                            if ((string)config1["School"] == s[2])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else if ((string)config1["Department"] == "" && (string)config1["School"] == "" && (string)config1["Campus"] != "")
-                                        {
-                                            if ((string)config1["Campus"] == s[0])
-                                            {
-                                                docAttList.TabelID = (int)config1["Table_ID"];
-                                                docAttList.No = (string)config1["No"];
-                                                docAttList.FileName = (string)config1["File_Name"];
-                                                docAttList.Remarks = (string)config1["Document_Description"];
-                                                docAttList.FileExt = (string)config1["File_Extension"];
-                                                docAttList.ID = (int)config1["ID"];
-                                                docAttList.LineNo = (string)config1["Line_No"];
-                                                docAttList.DocType = (string)config1["Document_Type"];
-                                                docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                                DocAttachment.Add(docAttList);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            docAttList.TabelID = (int)config1["Table_ID"];
-                                            docAttList.No = (string)config1["No"];
-                                            docAttList.FileName = (string)config1["File_Name"];
-                                            docAttList.Remarks = (string)config1["Document_Description"];
-                                            docAttList.FileExt = (string)config1["File_Extension"];
-                                            docAttList.ID = (int)config1["ID"];
-                                            docAttList.LineNo = (string)config1["Line_No"];
-                                            docAttList.DocType = (string)config1["Document_Type"];
-                                            docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
-                                            DocAttachment.Add(docAttList);
-                                        }
+                                        //}
+                                        //else if ((string)config1["Department"] != "" && (string)config1["School"] == "" && (string)config1["Campus"] != "")
+                                        //{
+                                        //    if ((string)config1["Department"] == s[1] && (string)config1["Campus"] == s[0])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else if ((string)config1["Department"] == "" && (string)config1["School"] != "" && (string)config1["Campus"] != "")
+                                        //{
+                                        //    if ((string)config1["School"] == s[2] && (string)config1["Campus"] == s[0])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else if ((string)config1["Department"] != "" && (string)config1["School"] == "" && (string)config1["Campus"] == "")
+                                        //{
+                                        //    if ((string)config1["Department"] == s[1])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else if ((string)config1["Department"] == "" && (string)config1["School"] != "" && (string)config1["Campus"] == "")
+                                        //{
+                                        //    if ((string)config1["School"] == s[2])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else if ((string)config1["Department"] == "" && (string)config1["School"] == "" && (string)config1["Campus"] != "")
+                                        //{
+                                        //    if ((string)config1["Campus"] == s[0])
+                                        //    {
+                                        //        docAttList.TabelID = (int)config1["Table_ID"];
+                                        //        docAttList.No = (string)config1["No"];
+                                        //        docAttList.FileName = (string)config1["File_Name"];
+                                        //        docAttList.Remarks = (string)config1["Document_Description"];
+                                        //        docAttList.FileExt = (string)config1["File_Extension"];
+                                        //        docAttList.ID = (int)config1["ID"];
+                                        //        docAttList.LineNo = (string)config1["Line_No"];
+                                        //        docAttList.DocType = (string)config1["Document_Type"];
+                                        //        docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //        DocAttachment.Add(docAttList);
+                                        //    }
+                                        //}
+                                        //else
+                                        //{
+                                        //    docAttList.TabelID = (int)config1["Table_ID"];
+                                        //    docAttList.No = (string)config1["No"];
+                                        //    docAttList.FileName = (string)config1["File_Name"];
+                                        //    docAttList.Remarks = (string)config1["Document_Description"];
+                                        //    docAttList.FileExt = (string)config1["File_Extension"];
+                                        //    docAttList.ID = (int)config1["ID"];
+                                        //    docAttList.LineNo = (string)config1["Line_No"];
+                                        //    docAttList.DocType = (string)config1["Document_Type"];
+                                        //    docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        //    DocAttachment.Add(docAttList);
+                                        //}
+                                        docAttList.TabelID = (int)config1["Table_ID"];
+                                        docAttList.No = (string)config1["No"];
+                                        docAttList.FileName = (string)config1["File_Name"];
+                                        docAttList.Remarks = (string)config1["Document_Description"];
+                                        docAttList.FileExt = (string)config1["File_Extension"];
+                                        docAttList.ID = (int)config1["ID"];
+                                        docAttList.LineNo = (string)config1["Line_No"];
+                                        docAttList.DocType = (string)config1["Document_Type"];
+                                        //docAttList.Date = ((DateTime)config1["Attached_Date"]).ToString("dd/MM/yyyy");
+                                        docAttList.Date = DateTime.Now.ToString("dd/MM/yyyy");
+                                        DocAttachment.Add(docAttList);
                                     }
                                 }
                             }
@@ -336,7 +343,7 @@ namespace Student.Controllers
                 string RegNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
                 if (Session["StudentDetails"] == null || Session["CurrentSem"].ToString() == "")
                 {
@@ -439,7 +446,7 @@ namespace Student.Controllers
                     string RegNo = Session["Username"].ToString();
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -484,123 +491,62 @@ namespace Student.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
-        public ActionResult GetBsDetailForm()
+        protected GroupLeader GetBSGroup(string StdNo, string Sem)
         {
-            ChaplainGroupDetails LeaderD = new ChaplainGroupDetails();
+            GroupLeader LeaderD = new GroupLeader();
             try
             {
-                string StdNo = Session["Username"].ToString();
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
-                }
-                string sem = Session["CurrentSem"].ToString();
-
                 LeaderD.IsBSLeader = false;
-                LeaderD.RequestToBeLeader = false;
                 LeaderD.BsGroup = "";
 
                 LeaderD.IsDCFLeader = false;
                 LeaderD.DCFGroup = "";
 
-                bool RequestedLeadership = CommonClass.RequestedTobeABsLeader(StdNo, sem);
-                if (RequestedLeadership)
+                #region BS Group
+                string page = "CourseReg?$select=Bible_Study_Group&$filter=StudentNo eq '" + StdNo + "' and Bible_Study_Group ne '' and Semester eq '" + Sem + "'&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    LeaderD.RequestToBeLeader = true;
-                    LeaderD.BsLeaderRequestStatus = "Open";
-                }
-                else
-                {
-                    #region BS Group
-                    //string page = "CourseReg?$select=Bible_Study_Group&$filter=StudentNo eq '" + StdNo + "' and Bible_Study_Group ne '' and Semester eq '" + sem + "'&$format=json";
-                    string page = "BsGroupMembers?$select=Group_Name&$filter=Student_No_ eq '" + StdNo + "' and Semester eq '" + sem + "'&$format=json";
-                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
                     {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
+                        foreach (JObject config in details["value"])
                         {
-                            foreach (JObject config in details["value"])
-                            {
-                                LeaderD.BsGroup = (string)config["Group_Name"];
-                                LeaderD.BsGroupName = CommonClass.GetBibleDescription((string)config["Group_Name"]);
-                            }
+                            LeaderD.IsBSLeader = true;
+                            LeaderD.BsGroup = (string)config["Bible_Study_Group"];
                         }
                     }
-                    #endregion
-                    #region BS Leader
-                    string pageL = "BsLeader?$filter=No eq '" + StdNo + "' and Semester eq '" + sem + "'&$format=json";
-                    HttpWebResponse httpResponseL = Credentials.GetOdataData(pageL);
-                    using (var streamReader = new StreamReader(httpResponseL.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
-                        {
-                            foreach (JObject config in details["value"])
-                            {                                
-                                LeaderD.RequestToBeLeader = true;
-                                LeaderD.BsLeaderRequestStatus = (string)config["Status"];
-                                if ((string)config["Status"] == "Approved")
-                                {
-                                    LeaderD.IsBSLeader = true;
-                                    LeaderD.BsLeaderRequestApproved = true;
-                                }
-                                else
-                                {
-                                    LeaderD.BsLeaderRequestApproved = false;
-                                }
-                            }
-                        }
-                    }
-                    #endregion
                 }
-                return View("~/Views/Dashboard/Partial Views/BsDiv.cshtml", LeaderD);
+                #endregion
+                #region DCF
+                //string pageDCF = "CourseReg?$select=Bible_Study_Group&$filter=StudentNo eq '" + StdNo + "' and Bible_Study_Group ne '' and Semester eq '" + Sem + "'&$format=json";
+                //HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                //{
+                //    var result = streamReader.ReadToEnd();
+
+                //    var details = JObject.Parse(result);
+
+                //    if (details["value"].Count() > 0)
+                //    {
+                //        foreach (JObject config in details["value"])
+                //        {
+                //            LeaderD.IsBSLeader = true;
+                //            LeaderD.BsGroup = (string)config["Bible_Study_Group"];
+                //        }
+                //    }
+                //}
+                #endregion
             }
             catch (Exception ex)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                ex.Data.Clear();
             }
+            return LeaderD;
         }
-        //protected GroupLeader GetBSGroup(string StdNo, string Sem)
-        //{
-        //    GroupLeader LeaderD = new GroupLeader();
-        //    try
-        //    {
-
-        //        #region DCF
-        //        //string pageDCF = "CourseReg?$select=Bible_Study_Group&$filter=StudentNo eq '" + StdNo + "' and Bible_Study_Group ne '' and Semester eq '" + Sem + "'&$format=json";
-        //        //HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-        //        //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        //        //{
-        //        //    var result = streamReader.ReadToEnd();
-
-        //        //    var details = JObject.Parse(result);
-
-        //        //    if (details["value"].Count() > 0)
-        //        //    {
-        //        //        foreach (JObject config in details["value"])
-        //        //        {
-        //        //            LeaderD.IsBSLeader = true;
-        //        //            LeaderD.BsGroup = (string)config["Bible_Study_Group"];
-        //        //        }
-        //        //    }
-        //        //}
-        //        #endregion
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ex.Data.Clear();
-        //    }
-        //    return LeaderD;
-        //}
         protected Bs GetBSGroupDetails(string StdNo, string Sem)
         {
             Bs BsD = new Bs();
@@ -645,7 +591,7 @@ namespace Student.Controllers
                 else
                 {
                     string RegNo = Session["Username"].ToString();
-                    string page = "BSGroupList?$filter=Description ne ''&$format=json";
+                    string page = "BSGroupList?$format=json";
 
                     List<DropdownList> ddlList = new List<DropdownList>();
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
@@ -683,56 +629,6 @@ namespace Student.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
-        public ActionResult JoinBSGroupAgainstGroup(string BSG)
-        {
-            try
-            {
-                BSGroupList BSGList = new BSGroupList();
-                if (Session["Username"] == null)
-                {
-                    RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
-                    string page = "BSGroupList?$filter=Description ne ''&$format=json";
-
-                    List<DropdownList> ddlList = new List<DropdownList>();
-                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            DropdownList d = new DropdownList();
-                            d.Value = (string)config["Code"];
-                            d.Text = (string)config["Description"];
-                            ddlList.Add(d);
-                        }
-                    }
-                    BSGList = new BSGroupList
-                    {
-                        Code = "",
-                        ListOfBSGroup = ddlList.Select(x =>
-                                          new SelectListItem()
-                                          {
-                                              Text = x.Text,
-                                              Value = x.Value
-                                          }).ToList()
-                    };
-                }
-                return PartialView("~/Views/Dashboard/Partial Views/AskLeadershipWithGroup.cshtml", BSGList);
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
         public ActionResult GetBSDetails(string BSG)
         {
             try
@@ -741,12 +637,15 @@ namespace Student.Controllers
                 string RegNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
 
                 string sem = Session["CurrentSem"].ToString();
 
-                string page = "BSGroupList?$filter=Code eq '" + BSG + "'&$format=json";
+                GroupLeader glD = GetBSGroup(RegNo, sem);
+                string BS = glD.BsGroup;
+
+                string page = "BSGroupList?$filter=Code eq '" + BS + "'&$format=json";
 
 
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
@@ -759,10 +658,10 @@ namespace Student.Controllers
                     foreach (JObject config in details["value"])
                     {
                         BSGDetail.Bs = (string)config["Description"];
-                        BSGDetail.GLeader = (string)config["Leader_Name"];
-                        BSGDetail.GLeader_PNo = (string)config["Leader_Contact"];
-                        BSGDetail.Location = (string)config["Room"];
+                        BSGDetail.GLeader_PNo = (string)config["Group_Leader"];
+                        BSGDetail.Location = "";
                         BSGDetail.Time = "";
+                        BSGDetail.GLeader_PNo = "";
                     }
                 }
                 return PartialView("~/Views/Dashboard/Partial Views/BSDetails.cshtml", BSGDetail);
@@ -787,39 +686,13 @@ namespace Student.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
 
                 Sem = Session["CurrentSem"].ToString();
 
-                Credentials.ObjNav.RequestToJoinBibleStudy(RegNo, BSG, Sem);
+                Credentials.ObjNav.JoinBSGroup(RegNo, Sem, BSG);
                 return Json(new { message = "BS group request submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        [HttpPost]
-        public JsonResult RequestBsGroupLeader()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                string RegNo = Session["Username"].ToString();
-                string Sem = "";
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                }
-
-                Sem = Session["CurrentSem"].ToString();
-
-                Credentials.ObjNav.RequestBsLeader(RegNo, 0, Sem, "");
-                return Json(new { message = "Rsequest submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -877,7 +750,7 @@ namespace Student.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
 
                 Sem = Session["CurrentSem"].ToString();
@@ -971,7 +844,7 @@ namespace Student.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
 
                 Sem = Session["CurrentSem"].ToString();
@@ -997,15 +870,8 @@ namespace Student.Controllers
                 }
                 else
                 {
-                    string Sem = "";
                     string RegNo = Session["Username"].ToString();
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                    }
-
-                    Sem = Session["CurrentSem"].ToString();
-                    string page = "BsGMembers?$filter=Group_Name eq '" + BsG + "' and Semester eq '" + Sem + "'&$format=json";
+                    string page = "BsGMembers?$format=json";
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
@@ -1016,13 +882,10 @@ namespace Student.Controllers
                         foreach (JObject config in details["value"])
                         {
                             BsMembers d = new BsMembers();
-                            d.Type = (string)config["Type"];
                             d.Student_No = (string)config["StudentNo"];
-                            d.Name = (string)config["Student_Staff_Name"];
-                            d.Contact = (string)config["Contact"];
-                            d.Email = (string)config["Email"];
-                            d.Email = (string)config["Email"];
-                            d.Programme = (string)config["Programme_Name"];
+                            d.Name = (string)config["StudentName"];
+                            d.Contact = (string)config["Student_Contact"];
+                            d.Email = (string)config["Student_Email"];
                             BsMembersList.Add(d);
                         }
                     }
@@ -1055,7 +918,7 @@ namespace Student.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
 
                 Sem = Session["CurrentSem"].ToString();
@@ -1123,10 +986,11 @@ namespace Student.Controllers
                     string Student = Session["Username"].ToString();
                     if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Student);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
 
                     string Sem = Session["CurrentSem"].ToString();
+                    string sem = Session["CurrentSem"].ToString();
                     string page = "StudentUnits?$filter=Student_No eq '" + Student + "' and Semester eq '" + Sem + "'&$format=json";
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -1177,7 +1041,7 @@ namespace Student.Controllers
                 int value = rnd.Next(1000, 9999);
                 string Last2 = RegNo.Substring(RegNo.Length - 2);
                 string Token = value.ToString() + Last2;
-                Credentials.ObjNav.UpdateCateringToken(RegNo, Token);
+                //Credentials.ObjNav.UpdateCateringToken(RegNo, Token);
                 string msg = Token;
 
                 return Json(new { message = msg, success = true }, JsonRequestBehavior.AllowGet);

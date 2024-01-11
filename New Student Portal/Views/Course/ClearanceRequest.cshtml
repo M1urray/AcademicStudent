@@ -1,6 +1,6 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "ClearanceRequest";
+    ViewBag.Title = "Clearance Request";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -9,42 +9,132 @@
     }
 </style>
 <div class="modal-content">
-    <div class="modal-header">
+    <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px">
         <h4 class="modal-title"><span class="spanClass"><label id="lblTitle"></label></span></h4>
     </div>
     <div class="modal-body">
-        <div id="divRequisition"></div>
+        <div id="divForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="RegNo" class="lblClass">Registration No</label>
+                        <label class="label label-info">@Model.No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fullName" class="lblClass">Full Name</label>
+                        <label class="label label-info">@Model.Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IDNo" class="lblClass">National ID</label>
+                        <label class="label label-info">@Model.ID_No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IDaddress" class="lblClass">Address</label>
+                        <label class="label label-info">@Model.Address</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtTel" class="lblClass">Telephone</label>
+                        <label class="label label-info">@Model.Phone_No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtEmail" class="lblClass">Jooust Email</label>
+                        <label class="label label-info">@Model.E_Mail</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtProg" class="lblClass">Programme</label>
+                        <label class="label label-info">@Model.Prog (@Model.ProgName)</label>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div align="center">
+                <input type="button" id="btnSaving" class="btn btn-danger" value="Make Request" onclick="SubmitClearanceRequest();" />
+            </div>
+            <hr />
+        </div>
+        <div id="divLine">
+            <p class="text-googleplus">
+                You have successfully requested for clearance. Follow the approval level to know where
+                the document is pending
+            </p>
+            <div id="divRequisitionLine"></div>
+        </div>
     </div>
 </div>
-
-<script src="~/JS/ShowProgression.js"></script>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalReports" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelTitle"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBodyReportReport">
+                <iframe id="iframe" style="width:100%;height:450px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
-        GetNewClearanceRequest();
+        if (`@Model.MadeRequest` == "True") {
+            $("#lblTitle").text("Clearance Request Line");
+            $("#divForm").hide();
+            $("#divLine").show();
+            LoadClearanceRequest();
+        }
+        else {
+            $("#lblTitle").text("Clearance Request Form");
+            $("#divForm").show();
+            $("#divLine").hide();
+        }
     });
-    function GetNewClearanceRequest() {
+    var LoadClearanceRequest = function () {
         ShowProgress();
         $.ajax({
+            cache: false,
             async: true,
-            type: "GET",
-            dataType: 'HTML',
+            type: "POST",
+            dataType: 'html',
             contentType: false,
-            processData: false,
-            url: "/Course/NewClearanceRequest",
+            data: JSON.stringify({ RegType: 'Clearance' }),
+            contentType: "application/json; charset=utf-8",
+            url: "/Course/StudentGradClearanceRequisitionLine",
             success: function (data) {
-                $("#divRequisition").html(data);
+                $("#divRequisitionLine").html(data);
                 HideProgress();
             },
             error: function () {
                 HideProgress();
-                Swal.fire('Error', 'There is some problem to process your request. Please try after some time', 'error');
+                alert("There is some problem to process your request. Please try after some time");
             }
         });
-    }
-    var SubmitClearanceRequest = function (StdNo, Prog) {
+    };
+    var SubmitClearanceRequest = function () {
         var StudentReqs = {};
-        StudentReqs.StdNo = StdNo;
-        StudentReqs.Prog = Prog;
+        StudentReqs.StdNo = `@Model.No`;
+        StudentReqs.Prog = `@Model.Prog`;
         StudentReqs.Requisition_Type = 10;
         StudentReqs.Remarks = "";
         ShowProgress();
@@ -57,24 +147,50 @@
                 success: function (data) {
                     if (data.success == true) {
                         HideProgress();
-                        GetNewClearanceRequest();
-                        Swal.fire('Success', data.message, 'success');
+                        $("#lblTitle").text("Clearance Request Line");
+                        $("#divForm").hide();
+                        $("#divLine").show();
+                        LoadClearanceRequest();
+                        swal('Success', data.message, 'success');
                     }
                     else {
                         HideProgress();
-                        Swal.fire('Warning', data.message, 'warning');
+                        swal('Warning', data.message, 'warning');
                     }
                 },
                 error: function (err) {
                     HideProgress();
-                    Swal.fire('Error', err, 'error');
+                    swal('Error', err, 'error');
                 }
             });
+    };
+    var PrintClearanceReport = function () {
+        ShowProgress();
+        $.ajax({
+            url: "/Course/PrintClearanceForm",
+            type: "POST",
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#myModalReports").modal("show");
+                    HideProgress();
+                }
+                else {
+                    swal('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+
+            },
+            error: function (err) {
+                HideProgress();
+                swal('Warning', err, 'warning');
+            }
+        });
     };
     var SubmitCollectionDate = function () {
         var date = $("#dtPicker").val();
         if (date == "") {
-            Swal.fire('Warning', 'Select the collection date', 'warning');
+            swal('Warning', 'Select the collection date', 'warning');
             return;
         }
         else {
@@ -89,16 +205,16 @@
                     if (data.success == true) {
                         HideProgress();
                         LoadClearanceRequest();
-                        Swal.fire('Success', data.message, 'success');
+                        swal('Success', data.message, 'success');
                     }
                     else {
-                        Swal.fire('Warning', data.message, 'warning');
+                        swal('Warning', data.message, 'warning');
                         HideProgress();
                     }
                 },
                 error: function (err) {
                     HideProgress();
-                    Swal.fire('Warning', err, 'warning');
+                    swal('Warning', err, 'warning');
                 }
             });
         }

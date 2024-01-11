@@ -66,10 +66,8 @@ namespace New_Student_Portal.ViewModel
     }
     public class GetRegisteredUnit
     {
-        public string Code { get; set; }
         public string RegDeadlineDate { get; set; }
         public List<StudentUnits> ListOfRegUnit { get; set; }
-        public List<SelectListItem> ListOfSpecExmReasons { get; set; }
     }
     public class UnitRegistrationSummery
     {

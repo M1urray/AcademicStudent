@@ -35,8 +35,9 @@ namespace Student.Controllers
             try
             {
                 string Redirect = "";
-                string page = "CustomerList?$filter=No eq '" + UserName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
-               
+                string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";
+
+
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {

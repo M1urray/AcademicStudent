@@ -55,7 +55,7 @@ namespace New_Student_Portal.Models
             string PicString = "";
             try
             {
-                PicString = ObjNav.GetDocumentAttachment(TblID, DocNo, Id);
+                //PicString = ObjNav.GetDocumentAttachment(TblID, DocNo, Id);
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace New_Student_Portal.Models
             {
                 File.WriteAllBytes(filePath, Convert.FromBase64String(base64String));
 
-                ObjNav.UploadAttachedDocument(DocNo, filePath, base64String, TableID);
+                //ObjNav.UploadAttachedDocument(DocNo, filePath, base64String, TableID);
                 Uploaded = "SUCCESS";
             }
             catch (Exception ex)

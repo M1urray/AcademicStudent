@@ -30,7 +30,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -45,12 +45,6 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "You need to register for units before booking for hostel";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
                         return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
                     else
@@ -316,7 +310,7 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
                 string sem = Session["CurrentSem"].ToString();
 
@@ -348,7 +342,7 @@ namespace New_Student_Portal.Controllers
 
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -479,7 +473,7 @@ namespace New_Student_Portal.Controllers
             try
             {
                 string RegNo = Session["Username"].ToString();
-
+               
                 HostelList HostD = new HostelList();
                 string gender = CommonClass.GetStudentGender(RegNo);
                 if (gender != "")
@@ -534,7 +528,7 @@ namespace New_Student_Portal.Controllers
                 {
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
                     string sem = Session["CurrentSem"].ToString();
                     string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
@@ -548,12 +542,6 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "You need to register for units before booking for Meals";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
                         return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
                     else
@@ -579,7 +567,7 @@ namespace New_Student_Portal.Controllers
                 {
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester("");
                     }
                     string sem = Session["CurrentSem"].ToString();
                     string pageRoom = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + sem + "' and Meals_Booked eq true&$format=json";
@@ -643,7 +631,7 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
                 string sem = Session["CurrentSem"].ToString();
 

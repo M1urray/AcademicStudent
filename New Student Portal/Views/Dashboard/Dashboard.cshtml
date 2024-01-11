@@ -56,7 +56,7 @@
     }
 
     .card-header, .card-title {
-        background-color: #d10e2c;
+        background-color: #192f59;
     }
 
     .card-title {
@@ -65,32 +65,6 @@
         padding-left: 10px;
     }
 </style>
-@if (Model.DisplinaryCases.Count() > 0)
-{
-    <div class="row">
-        <div class="col-md-12">
-            @foreach (var c in Model.DisplinaryCases)
-            {
-                <table class="table table-hover" style="border:2px solid Black">
-                    <thead style="background-color:black;color:white">
-                        <tr>
-                            <th>Displinary Remarks</th>
-                            <th>Return Date</th>
-                        </tr>
-                    </thead>
-                    <tbody style="color:red">
-                        <tr>
-                            <td>
-                                <img src="~/assets/images/NEW2.gif" /> @c.Remarks
-                            </td>
-                            <td>@c.EndDate</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-        </div>
-    </div>
-}
 <div class="card">
     <h4 class="card-title">Basic information</h4>
     <div class="card-body">
@@ -303,66 +277,6 @@
     </div>
 </div>
 <hr />
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <h4 class="card-title">Important Documents</h4>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-bordered dt-responsive nowrap">
-                            <thead style="color:white;background-color:black;">
-                                <tr>
-                                    <th width="5%">#</th>
-                                    <th width="45%">File Name</th>
-                                    <th width="40%">Remarks</th>
-                                    <th width="10%">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    if (Model.ListInternalMemos.ListOfIntMemos != null && Model.ListInternalMemos.ListOfIntMemos.Count > 0)
-                                    {
-                                        if (Model.ListInternalMemos.hasFiles)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.ListInternalMemos.ListOfIntMemos)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>@item.FileName</td>
-                                                    <td>@item.Remarks</td>
-                                                    <td> <button id="btnview" class="btn btn-sm btn-danger btnPadding" onclick="ViewAttachment('@item.TabelID','@item.No','@item.ID','@item.FileName','@item.FileExt');">View Document</button></td>
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            foreach (var item in Model.ListInternalMemos.ListOfIntMemos)
-                                            {
-                                                <tr>
-                                                    <td colspan="4">@item.FileName</td>
-                                                </tr>
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="4" style="color:Red">No Internal Memos found</td>
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div>
-</div>
-
 @*//////////////////////Modal////////////////////////////*@
 <div id="myModalUnits" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -397,15 +311,30 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if ('@Model.BSGroup' == "") {
-            $("#lblJoinBS").text("Join Bible Study(BS) Group");
-        }
-        else {
-            $("#lblJoinBS").text("Bible Study(BS) Group Details");
-        }
-        $("#lblToken").text(`@Model.Cat_Token`);
-        MyBSInformation();
+        //LoadNotifications();        
     });
+    var LoadNotifications = function () {
+         if (parseInt(`@Model.NotfCount`) > 0) {
+             ShowProgress();
+             $.ajax({
+                async: false,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                url: '@Url.Action("NotificationMessages", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBodyNot").html(data);
+                    $("#myModalNotif").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        }
+    };
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
         if (Type == "CurrReg") {
@@ -432,311 +361,6 @@
             }
         });
     }
-    var MyBSInformation = function () {
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: 'HTML',
-            url: '@Url.Action("GetBsDetailForm", "Dashboard")',
-            success: function (data) {
-                $("#divBs").html(data);
-                HideProgress();
-                LoadNotifications();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var LoadNotifications = function () {
-         if (parseInt(`@Model.NotfCount`) > 0) {
-             ShowProgress();
-             $.ajax({
-                async: false,
-                type: "GET",
-                dataType: 'HTML',
-                contentType: false,
-                processData: false,
-                url: '@Url.Action("NotificationMessages", "Common")',
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBodyNot").html(data);
-                    $("#myModalNotif").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var BSDetails = function (BsG) {
-        var x = document.getElementById("labelT");
-        var url;
-        if (BsG != "") {
-            x.innerHTML = 'Bible Study Details';
-            url = "/Dashboard/GetBSDetails";
-        }
-        else {
-            x.innerHTML = 'Join a Bible Study(BSG)';
-           url = "/Dashboard/JoinBSGroup";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ BSG: BsG }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateDocument = function (Type) {
-        var x = document.getElementById("labelT");
-        if (Type == "BS") {
-            x.innerHTML = 'Create Bible Study(BS)';
-        }
-        if (Type == "DCF") {
-            x.innerHTML = 'Create Daystar Christain Fellowship(DCF)';
-        }
-       ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDocument",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Type:Type  }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                swal('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var BibleStudyMembers = function (Bs,Waiting,Title) {
-        var x = document.getElementById("labelT");
-        x.innerHTML = Title;
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/BibleStudyMembers",
-            datatype: "json",
-            data:JSON.stringify({ waitingRoom: Waiting, BsG: Bs }),
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var AdmitStudent = function (StdNo) {
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/ApproveBSRequest",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Bs: '@Model.BstudyDetails.Code', StdNo: StdNo }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                if (data.success) {
-                    HideProgress();
-                    BibleStudyMembers('@Model.BSGroup', true, 'Students in Waiting Room');
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CDFEvents = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Daystar Christian Fellowship(CDF) Events';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/DCFEventsList",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateCDFEvent = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Create Daystar Christian Fellowship(CDF) Event';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDCFDocument",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitBSRequest = function () {
-        var BSG = $("#ddlBs").children("option:selected").val();
-        if (BSG == "") {
-            Swal.fire('Warning', 'Kindly select a group', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitBSRequest",
-                datatype: "json",
-                type: "POST",
-                async:false,
-                data: JSON.stringify({ BSG: BSG }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    MyBSInformation();
-                    $("#myModalUnits").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var RequestToBeBSLeader = function () {
-        var url;
-        if (`@Model.LeadershipOption` == "Request Against A Group") {
-            url = "/Dashboard/JoinBSGroupAgainstGroup";
-        }
-        else {
-            url = "/Dashboard/RequestBsGroupLeader";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                MyBSInformation();
-                Swal.fire('Success', data.message, 'success');
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitCreatedDocument = function (Type) {
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ Code: Code, Desc: Descr, Type: Type }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var SubmitDCFDocument = function () {
-        var CDF = $("#ddlDCF").children("option:selected").val();
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (CDF == "") {
-            Swal.fire('Warning', 'Kindly Select DCF', 'warning');
-            return;
-        }
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDCFDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ DCF: CDF, Code: Code, Desc: Descr }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        HideProgress();
-                        CreateCDFEvent();
-                        Swal.fire('Success', data.message, 'success');
-                    }
-                    else {
-                        HideProgress();
-                        Swal.fire('Error', data.message, 'error');
-                    }
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
     var AcademicCalender = function (Sem) {
         if (Sem == "" || Sem == null) {
             Swal.fire('Warning', 'Current Semester not set', 'warning');
@@ -751,7 +375,7 @@
                 dataType: 'HTML',
                 contentType: "application/json; charset = utf-8",
                 data: JSON.stringify({ Sem: Sem }),
-                url: "/Common/GetAcademicCalender",
+                url: '@Url.Action("GetAcademicCalender", "Common")',
                 success: function (data) {
                     HideProgress();
                     $("#modalBody").html(data);
@@ -790,7 +414,7 @@
             datatype: "json",
             type: "POST",
             contentType: "application/json; charset = utf-8",
-            url: "/Dashboard/GenerateNewCateringToken",
+            url: '@Url.Action("GenerateNewCateringToken", "Dashboard")',
             success: function (data) {
                 if (data.success == true) {
                     HideProgress();
@@ -808,12 +432,12 @@
             }
         });
     };
-    var ViewAttachment = function (tbl, No, Id, fName, ext) {
+     var ViewAttachment = function (tbl, No, Id, fName, ext) {
         $.ajaxSetup({ cache: false });
         ShowProgress();
         $.ajax({
             cache: false,
-            url: "/Common/DocumentAttachmentview",
+            url: '@Url.Action("DocumentAttachmentview", "Common")',
             type: "POST",
             datatype: "json",
             cache: false,
