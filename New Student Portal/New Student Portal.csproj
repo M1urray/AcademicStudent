@@ -644,10 +644,6 @@
     <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
     <Content Include="Views\Common\AcademicCalender.cshtml" />
     <Content Include="Views\Financial\PayFees.cshtml" />
-    <Content Include="Web References\NAVWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Login\AccountResetPassword.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -658,6 +654,10 @@
     <Content Include="Views\Shared\Partial Views\ErroMessangeView.cshtml" />
     <Content Include="Views\Shared\Partial Views\GraduationReqInfo.cshtml" />
     <Content Include="Views\Shared\SiteMaster.cshtml" />
+    <Content Include="Web References\NAVWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -667,10 +667,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://74.124.24.233:3334/IPSTC/WS/IPSTC/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://74.124.24.233:5112/IPSTC/WS/IPSTC/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://74.124.24.233:3334/IPSTC/WS/IPSTC/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://74.124.24.233:5112/IPSTC/WS/IPSTC/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

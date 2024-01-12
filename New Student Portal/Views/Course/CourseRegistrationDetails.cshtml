@@ -115,29 +115,29 @@
                 </div>
             </div>*@
         <hr />
-        <div class="row">
-            <div class="col-md-4 DivHostelDetails" id="divHostelT">
-                <span style="font-size: 16px; font-weight: bold">Student Residents:</span>
-                <div class="mb-3">
-                    <select class="form-select" id="ddlInterest" name="ddlInterest" onchange="GetHostelList();">
-                        <option value="">Choose Appropriately</option>
-                        <option value="1">University Accommodation</option>
-                        <option value="2">Private Accommodation outside Campus</option>
-                        <option value="3">University Partnership</option>
-                        <option value="4">Dayscholar</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4" id="divHostel">
-                <div id="DivAvaHost">
-                    <span style="font-size: 16px; font-weight: bold">Available Hostels:</span>
-                    <select class="form-select" id="ddlHostelList" name="ddlHostelList" onchange="ShowUnitsRegSec();">
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
+        @* <div class="row"> *@
+        @*     <div class="col-md-4 DivHostelDetails" id="divHostelT"> *@
+        @*         <span style="font-size: 16px; font-weight: bold">Student Residents:</span> *@
+        @*         <div class="mb-3"> *@
+        @*             <select class="form-select" id="ddlInterest" name="ddlInterest" onchange="GetHostelList();"> *@
+        @*                 <option value="">Choose Appropriately</option> *@
+        @*                 <option value="1">University Accommodation</option> *@
+        @*                 <option value="2">Private Accommodation outside Campus</option> *@
+        @*                 <option value="3">University Partnership</option> *@
+        @*                 <option value="4">Dayscholar</option> *@
+        @*             </select> *@
+        @*         </div> *@
+        @*     </div> *@
+        @*     <div class="col-md-4" id="divHostel"> *@
+        @*         <div id="DivAvaHost"> *@
+        @*             <span style="font-size: 16px; font-weight: bold">Available Hostels:</span> *@
+        @*             <select class="form-select" id="ddlHostelList" name="ddlHostelList" onchange="ShowUnitsRegSec();"> *@
+        @*             </select> *@
+        @*         </div> *@
+        @*     </div> *@
+        @*     <div class="col-md-4"> *@
+        @*     </div> *@
+        @* </div> *@
     </div>
     <div id="divRegUnits" style="background-color: #c5c3c3">
         <hr />
@@ -291,62 +291,5 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if ('@Model.HostelCode' != "") {
-            $("#divHostelT").hide();
-            $("#divRegUnits").show();
-        }
-        else {
-            $("#divHostelT").show();
-            $("#divRegUnits").hide();
-        }
-        $("#divHostel").hide();
     });
-    var ShowUnitsRegSec = function () {
-        var Hostel = $("#ddlHostelList").children("option:selected").val();
-        if (Hostel == "") {
-            $("#divRegUnits").hide();
-        }
-        else {
-            $("#divRegUnits").show();
-        };
-    };
-    var GetHostelList = function () {
-        var Interest = $("#ddlInterest").children("option:selected").val();
-        if (Interest == "") {
-            $("#ddlHostelList option").remove();
-            $('#ddlHostelList').empty().append('<option selected="selected" value="">--Select Hostel--</option>');
-            $("#divHostel").hide();
-            $("#divRegUnits").hide();
-        }
-        else {
-            if (Interest == "1") {
-                ShowProgress();
-                $("#divRegUnits").hide();
-                $("#ddlHostelList option").remove();
-                $('#ddlHostelList').empty().append('<option selected="selected" value="">--Select Hostel--</option>');
-
-                $.getJSON("/Welfare/GetHostelList",
-                    function (data) {
-                        if (data.success == true) {
-                            $('#ddlHostelList').empty().append('<option selected="selected" value="">--Select Hostel--</option>');
-                            $.each(data.message.ListOfHostels, function () {
-                                $("#ddlHostelList").append($("<option></option>").val(this['Value']).html(this['Text']));
-                            });
-                            $("#divHostel").show();
-                            HideProgress();
-                        }
-                        else {
-                            HideProgress();
-                            Swal.fire('Warning', data.message, 'warning');
-                        }
-                    });
-            }
-            else {
-                $("#ddlHostelList option").remove();
-                $('#ddlHostelList').empty().append('<option selected="selected" value="">--Select Hostel--</option>');
-                $("#divHostel").hide();
-                $("#divRegUnits").show();
-            }
-        }
-    }
 </script>

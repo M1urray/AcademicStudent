@@ -93,56 +93,41 @@
     }
     var GetUnits = function (hostel, Prog, Type) {
         var regType = "0";// $("#RegType").children("option:selected").val();
-        var IntestedInHostel = $("#ddlInterest").children("option:selected").val();
-        var HostelCode = $("#ddlHostelList").children("option:selected").val();
-        var UniyType;
-        var Title;
+        var uniyType;
+        var title;
         if (Type == "0") {
-            UniyType = $("#ddlUnitType").children("option:selected").val();
-            Title = $("#ddlUnitType").children("option:selected").text();
+            uniyType = $("#ddlUnitType").children("option:selected").val();
+            title = $("#ddlUnitType").children("option:selected").text();
         }
         else if (Type == "1") {
-            UniyType = $("#ddlUnitType1").children("option:selected").val();
-            Title = $("#ddlUnitType1").children("option:selected").text();
+            uniyType = $("#ddlUnitType1").children("option:selected").val();
+            title = $("#ddlUnitType1").children("option:selected").text();
         }
         else if (Type == "2") {
-            UniyType = $("#ddlUnitType2").children("option:selected").val();
-            Title = $("#ddlUnitType2").children("option:selected").text();
+            uniyType = $("#ddlUnitType2").children("option:selected").val();
+            title = $("#ddlUnitType2").children("option:selected").text();
         }
         else if (Type == "3") {
-            UniyType = $("#ddlUnitType3").children("option:selected").val();
-            Title = $("#ddlUnitType3").children("option:selected").text();
+            uniyType = $("#ddlUnitType3").children("option:selected").val();
+            title = $("#ddlUnitType3").children("option:selected").text();
         }
         else {
-            UniyType = "";
-            Title = "";
+            uniyType = "";
+            title = "";
         }
-        if (UniyType == "") {
+        if (uniyType == "") {
             Swal.fire('Warning', 'Kindly select the unit type you want to register', 'warning');
             return;
         }
         else {
-            if (IntestedInHostel == "" && hostel == "") {
-                Swal.fire('Warning', 'Kindly select Student Resident', 'warning');
-                return;
-            }
-            else if (IntestedInHostel == "1" && HostelCode == "") {
-                Swal.fire('Warning', 'Choose your preferred Hostel', 'warning');
-                return;
-            }
-            if (regType == "") {
-                Swal.fire('Warning', 'Select Registration Type', 'warning');
-                return;
-            }
-            else {
                 ShowProgress();
                 var x = document.getElementById("labelT");
-                x.innerHTML = Title;
+                x.innerHTML = title;
                 $.ajax({
                     url: "/Course/GetProgramUnits",
                     datatype: "json",
                     type: "POST",
-                    data: JSON.stringify({ Stdresidence: IntestedInHostel, Type: regType, HostelCode: HostelCode, UnitType: UniyType, Prog: Prog }),
+                    data: JSON.stringify({  Type: regType, UnitType: uniyType, Prog: Prog }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         $("#modalBody").html(data);
@@ -154,7 +139,6 @@
                         Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
                     }
                 });
-            }
         }
     }
     var GetFreeElectiveUnits = function () {
