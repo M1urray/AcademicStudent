@@ -393,7 +393,7 @@ namespace New_Student_Portal.Controllers
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
         }
-        public ActionResult GetProgramUnits(string Stdresidence, string Type, string HostelCode, string UnitType, string Prog)
+        public ActionResult GetProgramUnits( string Type, string UnitType, string Prog)
         {
             try
             {
@@ -425,16 +425,12 @@ namespace New_Student_Portal.Controllers
 
                     Sem = Session["CurrentSem"].ToString();
 
-                    Credentials.ObjNav.TestRegistrationStartDate(Sem);
+                    Credentials.ObjNav.TestRegistrationStartDate(Sem,RegNo);
                     string[] s = CommonClass.CurrentCourseRegistration(RegNo, Sem);
                     Credentials.ObjNav.RefreshStudentAudit(RegNo);
                     if (s[0] == null || s[1] == null)
                     {
-                        if (HostelCode == null)
-                        {
-                            HostelCode = "";
-                        }
-                        succ = Credentials.ObjNav.StudentPromotion(RegNo, Convert.ToInt32(Type), HostelCode, Convert.ToInt32(Stdresidence));
+                        succ = Credentials.ObjNav.StudentPromotion(RegNo, Convert.ToInt32(Type), "", 0);
                         s = CommonClass.CurrentCourseRegistration(RegNo, Sem);
                     }
 
@@ -446,10 +442,10 @@ namespace New_Student_Portal.Controllers
                     }
                     else
                     {
-                        if (HostelCode != null && HostelCode != "")
-                        {
-                            Credentials.ObjNav.SaveHostelBookingInterest(RegNo, Sem, HostelCode);
-                        }
+                        // if (HostelCode != null && HostelCode != "")
+                        // {
+                        //     Credentials.ObjNav.SaveHostelBookingInterest(RegNo, Sem, HostelCode);
+                        // }
 
                         int maxUnits = 0, sUnits = 0;
 
@@ -2422,7 +2418,7 @@ namespace New_Student_Portal.Controllers
                     CollectionPoint = regData.CollectionPoint;
                 }
                 decimal Bal = 0;
-                string DocNo = Credentials.ObjNav.fnSaveGraduation(RegNo, PEmail, currentProf, Company, PhoneNo, gown, CollectionPoint);
+                string DocNo = Credentials.ObjNav.fnSaveGraduation(RegNo, PEmail, currentProf, Company, PhoneNo, gown, CollectionPoint,"");
                 Bal = CommonClass.GetStudentBalance(RegNo);
                 return Json(new { message = "Graduation Request document No : " + DocNo + " Submited successfully", Doc = DocNo, Balance = Bal, success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -3136,7 +3132,7 @@ namespace New_Student_Portal.Controllers
                 {
                     string StudentNo = Session["Username"].ToString();
 
-                    Credentials.ObjNav.SaveStudentEnquiry(StudentNo, Enquiry, 0, Dep);
+                    Credentials.ObjNav.SaveStudentEnquiry(StudentNo, Enquiry, 0, Dep,1);
                 }
                 return Json(new { message = "Enquiry send successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
