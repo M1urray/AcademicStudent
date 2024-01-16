@@ -21,7 +21,7 @@
     }
 </style>
 <div class="pre-scrollable">
-    <table class="table table-bordered table-responsive table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>
@@ -63,26 +63,7 @@
                                 <td>
                                     @if (item.Requisition_Type == "Exemption" || item.Requisition_Type == "Drop Courses" || item.Requisition_Type == "Special Exams" || item.Requisition_Type == "Exam Challenge" || item.Requisition_Type == "Withdrawal")
                                     {
-                                        <div>
-                                            @Html.DisplayFor(modelItem => item.Requisition_Type) <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.LinesCounter Units)</button>
-                                            @if (item.ApprovedCount > 0 && item.Status == "Approved")
-                                            {
-                                                <span>
-                                                    @if (item.ApprovalCount > 0)
-                                                    {
-                                                        <span>
-                                                            Approved <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.ApprovalCount Units)</button>
-                                                        </span>
-                                                    }
-                                                    @if (item.RejectedCount > 0)
-                                                    {
-                                                        <span>
-                                                            Rejected <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.RejectedCount Units)</button>
-                                                        </span>
-                                                    }
-                                                </span>
-                                            }
-                                        </div>
+                                        @Html.DisplayFor(modelItem => item.Requisition_Type) <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.LinesCounter Units)</button>
                                     }
                                     else
                                     {
@@ -107,9 +88,7 @@
                                     }
                                     else if (item.Status == "Approved" && (item.Requisition_Type == "Special Exams" || item.Requisition_Type == "Exam Challenge"))
                                     {
-                                        @*<button class="btn btn-sm btn-danger" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">Assigned Lecturer</button>
-                                            <hr style="margin:1px" />*@
-                                        <button class="btn btn-sm btn-danger" onclick="GetExamCard('@item.Code');">Print Exam Card</button>
+                                        <button class="btn btn-sm btn-danger" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">Assigned Lecturer</button>
                                     }
                                     else if (item.Status == "Approved" && item.Requisition_Type == "Transit To Next Programme Level")
                                     {

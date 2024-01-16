@@ -19,7 +19,7 @@
         </div>
         <div class="row" id="divReport">
             <div class="col-md-12">
-                <iframe id="iframe" style="width:100%;height:600px"></iframe>
+                <iframe id="iframe" style="width:100%;height:450px"></iframe>
             </div>
         </div>
     </div>
@@ -42,14 +42,19 @@
             $("#divReport").show();
             PrintExamCard();
         }
-        if (DocType == "RESULTS" || DocType == "STDAUDIT") {
+        if (DocType == "RESULTS") {
+            $("#divProg").hide();
+            $("#divReport").show();
+            PrintProvissionalResults();
+        }
+        @*if (DocType == "RESULTS" || DocType == "STDAUDIT") {
             $("#divProg").show();
             $("#divReport").hide();
             ShowProgress();
             $("#ddlProgramme option").remove();
             $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
 
-            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
+            $.getJSON('@Url.Action("GetEnrolledProgrammes", "ViewDocuments")',
                 function (data) {
                     $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
                     $.each(data.ListOfValues, function () {
@@ -57,17 +62,45 @@
                     });
                     HideProgress();
                 });
-        };
+        };*@
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
             $("#divReport").show();
             GetSemesterInvoice();
         }
+        if (DocType == "LEGST") {
+            $("#divProg").hide();
+            $("#divReport").show();
+            LegacyStatement();
+        }
     }
     var GetSemesterInvoice = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/SemesterProformaInvoice',
+            url: '@Url.Action("SemesterProformaInvoice", "ViewDocuments")',
+            type: "POST",
+            async: false,
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+    var LegacyStatement = function () {
+        ShowProgress();
+        $.ajax({
+            url: '@Url.Action("LegacyStatement", "ViewDocuments")',
             type: "POST",
             async: false,
             success: function (data) {
@@ -90,7 +123,7 @@
     var PrintExamCard = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ExamCard',
+            url: '@Url.Action("ExamCard", "ViewDocuments")',
             type: "POST",
             async: false,
             success: function (data) {
@@ -124,7 +157,7 @@
                 var results = regex.exec(location.search);
                 return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
             }
-            
+
             if (DocType == "RESULTS") {
                 PrintProvissionalResults(Prog);
             }
@@ -133,17 +166,16 @@
             }
         }
     };
-    var PrintProvissionalResults = function (Prog) {
+    var PrintProvissionalResults = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ProvisionalResults',
+            url: '@Url.Action("ProvisionalResults", "ViewDocuments")',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message + "#toolbar=0");
+                    $('iframe').attr('src', data.message);
                     $("#divReport").show();
                     HideProgress();
                 }
@@ -161,7 +193,7 @@
     var GetStudentAudit = function (Prog) {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/GenerateStudentAudit',
+            url: '@Url.Action("GenerateStudentAudit", "ViewDocuments")',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",

@@ -22,8 +22,8 @@
     .pre-scrollable {
         max-height: none
     }
-</style> 
-<div class="modal-content">    
+</style>
+<div class="modal-content">
     <div class="modal-body pre-scrollable">
         <table class="table table-hover" style="font-size:12px">
             <thead style="color:white;background-color:black">
@@ -38,15 +38,8 @@
                         Credits
                     </th>
                     <th style="text-align:center">
-                        Marks
-                    </th>
-                    <th style="text-align:center">
                         Grade
                     </th>
-                    <th style="text-align:center">
-                        QP
-                    </th>
-
                 </tr>
             </thead>
             @{
@@ -66,6 +59,8 @@
                                     {
                                         foreach (var Res in item.ListOfResults)
                                         {
+                                            decimal TotalCred = 0;
+                                            TotalCred = Convert.ToDecimal(Res.Credits) * 15;
                                             <tr>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => Res.Unit)
@@ -74,22 +69,16 @@
                                                     @Html.DisplayFor(modelItem => Res.UnitName)
                                                 </td>
                                                 <td align="center">
-                                                    @Html.DisplayFor(modelItem => Res.Credits)
-                                                </td>
-                                                <td align="center">
-                                                    @Html.DisplayFor(modelItem => Res.Marks)
+                                                    @TotalCred
                                                 </td>
                                                 <td align="center">
                                                     @Html.DisplayFor(modelItem => Res.Grade)
-                                                </td>
-                                                <td align="center">
-                                                    @Html.DisplayFor(modelItem => Res.GltyPoints)
                                                 </td>
                                             </tr>
                                             TotalGPA = TotalGPA + Convert.ToDecimal(Res.GPA);
                                             TotalQltPoint = TotalQltPoint + Convert.ToDecimal(Res.GltyPoints);
                                             TotalUnits = TotalUnits + Convert.ToDecimal(Res.TotalUnits);
-                                            TotalCredits = TotalCredits + Convert.ToDecimal(Res.Credits);
+                                            TotalCredits = TotalCredits + TotalCred;
                                         }
                                         AVGQPoints = Math.Round((TotalQltPoint / TotalUnits), 2);
                                         <tr class="border_bottom">
@@ -98,15 +87,6 @@
                                                 @TotalCredits
                                             </td>
                                             <td colspan="2"></td>
-                                            <td align="center">
-                                                @TotalQltPoint
-                                            </td>
-                                        </tr>
-                                        <tr class="border_bottom">
-                                            <td colspan="5" align="right">Term GPA</td>
-                                            <td align="center">
-                                                @AVGQPoints
-                                            </td>
                                         </tr>
                                     }
                                     else

@@ -12,6 +12,7 @@ namespace New_Student_Portal.ViewModel
         public string Description { get; set; }
         public string Gender { get; set; }
         public int VacantSpaces { get; set; }
+        public string Cost { get; set; }
     }
     public class Rooms
     {
@@ -31,6 +32,7 @@ namespace New_Student_Portal.ViewModel
         public string Student { get; set; }
         public string Sem { get; set; }
         public bool Billed { get; set; }
+        public bool Confirm_Booking { get; set; }
     }
     public class HostelList
     {

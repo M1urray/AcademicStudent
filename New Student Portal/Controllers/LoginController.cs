@@ -22,8 +22,78 @@ namespace Student.Controllers
         {
             Session.Remove("Username");
             Session.RemoveAll();
-            Authedication user = new Authedication();
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            Authedication user = new Authedication();           
             return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Get_Gender(Authedication userlogin)
+        {
+            string msg = "Either Username or password is wrong";
+            bool success = false, ShowError = true;
+            string UserName = userlogin.UserName.ToUpper();
+            string passWrd = userlogin.Password;
+            try
+            {
+                string page = "CustomerList?$select=No,Gender,Password&$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";
+
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    if (details["value"].Count() > 0)
+                    {
+                        foreach (JObject config in details["value"])
+                        {
+                            string User = (string)config["No"];
+                            string Password = (string)config["Password"];
+                            if (User != "")
+                            {
+                                Session["Username"] = UserName;
+
+                                if (passWrd == Password)
+                                {
+                                    if (string.IsNullOrEmpty(((string)config["Gender"]).Replace(" ","")))
+                                    {
+                                        success = false;
+                                        ShowError = false;
+                                    }
+                                   else
+                                    {
+                                        success = true;
+                                    }
+                                }
+                                else
+                                {
+                                    msg = "Either Username or password is wrong. If forgotten your password, then reset";
+                                    success = false;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        msg = "Either Username or password is wrong. If forgotten your password, then reset";
+                        success = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+                success = false;
+            }
+            return Json(new
+            {
+                message = msg,
+                success = success,
+                ShowERROR= ShowError
+            }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult LoginUser(Authedication userlogin)
@@ -35,8 +105,8 @@ namespace Student.Controllers
             try
             {
                 string Redirect = "";
-                string page = "CustomerList?$filter=No eq '" + UserName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
-               
+                string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";              
+
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -54,16 +124,25 @@ namespace Student.Controllers
                             if (User != "")
                             {
                                 Session["Username"] = UserName;
+                                Session["PhoneNumber"] = (string)config["Phone_No"];
+                                Session["Email"] = (string)config["E_Mail"];
+                                Session["ID_No"] = (string)config["ID_No"];
+                                Session["Name"] = (string)config["Name"];
 
                                 if (passWrd == Password)
                                 {
+                                    if (userlogin.Gender != "" && userlogin.Gender != null)
+                                    {
+                                        Credentials.ObjNav.Update_Student_Gender(userlogin.UserName,Convert.ToInt32(userlogin.Gender));
+                                    }
+
                                     UserViewModel userModel = new UserViewModel();
                                     userModel.UserName = UserName;
                                     userModel.Email = (string)config["E_Mail"];
                                     if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
                                     {
                                         userModel.RoleName = "ALLUMINAE";
-                                        Redirect = "/Alumni/Dashboard";
+                                        Redirect = "A";
                                     }
                                     else
                                     {
@@ -76,7 +155,7 @@ namespace Student.Controllers
                                         {
                                             userModel.Full_Access = false;
                                         }
-                                        Redirect = "/Dashboard/Dashboard";
+                                        Redirect = "D";
                                     }
                                     string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
                                     FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
@@ -104,7 +183,7 @@ namespace Student.Controllers
                     }
                     else
                     {
-                        msg = "Unauthorised Login. Visit Registrar's Office";
+                        msg = "Unauthorised Login. Visit Admission Office";
                         success = false;
                     }
                 }
@@ -142,8 +221,8 @@ namespace Student.Controllers
                 else
                 {
                     string stdNo = Reg.UserName.ToUpper();
-                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
-
+                    //string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
+                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
@@ -170,16 +249,23 @@ namespace Student.Controllers
                                     {
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
                                         var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
-                                        var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
-                                            "<BR/>Contact Email : admissions@daystar.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
+                                        var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance.";
                                         var body = "Hi " + ret;
                                         body += "<br />";
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
                                         try
                                         {
-                                            CommonClass.SendEmailAlert(body, emailAddress, "DAYSTAR PORTAL RESET PASSWORD LINK");
-                                            msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
-                                            val = true;
+                                           Error err =  CommonClass.SendEmailAlert(body, emailAddress, "CHUKA PORTAL RESET PASSWORD LINK");
+                                            if (err.success)
+                                            {
+                                                msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
+                                                val = true;
+                                            }
+                                            else
+                                            {
+                                                msg = err.Message;
+                                                val = false;
+                                            }
                                         }
                                         catch (Exception ex)
                                         {
@@ -277,7 +363,8 @@ namespace Student.Controllers
                             if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
                             {
                                 userModel.RoleName = "ALLUMINAE";
-                                msg = "/Alumni/Dashboard";
+                                
+                                msg = "A"; 
                             }
                             else
                             {
@@ -290,7 +377,7 @@ namespace Student.Controllers
                                 {
                                     userModel.Full_Access = false;
                                 }
-                                msg = "/Dashboard/Dashboard";
+                                msg = "D";
                             }
                             string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
                             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,

@@ -142,13 +142,13 @@
             ShowProgress();
             $.ajax({
                 type: "POST",
-                url: "/Course/UpdateRegisteredUnits",
+                url: '@Url.Action("UpdateRegisteredUnits", "Course")',
                 data: JSON.stringify(UnitReg),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
                     if (data.success == true) {
-                        window.location = "/Course/CourseRegistration";
+                        window.location = '@Url.Action("CourseRegistration", "Course")';
                     }
                     else {
                         HideProgress();
@@ -170,14 +170,14 @@
         UnitFilters.Unit = Unit;
         ShowProgress();
         $.ajax({
-            url: "/Course/DropRegisteredUnit",
+            url: '@Url.Action("DropRegisteredUnit", "Course")',
             datatype: "json",
             type: "POST",
             data: JSON.stringify({ Filters: UnitFilters }),
             contentType: "application/json; charset = utf-8",
             success: function (data) {
                 if (data.success == true) {
-                    window.location = "/Course/CourseRegistration";
+                    window.location = '@Url.Action("CourseRegistration", "Course")';
                 }
                 else {
                     HideProgress();
@@ -190,6 +190,5 @@
             }
         });
     }
-
 </script>
 

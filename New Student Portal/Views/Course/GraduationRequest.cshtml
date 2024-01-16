@@ -1,6 +1,6 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "GraduationRequest";
+    ViewBag.Title = "Graduation Request";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -17,27 +17,133 @@
     b {
         font-size: 12px;
     }
-
-    .badge-outline-info {
-        overflow-wrap: break-word;
-    }
 </style>
 <div class="card">
     <div class="card-body">
-        <input type="button" class="btn btn-danger btnClass" value="New Requisition" onclick="NewRequisition();" />
+        <div class="row" style="background-color:cadetblue;" id="DivMessange">
+            <div id="divGradInf"></div>
+        </div>
+        <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="RegNo" class="lblClass">Registration No:</label>
+                    <label class="badge badge-outline-info">@Model.No</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="fullName" class="lblClass">Full Name:</label>
+                    <label class="badge badge-outline-info">@Model.Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtTel" class="lblClass">Telephone:</label>
+                    <label class="badge badge-outline-info">@Model.Phone_No</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtEmail" class="lblClass">Email:</label>
+                    <label class="badge badge-outline-info">@Model.E_Mail</label>
+                </div>
+            </div>
+        </div>
         <hr />
-        <div id="divGradLines"></div>
+        <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtPersEmail" class="lblClass">Personal Email Address</label>
+                    <input type="email" class="form-control" id="txtPersEmail" placeholder="Personal Email" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtCrrProf" class="lblClass">Current Profession</label>
+                    <input type="text" class="form-control" id="txtCrrProf" placeholder="Current Profession" required="" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtCrrCompany" class="lblClass">Current Institution/Company</label>
+                    <input type="text" class="form-control" id="txtCrrCompany" placeholder="Current Institution/Company" required="" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtPhoneNo" class="lblClass">Current Phone Number</label>
+                    <input type="text" class="form-control" id="txtPhoneNo" placeholder="Current Phone Number" required="" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="DivDisclaimer">
+            <div class="row  mb-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtPersEmail" class="lblClass">Graduating Programme</label>
+                        <label class="badge badge-outline-info">@Model.ProgName</label>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row  mb-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("Attach Nation ID Card/Birth Certificate", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            <table id="tableAttachments" width="100%" class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="file" id="IDCard" class="form-control" required="" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row  mb-3">
+                <div class="col-md-12" style="background-color:#b1a9a9;color:#051936">
+                    <h4>Disclaimer</h4>
+                    <p>
+                        <input type="checkbox" name="Accept" class="checkbox-circle checkboxClass">
+                        This is how your Name will appear on your certificate <b>@Model.Name</b>.
+                        If not please Enter your correct names in the Text Box.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b>Correct Name</b>
+                            <input type="text" class="form-control" id="txtCorrectName" />
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <hr />
+            <div align="center">
+                <input type="button" id="btnSaving" class="btn btn-danger" value="Make Request" onclick="SubmitGraduationRequest();" />
+            </div>
+            <hr />
+        </div>
     </div> <!-- end card-body -->
 </div>
-@*//////////////////////Modal////////////////////////////*@
-<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+<div id="divReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <h4 class="modal-title">Fee Statement</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4" id="modalBody">
+                <iframe id="iframe" style="width:100%;height:450px"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -45,50 +151,35 @@
         </div>
     </div>
 </div>
-<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        LoadGraduationLines();
+        $("#DivCollPoint").hide();
+        $("#DivMessange").hide();
+        if (`@Model.MadeRequest` == "True") {
+            document.getElementById("txtPersEmail").disabled = true;
+            document.getElementById("txtCrrProf").disabled = true;
+            document.getElementById("txtCrrCompany").disabled = true;
+            document.getElementById("txtPhoneNo").disabled = true;
+            //document.getElementById("ddlGown").disabled = true;
+            $("#DivDisclaimer").hide();
+            $("#DivMessange").show();
+            LoadGraduationInf(`@Model.DocNo`,`@Model.Balance`);
+            $("#txtPersEmail").val(`@Model.PersonalMail`);
+            $("#txtCrrProf").val(`@Model.Profession`);
+            $("#txtCrrCompany").val(`@Model.Company`);
+            $("#txtPhoneNo").val(`@Model.CurrentPhoneNo`);
+            if (`@Model.Gown` == "True") {
+                $("#ddlGown").val("1");
+                LoadCampus();
+                document.getElementById("ddlGownCollection").disabled = true;
+                $("#DivCollPoint").show();
+            }
+            else {
+                $("#ddlGown").val("2");
+                $("#DivCollPoint").hide();
+            }
+        }
     });
-    function LoadGraduationLines() {
-        ShowProgress();
-        $.ajax({
-            async: false,
-            type: "GET",
-            dataType: 'HTML',
-            contentType: false,
-            processData: false,
-            url: "/Course/GraduationRequisitionLine",
-            success: function (data) {
-                $("#divGradLines").html(data);
-                HideProgress();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var NewRequisition = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'New Requisition Form';
-        ShowProgress();
-        $.ajax({
-            url: "/Course/NewGraduationRequistion",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
     var ddlGownInterest = function () {
         var Intrested = $("#ddlGown").children("option:selected").val();
         if (Intrested == "1") {
@@ -102,7 +193,7 @@
     };
     var LoadCampus = function () {
         ShowProgress();
-        $.getJSON("/Course/GetCampusList", null,
+        $.getJSON('@Url.Action("GetCampusList", "Course")', null,
             function (data) {
                 $("#ddlGownCollection").empty().append('<option selected="selected" value="">--Select Collection Point--</option>');
                 $.each(data.ListOfCampus, function () {
@@ -117,10 +208,8 @@
         var CurrentProfession = $("#txtCrrProf").val();
         var CurrentInst = $("#txtCrrCompany").val();
         var CurrentPhoneNo = $("#txtPhoneNo").val();
-        var CorrectName = $("#txtCorrectName").val();
-        var Prog = $("#ddlProg").children("option:selected").val();
-        //var Gown = $("#ddlGown").children("option:selected").val();
-        //var collectionPoint = $("#ddlGownCollection").children("option:selected").val();
+        var Gown = $("#ddlGown").children("option:selected").val();
+        var collectionPoint = $("#ddlGownCollection").children("option:selected").val();
         var disclaimer = $('input[name="Accept"]').prop("checked");
         if (PersoanlEmail == "") {
             Swal.fire('Warning', 'Enter Your personal Email', 'warning');
@@ -142,10 +231,6 @@
             Swal.fire('Warning', 'Enter Your Curret Phone Number', 'warning');
             return;
         }
-        else if (Prog == "") {
-            Swal.fire('Warning', 'Select Graduating Programme', 'warning');
-            return;
-        }
         //else if (Gown == "") {
         //    Swal.fire('Warning', 'Confirm if you will be interested in a gown', 'warning');
         //    return;
@@ -159,63 +244,87 @@
             return;
         }
         else {
-            var GownIntest = false;
-            //if (Gown == "1") {
-            //    GownIntest = true;
-            //}
-            //else {
-            //    GownIntest = false;
-            //}
-            var GradRequest = {};
-            GradRequest.PersoanlEmail = PersoanlEmail;
-            GradRequest.CrrProf = CurrentProfession;
-            GradRequest.Company = CurrentInst;
-            GradRequest.CrrPhoneNo = CurrentPhoneNo;
-            GradRequest.Gown = GownIntest;
-            GradRequest.CollectionPoint = "";
-            GradRequest.Prog = Prog;
-            GradRequest.CorrectName = CorrectName;
-            ShowProgress();
-            $.ajax({
-                url: "/Course/SubmitGraduationRequest",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ regData: GradRequest }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        //document.getElementById("txtPersEmail").disabled = true;
-                        //document.getElementById("txtCrrProf").disabled = true;
-                        //document.getElementById("txtCrrCompany").disabled = true;
-                        //document.getElementById("txtPhoneNo").disabled = true;
-                        ////document.getElementById("ddlGown").disabled = true;
-                        //$("#DivMessange").show();
-                        //HideProgress();
-                        //LoadGraduationInf(data.Doc, data.Balance);
-                        //$("#DivDisclaimer").hide();
-                        HideProgress();
-                        LoadGraduationLines();
-                        $("#myModalUnits").modal("hide");
-                        Swal.fire('Success', data.message, 'success');
+            var filename1; var base64String1; var filetype1;
+            var files1 = document.getElementById('IDCard').files;
+            if (files1.length) {
+                var file1 = files1[0];
+                var blob1 = file1.slice();
+                filetype1 = file1.type;
+                filename1 = file1.name;
+                var reader1 = new FileReader();
+                reader1.onloadend = function (evt) {
+                    if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+                        var cont1 = evt.target.result
+                        base64String1 = getB64Str(cont1);
+                    };
+                    var GownIntest;
+                    if (Gown == "1") {
+                        GownIntest = true;
                     }
                     else {
-                        HideProgress();
-                        Swal.fire('Warning', data.message, 'warning');
+                        GownIntest = false;
                     }
-                },
-                error: function (err) {
-                    HideProgress();
-                    Swal.fire('Error', err, 'error');
-                }
-            });
+                    var GradRequest = {};
+                    GradRequest.PersoanlEmail = PersoanlEmail;
+                    GradRequest.CrrProf = CurrentProfession;
+                    GradRequest.Company = CurrentInst;
+                    GradRequest.CrrPhoneNo = CurrentPhoneNo;
+                    GradRequest.Gown = GownIntest;
+                    GradRequest.CollectionPoint = collectionPoint;
+                    ShowProgress();
+                    $.ajax({
+                        url: '@Url.Action("SubmitGraduationRequest", "Course")',
+                        datatype: "json",
+                        type: "POST",
+                        data: JSON.stringify({ regData: GradRequest, base64Upload: base64String1, fileName: filename1, Extn: filetype1 }),
+                        contentType: "application/json; charset = utf-8",
+                        success: function (data) {
+                            if (data.success == true) {
+                                document.getElementById("txtPersEmail").disabled = true;
+                                document.getElementById("txtCrrProf").disabled = true;
+                                document.getElementById("txtCrrCompany").disabled = true;
+                                document.getElementById("txtPhoneNo").disabled = true;
+                                //document.getElementById("ddlGown").disabled = true;
+                                $("#DivMessange").show();
+                                HideProgress();
+                                LoadGraduationInf(data.Doc, data.Balance);
+                                $("#DivDisclaimer").hide();
+                                Swal.fire('Success', data.message, 'success');
+                            }
+                            else {
+                                HideProgress();
+                                Swal.fire('Warning', data.message, 'warning');
+                            }
+                        },
+                        error: function (err) {
+                            HideProgress();
+                            Swal.fire('Error', err, 'error');
+                        }
+                    });
+                };
+                reader1.readAsArrayBuffer(blob1);
+            }
+            else {
+                Swal.fire('Warning', 'Attach Nation ID Card or Birth Certificate', 'warning');
+                return;
+            }
         }
     };
-    var LoadGraduationInf = function (DocNo, Bal) {
+    function getB64Str(buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+    var LoadGraduationInf = function (DocNo,Bal) {
         $.ajax({
-            url: "/Course/GraduationRequestInfo",
+            url: '@Url.Action("GraduationRequestInfo", "Course")',
             datatype: "json",
             type: "POST",
-            data: JSON.stringify({ DocNo: DocNo, Bal: Bal }),
+            data: JSON.stringify({ DocNo: DocNo, Bal:Bal }),
             contentType: "application/json; charset = utf-8",
             success: function (data) {
                 $("#divGradInf").html(data);
@@ -233,43 +342,23 @@
             return true;
         }
     }
-    var ViewApprovalTrail = function (DocNo) {
-        $("#labelT").text("Document Approval Trail");
+    var PrintInvitationCard = function () {
         ShowProgress();
         $.ajax({
-            async: true,
+            url: '@Url.Action("InvitationCard", "ViewDocuments")',
             type: "POST",
-            datatype: "json",
-            data: JSON.stringify({ DocNo: DocNo }),
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            url: '/Common/DocumentApprovalTrail',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             success: function (data) {
-                $("#modalBody").html(data);
-                HideProgress();
-                $("#myModalUnits").modal("show");
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    }
-    var ViewComments = function (DocNo) {
-        $("#labelT").text("Document Comments");
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            datatype: "json",
-            data: JSON.stringify({ DocNo: DocNo }),
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            url: '/Common/DocumentComments',
-            success: function (data) {
-                $("#modalBody").html(data);
-                HideProgress();
-                $("#myModalUnits").modal("show");
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#divReport").modal("show");
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
             },
             error: function (err) {
                 HideProgress();

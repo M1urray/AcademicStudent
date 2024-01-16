@@ -39,16 +39,11 @@ namespace New_Student_Portal.ViewModel
     {
         public string Comment { get; set; }
     }
-    public class ChaplainGroupDetails
+    public class GroupLeader
     {
         public bool IsBSLeader { get; set; }
-        public bool RequestToBeLeader { get; set; }
-        public bool BsLeaderRequestApproved { get; set; }
-        public string BsLeaderRequestStatus { get; set; }
         public string BsGroup { get; set; }
-        public string BsGroupName { get; set; }
         public bool IsDCFLeader { get; set; }
         public string DCFGroup { get; set; }
-        public string DCFGroupName { get; set; }
     }
 }

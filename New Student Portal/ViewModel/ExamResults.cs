@@ -20,6 +20,7 @@ namespace New_Student_Portal.ViewModel
     {
         public string Semester { get; set; }
         public string AcademicYear { get; set; }
+        public string Stage { get; set; }
         public List<ExamResults> ListOfResults { get; set; }
     }
 }

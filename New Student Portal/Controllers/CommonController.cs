@@ -98,7 +98,7 @@ namespace New_Student_Portal.Controllers
         {
             List<ApprovalEntries> ApprovalTrail = new List<ApprovalEntries>();
 
-            string page = "StudentReqApprovalList?select=Approver_ID,Date_Time_Sent_for_Approval,Due_Date,Status,Sequence_No,ApproverNames&$filter=Document_No eq '" + DocNo + "' and Status ne 'Canceled' and Status ne 'Rejected'&format=json";
+            string page = "StudentReqApprovalList?$select=Approver_ID,Date_Time_Sent_for_Approval,Due_Date,Status,Sequence_No,ApproverNames&$filter=Document_No eq '" + DocNo + "' and Status ne 'Canceled' and Status ne 'Rejected'&format=json";
 
             HttpWebResponse httpResponse = Credentials.GetOdataData(page);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -129,11 +129,11 @@ namespace New_Student_Portal.Controllers
             }
             return PartialView("~/Views/Shared/Partial Views/ApprovalTrail.cshtml", ApprovalTrail.OrderBy(x => x.Sequence));
         }
-        public PartialViewResult DocumentComments(string DocNo)
+        public PartialViewResult DocumentApprovalComments(string DocNo, string Seq)
         {
             List<ApprovalComment> CommentList = new List<ApprovalComment>();
 
-            string page = "ApprovalComments?select=Comment&$filter=Document_No eq '" + DocNo + "'&$format=json";
+            string page = "ApprovalComments?$select=Comment&$filter=Document_No eq '" + DocNo + "' and Sequence_No eq " + Convert.ToInt32(Seq) + "&$format=json";
 
             HttpWebResponse httpResponse = Credentials.GetOdataData(page);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -143,7 +143,7 @@ namespace New_Student_Portal.Controllers
                 var details = JObject.Parse(result);
                 foreach (JObject config in details["value"])
                 {
-                    ApprovalComment c = new ApprovalComment(); 
+                    ApprovalComment c = new ApprovalComment();
                     c.Comment = (string)config["Comment"];
                     CommentList.Add(c);
                 }

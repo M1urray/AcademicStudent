@@ -12,7 +12,7 @@ namespace New_Student_Portal.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,7 +26,7 @@ namespace New_Student_Portal.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.0.6:7047/ERP/WS/Chuka%20University/Codeunit/WebPortal")]
         public string New_Student_Portal_NAVWS_WebPortal {
             get {
                 return ((string)(this["New_Student_Portal_NAVWS_WebPortal"]));

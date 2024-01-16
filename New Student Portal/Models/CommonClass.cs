@@ -49,14 +49,17 @@ namespace New_Student_Portal.Models
             }
             return dtMenu;
         }
-        public static string[] CurrentCourseRegistration(string RegNo, string CurrSem)
+        public static string[] CurrentCourseRegistration(string RegNo, string CurrSem, string RegT)
         {
-            string[] dtMenu = new string[6];
+            string[] dtMenu = new string[5];
             try
             {
                 string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No,Student_Residence&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
-
+                string page = "";
+                if (RegT == "0" || RegT == "1")
+                {
+                    page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and (Registerfor eq 'Stage' or Registerfor eq 'Unit/Subject')&$format=json";
+                }
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
                 {
@@ -71,7 +74,6 @@ namespace New_Student_Portal.Models
                         dtMenu[2] = (string)config["Class_Code"];
                         dtMenu[3] = (string)config["UnitsTaken"];
                         dtMenu[4] = (string)config["Booked_Hostel_No"];
-                        dtMenu[5] = (string)config["Student_Residence"];
                     }
                 }
             }
@@ -81,22 +83,42 @@ namespace New_Student_Portal.Models
             }
             return dtMenu;
         }
-        public static string CurrentSemester(string StdNo)
+        public static string[] GetSupp_RetakeRegistration(string RegNo, string CurrSem, string RegT, string Stage)
+        {
+            string[] dtMenu = new string[5];
+            try
+            {
+                string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "' and Registerfor eq '" + RegT + "' and Stage eq '" + Stage + "'&$format=json";
+                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+                    foreach (JObject config in details["value"])
+                    {
+                        dtMenu[0] = (string)config["Programme"];
+                        dtMenu[1] = (string)config["Stage"];
+                        dtMenu[2] = (string)config["Class_Code"];
+                        dtMenu[3] = (string)config["UnitsTaken"];
+                        dtMenu[4] = (string)config["Booked_Hostel_No"];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return dtMenu;
+        }
+        public static string CurrentSemester(string Prog)
         {
             string CSem = "";
             try
             {
-                string page = "";
-                string Prog = GetStudentRegisteredProgramme(StdNo);
-
-                if (IsProgrammeShortCourse(Prog))
-                {
-                    page = "SemesterList?$select=Code,Description&$filter=CurrentSemester eq true and Short_Course_Semester eq true&$format=json";
-                }
-                else
-                {
-                    page = "SemesterList?$select=Code,Description&$filter=CurrentSemester eq true and Short_Course_Semester eq false&$format=json";
-                }
+                string page = "SemesterList?$select=Code,Description&$filter=CurrentSemester eq true&format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -315,46 +337,7 @@ namespace New_Student_Portal.Models
             }
             return Campus;
         }
-        public static string GetStudentSettlementType(string User)
-        {
-            string SettlementT = "";
-            try
-            {
-                string page = "CustomerList?$select=Current_Settlement_Type&$filter=No eq '" + User + "'&$format=json";
-
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        string page1 = "SettlementTypes?$select=Global_Type&$filter=Code eq '" + (string)config["Current_Settlement_Type"] + "'&$format=json";
-
-                        HttpWebResponse httpResponse1 = Credentials.GetOdataData(page1);
-                        using (var streamReader1 = new StreamReader(httpResponse1.GetResponseStream()))
-                        {
-                            var result1 = streamReader1.ReadToEnd();
-
-                            var details1 = JObject.Parse(result1);
-
-                            foreach (JObject config1 in details1["value"])
-                            {
-                                SettlementT = (string)config1["Global_Type"];
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return SettlementT;
-        }
-        public static bool UnitHasPreliquisites(string RegNo, string Unit, string Sem)
+        public static bool UnitHasPreliquisites(string RegNo, string Unit)
         {
             bool s = false;
             try
@@ -372,7 +355,7 @@ namespace New_Student_Portal.Models
                     {
                         foreach (JObject config in details["value"])
                         {
-                            string pageAudit = "StudentUnitsAudit?$select=Unit,Semester,Progress_Status&$filter=StudentNo eq '" + RegNo + "' and Unit eq '" + (string)config["Prerequisite_Unit"] + "' and (Progress_Status eq 'Future' or Progress_Status eq 'Registered')&$format=json";
+                            string pageAudit = "StudentUnitsAudit?$select=Unit&$filter=StudentNo eq '" + RegNo + "' and Unit eq '" + (string)config["Prerequisite_Unit"] + "' and Progress_Status eq 'Future'&$format=json";
                             HttpWebResponse httpResponseAudit = Credentials.GetOdataData(pageAudit);
                             using (var streamReaderAudit = new StreamReader(httpResponseAudit.GetResponseStream()))
                             {
@@ -382,17 +365,7 @@ namespace New_Student_Portal.Models
 
                                 if (detailsAudit["value"].Count() > 0)
                                 {
-                                    foreach (JObject config1 in detailsAudit["value"])
-                                    {
-                                        if ((string)config1["Progress_Status"] == "Registered" && (string)config1["Semester"] != Sem)
-                                        {
-                                            continue;
-                                        }
-                                        else
-                                        {
-                                            s = true;
-                                        }
-                                    }
+                                    s = true;
                                 }
                             }
                         }
@@ -454,36 +427,30 @@ namespace New_Student_Portal.Models
             }
             return fulName;
         }
-        public static bool SendEmailAlert(string body, string recepient, string subject)
+        public static Error SendEmailAlert(string body, string recepient, string subject)
         {
-            Boolean x = false;
-
-            var a = "";
+            Error err = new Error();
+            bool x = false;
             try
             {
                 x = Credentials.ObjNav.SendEmail(ref recepient, subject, body);
-                //string SMTPHost = "smtp.gmail.com";
-                //string fromAddress = "testjooust@gmail.com";
-                //string toAddress = recepient;
-                //System.Net.Mail.MailMessage mail_ = new System.Net.Mail.MailMessage();
-                //mail_.To.Add(toAddress);
-                //mail_.Subject = subject;
-                //mail_.From = new System.Net.Mail.MailAddress(fromAddress);
-                //mail_.Body = body;
-                //mail_.IsBodyHtml = true;
-
-                //var smtp = new SmtpClient(SMTPHost, 587)
-                //{
-                //    Credentials = new NetworkCredential("testjooust@gmail.com", "123@Team"),
-                //    EnableSsl = true
-                //};
-                //smtp.Send(mail_);
+                if (x)
+                {
+                    err.Message = "";
+                    err.success = true;
+                }
+                else
+                {
+                    err.Message = "Problem while sending email";
+                    err.success = false;
+                }
             }
             catch (Exception ex2)
             {
-                ex2.Data.Clear();
+                err.Message = ex2.Message;
+                err.success = false;
             }
-            return x;
+            return err;
         }
         public static bool ChangeStudentPassword(string User, string password)
         {
@@ -531,7 +498,7 @@ namespace New_Student_Portal.Models
             bool[] allow = new bool[2];
             try
             {
-                string page = "SemesterList?$select=Allow_Exam_Card_Generation,Allow_Lecturer_Evaluation&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
+                string page = "SemesterList?$select=Allow_Exam_Card_Generation&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -544,7 +511,7 @@ namespace New_Student_Portal.Models
                     foreach (JObject config in details["value"])
                     {
                         allow[0] = (bool)config["Allow_Exam_Card_Generation"];
-                        allow[1] = (bool)config["Allow_Lecturer_Evaluation"];
+                        allow[1] = false;// (bool)config["Allow_Lecturer_Evaluation"];
                     }
                 }
             }
@@ -602,6 +569,28 @@ namespace New_Student_Portal.Models
                 }
             }
             return Name;
+        }
+        public static string Get_Gender(string StdNo)
+        {
+            string g = "";
+
+            string page = "CustomerList?$select=Gender&$filter=No eq '" + StdNo + "'&$format=json";
+
+            HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+
+                var details = JObject.Parse(result);
+                if (details["value"].Count() > 0)
+                {
+                    foreach (JObject config in details["value"])
+                    {
+                        g = (string)config["Gender"];
+                    }
+                }
+            }
+            return g;
         }
         public static string GetStudentRegisteredProgramme(string RegNo)
         {
@@ -670,83 +659,6 @@ namespace New_Student_Portal.Models
                     foreach (JObject config in details["value"])
                     {
                         s = (string)config["Description"];
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return s;
-        }
-        public static bool IsProgrammeShortCourse(string Prog)
-        {
-            bool s = false;
-            try
-            {
-                string page = "ProgrammeList?$select=Short_Course&$filter=Code eq '" + Prog + "' and Short_Course eq true&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-                    if (details["value"].Count() > 0)
-                    {
-                        s = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return s;
-        }
-        public static string GetBibleDescription(string Code)
-        {
-            string s = "";
-            try
-            {
-                string page = "BSGroupList?$filter=Code eq '" + Code + "'&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        s = (string)config["Description"];
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return s;
-        }
-        public static bool RequestedTobeABsLeader(string StdNo, string Sem)
-        {
-            bool s = false;
-            try
-            {
-                string page = "BsLeader?$filter=No eq '" + StdNo + "' and Semester eq '" + Sem + "' and Status eq 'Open'&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    if (details["value"].Count() > 0)
-                    {
-                        s = true;
                     }
                 }
             }
@@ -844,7 +756,7 @@ namespace New_Student_Portal.Models
             bool Allow = false;
             try
             {
-                string page = "GraduatingStudentList?$select=No&$filter=No eq '" + StdNo + "'&format=json";
+                string page = "GraduatingStudentList?$select=No&$filter=No eq '" + StdNo + "'&$format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -865,7 +777,7 @@ namespace New_Student_Portal.Models
             }
             return Allow;
         }
-        public static bool AllowGraduationApplication(string StdNo)
+        public static bool AllowGraduationApplication()
         {
             bool Allow = false;
             try
@@ -1020,6 +932,198 @@ namespace New_Student_Portal.Models
             }
             return Allow;
         }
+        public static bool AllowAdvanceBooking(string CurrentSem)
+        {
+            bool b = false;
+            try
+            {
+                string page = "GeneralSetups?$filter=Allow_Advance_Hostel_Booking eq true&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        string pageSem = "SemesterList?$filter=Advance_Hostel_Booking eq true&$format=json";
+                        HttpWebResponse httpResponseSem = Credentials.GetOdataData(pageSem);
+                        using (var streamReaderSem = new StreamReader(httpResponseSem.GetResponseStream()))
+                        {
+                            var resultSem = streamReaderSem.ReadToEnd();
+
+                            var detailsSem = JObject.Parse(resultSem);
+                            if (detailsSem["value"].Count() > 0)
+                            {
+                                foreach (JObject config in detailsSem["value"])
+                                {
+                                    if (CurrentSem == (string)config["Code"])
+                                    {
+                                        b = false;
+                                    }
+                                    else
+                                    {
+                                        b = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool HasNotClearedRoom(string studentNo, string Sem)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentHostelRooms?$filter=Student eq '" + studentNo + "' and Semester ne '" + Sem + "' and Cleared eq false&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool QualifyForSupplimentary(string RegNo, string Prog, string Stage)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Stage' and Failed eq true and Supp_Taken eq false&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool QualifyForRetake(string RegNo, string Prog, string Stage)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentUnits?$filter=Student_No eq '" + RegNo + "' and Released eq true and Programme eq '" + Prog + "' and Stage eq '" + Stage + "' and Register_for eq 'Supplementary' and Failed eq true and Supp_Taken eq false&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool AllowSupp_Special(string Sem)
+        {
+            bool b = false;
+            try
+            {
+                string page = "SemesterList?$filter=Code eq '" + Sem + "' and Allow_Supp_Spec_Registration eq true&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static bool HasAdvancedBookedARoom(string studentNo, string Sem)
+        {
+            bool b = false;
+            try
+            {
+                string page = "StudentHostelRooms?$filter=Student eq '" + studentNo + "' and Semester eq '" + Sem + "' and Cleared eq false and Advanced_Booking eq true&$format=json";
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    if (details["value"].Count() > 0)
+                    {
+                        b = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return b;
+        }
+        public static string AdvanceBookingSemester()
+        {
+            string sem = "";
+            try
+            {
+                string pageSem = "SemesterList?$filter=Advance_Hostel_Booking eq true&$format=json";
+                HttpWebResponse httpResponseSem = Credentials.GetOdataData(pageSem);
+                using (var streamReaderSem = new StreamReader(httpResponseSem.GetResponseStream()))
+                {
+                    var resultSem = streamReaderSem.ReadToEnd();
+
+                    var detailsSem = JObject.Parse(resultSem);
+                    if (detailsSem["value"].Count() > 0)
+                    {
+                        foreach (JObject config in detailsSem["value"])
+                        {
+                            sem = (string)config["Code"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return sem;
+        }
         public static string GetDocRejectionComment(string DocNo, int SeqNo)
         {
             string comment = "";
@@ -1146,26 +1250,6 @@ namespace New_Student_Portal.Models
             }
             return count;
         }
-        public static string LeadershipOption()
-        {
-            string LshpOptopn = "";
-            string pageLine = "GeneralSetups?$select=BSG_Leadership_Options&$format=json";
-            HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-
-                var details = JObject.Parse(result);
-                if (details["value"].Count() > 0)
-                {
-                    foreach (var c in details["value"])
-                    {
-                        LshpOptopn = (string)c["BSG_Leadership_Options"];
-                    }
-                }
-            }
-            return LshpOptopn;
-        }
         public static string[] GetStudentDimensions(string RegNo)
         {
             string[] dtMenu = new string[3];
@@ -1276,8 +1360,7 @@ namespace New_Student_Portal.Models
         public static int GetTotalAttendance(string StdNo, string Sem, string Unit)
         {
             int count = 0;
-            //string pageLine = "ClassAttendanceLines?$count=true&$filter=StudentNo eq '" + StdNo + "' and Semester eq '" + Sem + "' and UnitCode eq '" + Unit + "' and Attendance eq 1 and Posted eq true&$format=json";
-            string pageLine = "ClassAttendanceLines?$count=true&$filter=StudentNo eq '" + StdNo + "' and Semester eq '" + Sem + "' and UnitCode eq '" + Unit + "' and Attendance eq 1&$format=json";
+            string pageLine = "ClassAttendanceLines?$count=true&$filter=StudentNo eq '" + StdNo + "' and Semester eq '" + Sem + "' and UnitCode eq '" + Unit + "' and Attendance eq 1 and Posted eq true&$format=json";
             HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -1308,7 +1391,7 @@ namespace New_Student_Portal.Models
         }
         public static string GetClearanceApprovalStatus(string DocNo, int Sequence)
         {
-            string s = "";
+            string s = "Open";
             try
             {
                 string page = "StudentReqApprovalList?$select=Status&$filter=Document_No eq '" + DocNo + "' and Sequence_No eq " + Sequence + "&format=json";

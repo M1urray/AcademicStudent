@@ -44,8 +44,8 @@ namespace New_Student_Portal.Controllers
                                 ExamSemesters examSemResults = new ExamSemesters();
                                 string Sem = (string)config1["Code"];
                                 List<ExamResults> examR = new List<ExamResults>();
-                                string page = "StudentsUnits?$select=Unit,UnitDescription,Grade,GPA,GPA_Quality_Points,NoOfUnits,Earned_No_of_Units,FinalScore&$filter=StudentNo eq '"
-                                    + RegNo + "' and Semester eq '" + Sem + "' and Programme eq '" + Prog + "'&$format=json";
+                                string page = "StudentsUnits?$select=Stage,Unit,UnitDescription,Grade,GPA,GPA_Quality_Points,NoOfUnits,Earned_No_of_Units,FinalScore&$filter=StudentNo eq '"
+                                    + RegNo + "' and Semester eq '" + Sem + "' and Programme eq '" + Prog + "' and Released eq true and Supp_Taken eq false&$format=json";
                                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                                 {
@@ -55,6 +55,7 @@ namespace New_Student_Portal.Controllers
 
                                     if (details["value"].Count() > 0)
                                     {
+                                        string Stage = "";
                                         foreach (JObject config in details["value"])
                                         {
                                             ExamResults R = new ExamResults();
@@ -66,9 +67,11 @@ namespace New_Student_Portal.Controllers
                                             R.GltyPoints = (string)config["GPA_Quality_Points"];
                                             R.TotalUnits = (string)config["NoOfUnits"];
                                             R.Marks = (string)config["FinalScore"];
+                                            Stage = (string)config["Stage"];
                                             examR.Add(R);
                                         }
-                                        examSemResults.Semester = Sem;
+                                        examSemResults.Stage = Stage;
+                                        examSemResults.Semester = Stage + "-" + Sem;
                                         examSemResults.ListOfResults = examR;
                                         examResults.Add(examSemResults);
                                     }
@@ -76,7 +79,7 @@ namespace New_Student_Portal.Controllers
                             }
                         }
                     }
-                    return View(examResults);
+                    return View(examResults.OrderBy(x=>x.Stage).ToList());
                 }
             }
             catch (Exception ex)

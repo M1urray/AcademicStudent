@@ -24,6 +24,9 @@
                                     <th width="60%">
                                         Description
                                     </th>
+                                    <th width="60%">
+                                        Accommondation Fee
+                                    </th>
                                     <th width="20%">
                                         Action
                                     </th>
@@ -45,8 +48,11 @@
                                                         @Html.DisplayFor(modelItem => item.Description)
                                                     </td>
                                                     <td>
+                                                        @Html.DisplayFor(modelItem => item.Cost)
+                                                    </td>
+                                                    <td>
                                                         <button onclick="LoadHostelRoomList('@item.AssetNo','@item.Description');" class="btn btn-sm btn-danger">Available Room</button>
-                                                       @* <a href="@Url.Action("HostelRoomList", "Welfare", new { HostelCode = item.AssetNo,HostelName=item.Description })" class="btn btn-sm btn-danger">Available Room</a>*@
+                                                        @* <a href="@Url.Action("HostelRoomList", "Welfare", new { HostelCode = item.AssetNo,HostelName=item.Description })" class="btn btn-sm btn-danger">Available Room</a>*@
                                                     </td>
                                                 </tr>
                                             }
@@ -54,7 +60,7 @@
                                         else
                                         {
                                             <tr>
-                                                <td colspan="2" style="color:red">
+                                                <td colspan="3" style="color:red">
                                                     No Asset Records Found
                                                 </td>
                                             </tr>
@@ -72,7 +78,7 @@
 <script type="text/javascript">
     var LoadHostelRoomList = function (HostelCode, HostelName) {
         ShowProgress();
-        window.location = "/Welfare/HostelRoomList?HostelCode=" + HostelCode + "&HostelName=" + HostelName;
+        window.location = '@Url.Action("HostelRoomList", "Welfare")?HostelCode=' + HostelCode + '&HostelName=' + HostelName;
     }
 </script>
 

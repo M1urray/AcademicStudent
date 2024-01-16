@@ -161,9 +161,9 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ExamResultsController.cs" />
     <Compile Include="Controllers\FinancialController.cs" />
-    <Compile Include="Controllers\GradeCompaintController.cs" />
     <Compile Include="Controllers\LecturerEvaluationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\ViewDocumentsController.cs" />
     <Compile Include="Controllers\WelfareController.cs" />
@@ -193,7 +193,6 @@
     <Compile Include="ViewModel\Error.cs" />
     <Compile Include="ViewModel\ExamResults.cs" />
     <Compile Include="ViewModel\FeeStatement.cs" />
-    <Compile Include="ViewModel\Grade_Compaint.cs" />
     <Compile Include="ViewModel\Hostel.cs" />
     <Compile Include="ViewModel\HostelBookingView.cs" />
     <Compile Include="ViewModel\ImportantDocs.cs" />
@@ -202,6 +201,7 @@
     <Compile Include="ViewModel\MyConstant.cs" />
     <Compile Include="ViewModel\NonResidenceData.cs" />
     <Compile Include="ViewModel\Notifications.cs" />
+    <Compile Include="ViewModel\Payment.cs" />
     <Compile Include="ViewModel\PaymentPlan.cs" />
     <Compile Include="ViewModel\ProgrammeDetails.cs" />
     <Compile Include="ViewModel\Receipts.cs" />
@@ -233,16 +233,13 @@
     <Content Include="assets\Fonts\remixicon.svg" />
     <Content Include="assets\Fonts\remixicon.symbol.svg" />
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
+    <Content Include="assets\images\bg.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
-    <Content Include="assets\images\ajax-loader2.gif" />
-    <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\login-bg.gif" />
-    <Content Include="assets\images\login-bg2.jpg" />
     <Content Include="assets\images\logo2.png" />
+    <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
     <Content Include="assets\images\profile_m.png" />
-    <Content Include="assets\images\retina_logo3.png" />
     <Content Include="assets\js\app.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery2.0.3.min.js" />
@@ -463,7 +460,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Downloads\" />
     <Folder Include="Views\LecturerEvaluation\" />
   </ItemGroup>
   <ItemGroup>
@@ -556,6 +552,7 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
+    <Content Include="Downloads\Jan 2022 semester plan %283%29.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -658,25 +655,19 @@
     <Content Include="Views\Alumni\Partial Views\EmpHistForm.cshtml" />
     <Content Include="Views\Alumni\Partial Views\QualHistForm.cshtml" />
     <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
-    <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BsDiv.cshtml" />
-    <Content Include="Views\Alumni\StudentRequisitions.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\NewAcademicRequisition.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\ProgrammeTransit.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\AskLeadershipWithGroup.cshtml" />
-    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
-    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestList.cshtml" />
-    <Content Include="Views\Course\Partial Views\SpecialExamForm.cshtml" />
-    <Content Include="Views\GradeCompaint\Grade_Complaint_List.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\Grade_Complaint_List_Views.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\NewRequisition.cshtml" />
     <Content Include="Views\Common\AcademicCalender.cshtml" />
-    <Content Include="Web References\NAVWS\Reference.map">
+    <Content Include="Views\Financial\PayFees.cshtml" />
+    <Content Include="Views\Welfare\AdvanceBookedHostel.cshtml" />
+    <Content Include="Views\Course\Partial Views\BasketUnitList.cshtml" />
+    <Content Include="Views\Payment\MakePayment.cshtml" />
+    <Content Include="Views\Dashboard\MakePaymentForm.cshtml" />
+    <None Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
+    <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
+    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
+    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -686,10 +677,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://192.168.0.6:7047/ERP/WS/Chuka%2520University/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://192.168.0.6:7047/ERP/WS/Chuka%2520University/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

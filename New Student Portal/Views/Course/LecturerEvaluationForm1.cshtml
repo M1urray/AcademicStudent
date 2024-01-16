@@ -501,7 +501,7 @@
                     </div>
                 </div>
                 <hr style="border-bottom:3px solid Black" />
-
+               
                 <hr />
                 <div class="responsive-table-plugin d-none" id="Online">
                     <div>
@@ -929,7 +929,7 @@
         ShowProgress();
         $.ajax({
             type: "POST",
-            url: "/LecturerEvaluation/SaveSectionData",
+            url: '@Url.Action("SaveSectionData", "LecturerEvaluation")',
             data: JSON.stringify({ Lec: Lecturer, lecQuiz: LecEval, SectionOne: FirstStep, LastSection: LastStep }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

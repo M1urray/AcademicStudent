@@ -11,6 +11,7 @@
     .card-body {
         padding: 0.7rem 0.5rem;
     }
+
     .w-75 {
         width: 100% !important;
     }
@@ -21,7 +22,7 @@
             <div class="auth-logo">
                 <a href="#" class="logo logo-dark text-center">
                     <span class="logo-lg">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="120" width="100%">
+                        <img src="~/assets/images/logo2.png" alt="" height="150" width="150">
                     </span>
                 </a>
             </div>
@@ -56,10 +57,42 @@
         </div>
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <p> <a href="/Login/ForgotPassword" class="text-muted ms-1">Forgot your password?</a></p>
+                <p> <a href="@Url.Action("ForgotPassword", "Login")" class="text-muted ms-1">Forgot your password?</a></p>
             </div> <!-- end col -->
         </div>
     </div> <!-- end card-body -->
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalReports" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select Gender</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        Gender
+                        <select class="form-select" id="ddlGender" name="ddlGender">
+                            <option value="">----</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <button class="btn btn-primary" onclick="LoginUser()"> Log In </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- end card -->
 <!-- end row -->
@@ -81,20 +114,53 @@
                 var Authedication = {};
                 Authedication.Username = username;
                 Authedication.Password = password;
+
                 ShowProgress();
-                $.ajax({
-                    url: "/Login/LoginUser",
+
+                 $.ajax({
+                    url: '@Url.Action("Get_Gender", "Login")',
                     datatype: "json",
                     type: "POST",
                     data: JSON.stringify({ userlogin: Authedication }),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         if (data.success == true) {
-                            window.location = data.message;
+                            $.ajax({
+                                url: '@Url.Action("LoginUser", "Login")',
+                                datatype: "json",
+                                type: "POST",
+                                data: JSON.stringify({ userlogin: Authedication }),
+                                contentType: "application/json; charset = utf-8",
+                                success: function (data) {
+                                    if (data.success == true) {
+                                        if (data.message == "A") {
+                                            window.location = '@Url.Action("Dashboard", "Alumni")';
+                                        }
+                                        else {
+                                            window.location = '@Url.Action("Dashboard", "Dashboard")';
+                                        }
+                                    }
+                                    else {
+                                        HideProgress();
+                                        Swal.fire('Warning', data.message, 'warning');
+                                    }
+                                },
+                                error: function (err) {
+                                    HideProgress();
+                                    Swal.fire('Error', err, 'error');
+                                }
+                            });
                         }
                         else {
-                            HideProgress();
-                            Swal.fire('Warning', data.message, 'warning');
+                            if (data.ShowERROR == true) {
+                                HideProgress();
+                                Swal.fire('Warning', data.message, 'warning');                                
+                            }
+                            else {
+                                HideProgress();
+                                $("#myModalReports").modal("show");
+                                HideProgress();
+                            }
                         }
                     },
                     error: function (err) {
@@ -105,6 +171,56 @@
             }
         });
     });
+    var LoginUser = function () {
+        var Gender = $("#ddlGender").children("option:selected").val();
+        var username = $("#username").val();
+        var password = $("#userpassword").val();
+        if (username == "") {
+            Swal.fire('Warning', 'Enter Username', 'warning');
+            return;
+        }
+        else if (password == "") {
+            Swal.fire('Warning', 'Enter Your Password', 'warning');
+            return;
+        }
+        else if (Gender == "") {
+            Swal.fire('Warning', 'Select Gender', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            var Authedication = {};
+            Authedication.Username = username;
+            Authedication.Password = password;
+            Authedication.Gender = Gender;
+            $.ajax({
+                url: '@Url.Action("LoginUser", "Login")',
+                datatype: "json",
+                type: "POST",
+                data: JSON.stringify({ userlogin: Authedication }),
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    if (data.success == true) {
+                        if (data.message == "A") {
+                            window.location = '@Url.Action("Dashboard", "Alumni")';
+                        }
+                        else {
+                            window.location = '@Url.Action("Dashboard", "Dashboard")';
+                        }
+                    }
+                    else {
+                        HideProgress();
+                        Swal.fire('Warning', data.message, 'warning');
+                    }
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Error', err, 'error');
+                }
+            });
+        }
+    };
+
     $("#username").keyup(function (event) {
         if (event.keyCode === 13) {
             $("#btnLogin").click();

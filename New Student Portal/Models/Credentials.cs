@@ -12,6 +12,7 @@ namespace New_Student_Portal.Models
     public class Credentials
     {
         public static string fileSourcePath = ConfigurationManager.AppSettings["FILEPATH"];
+        public static string fileDownLoads = ConfigurationManager.AppSettings["DOWNLOADLINKS"];
         public static HttpWebResponse GetOdataData(string page)
         {
             HttpWebResponse httpResponse = null;

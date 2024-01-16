@@ -20,15 +20,9 @@ namespace New_Student_Portal.ViewModel
         public string Score { get; set; }
         public int Index { get; set; }
     }
-    public class ELearningQuiz
-    {
-        public string Quiz { get; set; }
-        public string Asnwer { get; set; }
-        public string Cat { get; set; }
-    }
     public class Eval_Form
     {
-        public List<LecEvaluationQuiz>  Eval_Quiz { get; set; }
+        public List<LecEvaluationQuiz> Eval_Quiz { get; set; }
         public string Category { get; set; }
         public int order { get; set; }
     }

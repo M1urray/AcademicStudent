@@ -24,13 +24,13 @@ namespace New_Student_Portal.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
                 Sem = Session["CurrentSem"].ToString();
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
 
@@ -42,58 +42,19 @@ namespace New_Student_Portal.Controllers
                 if (SectionOne)
                 {
                     Credentials.ObjNav.LecturerEvaluationHeader(RegNo, Lec.Unit, Sem, Stage, Lec.LecNo,
-                        s[0], Lec.LecName, "");
+                        s[0], Lec.LecName, "",0,false,false,false,false,false,false,0,0,false,false,false,false,false,"");
                 }
 
                 foreach (var c in lecQuiz)
                 {
-                    string quizC = c.QuizCategory.ToUpper().Trim();
-                    string quiz = c.Quiz.Trim();
+                    //string[] que = c.Quiz.Trim().Split('.');
+                    string quizC = c.QuizCategory;
+                    string quiz = c.Quiz;
                     decimal score = Convert.ToDecimal(c.Score.Trim());
                     Credentials.ObjNav.SaveLecturerEvaluationForm(RegNo, Lec.Unit, Sem, Lec.LecNo, "", quiz, "",
-                        s[0], score, 0, quizC, false, 0);
+                        s[0], score,0, quizC);
                 }
-                return Json(new { message = "Evaluation Section submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult SaveELearningCourseEvaluation(Lecturer Lec, List<LecEvaluationQuiz> lecQuiz, List<ELearningQuiz> EQuiz)
-        {
-            try
-            {
-                string RegNo = Session["Username"].ToString();
-                string Sem = "";
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                }
-                Sem = Session["CurrentSem"].ToString();
-
-                if (Session["CurrentProgDetails"] == null)
-                {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
-                }
-                string[] s = (string[])Session["CurrentProgDetails"];
-                Credentials.ObjNav.DeleteLecturerEvaluationOnlineLearning(RegNo, Lec.Unit, Sem, "", Lec.LecNo, "");
-
-                foreach (var c in lecQuiz)
-                {
-                    string quizC = c.QuizCategory.ToUpper().Trim();
-                    string quiz = c.Quiz.Trim();
-                    int score = Convert.ToInt32(c.Score.Trim());
-                    Credentials.ObjNav.SaveLecturerEvaluationForm(RegNo, Lec.Unit, Sem, Lec.LecNo, "", quiz, "",
-                        s[0], score, 0, quizC, true, score);
-                }
-                foreach (var c in EQuiz)
-                {
-                    int Cat = Convert.ToInt32(c.Cat);
-                    Credentials.ObjNav.LecturerEvaluationOnlineLearning(RegNo, Lec.Unit, Sem, "", Lec.LecNo, "", c.Quiz, c.Asnwer, Cat);
-                }
-                return Json(new { message = "Evaluation Section submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { message = "Unit " + Lec.UnitName + " Evaluated successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -109,16 +70,15 @@ namespace New_Student_Portal.Controllers
                 string Sem = "";
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
                 }
                 Sem = Session["CurrentSem"].ToString();
 
                 if (Session["CurrentProgDetails"] == null)
                 {
-                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
+                    Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem, "0");
                 }
                 string[] s = (string[])Session["CurrentProgDetails"];
-
                 Credentials.ObjNav.SaveGeneralEvaluationComments(RegNo, Unit, Sem, StaffNo, "", sug1, sug2, sug3, sug4);
 
                 return Json(new { message = "Unit " + UnitName + " Evaluated successfully", success = true }, JsonRequestBehavior.AllowGet);

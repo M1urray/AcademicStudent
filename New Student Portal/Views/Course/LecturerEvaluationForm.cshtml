@@ -13,20 +13,27 @@
     label {
         vertical-align: -webkit-baseline-middle;
     }
+    .p-4 {
+        padding: 0.1rem !important;
+    }
 </style>
 <div class="modal-content">
-    <div class="modal-body" style="font-size: 12px">
-        <p style="font-size: 14px; font-weight: bold; text-decoration: underline;">
-            Introduction
-        </p>
+    <div class="modal-body" style="font-size: 12px">        
         <p>
-            <u><b>PURPOSE AND CONFIDENTIALITY</b></u><br />
-            The purpose of this evaluation is to provide feedback about the course presentation to help in future
-            improvement. Please rate the statements given by choosing the most appropriate score as per the
-            following scale:
+            <u><b>OBJECTIVES</b></u><br />
+            The objectives of this instrument is to provide feedback on the quality of teaching to members of academic staff
         </p>
+        <h6>INSTRUCTIONS</h6>
+        <ul>
+            <li>You are expected to assess the quality of teaching of this course.</li>
+            <li>Your sincere response to all the items is vital to the improvement of the teaching of this course.</li>
+            <li>For each item tick the score that best represents your opinion on the matter.</li>
+            <li>You need not identify yourself.</li>
+            <li>The information you provide will not be used against you or the lecturer.</li>
+        </ul>
+        <hr />
         <p style="font-weight:bold">
-            1=Strongly Disagree; 2=Disagree; 3=Neutral; 4=Agree; 5=Strongly Agree
+            1=Very Poor; 2=Poor; 3=Fair; 4=Good; 5=Very Good
         </p>
         <hr />
         <div class="panel panel-default">
@@ -76,11 +83,11 @@
                                     <thead>
                                         <tr>
                                             <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                            <th width="10%" style="text-align:center">Very Poor</th>
+                                            <th width="10%" style="text-align:center">Poor</th>
+                                            <th width="10%" style="text-align:center">Fair</th>
+                                            <th width="10%" style="text-align:center">Good</th>
+                                            <th width="10%" style="text-align:center">Very Good</th>
                                         </tr>
                                     </thead>
                                     @{ int i = 1;}
@@ -115,7 +122,7 @@
             </div>
             <hr />
             <div class="row">
-                <div class="d-inline col-8 col-sm-8 col-md-8" style="text-align:center">Steps 1 of 5</div>
+                <div class="d-inline col-8 col-sm-8 col-md-8" style="text-align:center">Steps 1 of 4</div>
                 <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
                     <button class="btn btn-sm btn-success" onclick="NextStep('2',true,false,'@Cat');">Next >>></button>
                 </div>
@@ -136,11 +143,11 @@
                                     <thead>
                                         <tr>
                                             <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                            <th width="10%" style="text-align:center">Very Poor</th>
+                                            <th width="10%" style="text-align:center">Poor</th>
+                                            <th width="10%" style="text-align:center">Fair</th>
+                                            <th width="10%" style="text-align:center">Good</th>
+                                            <th width="10%" style="text-align:center">Very Good</th>
                                         </tr>
                                     </thead>
                                     @{ int i = 1;}
@@ -178,7 +185,7 @@
                 <div class="d-inline col-4 col-sm-4 col-md-4">
                     <button class="btn btn-sm btn-primary" onclick="PreviousStep('1');"><<< Back</button>
                 </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 2 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 2 of 4</div>
                 <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
                     <button class="btn btn-sm btn-success" onclick="NextStep('3',false,false,'@Cat');">Next >>></button>
                 </div>
@@ -199,11 +206,11 @@
                                     <thead>
                                         <tr>
                                             <th width="50%">Question</th>
-                                            <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                            <th width="10%" style="text-align:center">Disagree</th>
-                                            <th width="10%" style="text-align:center">Neutral</th>
-                                            <th width="10%" style="text-align:center">Agree</th>
-                                            <th width="10%" style="text-align:center">Strongly Agree</th>
+                                            <th width="10%" style="text-align:center">Very Poor</th>
+                                            <th width="10%" style="text-align:center">Poor</th>
+                                            <th width="10%" style="text-align:center">Fair</th>
+                                            <th width="10%" style="text-align:center">Good</th>
+                                            <th width="10%" style="text-align:center">Very Good</th>
                                         </tr>
                                     </thead>
                                     @{ int i = 1;}
@@ -240,26 +247,26 @@
                 <div class="d-inline col-4 col-sm-4 col-md-4">
                     <button class="btn btn-sm btn-primary" onclick="PreviousStep('2');"><<< Back</button>
                 </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 3 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 3 of 4</div>
                 <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
                     <button class="btn btn-sm btn-success" onclick="NextStep('4',false,false,'@Cat');">Next >>></button>
                 </div>
             </div>
         </div>
-        <div class="d-none" id="Step4">
+        @*<div class="d-none" id="Step4">
             @{ string OnlineCat = "", FaceCat = ""; }
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-weight: bold">
                     D. What was the mode of learning for this course<br />
                     <div style="padding-left:50px">
                         <div class="form-check">
-                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="1" id="flexRadioDefault1" onchange="StudyMode('1');">
+                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="1" id="flexRadioDefault1" onclick="StudyMode(this);">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Online
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="2" id="flexRadioDefault2" onchange="StudyMode('2');">
+                            <input class="form-check-input RadioClass" type="radio" name="AnsStM" value="2" id="flexRadioDefault2" onclick="StudyMode(this);">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Face to Face
                             </label>
@@ -267,7 +274,7 @@
                     </div>
                 </div>
                 <hr style="border-bottom:3px solid Black" />
-                <div class="responsive-table-plugin d-none" id="FaceToFace">
+                <div class="d-none" id="FaceToFace">
                     @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 4))
                     {
                         Cat = "";
@@ -281,11 +288,11 @@
                                         <thead>
                                             <tr>
                                                 <th width="50%">Question</th>
-                                                <th width="10%" style="text-align:center">Strongly Disagree</th>
-                                                <th width="10%" style="text-align:center">Disagree</th>
-                                                <th width="10%" style="text-align:center">Neutral</th>
-                                                <th width="10%" style="text-align:center">Agree</th>
-                                                <th width="10%" style="text-align:center">Strongly Agree</th>
+                                                <th width="10%" style="text-align:center">Very Poor</th>
+                                                <th width="10%" style="text-align:center">Poor</th>
+                                                <th width="10%" style="text-align:center">Fair</th>
+                                                <th width="10%" style="text-align:center">Good</th>
+                                                <th width="10%" style="text-align:center">Very Good</th>
                                             </tr>
                                         </thead>
                                         @{ int i = 1;}
@@ -318,7 +325,7 @@
                         FaceCat = c.Category;
                     }
                 </div>
-                <div class="responsive-table-plugin d-none" id="Online">
+                <div class="d-none" id="Online">
                     @foreach (var c in Model.Eval_Form_Quiz.Where(x => x.order == 5))
                     {
                         Cat = "";
@@ -463,8 +470,8 @@
                     <button class="btn btn-sm btn-success" onclick="NextStep5('@OnlineCat','@FaceCat');">Next >>></button>
                 </div>
             </div>
-        </div>
-        <div class="d-none" id="Step5">
+        </div>*@
+        <div class="d-none" id="Step4">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-weight: bold">
                     E. What elements of the course most contributed to your learning?
@@ -488,9 +495,9 @@
             <hr />
             <div class="row">
                 <div class="d-inline col-4 col-sm-4 col-md-4">
-                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('4');"><<< Back</button>
+                    <button class="btn btn-sm btn-primary" onclick="PreviousStep('3');"><<< Back</button>
                 </div>
-                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 5 of 5</div>
+                <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:center">Steps 4 of 4</div>
                 <div class="d-inline col-4 col-sm-4 col-md-4" style="text-align:right">
                 </div>
             </div>
@@ -845,13 +852,16 @@
             $("#Step5").removeClass("d-none");
         }
     };
-    var StudyMode = function (Type) {
+    var StudyMode = function (myRadio) {
+        alert(myRadio);
+        var Type = myRadio.value;
+        alert(Type);
         if (Type == "1") {
             $("#Online").removeClass("d-none");
-            $("#FaceToFace").addClass("d-none");
+            //$("#FaceToFace").addClass("d-none");
         }
         else {
-            $("#Online").addClass("d-none");
+            //$("#Online").addClass("d-none");
             $("#FaceToFace").removeClass("d-none");
         }
     };

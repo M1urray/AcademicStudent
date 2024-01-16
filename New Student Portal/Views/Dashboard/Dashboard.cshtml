@@ -56,7 +56,7 @@
     }
 
     .card-header, .card-title {
-        background-color: #d10e2c;
+        background-color: #3db166;
     }
 
     .card-title {
@@ -106,11 +106,11 @@
                     {
                         if (Model.Gender == "Female")
                         {
-                            <img src="~/img/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                         else
                         {
-                            <img src="~/img/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                     }
                 }
@@ -170,20 +170,20 @@
                             </div>
                         </div>
                     </div> <!-- end col -->
-                    @if (Model.Qualify_For_Catering)
-                    {
-                        <div class="col-sm-4 col-md-4">
-                            <hr />
-                            <div class="row mb-3">
-                                <label class="col-md-2"></label>
-                                <div class="col-md-8">
-                                    <button class="btn btn-sm btn-danger form-control" onclick="GenerateCateringToken('@Model.Semester');">Get Catering Token</button>
-                                    <b style="color:black">Current Catering Token :</b> <label id="lblToken" class="label badge badge-outline-success"></label>
+                    @*@if (Model.Qualify_For_Catering)
+                        {
+                            <div class="col-sm-4 col-md-4">
+                                <hr />
+                                <div class="row mb-3">
+                                    <label class="col-md-2"></label>
+                                    <div class="col-md-8">
+                                        <button class="btn btn-sm btn-danger form-control" onclick="GenerateCateringToken('@Model.Semester');">Get Catering Token</button>
+                                        <b style="color:black">Current Catering Token :</b> <label id="lblToken" class="label badge badge-outline-success"></label>
+                                    </div>
+                                    <label class="col-md-2"></label>
                                 </div>
-                                <label class="col-md-2"></label>
                             </div>
-                        </div>
-                    }
+                        }*@
                     <div class="col-sm-4 col-md-4">
                         <hr />
                         <div class="row mb-3">
@@ -199,7 +199,7 @@
                         <div class="row mb-3">
                             <label class="col-md-2"></label>
                             <div class="col-md-8">
-                                <button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>
+                                @*<button class="btn btn-sm btn-danger form-control" onclick="GetClassAttendanceList();">View Class Attendance</button>*@
                             </div>
                             <label class="col-md-2"></label>
                         </div>
@@ -222,49 +222,16 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.ProgName)</span>
                             </div>
                         </div>
-                        @if (Model.OtherProg != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Other Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.OtherProg)</span>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.SecondConc != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Double Concentration</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.SecondConc)</span>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Minor != "")
-                        {
-                            <div class="row mb-3">
-                                <label class="col-md-5">Minor Programme</label>
-                                <div class="col-md-7">
-                                    <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Minor)</span>
-                                </div>
-                            </div>
-                        }
                         <div class="row mb-3">
-                            <label class="col-md-5"> Completed Units</label>
+                            <label class="col-md-5"> Attempted Units</label>
                             <div class="col-md-7">
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.AttemptedUnits)</span>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-md-5"> GPA</label>
+                            <label class="col-md-5"> Registered Units</label>
                             <div class="col-md-7">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.GPA)</span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-md-5">Academic Status</label>
-                            <div class="col-md-7">
-                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.AcademicStatus)</span>
+                                <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.RegUnits)</span>
                             </div>
                         </div>
                     </div> <!-- end col -->
@@ -296,6 +263,8 @@
                                 <span class="badge badge-soft-pink"> @Balance</span>
                             </div>
                         </div>
+                        <button class="btn btn-sm btn-success form-control" onclick="MakePayment();">Make Payment</button>
+                        <a href="#" onclick="AlreadyPaid();">Already Paid?</a>
                     </div> <!-- end col -->
                 </div> <!-- end row -->
             </div> <!-- end card-body -->
@@ -362,7 +331,7 @@
         </div> <!-- end card-->
     </div>
 </div>
-
+<hr />
 @*//////////////////////Modal////////////////////////////*@
 <div id="myModalUnits" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -395,8 +364,45 @@
         </div>
     </div>
 </div>
+
+<!--/////////////////payments/////////////////////-->
+<div id="myModalPayment" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Make Payment</h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBodyPayment">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//////////////////////Modal PayNow////////////////////////////*@
+<div id="myModalPayNow" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBodyPayNow">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
+        LoadNotifications();
         if ('@Model.BSGroup' == "") {
             $("#lblJoinBS").text("Join Bible Study(BS) Group");
         }
@@ -404,8 +410,29 @@
             $("#lblJoinBS").text("Bible Study(BS) Group Details");
         }
         $("#lblToken").text(`@Model.Cat_Token`);
-        MyBSInformation();
     });
+    var LoadNotifications = function () {
+         if (parseInt(`@Model.NotfCount`) > 0) {
+             ShowProgress();
+             $.ajax({
+                async: false,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                url: '@Url.Action("NotificationMessages", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBodyNot").html(data);
+                    $("#myModalNotif").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        }
+    };
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
         if (Type == "CurrReg") {
@@ -432,63 +459,23 @@
             }
         });
     }
-    var MyBSInformation = function () {
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: 'HTML',
-            url: '@Url.Action("GetBsDetailForm", "Dashboard")',
-            success: function (data) {
-                $("#divBs").html(data);
-                HideProgress();
-                LoadNotifications();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var LoadNotifications = function () {
-         if (parseInt(`@Model.NotfCount`) > 0) {
-             ShowProgress();
-             $.ajax({
-                async: false,
-                type: "GET",
-                dataType: 'HTML',
-                contentType: false,
-                processData: false,
-                url: '@Url.Action("NotificationMessages", "Common")',
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBodyNot").html(data);
-                    $("#myModalNotif").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var BSDetails = function (BsG) {
+    var BSDetails = function () {
         var x = document.getElementById("labelT");
         var url;
-        if (BsG != "") {
-            x.innerHTML = 'Bible Study Details';
+        if (`@Model.BSGroup` != "") {
+            x.innerHTML = 'Bible Study(BS) Details';
             url = "/Dashboard/GetBSDetails";
         }
         else {
-            x.innerHTML = 'Join a Bible Study(BSG)';
-           url = "/Dashboard/JoinBSGroup";
+            x.innerHTML = 'Join a Bible Study(BS)';
+            url = "/Dashboard/JoinBSGroup";
         }
         ShowProgress();
         $.ajax({
             url: url,
             datatype: "json",
             type: "POST",
-            data: JSON.stringify({ BSG: BsG }),
+            data: JSON.stringify({ BSG:`@Model.BSGroup`  }),
             contentType: "application/json; charset = utf-8",
             success: function (data) {
                 HideProgress();
@@ -629,9 +616,8 @@
                 contentType: "application/json; charset = utf-8",
                 success: function (data) {
                     HideProgress();
-                    MyBSInformation();
-                    $("#myModalUnits").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
+                    CreateDocument('BS');
+                   MSemesterdelodelSwal.fire('Success', data.message, 'success');
                 },
                 error: function () {
                     HideProgress();
@@ -639,31 +625,6 @@
                 }
             });
         }
-    }
-    var RequestToBeBSLeader = function () {
-        var url;
-        if (`@Model.LeadershipOption` == "Request Against A Group") {
-            url = "/Dashboard/JoinBSGroupAgainstGroup";
-        }
-        else {
-            url = "/Dashboard/RequestBsGroupLeader";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                MyBSInformation();
-                Swal.fire('Success', data.message, 'success');
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
     }
     var SubmitCreatedDocument = function (Type) {
         var Code = $("#txtCode").val();
@@ -751,7 +712,7 @@
                 dataType: 'HTML',
                 contentType: "application/json; charset = utf-8",
                 data: JSON.stringify({ Sem: Sem }),
-                url: "/Common/GetAcademicCalender",
+                url: '@Url.Action("GetAcademicCalender", "Common")',
                 success: function (data) {
                     HideProgress();
                     $("#modalBody").html(data);
@@ -790,7 +751,7 @@
             datatype: "json",
             type: "POST",
             contentType: "application/json; charset = utf-8",
-            url: "/Dashboard/GenerateNewCateringToken",
+            url: '@Url.Action("GenerateNewCateringToken", "Dashboard")',
             success: function (data) {
                 if (data.success == true) {
                     HideProgress();
@@ -808,12 +769,12 @@
             }
         });
     };
-    var ViewAttachment = function (tbl, No, Id, fName, ext) {
+     var ViewAttachment = function (tbl, No, Id, fName, ext) {
         $.ajaxSetup({ cache: false });
         ShowProgress();
         $.ajax({
             cache: false,
-            url: "/Common/DocumentAttachmentview",
+            url: '@Url.Action("DocumentAttachmentview", "Common")',
             type: "POST",
             datatype: "json",
             cache: false,
@@ -847,6 +808,66 @@
             error: function (err) {
                 HideProgress();
                 Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+    var MakePayment = function () {
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            datatype: "json",
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            url: '/Dashboard/MakePayment',
+            success: function (data) {
+                $("#modalBodyPayment").html(data);
+                HideProgress();
+                $("#myModalPayment").modal("show");
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+    var PayNow = function () {
+        ShowProgress();
+        var Service = $("#ddlService").children("option:selected").val();
+        var amounttopay = $("#amountopay").val();
+        if (amounttopay == "0") {
+            HideProgress();
+            Swal.fire('Warning', 'Amount must not be zero', 'warning');
+        }
+        if (amounttopay == "") {
+            HideProgress();
+            Swal.fire('Warning', 'Amount must have a value ', 'warning');
+        }
+        else if (Service == "") {
+            HideProgress();
+            Swal.fire('Warning', 'Please select service', 'warning');
+        } else {
+            window.location = "/Payment/MakePayment?DocNo=" + amounttopay + "&SID=" + Service;
+        }
+
+    }
+    var AlreadyPaid = function () {
+        var msg = "";
+        ShowProgress();
+        $.ajax({
+            url: "/Payment/AlreadyPaid",
+            datatype: "json",
+            type: "POST",
+            data: JSON.stringify({ Type: "" }),
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                msg = data.message;
+                Swal.fire("", msg, 'info');
+            },
+            error: function () {
+                HideProgress();
+                Swal('Warning', 'Problem encountered while retrieving payment', 'warning');
             }
         });
     };

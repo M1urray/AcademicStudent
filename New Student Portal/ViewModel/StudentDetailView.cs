@@ -29,7 +29,6 @@ namespace New_Student_Portal.ViewModel
         public string Minor { get; set; }
         public bool MadeRequest { get; set; }
         public string DocNo { get; set; }
-        public string DateRequested { get; set; }
         public string PersonalMail { get; set; }
         public string Profession { get; set; }
         public string Company { get; set; }
@@ -40,7 +39,6 @@ namespace New_Student_Portal.ViewModel
         public string AcademicStatus { get; set; }
         public string GPA { get; set; }
         public string Semester { get; set; }
-        public string Status { get; set; }
         public int NotfCount { get; set; }
         public bool IsBsLeader { get; set; }
         public string BSGroup { get; set; }
@@ -51,8 +49,6 @@ namespace New_Student_Portal.ViewModel
         public Bs BstudyDetails { get; set; }
         public bool Qualify_For_Catering { get; set; }
         public string Cat_Token { get; set; }
-        public string LeadershipOption { get; set; }
-        public ProgrammeList Enrolled_Prog { get; set; }
     }
     public class InternalMemos
     {
@@ -104,12 +100,10 @@ namespace New_Student_Portal.ViewModel
     }
     public class BsMembers
     {
-        public string Type { get; set; }
         public string Student_No { get; set; }
         public string Name { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
-        public string Programme { get; set; }
     }
     public class EmpHist
     {
@@ -129,5 +123,18 @@ namespace New_Student_Portal.ViewModel
     {
         public string Prog { get; set; }
         public string ProgName { get; set; }
+    }
+
+    public class Payments
+    {
+        public List<SelectListItem> ListofServices { get; set; }
+        public string ServiceCode { get; set; }
+        public string ServiceDesc { get; set; }
+    }
+
+    public class Services
+    {
+        public string ServiceCode { get; set; }
+        public string ServiceDesc { get; set; }
     }
 }
