@@ -1080,7 +1080,7 @@ namespace New_Student_Portal.Controllers
                     {
                         Day = c.Day.Trim();
                     }
-                    Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, 1, ClassCode, Campus, Day, Period);
+                    Credentials.ObjNav.RegisterStudentUnitBasket(RegNo, Sem, "", "", d, 0, ClassCode, Campus, Day, Period);
                     i++;
                 }
                 return Json(new { message = i.ToString() + " Units Selected successfully", success = true }, JsonRequestBehavior.AllowGet);
