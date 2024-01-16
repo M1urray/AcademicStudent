@@ -55,7 +55,7 @@ namespace New_Student_Portal.Models
             try
             {
                 string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No,Student_Residence&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
+                string page = "CourseReg?$select = Programme,Stage,Class_Code,UnitsTaken,Booked_Hostel_No&$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + CurrSem + "' and Programme eq '" + Prog + "'&$format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))

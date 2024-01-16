@@ -1,4 +1,10 @@
 ﻿@model IEnumerable<New_Student_Portal.ViewModel.Grade_Compaint>
+<style>
+    thead {
+        color:white;
+        background-color:black;
+    }
+</style>
 <div class="responsive-table-plugin">
     <div class="table-rep-plugin">
         <div class="table-responsive" data-pattern="priority-columns">
@@ -11,19 +17,19 @@
                         <th width="10%">
                             Unit
                         </th>
-                        <th width="40%">
+                        <th width="30%">
                             Description
                         </th>
-                        <th width="20%" style="text-align:right">
+                        <th width="20%">
                             Semester
                         </th>
-                        <th width="20%" style="text-align:right">
+                        <th width="20%">
                             Current Grade
                         </th>
-                        <th width="20%" style="text-align:right">
+                        <th width="20%">
                             New Grade
                         </th>
-                        <th width="20%" style="text-align:right">
+                        <th width="20%">
                             Status
                         </th>
                     </tr>
@@ -66,7 +72,7 @@
                                             }
                                             else
                                             {
-                                                <span class="badge badge-soft-warning">No Action</span>
+                                                <span class="badge badge-soft-warning">Pending Action</span>
                                             }
                                         </td>
                                     </tr>

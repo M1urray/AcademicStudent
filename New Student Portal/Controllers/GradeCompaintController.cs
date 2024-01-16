@@ -53,6 +53,7 @@ namespace New_Student_Portal.Controllers
                                 newDoc.Current_Grade = (string)config["OriginalGrade"];
                                 newDoc.New_Grade = (string)config["NewGrade"];
                                 newDoc.Status = (string)config["Status"];
+                                newDocList.Add(newDoc);
                             }
                         }
                     }
@@ -76,7 +77,7 @@ namespace New_Student_Portal.Controllers
                 }
                 string StudentNo = Session["Username"].ToString();
                 List<DropdownList> semesterList = new List<DropdownList>();
-                string page = "StudentUnits?$select=Semester&$filter=Student_No eq '" + StudentNo + "' and Released eq true&$format=json";
+                string page = "StudentUnits?$select=Semester,Grade&$filter=Student_No eq '" + StudentNo + "' and Released eq true&$format=json";
 
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -87,10 +88,13 @@ namespace New_Student_Portal.Controllers
 
                     foreach (JObject config in details["value"])
                     {
-                        DropdownList ddl = new DropdownList();
-                        ddl.Value = (string)config["Semester"];
-                        ddl.Text = (string)config["Semester"];
-                        semesterList.Add(ddl);
+                        if (NonCalculatedGrade((string)config["Grade"]))
+                        {
+                            DropdownList ddl = new DropdownList();
+                            ddl.Value = (string)config["Semester"];
+                            ddl.Text = (string)config["Semester"];
+                            semesterList.Add(ddl);
+                        }
                     }
                 }
                 New_Requisition newR = new New_Requisition
@@ -120,7 +124,7 @@ namespace New_Student_Portal.Controllers
                 string StudentNo = Session["Username"].ToString();
                 #region Unit List
                 List<DropdownList> unitList = new List<DropdownList>();
-                string page = "StudentUnits?$select=Unit,Unit_Description&$filter=Student_No eq '" + StudentNo + "' and Semester eq '" + Sem + "' and Released eq true&$format=json";
+                string page = "StudentUnits?$select=Unit,Unit_Description,Grade&$filter=Student_No eq '" + StudentNo + "' and Semester eq '" + Sem + "' and Released eq true&$format=json";
 
                 HttpWebResponse httpResponseCampus = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseCampus.GetResponseStream()))
@@ -132,10 +136,13 @@ namespace New_Student_Portal.Controllers
 
                     foreach (JObject config in details["value"])
                     {
-                        DropdownList Unit = new DropdownList();
-                        Unit.Value = (string)config["Unit"];
-                        Unit.Text = (string)config["Unit"] + "-" + (string)config["Unit_Description"];
-                        unitList.Add(Unit);
+                        if (NonCalculatedGrade((string)config["Grade"]))
+                        {
+                            DropdownList Unit = new DropdownList();
+                            Unit.Value = (string)config["Unit"];
+                            Unit.Text = (string)config["Unit"] + "-" + (string)config["Unit_Description"];
+                            unitList.Add(Unit);
+                        }
                     }
                 }
                 #endregion
@@ -154,6 +161,52 @@ namespace New_Student_Portal.Controllers
             {
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult SubmitGradeComplain(string Sem, string Unit, string Reason)
+        {
+            try
+            {
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect(Url.Action("Login", "Login"));
+                }
+                string RegNo = Session["Username"].ToString();
+
+                Credentials.ObjNav.InsertGradeCompain(RegNo, Unit, Sem, Reason);
+                return Json(new { message = "Grade Complaint submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        protected bool NonCalculatedGrade(string grade)
+        {
+            bool All = false;
+            try
+            {
+                string page = "Exam_Rules?$select=Code&$filter=Code eq '" + grade + "' and Code ne 'W' and Code ne 'P'&$format=json";
+
+                HttpWebResponse httpResponseCampus = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponseCampus.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+
+
+                    if (details["value"].Count() > 0)
+                    {
+                        All = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return All;
         }
     }
 }

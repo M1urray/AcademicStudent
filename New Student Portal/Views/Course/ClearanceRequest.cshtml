@@ -1,6 +1,6 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "ClearanceRequest";
+    ViewBag.Title = "Clearance Request";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -13,31 +13,68 @@
         <h4 class="modal-title"><span class="spanClass"><label id="lblTitle"></label></span></h4>
     </div>
     <div class="modal-body">
+        <input type="button" class="btn btn-danger btnClass" value="New Requisition" onclick="GetNewClearanceRequest();" />
+        <hr />
         <div id="divRequisition"></div>
     </div>
 </div>
-
+@*//////////////////////Modal////////////////////////////*@
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        GetNewClearanceRequest();
+        LoadClearanceLines();
     });
-    function GetNewClearanceRequest() {
+    function LoadClearanceLines() {
         ShowProgress();
         $.ajax({
-            async: true,
+            async: false,
             type: "GET",
             dataType: 'HTML',
             contentType: false,
             processData: false,
-            url: "/Course/NewClearanceRequest",
+            url: "/Course/ClearanceRequisitionLine",
             success: function (data) {
                 $("#divRequisition").html(data);
                 HideProgress();
             },
             error: function () {
                 HideProgress();
-                Swal.fire('Error', 'There is some problem to process your request. Please try after some time', 'error');
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+            }
+        });
+    }
+    function GetNewClearanceRequest() {       
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'New Requisition Form';
+        ShowProgress();
+        $.ajax({
+            url: "/Course/NewClearanceRequest",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
             }
         });
     }
@@ -49,27 +86,27 @@
         StudentReqs.Remarks = "";
         ShowProgress();
         $.ajax({
-                url: "/Course/SubmitClearanceRequest",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ regData: StudentReqs }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        HideProgress();
-                        GetNewClearanceRequest();
-                        Swal.fire('Success', data.message, 'success');
-                    }
-                    else {
-                        HideProgress();
-                        Swal.fire('Warning', data.message, 'warning');
-                    }
-                },
-                error: function (err) {
+            url: "/Course/SubmitClearanceRequest",
+            datatype: "json",
+            type: "POST",
+            data: JSON.stringify({ regData: StudentReqs }),
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                if (data.success == true) {
                     HideProgress();
-                    Swal.fire('Error', err, 'error');
+                    GetNewClearanceRequest();
+                    Swal.fire('Success', data.message, 'success');
                 }
-            });
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Error', err, 'error');
+            }
+        });
     };
     var SubmitCollectionDate = function () {
         var date = $("#dtPicker").val();

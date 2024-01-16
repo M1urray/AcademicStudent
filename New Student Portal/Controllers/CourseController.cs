@@ -1154,13 +1154,8 @@ namespace New_Student_Portal.Controllers
 
                     Sem = Session["CurrentSem"].ToString();
 
-                    if (Session["CurrentProgDetails"] == null)
-                    {
-                        Session["CurrentProgDetails"] = CommonClass.CurrentCourseRegistration(RegNo, Sem);
-                    }
-                    string[] s = (string[])Session["CurrentProgDetails"];
-
-                    bool paymntPlan = Credentials.ObjNav.RegisterStudentUnits(RegNo, Sem, "", s[0], 0, false);
+                    string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                    bool paymntPlan = Credentials.ObjNav.RegisterStudentUnits(RegNo, Sem, "", Prog, 0, false);
 
 
                     if (paymntPlan)
@@ -2479,81 +2474,20 @@ namespace New_Student_Portal.Controllers
                     bool GradAllowed = CommonClass.AllowGraduationApplication(RegNo);
                     if (GradAllowed)
                     {
-                        StudentDetailView Details = new StudentDetailView();
-                        #region Graduation Header
-                        string pageGradReq = "GraduationRequest?$filter=StudentNo eq '" + RegNo + "'&$format=json";
-
-                        HttpWebResponse httpResponseGradReq = Credentials.GetOdataData(pageGradReq);
-                        using (var streamReaderGradReq = new StreamReader(httpResponseGradReq.GetResponseStream()))
-                        {
-                            var resultGradReq = streamReaderGradReq.ReadToEnd();
-
-                            var detailsGradReq = JObject.Parse(resultGradReq);
-                            string ProgCode = "";
-                            if (detailsGradReq["value"].Count() > 0)
-                            {
-                                foreach (JObject config in detailsGradReq["value"])
-                                {
-                                    Details.DocNo = (string)config["Code"];
-                                    Details.No = (string)config["StudentNo"];
-                                    Details.Name = (string)config["Names"];
-                                    Details.ID_No = (string)config["IDNumber"];
-                                    Details.Phone_No = (string)config["Telephone"];
-                                    Details.Address = (string)config["Address"];
-                                    Details.E_Mail = (string)config["Email"];
-                                    Details.Balance = CommonClass.GetStudentBalance(RegNo);
-                                    ProgCode = (string)config["Programme"];
-                                    if (ProgCode == "")
-                                    {
-                                        ProgCode = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                                    }
-                                    Details.Prog = ProgCode;
-                                    Details.ProgName = CommonClass.GetProgrammeName(ProgCode);
-                                    Details.PersonalMail = (string)config["PersonalEmail"];
-                                    Details.Profession = (string)config["Currentprofession"];
-                                    Details.Company = (string)config["CurrentInstitustionCompany"];
-                                    Details.CurrentPhoneNo = (string)config["Current_Phone_No"];
-                                    Details.Gown = (string)config["Gown_Required"];
-                                    Details.CollectionPoint = (string)config["Gown_Collection_Campus"];
-                                    Details.MadeRequest = true;
-                                }
-                            }
-                            else
-                            {
-                                #region Graduation Request Header
-                                string page = "CustomerList?$filter=No eq '" + RegNo + "'&$format=json";
-
-                                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                                {
-                                    var result = streamReader.ReadToEnd();
-
-                                    var details = JObject.Parse(result);
-                                    foreach (JObject config in details["value"])
-                                    {
-                                        Details.No = (string)config["No"];
-                                        Details.Name = (string)config["Name"];
-                                        Details.ID_No = (string)config["ID_No"];
-                                        Details.Phone_No = (string)config["Phone_No"];
-                                        Details.Address = (string)config["Address"];
-                                        Details.E_Mail = (string)config["E_Mail"];
-                                        ProgCode = (string)config["Programme_Name"];                                        
-                                        Details.Prog = ProgCode;
-                                        Details.ProgName = (string)config["Programme_Name"];
-                                        Details.MadeRequest = false;
-                                    }
-                                }
-                                #endregion
-                            }
-                        }
-                        #endregion
                         return View();
                     }
                     else
                     {
-                        Error errormsg = new Error();
-                        errormsg.Message = "Graduation request not active at the moment";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        if (HasGradRequest(RegNo))
+                        {
+                            return View();
+                        }
+                        else
+                        {
+                            Error errormsg = new Error();
+                            errormsg.Message = "Graduation request closed at the moment";
+                            return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        }
                     }
                 }
             }
@@ -2563,6 +2497,31 @@ namespace New_Student_Portal.Controllers
                 errormsg.Message = ex.Message;
                 return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
             }
+        }
+        protected bool HasGradRequest(string RegNo)
+        {
+            bool s = false;
+            try
+            {
+                string pageGradReq = "GraduationRequest?$filter=StudentNo eq '" + RegNo + "'&$format=json";
+
+                HttpWebResponse httpResponseGradReq = Credentials.GetOdataData(pageGradReq);
+                using (var streamReaderGradReq = new StreamReader(httpResponseGradReq.GetResponseStream()))
+                {
+                    var resultGradReq = streamReaderGradReq.ReadToEnd();
+
+                    var detailsGradReq = JObject.Parse(resultGradReq);
+                    if (detailsGradReq["value"].Count() > 0)
+                    {
+                        s = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Clear();
+            }
+            return s;
         }
         public PartialViewResult GraduationRequisitionLine()
         {
@@ -2684,7 +2643,6 @@ namespace New_Student_Portal.Controllers
                                                }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList();
                         #endregion
 
-
                         Details.Enrolled_Prog = P;
                         Details.MadeRequest = false;
                     }
@@ -2779,6 +2737,66 @@ namespace New_Student_Portal.Controllers
                 return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
             }
         }
+        public PartialViewResult ClearanceRequisitionLine()
+        {
+            try
+            {
+                List<StudentDetailView> DetailsList = new List<StudentDetailView>();
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect(Url.Action("Login", "Login"));
+                }
+                string RegNo = Session["Username"].ToString();
+                string pageGradReq = "GraduationRequest?$filter=StudentNo eq '" + RegNo + "'&$format=json";
+
+                HttpWebResponse httpResponseGradReq = Credentials.GetOdataData(pageGradReq);
+                using (var streamReaderGradReq = new StreamReader(httpResponseGradReq.GetResponseStream()))
+                {
+                    var resultGradReq = streamReaderGradReq.ReadToEnd();
+
+                    var detailsGradReq = JObject.Parse(resultGradReq);
+                    string ProgCode = "";
+                    if (detailsGradReq["value"].Count() > 0)
+                    {
+                        foreach (JObject config in detailsGradReq["value"])
+                        {
+                            StudentDetailView Details = new StudentDetailView();
+                            Details.DocNo = (string)config["Code"];
+                            Details.No = (string)config["StudentNo"];
+                            Details.Name = (string)config["Names"];
+                            Details.ID_No = (string)config["IDNumber"];
+                            Details.DateRequested = (string)config["Date_Requested"];
+                            Details.Phone_No = (string)config["Telephone"];
+                            Details.Address = (string)config["Address"];
+                            Details.E_Mail = (string)config["Email"];
+                            Details.Balance = CommonClass.GetStudentBalance(RegNo);
+                            ProgCode = (string)config["Programme"];
+                            if (ProgCode == "")
+                            {
+                                ProgCode = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                            }
+                            Details.Prog = ProgCode;
+                            Details.ProgName = CommonClass.GetProgrammeName(ProgCode);
+                            Details.PersonalMail = (string)config["PersonalEmail"];
+                            Details.Profession = (string)config["Currentprofession"];
+                            Details.Company = (string)config["CurrentInstitustionCompany"];
+                            Details.CurrentPhoneNo = (string)config["Current_Phone_No"];
+                            Details.Gown = (string)config["Gown_Required"];
+                            Details.CollectionPoint = (string)config["Gown_Collection_Campus"];
+                            Details.Status = (string)config["Status"];
+                            DetailsList.Add(Details);
+                        }
+                    }
+                }
+                return PartialView("~/Views/Course/Partial Views/ClearanceRequestList.cshtml", DetailsList.OrderByDescending(x => x.DocNo));
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.Message = ex.Message.Replace("'", "");
+                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+        }
         public ActionResult NewClearanceRequest()
         {
             try
@@ -2824,20 +2842,20 @@ namespace New_Student_Portal.Controllers
                     return View("~/Views/Course/ClearanceApprovalEntries.cshtml", newDoc);
                 }
                 else
-                { 
+                {
                     bool ClearanceAllowed = CommonClass.AllowClearanceApplication();
                     if (ClearanceAllowed)
                     {
                         bool AllowApplication = true;// CommonClass.AllowGradClearanceApplication(RegNo);
                         if (!AllowApplication)
                         {
-                            var errormsg = new Error();
+                            Error errormsg = new Error();
                             errormsg.Message = "You do not qualify to apply for clearance";
                             return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                         }
                         else
                         {
-                            #region Clearance Header
+                            #region Graduation Header
                             string page = "CustomerList?$filter=No eq '" + RegNo + "'&format=json";
 
                             HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
@@ -2859,25 +2877,56 @@ namespace New_Student_Portal.Controllers
                                     Details.Address = (string)config["Address"];
                                     Details.E_Mail = (string)config["E_Mail"];
                                     ProgCode = (string)config["Student_Programme"];
-                                    if (ProgCode == "")
+                                    //if (ProgCode == "")
+                                    //{
+                                    //    ProgCode = (string)config["Current_Programme"];
+                                    //}
+                                    //if (ProgCode == "")
+                                    //{
+                                    //    ProgCode = (string)config["Current_Program"];
+                                    //}
+                                    //if (ProgCode == "")
+                                    //{
+                                    //    ProgCode = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                                    //}
+                                    //Details.Prog = ProgCode;
+                                    //Details.ProgName = CommonClass.GetProgrammeName(ProgCode);
+                                    #region Programme List
+                                    ProgrammeList P = new ProgrammeList();
+                                    List<DropdownList> ProgList = new List<DropdownList>();
+                                    string page1 = "StudentEnrolment?$select=Programme&$filter=Student_No eq '" + RegNo + "'&$format=json";
+
+                                    HttpWebResponse httpResponse1 = Credentials.GetOdataData(page1);
+                                    using (var streamReader1 = new StreamReader(httpResponse1.GetResponseStream()))
                                     {
-                                        ProgCode = (string)config["Current_Programme"];
+                                        var result1 = streamReader1.ReadToEnd();
+
+                                        var details1 = JObject.Parse(result1);
+
+
+                                        foreach (JObject config1 in details1["value"])
+                                        {
+                                            DropdownList p = new DropdownList();
+                                            p.Value = (string)config1["Programme"];
+                                            p.Text = CommonClass.GetProgrammeName((string)config1["Programme"]);
+                                            ProgList.Add(p);
+                                        }
                                     }
-                                    if (ProgCode == "")
-                                    {
-                                        ProgCode = (string)config["Current_Program"];
-                                    }
-                                    if (ProgCode == "")
-                                    {
-                                        ProgCode = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                                    }
-                                    Details.Prog = ProgCode;
-                                    Details.ProgName = CommonClass.GetProgrammeName(ProgCode);
+                                    P.Code = "";
+                                    P.ListOfProgrammes = ProgList.Select(x =>
+                                                           new SelectListItem()
+                                                           {
+                                                               Text = x.Text,
+                                                               Value = x.Value
+                                                           }).DistinctBy(x => x.Value).OrderBy(x => x.Value).ToList();
+                                    #endregion
+
+                                    Details.Enrolled_Prog = P;
                                     Details.MadeRequest = false;
                                 }
                             }
                             #endregion
-                            return View("~/Views/Course/NewClearanceRequestForm.cshtml", Details);
+                            return View("~/Views/Course/Partial Views/NewClearanceRequestForm.cshtml", Details);
                         }
 
                     }
@@ -2885,7 +2934,7 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "Clearance request not active at the moment";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
                     }
                 }
             }

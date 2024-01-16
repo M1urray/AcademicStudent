@@ -79,54 +79,70 @@
                 Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
             }
         });
-    }
-    var SelectedRowUnit = function (unit, Sec) {
-        $("#labelT").text("Course Evaluation Form");
+    }   
+    var SubmitStudentRequistion = function () {
+        var Semester = $("#ddlSemester").children("option:selected").val();
+        var Unit = $("#ddlUnit").children("option:selected").val();
+        var Reason = $("#txtReason").val();
+        if (Semester == "") {
+            Swal.fire('Warning', 'Select Semester', 'warning');
+            return;
+        }
+        else if (Unit == "") {
+            Swal.fire('Warning', 'Select Unit', 'warning');
+            return;
+        }
+        else if (Reason == "") {
+            Swal.fire('Warning', 'Enter Reason for the complaint', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                url: "/GradeCompaint/SubmitGradeComplain",
+                data: JSON.stringify({ Sem: Semester, Unit: Unit, Reason: Reason }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        HideProgress();
+                        LoadGradeComplaintList();
+                        $("#myModalUnits").modal("hide");
+                        Swal.fire('Success', data.message, 'success');
+                    }
+                    else {
+                        HideProgress();
+                        Swal.fire('Warning', data.message, 'warning');
+                    }
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Error', data.message, 'error');
+                }
+            });
+        }
+    };
+    var ViewApprovalTrail = function (DocNo) {
+        $("#labelT").text("Document Approval Trail");
         ShowProgress();
         $.ajax({
+            async: true,
             type: "POST",
-            url: "/Course/LecturerEvaluationForm",
-            data: JSON.stringify({ Unit: unit, Sec: Sec }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "html",
+            datatype: "json",
+            data: JSON.stringify({ DocNo: DocNo }),
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            url: '/Common/DocumentApprovalTrail',
             success: function (data) {
-                HideProgress();
                 $("#modalBody").html(data);
-                $("#myModalLecturerEvaluationForm").modal("show");
+                HideProgress();
+                $("#myModalUnits").modal("show");
             },
             error: function (err) {
                 HideProgress();
-                Swal.fire('Error', "There is some problem to process your request. Please try after some time", 'error');
+                Swal.fire('Warning', err, 'warning');
             }
         });
     }
-    var CompleteEvaluation = function (Unit, UnitName, StaffNo) {
-        var sug1 = $("#txtContrb").val();
-        var sug2 = $("#txtImprivents").val();
-        var sug3 = $("#txtOtherComment").val();
-        ShowProgress();
-        $.ajax({
-            type: "POST",
-            url: "/LecturerEvaluation/CompleteCourseEvaluation",
-            data: JSON.stringify({ Unit: Unit, UnitName: UnitName, StaffNo: StaffNo, sug1: sug1, sug2: sug2, sug3: sug3, sug4: "" }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-                    HideProgress();
-                    LoadCurrentRegisteredUnits();
-                    $("#myModalLecturerEvaluationForm").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Error', data.message, 'error');
-            }
-        });
-    };
 </script>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using New_Student_Portal.ViewModel;
 
@@ -40,7 +41,7 @@ namespace New_Student_Portal.Controllers
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new FileInfo(DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
@@ -78,7 +79,7 @@ namespace New_Student_Portal.Controllers
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
@@ -113,7 +114,7 @@ namespace New_Student_Portal.Controllers
                     string StudentNo = Session["Username"].ToString();
 
                     string Sem = "";
-                    if (Session["CurrentSem"] == null || Convert.ToString(Session["CurrentSem"]) == "")
+                    if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                     {
                         Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
                     }

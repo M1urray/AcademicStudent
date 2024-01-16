@@ -1127,6 +1127,7 @@ namespace Student.Controllers
                     }
 
                     string Sem = Session["CurrentSem"].ToString();
+                    string sem = Session["CurrentSem"].ToString();
                     string page = "StudentUnits?$filter=Student_No eq '" + Student + "' and Semester eq '" + Sem + "'&$format=json";
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))

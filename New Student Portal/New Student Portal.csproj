@@ -234,15 +234,12 @@
     <Content Include="assets\Fonts\remixicon.symbol.svg" />
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
     <Content Include="assets\images\ajax-loader.gif" />
-    <Content Include="assets\images\ajax-loader2.gif" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\login-bg.gif" />
-    <Content Include="assets\images\login-bg2.jpg" />
     <Content Include="assets\images\logo2.png" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
     <Content Include="assets\images\profile_m.png" />
-    <Content Include="assets\images\retina_logo3.png" />
     <Content Include="assets\js\app.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery2.0.3.min.js" />
@@ -665,18 +662,19 @@
     <Content Include="Views\Alumni\Partial Views\ProgrammeTransit.cshtml" />
     <Content Include="Views\Dashboard\Partial Views\AskLeadershipWithGroup.cshtml" />
     <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
-    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
+    <Content Include="Views\Course\Partial Views\NewClearanceRequestForm.cshtml" />
     <Content Include="Views\Course\Partial Views\GraduationRequestForm.cshtml" />
     <Content Include="Views\Course\Partial Views\GraduationRequestList.cshtml" />
     <Content Include="Views\Course\Partial Views\SpecialExamForm.cshtml" />
     <Content Include="Views\GradeCompaint\Grade_Complaint_List.cshtml" />
     <Content Include="Views\GradeCompaint\Partial View\Grade_Complaint_List_Views.cshtml" />
     <Content Include="Views\GradeCompaint\Partial View\NewRequisition.cshtml" />
-    <Content Include="Views\Common\AcademicCalender.cshtml" />
-    <Content Include="Web References\NAVWS\Reference.map">
+    <Content Include="Views\Course\Partial Views\ClearanceRequestList.cshtml" />
+    <None Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
+    <Content Include="Views\Common\AcademicCalender.cshtml" />
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -686,10 +684,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://192.168.7.153:7047/ERP/WS/DAYSTAR%2520UNI/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://192.168.7.153:7047/ERP/WS/DAYSTAR%2520UNI/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
