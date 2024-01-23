@@ -401,22 +401,6 @@ namespace New_Student_Portal.Models
             try
             {
                 x = Credentials.ObjNav.SendEmail(ref recepient, subject, body);
-                //string SMTPHost = "smtp.gmail.com";
-                //string fromAddress = "testjooust@gmail.com";
-                //string toAddress = recepient;
-                //System.Net.Mail.MailMessage mail_ = new System.Net.Mail.MailMessage();
-                //mail_.To.Add(toAddress);
-                //mail_.Subject = subject;
-                //mail_.From = new System.Net.Mail.MailAddress(fromAddress);
-                //mail_.Body = body;
-                //mail_.IsBodyHtml = true;
-
-                //var smtp = new SmtpClient(SMTPHost, 587)
-                //{
-                //    Credentials = new NetworkCredential("testjooust@gmail.com", "123@Team"),
-                //    EnableSsl = true
-                //};
-                //smtp.Send(mail_);
             }
             catch (Exception ex2)
             {

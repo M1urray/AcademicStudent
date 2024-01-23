@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: black;
+/*    background-color: black;*/
     z-index: 1000 !important;
     opacity: 0.8;
     filter: alpha(opacity=80);
@@ -14,11 +14,11 @@
 .loading {
     font-family: Arial;
     font-size: 10pt;
-    border: 5px solid #67CFF5;
+/*    border: 5px solid #67CFF5;*/
     width: 300px;
     height: 200px;
     display: none;
     position: fixed;
-    background-color: White;
+/*    background-color: White;*/
     z-index: 1500 !important;
 }

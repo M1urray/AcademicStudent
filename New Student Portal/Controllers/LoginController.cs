@@ -127,6 +127,85 @@ namespace Student.Controllers
             Authedication user = new Authedication();
             return View(user);
         }
+        //[HttpPost]
+        //public ActionResult ForgotPassword(Authedication Reg)
+        //{
+        //    string msg = "";
+        //    bool val = false;
+        //    try
+        //    {
+        //        if (Reg.UserName == null || Reg.UserName == "")
+        //        {
+        //            val = true;
+        //            msg = "Enter Your Registration Number";
+        //            val = false;
+        //        }
+        //        else
+        //        {
+        //            string stdNo = Reg.UserName.ToUpper();
+        //            string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
+
+        //            HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+        //            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        //            {
+        //                var result = streamReader.ReadToEnd();
+
+        //                var details = JObject.Parse(result);
+
+        //                foreach (JObject config in details["value"])
+        //                {
+        //                    if ((string)config["E_Mail"] == "")
+        //                    {
+        //                        msg = "Your email address has not been set. Contact Admission office for assistance";
+        //                        val = false;
+        //                    }
+        //                    else
+        //                    {
+        //                        Random rnd = new Random();
+        //                        int value = rnd.Next(100000000, 999999999);
+        //                        string emailAddress = (string)config["E_Mail"];
+        //                        string ret = Credentials.ObjNav.StudentForgotPassword(stdNo, value.ToString());
+        //                        if (ret != "")
+        //                        {
+        //                            if (!string.IsNullOrEmpty(Reg.UserName))
+        //                            {
+        //                                string url = ConfigurationManager.AppSettings["ROOTLINK"];
+        //                                var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
+        //                                var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
+        //                                    "<BR/>Best Regards.<BR/>";
+        //                                var body = "Hi " + ret;
+        //                                body += "<br />";
+        //                                body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
+        //                                try
+        //                                {
+        //                                    CommonClass.SendEmailAlert(body, emailAddress, "IPSTC PORTAL RESET PASSWORD LINK");
+        //                                    msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
+        //                                    val = true;
+        //                                }
+        //                                catch (Exception ex)
+        //                                {
+        //                                    msg = ex.Message;
+        //                                    val = false;
+        //                                }
+        //                            }
+        //                        }
+        //                        else
+        //                        {
+        //                            msg = "Problem encountered while reseting your account. Try later or contact DAYSTAR ICT for assistance";
+        //                            val = false;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        msg = ex.Message;
+        //        val = false;
+        //    }
+        //    return Json(new { message = msg, success = val }, JsonRequestBehavior.AllowGet);
+        //}
         [HttpPost]
         public ActionResult ForgotPassword(Authedication Reg)
         {
@@ -143,8 +222,8 @@ namespace Student.Controllers
                 else
                 {
                     string stdNo = Reg.UserName.ToUpper();
-                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
-
+                    //string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
+                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and (Status eq 'Registration' or Status eq 'Current')&$format=json";
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
@@ -171,16 +250,23 @@ namespace Student.Controllers
                                     {
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
                                         var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
-                                        var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
-                                            "<BR/>Contact Email : admissions@daystar.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
+                                        var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance.";
                                         var body = "Hi " + ret;
                                         body += "<br />";
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
                                         try
                                         {
-                                            CommonClass.SendEmailAlert(body, emailAddress, "DAYSTAR PORTAL RESET PASSWORD LINK");
-                                            msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
-                                            val = true;
+                                            Error err = CommonClass.SendEmailAlert(body, emailAddress, "IPSTC PORTAL RESET PASSWORD LINK");
+                                            if (err.success)
+                                            {
+                                                msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
+                                                val = true;
+                                            }
+                                            else
+                                            {
+                                                msg = err.Message;
+                                                val = false;
+                                            }
                                         }
                                         catch (Exception ex)
                                         {
