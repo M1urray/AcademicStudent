@@ -234,12 +234,10 @@
     <Content Include="assets\Fonts\remixicon.svg" />
     <Content Include="assets\Fonts\remixicon.symbol.svg" />
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
-    <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\ajax-loader2.gif" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\login-bg.gif" />
     <Content Include="assets\images\login-bg2.jpg" />
-    <Content Include="assets\images\logo2.png" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
     <Content Include="assets\images\profile_m.png" />
@@ -464,7 +462,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Downloads\" />
     <Folder Include="Views\LecturerEvaluation\" />
   </ItemGroup>
   <ItemGroup>
@@ -557,6 +554,7 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
+    <Content Include="Downloads\FEESTATEMENT-1230558MATS.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

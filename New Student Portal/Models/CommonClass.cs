@@ -695,7 +695,7 @@ namespace New_Student_Portal.Models
             bool[] allow = new bool[2];
             try
             {
-                string page = "SemesterList?$select=Allow_Exam_Card_Generation,Allow_Lecturer_Evaluation62672&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
+                string page = "SemesterList?$select=Allow_Exam_Card_Generation,Allow_Lecturer_Evaluation&$filter=Code eq '" + Sem + "' and CurrentSemester eq true&format=json";
 
                 HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
@@ -708,7 +708,7 @@ namespace New_Student_Portal.Models
                     foreach (JObject config in details["value"])
                     {
                         allow[0] = (bool)config["Allow_Exam_Card_Generation"];
-                        allow[1] = (bool)config["Allow_Lecturer_Evaluation62672"];
+                        allow[1] = (bool)config["Allow_Lecturer_Evaluation"];
                     }
                 }
             }

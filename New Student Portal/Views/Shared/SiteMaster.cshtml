@@ -1,5 +1,4 @@
-﻿@using New_Student_Portal.CustomSecurity;
-@using New_Student_Portal.Models;
+﻿@using New_Student_Portal.Models;
 @using System.Globalization;
 @{
     Layout = null;
@@ -20,9 +19,9 @@
     {
         string StdNo = Session["Username"].ToString();
         string Sem = Session["CurrentSem"].ToString();
-        if (Sem=="")
+        if (Sem == "")
         {
-            Sem= CommonClass.CurrentSemester(StdNo);
+            Sem = CommonClass.CurrentSemester(StdNo);
         }
 
         Session["CurrentSem"] = Sem;
@@ -284,17 +283,17 @@
                                 </a>
                             </li>
                             @*<li>
-                <a href="#" onclick="ApplicationIsntuctionLink();">
-                    <i class="ri-information-fill"></i>
-                    <span>Application Instructions</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" onclick="ApplicationListLink();">
-                    <i class="ri-input-cursor-move"></i>
-                    <span>Application List</span>
-                </a>
-            </li>*@
+                                    <a href="#" onclick="ApplicationIsntuctionLink();">
+                                        <i class="ri-information-fill"></i>
+                                        <span>Application Instructions</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="ApplicationListLink();">
+                                        <i class="ri-input-cursor-move"></i>
+                                        <span>Application List</span>
+                                    </a>
+                                </li>*@
 
                         }
                         else
@@ -339,7 +338,7 @@
 
                             }
                             if (AllowApplication)
-                            { 
+                            {
                                 <li>
                                     <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
                                         <i class="ri-shopping-bag-fill"></i>
@@ -348,16 +347,16 @@
                                 </li>
                             }
                             @*<li>
-                <a href="#" onclick="EnquiryLink();">
-                    <i class="ri-question-answer-fill"></i>
-                    <span>General Complaint</span>
-                </a>
-            </li>*@
+                                    <a href="#" onclick="EnquiryLink();">
+                                        <i class="ri-question-answer-fill"></i>
+                                        <span>General Complaint</span>
+                                    </a>
+                                </li>*@
                             <li>
-                            <a href="#" onclick="StudentAuditLink();">
-                                <i class="ri-pushpin-fill"></i>
-                                <span>Student Audit</span>
-                            </a>
+                                <a href="#" onclick="StudentAuditLink();">
+                                    <i class="ri-pushpin-fill"></i>
+                                    <span>Student Audit</span>
+                                </a>
                             </li>
                             <li class="menu-title mt-2">Financials</li>
                             <li>
@@ -403,11 +402,11 @@
                                     </a>
                                 </li>
                                 @*<li>
-                    <a href="#" onclick="ClubsSocietiesLink();">
-                        <i class="ri-football-fill"></i>
-                        <span>Clubs & Society</span>
-                    </a>
-                </li>*@
+                                        <a href="#" onclick="ClubsSocietiesLink();">
+                                            <i class="ri-football-fill"></i>
+                                            <span>Clubs & Society</span>
+                                        </a>
+                                    </li>*@
                             }
                             if (fullAccess)
                             {

@@ -483,6 +483,50 @@ namespace New_Student_Portal.Controllers
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult SupplimentaryExamCard(string DocNo)
+        {
+            bool success = false;
+            try
+            {
+                string message = "";
+
+                if (Session["Username"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    string Sem = "";
+                    string RegNo = Session["Username"].ToString();
+                    if (Session["CurrentSem"] == null)
+                    {
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                    }
+                    Sem = Session["CurrentSem"].ToString();
+                    string filename = Session["Username"].ToString().Replace("/", "");
+                    Credentials.ObjNav.PrintSupplimentaryExamCard(RegNo, Sem, "SUPP_EXAMCARD-" + filename + ".pdf");
+                    filename = "SUPP_EXAMCARD-" + filename + ".pdf";
+                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
+                    CommonClass.MoveFile(filename, DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    if (file.Exists)
+                    {
+                        success = true;
+                        message = @"/Downloads/" + filename;
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "File Not Found";
+                    }
+                }
+                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult SpecialExamCard(string DocNo)
         {
             bool success = false;
@@ -496,7 +540,7 @@ namespace New_Student_Portal.Controllers
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();                  
+                    string RegNo = Session["Username"].ToString();
 
                     string filename = Session["Username"].ToString().Replace("/", "");
                     Credentials.ObjNav.PrintSpecialExamCard(DocNo, "SPC_EXAMCARD-" + filename + ".pdf");

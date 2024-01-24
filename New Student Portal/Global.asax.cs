@@ -53,15 +53,21 @@ namespace New_Student_Portal
                         string[] userData = udata.Split('|');
 
                         CustomPrincipal myUser = new CustomPrincipal(userData[0]);
+                        myUser.UserID = userData[1];
                         myUser.Email = userData[2];
                         myUser.RoleName = userData[3];
-                        myUser.Full_Access = true;
+                        if (userData[4] != "" && userData[4] != null)
+                        {
+                            myUser.Full_Access = bool.Parse(userData[4]);
+                        }
+
                         HttpContext.Current.User = myUser;
                     }
                 }
             }
             catch (CryptographicException cex)
             {
+                cex.Data.Clear();
                 FormsAuthentication.SignOut();
             }
         }

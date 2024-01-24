@@ -13,7 +13,22 @@
             </div>
             <div class="col-md-6">
                 <br />
-                <input type="button" id="btnGetReport" class="btn btn-danger" value="Get Report" onclick="GetReport();" />
+                <input type="button" id="btnGetResults" class="btn btn-danger" value="Get Results" onclick="PrintProvissionalResults();" />
+            </div>
+            <hr />
+        </div>
+        <div class="row" id="divExamCard">
+            <div class="col-md-6">
+                <b>Exam Card Type</b>
+                <select class="form-select" id="ddlExamT" name="ddlExamT">
+                    <option value="">--Select Exam Card--</option>
+                    <option value="0">Normal Exam Card</option>
+                    <option value="1">Supplimentary Exam Card</option>                  
+                </select>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="button" id="btnExamCard" class="btn btn-danger" value="Get Exam Card" onclick="PrintExamCard();" />
             </div>
             <hr />
         </div>
@@ -40,27 +55,38 @@
         if (DocType == "EXAMCARD") {
             $("#divProg").hide();
             $("#divReport").show();
-            PrintExamCard();
+            //PrintExamCard();
+            $("#divProg").hide();
+            $("#divReport").hide();
+            $("#divExamCard").show();
         }
-        if (DocType == "RESULTS" || DocType == "STDAUDIT") {
+        if (DocType == "RESULTS") {
             $("#divProg").show();
             $("#divReport").hide();
+            $("#divExamCard").hide();
             ShowProgress();
             $("#ddlProgramme option").remove();
             $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
 
             $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
                 function (data) {
-                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+                    $('#ddlProgramme').empty().append('<option selected="selected" value="0">--Select Stage--</option>');
                     $.each(data.ListOfValues, function () {
                         $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
                     });
                     HideProgress();
                 });
         };
+        if (DocType == "STDAUDIT") {
+            $("#divProg").hide();
+            $("#divReport").show();
+            GetStudentAudit();
+        }
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
             $("#divReport").show();
+            $("#divExamCard").hide();
+
             GetSemesterInvoice();
         }
     }
@@ -87,10 +113,42 @@
             }
         });
     }
-    var PrintExamCard = function () {
+    var PrintProvissionalResults = function () {
+        var Prog = $("#ddlProgramme").children("option:selected").val();
+        if (Prog == "") {
+            Swal.fire('Warning', "Select programme", 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                url: '/ViewDocuments/ProvisionalResults',
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ Prog: Prog }),
+                success: function (data) {
+                    if (data.success == true) {
+                        $('iframe').attr('src', data.message + "#toolbar=0");
+                        $("#divReport").show();
+                        HideProgress();
+                    }
+                    else {
+                        Swal.fire('Warning', data.message, 'warning');
+                        HideProgress();
+                    }
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Warning', err, 'warning');
+                }
+            });
+        }
+    }
+    var GetStudentAudit = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/ExamCard',
+            url: '/ViewDocuments/GenerateStudentAudit',
             type: "POST",
             async: false,
             success: function (data) {
@@ -110,77 +168,39 @@
             }
         });
     }
-    var GetReport = function () {
-        var Prog = $("#ddlProgramme").children("option:selected").val();
-        if (Prog == "") {
-            Swal.fire('Warning', "Select programme", 'warning');
+    var PrintExamCard = function () {
+        var Url;
+        var Category = $("#ddlExamT").children("option:selected").val();
+        if (Category == "") {
+            Swal.fire('Warning', "Select Exam Card Type", 'warning');
             return;
         }
         else {
-            var DocType = GetParameterValues('DocT');
-            function GetParameterValues(name) {
-                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                var results = regex.exec(location.search);
-                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            }
-            
-            if (DocType == "RESULTS") {
-                PrintProvissionalResults(Prog);
-            }
-            if (DocType == "STDAUDIT") {
-                GetStudentAudit(Prog);
-            }
+            if (Category == "0") { Url = '/ViewDocuments/ExamCard'; }
+            if (Category == "1") { Url = '/ViewDocuments/SupplimentaryExamCard'; }
+            if (Category == "2") { Url = '/ViewDocuments/SpecialExamCard'; }
+            ShowProgress();
+            $.ajax({
+                url: Url,
+                type: "POST",
+                async: false,
+                success: function (data) {
+                    if (data.success == true) {
+                        $('iframe').attr('src', data.message);
+                        $("#divReport").show();
+                        HideProgress();
+                    }
+                    else {
+                        Swal.fire('Warning', data.message, 'warning');
+                        HideProgress();
+                    }
+
+                },
+                error: function (err) {
+                    HideProgress();
+                    Swal.fire('Warning', err, 'warning');
+                }
+            });
         }
-    };
-    var PrintProvissionalResults = function (Prog) {
-        ShowProgress();
-        $.ajax({
-            url: '/ViewDocuments/ProvisionalResults',
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
-            success: function (data) {
-                if (data.success == true) {
-                    $('iframe').attr('src', data.message + "#toolbar=0");
-                    $("#divReport").show();
-                    HideProgress();
-                }
-                else {
-                    Swal.fire('Warning', data.message, 'warning');
-                    HideProgress();
-                }
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    }
-    var GetStudentAudit = function (Prog) {
-        ShowProgress();
-        $.ajax({
-            url: '/ViewDocuments/GenerateStudentAudit',
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
-            success: function (data) {
-                if (data.success == true) {
-                    $('iframe').attr('src', data.message);
-                    $("#divReport").show();
-                    HideProgress();
-                }
-                else {
-                    Swal.fire('Warning', data.message, 'warning');
-                    HideProgress();
-                }
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
     }
 </script>
