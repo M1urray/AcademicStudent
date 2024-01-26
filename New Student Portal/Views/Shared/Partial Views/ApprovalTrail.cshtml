@@ -2,9 +2,9 @@
 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
     <thead style="background-color:black;color:white">
         <tr>
-            <th>Names</th>
+            <th>Approver Name</th>
             <th>Date Sent for Approval</th>
-            <th>Status</th>
+            @*<th>Status</th>*@
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DateSendForApproval)
                         </td>
-                        <td>
+                        @*<td>
                             @if (item.Status == "Open")
                             {
                                 <span class="badge badge-outline-info">Pending Approval</span>
@@ -37,14 +37,14 @@
                             {
                                 @Html.DisplayFor(modelItem => item.Status)
                             }
-                        </td>
+                        </td>*@
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="5" style="color:red">
+                    <td colspan="2" style="color:red">
                         No Records Found
                     </td>
                 </tr>

@@ -19,6 +19,7 @@
         font-size: 16px;
         font-weight: bold;
     }
+
     .BtnPadding {
         padding: 1px;
         font-size: 12px;
@@ -28,7 +29,7 @@
 {
     <hr />
     <p class="text-c-yellow">
-        Your request has been rejected at the @Model.ApprovalLevel level.
+        Your rquest has been rejected at the @Model.ApprovalLevel level.
         Click <button onclick="ViewrejectComments();" class="btn btn-primary BtnPadding">Here</button> to view the reason for rejection
     </p>
     <hr />
@@ -44,7 +45,7 @@
                     Date
                 </th>
                 <th>
-                    Requisition Type
+                    Requistion Type
                 </th>
 
                 <th>
@@ -146,21 +147,18 @@
     <hr />
     <input type="button" id="btnPrintReport" class="btn btn-primary" value="Submit Collection Date" onclick="SubmitCollectionDate();" />
 </div>
-@*//////////////////////Document Rejection Modal////////////////////////////*@
-<div class="modal fade" id="myModalComments" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content bg-white">
+@*//////////////////////Modal////////////////////////////*@
+<div id="myModalComments" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Rejection Comments</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="modalCommentBody">
-                <div id="divDocComments"></div>
+            <div class="modal-body p-4" id="modalCommentBody">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

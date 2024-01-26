@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using System.Net;
-using New_Student_Portal.NAVWS;
 using System.IO;
+using New_Student_Portal.NAVWS;
 
 namespace New_Student_Portal.Models
 {
@@ -14,6 +14,7 @@ namespace New_Student_Portal.Models
         public static string fileSourcePath = ConfigurationManager.AppSettings["FILEPATH"];
         public static HttpWebResponse GetOdataData(string page)
         {
+            
             HttpWebResponse httpResponse = null;
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["ODATA_URI"] + page);
@@ -28,11 +29,11 @@ namespace New_Student_Portal.Models
 
             return httpResponse;
         }
-        public static WebPortal ObjNav
+        public static Webportal ObjNav
         {
             get
             {
-                var ws = new WebPortal();
+                var ws = new Webportal();
 
                 try
                 {
@@ -55,7 +56,7 @@ namespace New_Student_Portal.Models
             string PicString = "";
             try
             {
-                PicString = ObjNav.GetDocumentAttachment(TblID, DocNo, Id);
+                //PicString = ObjNav.GetDocumentAttachment(TblID, DocNo, Id);
             }
             catch (Exception ex)
             {
@@ -74,7 +75,7 @@ namespace New_Student_Portal.Models
             {
                 File.WriteAllBytes(filePath, Convert.FromBase64String(base64String));
 
-                ObjNav.UploadAttachedDocument(DocNo, filePath, base64String, TableID);
+                //ObjNav.UploadAttachedDocument(DocNo, filePath, base64String, TableID);
                 Uploaded = "SUCCESS";
             }
             catch (Exception ex)

@@ -1,12 +1,12 @@
 ﻿@model New_Student_Portal.ViewModel.DropdownListValues
 @{
-    ViewBag.Title = "Student Complaint List";
+    ViewBag.Title = "Student Enquiry List";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <div class="card">
     <div class="card-body">
         <hr />
-        <input type="button" class="btn btn-danger btnClass" value="New Compliant" onclick="NewEnquiry();" />
+        <input type="button" class="btn btn-danger btnClass" value="New Enquiry" onclick="NewEnquiry();" />
         <hr />
         <div id="divEnquiry"></div>
     </div>
@@ -16,21 +16,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Complaint Form</h4>
+                <h4 class="modal-title">Enquiry Form</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4" id="modalBody">
                 <div class="row" style="background-color:darkgrey">
                     <div class="col-md-6">
-                        Issue Directed to
-                        <select class="form-select" id="ddlInquiry">
-                            <option value="">----</option>
-                            <option value="1">Quality Assurance Department</option>
-                            <option value="2">Corporate Affairs Department</option>
-                            <option value="3">ICT Department</option>
-                            <option value="4">Admissions Departent</option>
-                        </select>
-                        @*@Html.DropDownListFor(m => m.Code, new SelectList(Model.ListOfValues, "Value", "Text", Model.Code), "--Select Department--", new { @id = "ddlDim1", @class = "form-select" })*@
+                        Enquire From
+                        @Html.DropDownListFor(m => m.Code, new SelectList(Model.ListOfValues, "Value", "Text", Model.Code), "--Select Department--", new { @id = "ddlDim1", @class = "form-select" })                       
                         <br />
                     </div>
                     <div class="col-md-6"></div>
@@ -38,32 +31,13 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-12">
-                        Issue Description
+                        Enter Enquiry
                         <textarea id="txtQuery" rows="3" class="form-control"></textarea>
                     </div>
                 </div>
                 <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        Priority
-                        <select class="form-select" id="ddlPriority">
-                            <option value="">----</option>
-                            <option value="1">High</option>
-                            <option value="2">Moderate</option>
-                            <option value="3">Low</option>
-                        </select>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        Attachment
-                        <input type="file" class="form-control" id="fileProveAttachment" />
-                    </div>
-                </div>
-                <hr />
                 <div align="center">
-                    <input type="button" id="btnSaving" class="btn btn-danger" value="Make Complaint" onclick="SubmitEnquiry();" />
+                    <input type="button" id="btnSaving" class="btn btn-danger" value="Make Enquiry" onclick="SubmitEnquiry();" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -100,8 +74,7 @@
         $("#myModalEnquiry").modal("show");
     }
     var SubmitEnquiry = function () {
-        var Dep = $("#ddlInquiry").children("option:selected").val();
-        var Priority = $("#ddlPriority").children("option:selected").val();
+        var Dep = $("#ddlDim1").children("option:selected").val();
         var txtEnquiry = $("#txtQuery").val();
         if (Dep == "") {
             Swal.fire('Warning', 'Select Department', 'warning');
@@ -111,17 +84,13 @@
             Swal.fire('Warning', 'Enter Enquiry', 'warning');
             return;
         }
-        else if (Priority == "") {
-            Swal.fire('Warning', 'Select Priority', 'warning');
-            return;
-        }
         else {
             ShowProgress();
             $.ajax({
                 url: "/Course/SubmitEnquiry",
                 datatype: "json",
                 type: "POST",
-                data: JSON.stringify({ Dep: Dep, Enquiry: txtEnquiry, Priority: Priority }),
+                data: JSON.stringify({ Dep: Dep, Enquiry: txtEnquiry }),
                 contentType: "application/json; charset = utf-8",
                 success: function (data) {
                     if (data.success == true) {

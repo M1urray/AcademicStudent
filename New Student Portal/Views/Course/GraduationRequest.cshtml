@@ -1,6 +1,6 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "GraduationRequest";
+    ViewBag.Title = "Graduation Request";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -17,78 +17,283 @@
     b {
         font-size: 12px;
     }
-
-    .badge-outline-info {
-        overflow-wrap: break-word;
-    }
 </style>
-<div class="card">
-    <div class="card-body">
-        <input type="button" class="btn btn-danger btnClass" value="New Requisition" onclick="NewRequisition();" />
-        <hr />
-        <div id="divGradLines"></div>
-    </div> <!-- end card-body -->
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title"><span class="spanClass">Graduation Request Form</span></h4>
+    </div>
+    <div class="modal-body">
+        <div id="divForm">
+            <div class="row mb-1" style="background-color:cadetblue;" id="DivMessange">
+                <div id="divGradInf"></div>
+            </div>
+            <div class="row  mb-1">
+                <div class="col-md-6">
+                    <label for="RegNo" class="lblClass">Registration No :</label>
+                    <label class="badge badge-outline-success">@Model.No</label>
+                </div>
+                <div class="col-md-6">
+                    <label for="fullName" class="lblClass">Full Name :</label>
+                    <label class="badge badge-outline-success">@Model.Name</label>
+                </div>
+            </div>
+            <div class="row  mb-1">
+                <div class="col-md-6">
+                    <label for="IDNo" class="lblClass">National ID :</label>
+                    <label class="badge badge-outline-success">@Model.ID_No</label>
+                </div>
+                <div class="col-md-6">
+                    <label for="IDaddress" class="lblClass">Address :</label>
+                    <label class="badge badge-outline-success">@Model.Address</label>
+                </div>
+            </div>
+            <div class="row  mb-1">
+                <div class="col-md-6">
+                    <label for="IDaddress" class="lblClass">Phone No :</label>
+                    <label class="badge badge-outline-success">@Model.Phone_No</label>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtEmail" class="lblClass">Email :</label>
+                    <label class="badge badge-outline-success">@Model.E_Mail</label>
+                </div>
+            </div>
+            <div class="row  mb-1">
+                <div class="col-md-12">
+                    <label for="txtProg" class="lblClass">Programme :</label>
+                    <label class="badge badge-outline-success">@Model.Prog (@Model.ProgName)</label>
+                </div>
+            </div>
+            <hr />
+            <div class="row  mb-1">
+                <div class="col-md-6">
+                    <label for="txtPersEmail" class="lblClass">Personal Email Address</label>
+                    <input type="email" class="form-control" id="txtPersEmail" placeholder="Personal Email" autocomplete="off">
+                </div>
+                <div class="col-md-6">
+                    <label for="txtCrrProf" class="lblClass">Current Profession</label>
+                    <input type="text" class="form-control" id="txtCrrProf" placeholder="Current Profession" required="" autocomplete="off">
+                </div>
+            </div>
+            <div class="row  mb-1">
+                <div class="col-md-6">
+                    <label for="txtCrrCompany" class="lblClass">Current Institution/Company</label>
+                    <input type="text" class="form-control" id="txtCrrCompany" placeholder="Current Institution/Company" required="" autocomplete="off">
+                </div>
+                <div class="col-md-6">
+                    <label for="txtPhoneNo" class="lblClass">Current Phone Number</label>
+                    <input type="text" class="form-control" id="txtPhoneNo" placeholder="Current Phone Number" required="" autocomplete="off">
+                </div>
+            </div>
+            @*<hr />
+                <div class="row  mb-1" id="DivDisclaimer">
+                    <div class="col-md-12" style="background-color:#938d8d;color:#051936">
+                        <h4>Disclaimer</h4>
+                        <p>
+                            <input type="checkbox" name="Accept" class="checkbox-circle checkboxClass">
+                            This is how your Name will appear on your certificate <b><u>@Model.Name</u></b>.
+                            If not please visit the Admission Office for correction.
+                        </p>
+                        <p>
+                            NOTE: If your name has changed, visit the Admission Office with evidence of Name change. e.g.
+                            sGazette Notice, Marriage Certificate, National Identification Card.
+                        </p>
+                    </div>
+                </div>*@
+            <div align="center" id="divSubmitButton">
+                <hr />
+                <input type="button" id="btnSaving" class="btn btn-danger" value="Make Request" onclick="SubmitGraduationRequest();" />
+            </div>
+            <hr />
+        </div>
+    </div>
 </div>
 @*//////////////////////Modal////////////////////////////*@
-<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+<div id="myModalGradFee" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><label id="labelT"></label></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title">Graduation Fee Payment</h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4" id="modalBody">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Pay the compulsory graduation fee as indicated below.</h4>
+                        <ul>
+                            <li>
+                                Diploma <b>Ksh 4,000</b>
+                            </li>
+                            <li>
+                                Higher diploma <b>Ksh 5,000</b>
+                            </li>
+                            <li>
+                                Undergraduate. <b>Ksh 6,000</b>
+                            </li>
+                            <li>
+                                Masters <b>Ksh 7,000</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div class="col-md-12">
+                        <h4>PAYMENT DETAILS</h4>
+                        <table class="table table-hover">
+                            <thead style="background-color:black;color:white">
+                                <tr>
+                                    <th>Kenya Commercial Bank</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Bank Name: KENYA COMMERCIAL BANK
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Account Name: AMREF INTERNATIONAL UNI R TRUSTEES
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Account Number: 1221632108
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Payment Reference: (Quote your Student’s Registration Number)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        PLEASE SHARE PROOF OF PAYMENT VIA : Amiu.Studentfinance@Amref.ac.ke
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-hover">
+                            <thead style="background-color:black;color:white">
+                                <tr>
+                                    <th>ABSA (Foreign students billed in USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Account Name: AMREF INTERNATIONAL UNIVERSITY (AMIU)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Bank: Barclays ABSA
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Account Number: 2040189273 (USD)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Account Branch: Corporate Service Centre
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Branch Code: 077
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Branch Address: P 0 Box 27691 — 00100, GPO Nairobi.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Payment Reference: Student Registration Number
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        PLEASE SHARE PROOF OF PAYMENT VIA : Amiu.Studentfinance@Amref.ac.ke
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead style="background-color:black;color:white">
+                                <tr>
+                                    <th>For M-pesa Payment:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Paybill Number: 000555
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Account: Student’s Registration Number
+                                    </td>
+                                </tr>                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-<script src="~/JS/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        LoadGraduationLines();
+        $("#DivCollPoint").hide();
+        $("#DivMessange").hide();
+        if (`@Model.MadeRequest` == "True") {
+            document.getElementById("txtPersEmail").disabled = true;
+            document.getElementById("txtCrrProf").disabled = true;
+            document.getElementById("txtCrrCompany").disabled = true;
+            document.getElementById("txtPhoneNo").disabled = true;
+            //document.getElementById("ddlGown").disabled = true;
+            //$("#DivDisclaimer").hide();
+            $("#DivMessange").show();
+            $("#divSubmitButton").hide();
+            LoadGraduationInf(`@Model.DocNo`,`@Model.Balance`);
+            $("#txtPersEmail").val(`@Model.PersonalMail`);
+            $("#txtCrrProf").val(`@Model.Profession`);
+            $("#txtCrrCompany").val(`@Model.Company`);
+            $("#txtPhoneNo").val(`@Model.CurrentPhoneNo`);
+            $("#myModalGradFee").modal("show");
+            @*if (`@Model.Gown` == "True") {
+                $("#ddlGown").val("1");
+                LoadCampus();
+                document.getElementById("ddlGownCollection").disabled = true;
+                $("#DivCollPoint").show();
+            }
+            else {
+                $("#ddlGown").val("2");
+                $("#DivCollPoint").hide();
+            }*@
+        }
+
+        var Successmsg = '@Request.RequestContext.HttpContext.Session["SuccessMsg"]';
+        if (Successmsg != "") {
+            Swal.fire('Success', Successmsg, 'success', true);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("NullibySessions", "Common")'
+            });
+        }
+        $("button[data-dismiss=modal]").click(function () {
+            $(".modal").modal('hide');
+        });
     });
-    function LoadGraduationLines() {
-        ShowProgress();
-        $.ajax({
-            async: false,
-            type: "GET",
-            dataType: 'HTML',
-            contentType: false,
-            processData: false,
-            url: "/Course/GraduationRequisitionLine",
-            success: function (data) {
-                $("#divGradLines").html(data);
-                HideProgress();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var NewRequisition = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'New Requisition Form';
-        ShowProgress();
-        $.ajax({
-            url: "/Course/NewGraduationRequistion",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
     var ddlGownInterest = function () {
         var Intrested = $("#ddlGown").children("option:selected").val();
         if (Intrested == "1") {
@@ -117,11 +322,9 @@
         var CurrentProfession = $("#txtCrrProf").val();
         var CurrentInst = $("#txtCrrCompany").val();
         var CurrentPhoneNo = $("#txtPhoneNo").val();
-        var CorrectName = $("#txtCorrectName").val();
-        var Prog = $("#ddlProg").children("option:selected").val();
         //var Gown = $("#ddlGown").children("option:selected").val();
         //var collectionPoint = $("#ddlGownCollection").children("option:selected").val();
-        var disclaimer = $('input[name="Accept"]').prop("checked");
+        //var disclaimer = $('input[name="Accept"]').prop("checked");
         if (PersoanlEmail == "") {
             Swal.fire('Warning', 'Enter Your personal Email', 'warning');
             return;
@@ -142,10 +345,6 @@
             Swal.fire('Warning', 'Enter Your Curret Phone Number', 'warning');
             return;
         }
-        else if (Prog == "") {
-            Swal.fire('Warning', 'Select Graduating Programme', 'warning');
-            return;
-        }
         //else if (Gown == "") {
         //    Swal.fire('Warning', 'Confirm if you will be interested in a gown', 'warning');
         //    return;
@@ -154,12 +353,12 @@
         //    Swal.fire('Warning', 'Choose your collection Point', 'warning');
         //    return;
         //}
-        else if (disclaimer == false) {
-            Swal.fire('Warning', 'Confirm the desclaimer before saving', 'warning');
-            return;
-        }
+        //else if (disclaimer == false) {
+        //    Swal.fire('Warning', 'Confirm the desclaimer before saving', 'warning');
+        //    return;
+        //}
         else {
-            var GownIntest = false;
+            //var GownIntest;
             //if (Gown == "1") {
             //    GownIntest = true;
             //}
@@ -171,10 +370,8 @@
             GradRequest.CrrProf = CurrentProfession;
             GradRequest.Company = CurrentInst;
             GradRequest.CrrPhoneNo = CurrentPhoneNo;
-            GradRequest.Gown = GownIntest;
-            GradRequest.CollectionPoint = "";
-            GradRequest.Prog = Prog;
-            GradRequest.CorrectName = CorrectName;
+            //GradRequest.Gown = GownIntest;
+            //GradRequest.CollectionPoint = collectionPoint;
             ShowProgress();
             $.ajax({
                 url: "/Course/SubmitGraduationRequest",
@@ -184,19 +381,19 @@
                 contentType: "application/json; charset = utf-8",
                 success: function (data) {
                     if (data.success == true) {
+                        window.location = "/Course/GraduationRequest";
                         //document.getElementById("txtPersEmail").disabled = true;
                         //document.getElementById("txtCrrProf").disabled = true;
                         //document.getElementById("txtCrrCompany").disabled = true;
                         //document.getElementById("txtPhoneNo").disabled = true;
                         ////document.getElementById("ddlGown").disabled = true;
                         //$("#DivMessange").show();
+                        //$("#divSubmitButton").hide();
                         //HideProgress();
+                        //$("#myModalGradFee").modal("show");
                         //LoadGraduationInf(data.Doc, data.Balance);
-                        //$("#DivDisclaimer").hide();
-                        HideProgress();
-                        LoadGraduationLines();
-                        $("#myModalUnits").modal("hide");
-                        Swal.fire('Success', data.message, 'success');
+                        ////$("#DivDisclaimer").hide();
+                        //Swal.fire('Success', data.message, 'success');
                     }
                     else {
                         HideProgress();
@@ -211,16 +408,19 @@
         }
     };
     var LoadGraduationInf = function (DocNo, Bal) {
+        ShowProgress();
         $.ajax({
             url: "/Course/GraduationRequestInfo",
             datatype: "json",
             type: "POST",
-            data: JSON.stringify({ DocNo: DocNo, Bal: Bal }),
+            data: JSON.stringify({ DocNo: DocNo, Bal:Bal }),
             contentType: "application/json; charset = utf-8",
             success: function (data) {
+                HideProgress();
                 $("#divGradInf").html(data);
             },
             error: function (err) {
+                HideProgress();
                 Swal.fire('Error', err, 'error');
             }
         });
@@ -233,49 +433,8 @@
             return true;
         }
     }
-    var ViewApprovalTrail = function (DocNo) {
-        $("#labelT").text("Document Approval Trail");
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            datatype: "json",
-            data: JSON.stringify({ DocNo: DocNo }),
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            url: '/Common/DocumentApprovalTrail',
-            success: function (data) {
-                $("#modalBody").html(data);
-                HideProgress();
-                $("#myModalUnits").modal("show");
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    }
-    var ViewComments = function (DocNo) {
-        $("#labelT").text("Document Comments");
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            datatype: "json",
-            data: JSON.stringify({ DocNo: DocNo }),
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            url: '/Common/DocumentComments',
-            success: function (data) {
-                $("#modalBody").html(data);
-                HideProgress();
-                $("#myModalUnits").modal("show");
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    }
+    var NewGraduationfeePayment = function () {
+        $("#myModalGradFee").modal("show");
+    };
 </script>
 

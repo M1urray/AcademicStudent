@@ -9,22 +9,13 @@
                             <thead style="background-color:black;color:white">
                                 <tr>
                                     <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        Type
-                                    </th>
-                                    <th>
-                                        Name
+                                        Student
                                     </th>
                                     <th>
                                         Contact
                                     </th>
                                     <th>
                                         Email
-                                    </th>
-                                    <th>
-                                        Programme
                                     </th>
                                     @if (Model.Waiting)
                                     {
@@ -40,16 +31,9 @@
                                     {
                                         if (Model.ListOfBsList.Count() > 0)
                                         {
-                                            int i = 1;
                                             foreach (var item in Model.ListOfBsList)
                                             {
                                                 <tr>
-                                                    <td>
-                                                        @i
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Type)
-                                                    </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Name)
                                                     </td>
@@ -58,9 +42,6 @@
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Email)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Programme)
                                                     </td>
                                                     @if (Model.Waiting)
                                                     {
@@ -72,7 +53,6 @@
                                                         </td>
                                                     }
                                                 </tr>
-                                                i++;
                                             }
                                         }
                                         else

@@ -2959,13 +2959,13 @@ textarea.form-control-lg {
 
 .btn-primary {
     color: #fff;
-    background-color: black;
+    background-color: #3bafda;
     border-color: #3bafda
 }
 
     .btn-primary:hover {
         color: #fff;
-        background-color: #516471;
+        background-color: #3295b9;
         border-color: #2f8cae
     }
 
@@ -4700,7 +4700,7 @@ textarea.form-control-lg {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid #dde6f5;
+    border: 1px solid #e7eaed;
     border-radius: .25rem
 }
 
@@ -5263,7 +5263,7 @@ textarea.form-control-lg {
 
 .progress {
     display: flex;
-    height: 1.75rem;
+    height: .75rem;
     overflow: hidden;
     font-size: .675rem;
     background-color: #ebeef0;
@@ -8344,7 +8344,7 @@ textarea.form-control-lg {
 
 .text-muted {
     --bs-text-opacity: 1;
-    color: #f5e2bc !important
+    color: #048835 !important
 }
 
 .text-black-50 {

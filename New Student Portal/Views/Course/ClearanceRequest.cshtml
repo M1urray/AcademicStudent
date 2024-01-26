@@ -1,6 +1,6 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "ClearanceRequest";
+    ViewBag.Title = "Clearance Request";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -16,8 +16,22 @@
         <div id="divRequisition"></div>
     </div>
 </div>
-
-<script src="~/JS/ShowProgression.js"></script>
+@*//////////////////////Modal////////////////////////////*@
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBodyApp">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
         GetNewClearanceRequest();
@@ -49,27 +63,27 @@
         StudentReqs.Remarks = "";
         ShowProgress();
         $.ajax({
-                url: "/Course/SubmitClearanceRequest",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ regData: StudentReqs }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        HideProgress();
-                        GetNewClearanceRequest();
-                        Swal.fire('Success', data.message, 'success');
-                    }
-                    else {
-                        HideProgress();
-                        Swal.fire('Warning', data.message, 'warning');
-                    }
-                },
-                error: function (err) {
+            url: "/Course/SubmitClearanceRequest",
+            datatype: "json",
+            type: "POST",
+            data: JSON.stringify({ regData: StudentReqs }),
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                if (data.success == true) {
                     HideProgress();
-                    Swal.fire('Error', err, 'error');
+                    GetNewClearanceRequest();
+                    Swal.fire('Success', data.message, 'success');
                 }
-            });
+                else {
+                    HideProgress();
+                    Swal.fire('Warning', data.message, 'warning');
+                }
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Error', err, 'error');
+            }
+        });
     };
     var SubmitCollectionDate = function () {
         var date = $("#dtPicker").val();
@@ -102,6 +116,73 @@
                 }
             });
         }
+    };
+    var ViewApprovalTrail = function (DocNo, Seq) {
+        $("#labelT").text("Document Approvers");
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            datatype: "json",
+            data: JSON.stringify({ DocNo: DocNo, Sequence: Seq }),
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            url: '/Common/DocumentApprovalTrail',
+            success: function (data) {
+                $("#modalBodyApp").html(data);
+                HideProgress();
+                $("#myModalUnits").modal("show");
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+    var GetRejectionComments = function (DocNo, Seq) {
+        $("#labelT").text("Document Comments");
+        ShowProgress();
+        $.ajax({
+            async: true,
+            type: "POST",
+            datatype: "json",
+            data: JSON.stringify({ DocNo: DocNo, Sequence: Seq }),
+            contentType: "application/json; charset = utf-8",
+            processData: false,
+            url: '/Common/DocumentComments',
+            success: function (data) {
+                $("#modalBodyApp").html(data);
+                HideProgress();
+                $("#myModalUnits").modal("show");
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+    var PrintClearanceReport = function () {
+        ShowProgress();
+        $.ajax({
+            url: "/Course/PrintClearanceForm",
+            type: "POST",
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#myModalReport").modal("show");
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
     };
 </script>
 

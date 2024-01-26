@@ -33,18 +33,18 @@
                         <th>
                             Description
                         </th>
-                        <th style="text-align:center">
-                            Section
-                        </th>
+                        @*<th style="text-align:center">
+                                Section
+                            </th>*@
                         <th style="text-align:center">
                             CH
                         </th>
-                        @if (droUnit)
-                        {
-                            <th style="text-align:center">
-                                Action
-                            </th>
-                        }
+                        @*@if (droUnit)
+                            {
+                                <th style="text-align:center">
+                                    Action
+                                </th>
+                            }*@
                     </tr>
                 </thead>
                 <tbody>
@@ -62,32 +62,32 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Unit_Name)
                                         </td>
-                                        <td align="center">
-                                            @Html.DisplayFor(modelItem => item.Section)
-                                        </td>
+                                        @*<td align="center">
+                                                @Html.DisplayFor(modelItem => item.Section)
+                                            </td>*@
                                         <td align="center">
                                             @Html.DisplayFor(modelItem => item.CF)
                                         </td>
-                                        @if (droUnit)
-                                        {
-                                            <td align="center">
-                                                <button class="btn btn-warning BtnPadding" onclick="DropRegisteredUnit(this,'@item.Programme','@item.Semester','@item.Unit','@item.Unit_Name','@item.RegFor')">Drop</button>
-                                            </td>
-                                        }
+                                        @*@if (droUnit)
+                                            {
+                                                <td align="center">
+                                                    <button class="btn btn-warning BtnPadding" onclick="DropRegisteredUnit(this,'@item.Programme','@item.Semester','@item.Unit','@item.Unit_Name','@item.RegFor')">Drop</button>
+                                                </td>
+                                            }*@
                                     </tr>
                                 }
                             }
                             else
                             {
                                 <tr>
-                                    <td colspan="5" style="color:red">No Units Found</td>
+                                    <td colspan="3" style="color:red">No Units Found</td>
                                 </tr>
                             }
                         }
                         else
                         {
                             <tr>
-                                <td colspan="5" style="color:red">@ViewBag.Error</td>
+                                <td colspan="3" style="color:red">@ViewBag.Error</td>
                             </tr>
                         }
                     }

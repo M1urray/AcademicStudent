@@ -56,7 +56,7 @@
     }
 
     .card-header, .card-title {
-        background-color: #d10e2c;
+        background-color: #192f59;
     }
 
     .card-title {
@@ -65,32 +65,6 @@
         padding-left: 10px;
     }
 </style>
-@if (Model.DisplinaryCases.Count() > 0)
-{
-    <div class="row">
-        <div class="col-md-12">
-            @foreach (var c in Model.DisplinaryCases)
-            {
-                <table class="table table-hover" style="border:2px solid Black">
-                    <thead style="background-color:black;color:white">
-                        <tr>
-                            <th>Displinary Remarks</th>
-                            <th>Return Date</th>
-                        </tr>
-                    </thead>
-                    <tbody style="color:red">
-                        <tr>
-                            <td>
-                                <img src="~/assets/images/NEW2.gif" /> @c.Remarks
-                            </td>
-                            <td>@c.EndDate</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-        </div>
-    </div>
-}
 <div class="card">
     <h4 class="card-title">Basic information</h4>
     <div class="card-body">
@@ -106,11 +80,11 @@
                     {
                         if (Model.Gender == "Female")
                         {
-                            <img src="~/img/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_f.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                         else
                         {
-                            <img src="~/img/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
+                            <img src="~/assets/images/profile_m.png" Height="115" Width="114" style="border-radius: 50% !important" />
                         }
                     }
                 }
@@ -169,22 +143,8 @@
                                 <span class="badge badge-soft-pink"> @Html.DisplayFor(model => model.Campus)</span>
                             </div>
                         </div>
-                    </div> <!-- end col -->
-                    @if (Model.Qualify_For_Catering)
-                    {
-                        <div class="col-sm-4 col-md-4">
-                            <hr />
-                            <div class="row mb-3">
-                                <label class="col-md-2"></label>
-                                <div class="col-md-8">
-                                    <button class="btn btn-sm btn-danger form-control" onclick="GenerateCateringToken('@Model.Semester');">Get Catering Token</button>
-                                    <b style="color:black">Current Catering Token :</b> <label id="lblToken" class="label badge badge-outline-success"></label>
-                                </div>
-                                <label class="col-md-2"></label>
-                            </div>
-                        </div>
-                    }
-                    <div class="col-sm-4 col-md-4">
+                    </div> <!-- end col -->                   
+                    <div class="col-sm-4 col-md-6">
                         <hr />
                         <div class="row mb-3">
                             <label class="col-md-2"></label>
@@ -194,7 +154,7 @@
                             <label class="col-md-2"></label>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-4">
+                    <div class="col-sm-4 col-md-6">
                         <hr />
                         <div class="row mb-3">
                             <label class="col-md-2"></label>
@@ -362,7 +322,7 @@
         </div> <!-- end card-->
     </div>
 </div>
-
+<hr />
 @*//////////////////////Modal////////////////////////////*@
 <div id="myModalUnits" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -397,15 +357,30 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if ('@Model.BSGroup' == "") {
-            $("#lblJoinBS").text("Join Bible Study(BS) Group");
-        }
-        else {
-            $("#lblJoinBS").text("Bible Study(BS) Group Details");
-        }
-        $("#lblToken").text(`@Model.Cat_Token`);
-        MyBSInformation();
+        LoadNotifications();
     });
+    var LoadNotifications = function () {
+         if (parseInt(`@Model.NotfCount`) > 0) {
+             ShowProgress();
+             $.ajax({
+                async: false,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                url: '@Url.Action("NotificationMessages", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBodyNot").html(data);
+                    $("#myModalNotif").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        }
+    };
     var ViewRegUnits = function (Type) {
         var x = document.getElementById("labelT");
         if (Type == "CurrReg") {
@@ -432,388 +407,12 @@
             }
         });
     }
-    var MyBSInformation = function () {
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: 'HTML',
-            url: '@Url.Action("GetBsDetailForm", "Dashboard")',
-            success: function (data) {
-                $("#divBs").html(data);
-                HideProgress();
-                LoadNotifications();
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
-    var LoadNotifications = function () {
-         if (parseInt(`@Model.NotfCount`) > 0) {
-             ShowProgress();
-             $.ajax({
-                async: false,
-                type: "GET",
-                dataType: 'HTML',
-                contentType: false,
-                processData: false,
-                url: '@Url.Action("NotificationMessages", "Common")',
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBodyNot").html(data);
-                    $("#myModalNotif").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var BSDetails = function (BsG) {
-        var x = document.getElementById("labelT");
-        var url;
-        if (BsG != "") {
-            x.innerHTML = 'Bible Study Details';
-            url = "/Dashboard/GetBSDetails";
-        }
-        else {
-            x.innerHTML = 'Join a Bible Study(BSG)';
-           url = "/Dashboard/JoinBSGroup";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ BSG: BsG }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateDocument = function (Type) {
-        var x = document.getElementById("labelT");
-        if (Type == "BS") {
-            x.innerHTML = 'Create Bible Study(BS)';
-        }
-        if (Type == "DCF") {
-            x.innerHTML = 'Create Daystar Christain Fellowship(DCF)';
-        }
-       ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDocument",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Type:Type  }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                swal('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var BibleStudyMembers = function (Bs,Waiting,Title) {
-        var x = document.getElementById("labelT");
-        x.innerHTML = Title;
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/BibleStudyMembers",
-            datatype: "json",
-            data:JSON.stringify({ waitingRoom: Waiting, BsG: Bs }),
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var AdmitStudent = function (StdNo) {
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/ApproveBSRequest",
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ Bs: '@Model.BstudyDetails.Code', StdNo: StdNo }),
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                if (data.success) {
-                    HideProgress();
-                    BibleStudyMembers('@Model.BSGroup', true, 'Students in Waiting Room');
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Warning', data.message, 'warning');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CDFEvents = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Daystar Christian Fellowship(CDF) Events';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/DCFEventsList",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var CreateCDFEvent = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Create Daystar Christian Fellowship(CDF) Event';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/CreateDCFDocument",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitBSRequest = function () {
-        var BSG = $("#ddlBs").children("option:selected").val();
-        if (BSG == "") {
-            Swal.fire('Warning', 'Kindly select a group', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitBSRequest",
-                datatype: "json",
-                type: "POST",
-                async:false,
-                data: JSON.stringify({ BSG: BSG }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    MyBSInformation();
-                    $("#myModalUnits").modal("hide");
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var RequestToBeBSLeader = function () {
-        var url;
-        if (`@Model.LeadershipOption` == "Request Against A Group") {
-            url = "/Dashboard/JoinBSGroupAgainstGroup";
-        }
-        else {
-            url = "/Dashboard/RequestBsGroupLeader";
-        }
-        ShowProgress();
-        $.ajax({
-            url: url,
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                MyBSInformation();
-                Swal.fire('Success', data.message, 'success');
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-            }
-        });
-    }
-    var SubmitCreatedDocument = function (Type) {
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ Code: Code, Desc: Descr, Type: Type }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    HideProgress();
-                    Swal.fire('Success', data.message, 'success');
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var SubmitDCFDocument = function () {
-        var CDF = $("#ddlDCF").children("option:selected").val();
-        var Code = $("#txtCode").val();
-        var Descr = $("#txtDescription").val();
-        if (CDF == "") {
-            Swal.fire('Warning', 'Kindly Select DCF', 'warning');
-            return;
-        }
-        if (Code == "") {
-            Swal.fire('Warning', 'Kindly enter Code', 'warning');
-            return;
-        }
-        else if (Descr == "") {
-            Swal.fire('Warning', 'Kindly enter description', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: "/Dashboard/SubmitDCFDocument",
-                datatype: "json",
-                type: "POST",
-                data: JSON.stringify({ DCF: CDF, Code: Code, Desc: Descr }),
-                contentType: "application/json; charset = utf-8",
-                success: function (data) {
-                    if (data.success == true) {
-                        HideProgress();
-                        CreateCDFEvent();
-                        Swal.fire('Success', data.message, 'success');
-                    }
-                    else {
-                        HideProgress();
-                        Swal.fire('Error', data.message, 'error');
-                    }
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                }
-            });
-        }
-    }
-    var AcademicCalender = function (Sem) {
-        if (Sem == "" || Sem == null) {
-            Swal.fire('Warning', 'Current Semester not set', 'warning');
-            return;
-        }
-        else {
-            var x = document.getElementById("labelT");
-            x.innerHTML = 'Academic Calender';
-            ShowProgress();
-            $.ajax({
-                type: "POST",
-                dataType: 'HTML',
-                contentType: "application/json; charset = utf-8",
-                data: JSON.stringify({ Sem: Sem }),
-                url: "/Common/GetAcademicCalender",
-                success: function (data) {
-                    HideProgress();
-                    $("#modalBody").html(data);
-                    $("#myModalUnits").modal("show");
-                },
-                error: function () {
-                    HideProgress();
-                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-                }
-            });
-        }
-    };
-    var GetClassAttendanceList = function () {
-        var x = document.getElementById("labelT");
-        x.innerHTML = 'Class Attendance';
-        ShowProgress();
-        $.ajax({
-            url: "/Dashboard/GetUnitsClassAttendance",
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            success: function (data) {
-                HideProgress();
-                $("#modalBody").html(data);
-                $("#myModalUnits").modal("show");
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    };
-    var GenerateCateringToken = function () {
-        ShowProgress();
-        $.ajax({
-            datatype: "json",
-            type: "POST",
-            contentType: "application/json; charset = utf-8",
-            url: "/Dashboard/GenerateNewCateringToken",
-            success: function (data) {
-                if (data.success == true) {
-                    HideProgress();
-                    Swal.fire('Success', "Token Generated successfully. Current token is : <b>" + data.message+"</b>", 'success');
-                    $("#lblToken").text(data.message);
-                }
-                else {
-                    HideProgress();
-                    Swal.fire('Error', data.message, 'error');
-                }
-            },
-            error: function () {
-                HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    };
     var ViewAttachment = function (tbl, No, Id, fName, ext) {
         $.ajaxSetup({ cache: false });
         ShowProgress();
         $.ajax({
             cache: false,
-            url: "/Common/DocumentAttachmentview",
+            url: '@Url.Action("DocumentAttachmentview", "Common")',
             type: "POST",
             datatype: "json",
             cache: false,
@@ -847,6 +446,53 @@
             error: function (err) {
                 HideProgress();
                 Swal.fire('Warning', err, 'warning');
+            }
+        });
+    };
+    var AcademicCalender = function (Sem) {
+        if (Sem == "" || Sem == null) {
+            Swal.fire('Warning', 'Current Semester not set', 'warning');
+            return;
+        }
+        else {
+            var x = document.getElementById("labelT");
+            x.innerHTML = 'Academic Calender';
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                dataType: 'HTML',
+                contentType: "application/json; charset = utf-8",
+                data: JSON.stringify({ Sem: Sem }),
+                url: '@Url.Action("GetAcademicCalender", "Common")',
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBody").html(data);
+                    $("#myModalUnits").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+        }
+    };
+    var GetClassAttendanceList = function () {
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'Class Attendance';
+        ShowProgress();
+        $.ajax({
+            url: "/Dashboard/GetUnitsClassAttendance",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
             }
         });
     };

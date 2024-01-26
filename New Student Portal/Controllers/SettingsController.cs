@@ -25,25 +25,33 @@ namespace New_Student_Portal.Controllers
         {
             try
             {
-                if (Session["Username"] == null)
+                string message = "";
+                bool success = false;
+                if (Session["domainUser"] == null)
                 {
                     return Json(new { message = "/Login/Login", success = false, redirect = true }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    string StdNo = Session["Username"].ToString();
+                   // string StdNo = Session["Username"].ToString();
+                    string StdNo = Session["domainUser"].ToString();
 
-                    bool ok = CommonClass.ChangeStudentPassword(StdNo, newpass);
+                    string  ok = CommonClass.ResetPassword(StdNo, newpass);
 
-                    if (ok)
+                    if (ok!="")
                     {
-                        return Json(new { message = "Password Changed Successfully", success = true }, JsonRequestBehavior.AllowGet);
+                        message = "Password Changed Successfully";
+                        success = true;
+                        //return Json(new { , , redirect = false }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        return Json(new { message = "Problem Encountered while changing your password. Try later", success = false, redirect = false }, JsonRequestBehavior.AllowGet);
+                        message = "Problem Encountered while changing your password. Try later";
+                        success = false;
+                        //return Json(new { , , redirect = false }, JsonRequestBehavior.AllowGet);
                     }
                 }
+                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

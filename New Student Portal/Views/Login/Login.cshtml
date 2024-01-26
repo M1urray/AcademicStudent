@@ -2,34 +2,23 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/LoginMaster.cshtml";
+    string UniEmail = "@mcampus.amref.ac.ke";
 }
-<style>
-    label {
-        color: white;
-    }
-
-    .card-body {
-        padding: 0.7rem 0.5rem;
-    }
-    .w-75 {
-        width: 100% !important;
-    }
-</style>
 <div class="card">
     <div class="card-body p-4">
         <div class="text-center w-75 m-auto">
             <div class="auth-logo">
                 <a href="#" class="logo logo-dark text-center">
                     <span class="logo-lg">
-                        <img src="~/assets/images/retina_logo3.png" alt="" height="120" width="100%">
+                        <img src="~/assets/images/logo2.png" alt="" class="imgDiv">
                     </span>
                 </a>
             </div>
         </div>
         <hr />
         <div class="mb-2">
-            <label for="emailaddress" class="form-label">Reg. Number</label>
-            <input class="form-control" type="text" id="username" required="" placeholder="Reg. Number">
+            <label for="emailaddress" class="form-label">Amref University Email Address</label>
+            <input class="form-control" type="text" id="username" required="" placeholder="eg. @UniEmail">
         </div>
 
         <div class="mb-2">
@@ -57,7 +46,7 @@
         <div class="row mt-3">
             <div class="col-12 text-center">
                 <p> <a href="/Login/ForgotPassword" class="text-muted ms-1">Forgot your password?</a></p>
-            </div> <!-- end col -->
+            </div>  end col 
         </div>
     </div> <!-- end card-body -->
 </div>

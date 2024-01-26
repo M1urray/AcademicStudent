@@ -35,6 +35,7 @@ namespace New_Student_Portal.ViewModel
         public IEnumerable<FreeElectiveUnitSubject> ListOfFreeElectiveUnitsSubjects { get; set; }
         public List<SelectListItem> ListOfClasses { get; set; }
         public bool ShowClass { get; set; }
+        public int MinimumCourses { get; set; }
         public int MaximumCourses { get; set; }
         public int SelectedCourses { get; set; }
         public string HostelCode { get; set; }
@@ -60,6 +61,7 @@ namespace New_Student_Portal.ViewModel
         public string UnitType { get; set; }
         public string HasPrelqUnit { get; set; }
         public string ClassFull { get; set; }
+        public string Room { get; set; }
     }
     public class GeneralUnitSubject
     {

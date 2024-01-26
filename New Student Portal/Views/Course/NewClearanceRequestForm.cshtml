@@ -1,52 +1,33 @@
-﻿<div id="divForm">
-    <div class="row">
+﻿@model New_Student_Portal.ViewModel.StudentDetailView
+<div id="divForm">
+    <div class="row  mb-1">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="RegNo" class="lblClass">Registration No</label>
-                <label class="badge badge-info">@Model.No</label>
-            </div>
+            <label for="RegNo" class="lblClass">Registration No :</label>
+            <label class="badge badge-outline-success">@Model.No</label>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="fullName" class="lblClass">Full Name</label>
-                <label class="badge badge-info">@Model.Name</label>
-            </div>
+            <label for="fullName" class="lblClass">Full Name :</label>
+            <label class="badge badge-outline-success">@Model.Name</label>
         </div>
     </div>
-    <div class="row">
+    <div class="row  mb-1">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="IDNo" class="lblClass">National ID</label>
-                <label class="badge badge-info">@Model.ID_No</label>
-            </div>
+            <label for="IDNo" class="lblClass">National ID :</label>
+            <label class="badge badge-outline-success">@Model.ID_No</label>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="IDaddress" class="lblClass">Address</label>
-                <label class="badge badge-info">@Model.Address</label>
-            </div>
+            <label for="IDaddress" class="lblClass">Address :</label>
+            <label class="badge badge-outline-success">@Model.Address</label>
         </div>
     </div>
-    <div class="row">
+    <div class="row  mb-1">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="txtTel" class="lblClass">Telephone</label>
-                <label class="badge badge-info">@Model.Phone_No</label>
-            </div>
+            <label for="txtProg" class="lblClass">Programme :</label>
+            <label class="badge badge-outline-success">@Model.Prog (@Model.ProgName)</label>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="txtEmail" class="lblClass">Email</label>
-                <label class="badge badge-info">@Model.E_Mail</label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="txtProg" class="lblClass">Programme</label>
-                <label class="badge badge-info">@Model.Prog (@Model.ProgName)</label>
-            </div>
+            <label for="txtEmail" class="lblClass">Email :</label>
+            <label class="badge badge-outline-success">@Model.E_Mail</label>
         </div>
     </div>
     <hr />
@@ -58,5 +39,5 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#lblTitle").text("New Clearance Form");
-    });    
+    });
 </script>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using New_Student_Portal.ViewModel;
 
@@ -40,7 +41,7 @@ namespace New_Student_Portal.Controllers
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new FileInfo(DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
@@ -73,12 +74,12 @@ namespace New_Student_Portal.Controllers
                 {
                     string StudentNo = Session["Username"].ToString();
                     string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.GenerateReceipt(ReceiptNo, "RCP-" + filename + ".pdf");
+                    Credentials.ObjNav.GenerateReceipts(ReceiptNo, "RCP-" + filename + ".pdf");
                     filename = "RCP-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
 
-                    FileInfo file = new System.IO.FileInfo(DestinationPath);
+                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
                     if (file.Exists)
                     {
                         success = true;
@@ -113,9 +114,9 @@ namespace New_Student_Portal.Controllers
                     string StudentNo = Session["Username"].ToString();
 
                     string Sem = "";
-                    if (Session["CurrentSem"] == null || Convert.ToString(Session["CurrentSem"]) == "")
+                    if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
 
                     Sem = Session["CurrentSem"].ToString();
@@ -162,14 +163,14 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
                     Sem = Session["CurrentSem"].ToString();
 
                     if (EvaluatedAllUnits(RegNo, Sem))
                     {
                         string filename = Session["Username"].ToString().Replace("/", "");
-                        Credentials.ObjNav.GenerateStudentExamCard(RegNo, Sem, "EXAMCARD-" + filename + ".pdf");
+                        Credentials.ObjNav.GenerateStudentExamCards(RegNo, Sem, "EXAMCARD-" + filename + ".pdf");
                         filename = "EXAMCARD-" + filename + ".pdf";
                         string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                         CommonClass.MoveFile(filename, DestinationPath);
@@ -224,7 +225,7 @@ namespace New_Student_Portal.Controllers
             }
             return s;
         }
-        public ActionResult ProvisionalResults(string Prog)
+        public ActionResult ProvisionalResults()
         {
             try
             {
@@ -239,7 +240,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
 
                     string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentReportCardByProg(RegNo, Prog, "PROVISIONAL RESULTS-" + filename + ".pdf");
+                    Credentials.ObjNav.GenerateStudentReportCard(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf");
                     filename = "PROVISIONAL RESULTS-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -279,13 +280,13 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
 
                     Sem = Session["CurrentSem"].ToString();
 
                     string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentProformaInvoice(StudentNo, Sem, "PROFORMA-" + filename + ".pdf");
+                    Credentials.ObjNav.GenerateStudentProformaInvoices(StudentNo, Sem, "PROFORMA-" + filename + ".pdf");
                     filename = "PROFORMA-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -326,7 +327,7 @@ namespace New_Student_Portal.Controllers
                     string Sem = "";
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
 
                     Sem = Session["CurrentSem"].ToString();
@@ -459,7 +460,7 @@ namespace New_Student_Portal.Controllers
                     string StudentNo = Session["Username"].ToString();
                     string filename = StudentNo.Replace("/", "");
 
-                    Credentials.ObjNav.GenerateNextLevelAdmissionLetter(AppNo, "ADMLETTER-" + filename + ".pdf", "");
+                    //Credentials.ObjNav.GenerateNextLevelAdmissionLetter(AppNo, "ADMLETTER-" + filename + ".pdf", "");
                     filename = "ADMLETTER-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);
@@ -499,7 +500,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();                  
 
                     string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.PrintSpecialExamCard(DocNo, "SPC_EXAMCARD-" + filename + ".pdf");
+                    //Credentials.ObjNav.PrintSpecialExamCard(DocNo, "SPC_EXAMCARD-" + filename + ".pdf");
                     filename = "SPC_EXAMCARD-" + filename + ".pdf";
                     string DestinationPath = Server.MapPath("~/Downloads/" + filename);
                     CommonClass.MoveFile(filename, DestinationPath);

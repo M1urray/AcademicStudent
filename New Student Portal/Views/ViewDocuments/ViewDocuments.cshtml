@@ -42,22 +42,27 @@
             $("#divReport").show();
             PrintExamCard();
         }
-        if (DocType == "RESULTS" || DocType == "STDAUDIT") {
-            $("#divProg").show();
-            $("#divReport").hide();
-            ShowProgress();
-            $("#ddlProgramme option").remove();
-            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+        if (DocType == "RESULTS") {
+            $("#divProg").hide();
+            $("#divReport").show();
+            PrintProvissionalResults();
+        }
+        //if (DocType == "RESULTS" || DocType == "STDAUDIT") {
+        //    $("#divProg").show();
+        //    $("#divReport").hide();
+        //    ShowProgress();
+        //    $("#ddlProgramme option").remove();
+        //    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
 
-            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
-                function (data) {
-                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-                    $.each(data.ListOfValues, function () {
-                        $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
-                    });
-                    HideProgress();
-                });
-        };
+        //    $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
+        //        function (data) {
+        //            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+        //            $.each(data.ListOfValues, function () {
+        //                $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
+        //            });
+        //            HideProgress();
+        //        });
+        //};
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
             $("#divReport").show();
@@ -95,7 +100,7 @@
             async: false,
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message);
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
                     HideProgress();
                 }
                 else {
@@ -133,14 +138,13 @@
             }
         }
     };
-    var PrintProvissionalResults = function (Prog) {
+    var PrintProvissionalResults = function () {
         ShowProgress();
         $.ajax({
             url: '/ViewDocuments/ProvisionalResults',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
             success: function (data) {
                 if (data.success == true) {
                     $('iframe').attr('src', data.message + "#toolbar=0");

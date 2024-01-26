@@ -36,6 +36,7 @@ namespace New_Student_Portal.ViewModel
         public List<SelectListItem> ListOfUnitCategory1 { get; set; }
         public List<SelectListItem> ListOfUnitCategory2 { get; set; }
         public List<SelectListItem> ListOfUnitCategory3 { get; set; }
+        public List<SelectListItem> ListOfStages { get; set; }
         public string HostelCode { get; set; }
         public string Campus { get; set; }
     }
@@ -66,10 +67,8 @@ namespace New_Student_Portal.ViewModel
     }
     public class GetRegisteredUnit
     {
-        public string Code { get; set; }
         public string RegDeadlineDate { get; set; }
         public List<StudentUnits> ListOfRegUnit { get; set; }
-        public List<SelectListItem> ListOfSpecExmReasons { get; set; }
     }
     public class UnitRegistrationSummery
     {

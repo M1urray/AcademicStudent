@@ -211,7 +211,7 @@ namespace New_Student_Portal.Controllers
 
                 DateTime startDate = DateTime.ParseExact(empHist.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime endDate = DateTime.ParseExact(empHist.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                Credentials.ObjNav.StudentEmploymentHistory(RegNo, empHist.Title, empHist.Company, startDate, endDate, "");
+                //Credentials.ObjNav.StudentEmploymentHistory(RegNo, empHist.Title, empHist.Company, startDate, endDate, "");
 
                 return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -229,7 +229,7 @@ namespace New_Student_Portal.Controllers
 
                 DateTime startDate = DateTime.ParseExact(qual.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime endDate = DateTime.ParseExact(qual.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                Credentials.ObjNav.StudentEducationHistory(RegNo, "", qual.Institution, qual.Award, startDate, endDate, "");
+               // Credentials.ObjNav.StudentEducationHistory(RegNo, "", qual.Institution, qual.Award, startDate, endDate, "");
 
                 return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -243,7 +243,7 @@ namespace New_Student_Portal.Controllers
         {
             try
             {
-                Credentials.ObjNav.DeleteStudentEmploymentHistory(Convert.ToInt32(LineNo));
+                //Credentials.ObjNav.DeleteStudentEmploymentHistory(Convert.ToInt32(LineNo));
 
                 return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -341,233 +341,6 @@ namespace New_Student_Portal.Controllers
         public JsonResult SaveStepFiveData()
         {
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult StudentRequisitions()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                string RegNo = Session["Username"].ToString();
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
-                }
-                if (Session["StudentDetails"] == null)
-                {
-                    Session["StudentDetails"] = CommonClass.StudentProgrammeDetails(RegNo);
-                }
-                string[] s = (string[])Session["StudentDetails"];
-                string sem = Session["CurrentSem"].ToString();
-
-                StudentCourseDetails stdDetail = new StudentCourseDetails
-                {
-                    StdNo = RegNo,
-                    Name = s[0],
-                    CurrentSem = sem,
-                    Prog = s[1],
-                    Email = s[2]
-                };
-                return View(stdDetail);
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
-            }
-        }
-        public PartialViewResult StudentRequisitionList()
-        {
-            try
-            {
-                List<StudentReqs> RegList = new List<StudentReqs>();
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                string RegNo = Session["Username"].ToString();
-                string page = "StudentRequisitions?$filter=Student_No eq '" + RegNo + "' and Requisition_Type ne 'Clearance'&$format=json";
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    if (details["value"].Count() > 0)
-                    {
-                        foreach (JObject config in details["value"])
-                        {
-                            StudentReqs stdreq = new StudentReqs();
-                            stdreq.Code = (string)config["Code"];
-                            stdreq.Date = (string)config["Date"];
-                            stdreq.Requisition_Type = (string)config["Requisition_Type"];
-                            stdreq.Semester = (string)config["Semester"];
-                            stdreq.Status = (string)config["Status"];
-                            stdreq.ApprovalCount = (int)config["Approval_Count"];
-                            stdreq.LinesCounter = (string)config["Lines_Count"];// GetRegLinesCounter((string)config["Code"]).ToString();
-                            stdreq.ApprovalCount = (int)config["Approved_Lines_Count"];
-                            stdreq.RejectedCount = (int)config["Rejected_Lines_Count"];
-                            RegList.Add(stdreq);
-                        }
-                    }
-                }
-
-                return PartialView("~/Views/Course/StudentRequisitionList.cshtml", RegList.OrderByDescending(x => x.Code).ToList());
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public int GetRegLinesCounter(string DocNo)
-        {
-            int counter = 0;
-            try
-            {
-                string pageLine = "StudentRequisitionLines?$select=Line_No&$count=true&$filter=Application_No eq '" + DocNo + "'&format=json";
-                HttpWebResponse httpResponse = Credentials.GetOdataData(pageLine);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-                    counter = (int)details["@odata.count"];
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return counter;
-        }
-        public PartialViewResult NewRequistion()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-
-                return PartialView("~/Views/Alumni/Partial Views/NewAcademicRequisition.cshtml");
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public ActionResult OfficialTranscript()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string STDNo = Session["Username"].ToString();
-                    #region Programme List
-                    List<DropdownList> ProgList = new List<DropdownList>();
-                    string page = "StudentEnrolment?$select=Programme&$filter=Student_No eq '" + STDNo + "'&$format=json";
-
-                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-
-                        foreach (JObject config in details["value"])
-                        {
-                            DropdownList p = new DropdownList();
-                            p.Value = (string)config["Programme"];
-                            p.Text = CommonClass.GetProgrammeName((string)config["Programme"]);
-                            ProgList.Add(p);
-                        }
-                    }
-                    #endregion
-                    DropdownListValues STDProg = new DropdownListValues
-                    {
-                        ListOfValues = ProgList.Select(x =>
-                                        new SelectListItem()
-                                        {
-                                            Text = x.Text,
-                                            Value = x.Value
-                                        }).ToList()
-                    };
-                    return PartialView("~/Views/Course/Partial Views/OfficalTranscript.cshtml", STDProg);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public ActionResult GetProgrammeTransit()
-        {
-            try
-            {
-                return PartialView("~/Views/Alumni/Partial Views/ProgrammeTransit.cshtml");
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public JsonResult GetProgrammeList(string Categ)
-        {
-            try
-            {
-                #region Programme List
-                List<Programmes> ProgList = new List<Programmes>();
-                string page = "ProgrammeList?$filter=Category eq '" + Categ + "' and OldCarriculum eq false and Description ne ''&$format=json";
-
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-
-                    foreach (JObject config in details["value"])
-                    {
-                        Programmes PList = new Programmes();
-                        PList.Code = (string)config["Code"];
-                        PList.Description = (string)config["Description"];
-                        ProgList.Add(PList);
-                    }
-                }
-                #endregion
-                ProgrammeList programmeList = new ProgrammeList
-                {
-                    ListOfProgrammes = ProgList.Select(x =>
-                                     new SelectListItem()
-                                     {
-                                         Text = x.Description,
-                                         Value = x.Code
-                                     }).ToList()
-                };
-                return Json(new { programmeList, success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
         }
     }
 }

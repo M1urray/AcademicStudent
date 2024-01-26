@@ -91,70 +91,38 @@
             }
         });
     }
-    var GetUnits = function (hostel, Prog, Type) {
-        var regType = "0";// $("#RegType").children("option:selected").val();
-        var IntestedInHostel = $("#ddlInterest").children("option:selected").val();
-        var HostelCode = $("#ddlHostelList").children("option:selected").val();
-        var UniyType;
-        var Title;
-        if (Type == "0") {
-            UniyType = $("#ddlUnitType").children("option:selected").val();
-            Title = $("#ddlUnitType").children("option:selected").text();
+    var GetUnits = function (Prog) {
+        $("#labelT").text("Units Registration Form");
+        var regType = $("#RegType").children("option:selected").val();
+        var Stage = $("#ddlStage").children("option:selected").val();
+        if (regType == "") {
+            Swal.fire('Warning', 'Select Registration Type', 'warning');
+            return;
         }
-        else if (Type == "1") {
-            UniyType = $("#ddlUnitType1").children("option:selected").val();
-            Title = $("#ddlUnitType1").children("option:selected").text();
-        }
-        else if (Type == "2") {
-            UniyType = $("#ddlUnitType2").children("option:selected").val();
-            Title = $("#ddlUnitType2").children("option:selected").text();
-        }
-        else if (Type == "3") {
-            UniyType = $("#ddlUnitType3").children("option:selected").val();
-            Title = $("#ddlUnitType3").children("option:selected").text();
-        }
-        else {
-            UniyType = "";
-            Title = "";
-        }
-        if (UniyType == "") {
-            Swal.fire('Warning', 'Kindly select the unit type you want to register', 'warning');
+        else if ((regType == "2") && (Stage == "")) {
+            Swal.fire('Warning', 'Select Stage', 'warning');
             return;
         }
         else {
-            if (IntestedInHostel == "" && hostel == "") {
-                Swal.fire('Warning', 'Kindly select Student Resident', 'warning');
-                return;
-            }
-            else if (IntestedInHostel == "1" && HostelCode == "") {
-                Swal.fire('Warning', 'Choose your preferred Hostel', 'warning');
-                return;
-            }
-            if (regType == "") {
-                Swal.fire('Warning', 'Select Registration Type', 'warning');
-                return;
-            }
-            else {
-                ShowProgress();
-                var x = document.getElementById("labelT");
-                x.innerHTML = Title;
-                $.ajax({
-                    url: "/Course/GetProgramUnits",
-                    datatype: "json",
-                    type: "POST",
-                    data: JSON.stringify({ Stdresidence: IntestedInHostel, Type: regType, HostelCode: HostelCode, UnitType: UniyType, Prog: Prog }),
-                    contentType: "application/json; charset = utf-8",
-                    success: function (data) {
-                        $("#modalBody").html(data);
-                        $("#myModalUnits").modal("show");
-                        HideProgress();
-                    },
-                    error: function () {
-                        HideProgress();
-                        Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
-                    }
-                });
-            }
+            ShowProgress();
+            $.ajax({
+                url: "/Course/GetProgramUnits",
+                datatype: "json",
+                type: "POST",
+                data: JSON.stringify({ RegT: regType, Prog: Prog, Stage: Stage }),
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    HideProgress();
+                    LoadCourseRegistrationDetails();
+                    $("#modalBody").html(data);
+                    $("#myModalUnits").modal("show");
+                    HideProgress();
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
+                }
+            });
         }
     }
     var GetFreeElectiveUnits = function () {
@@ -186,7 +154,7 @@
             if (row.find('input[type="checkbox"]').is(':checked')) {
                 var Unit = {};
                 Unit.UnitCode = row.find("td").eq(1).html();
-                Unit.ClassCode = row.find("td").eq(2).html();
+                Unit.ClassCode = "";
                 Unit.Day = row.find("td").eq(4).html();
                 Unit.Period = row.find("td").eq(5).html();
                 Unit.Campus = row.find("td").eq(6).html();
@@ -208,12 +176,13 @@
                 success: function (data) {
                     if (data.success == true) {
                         HideProgress();
-                        LoadCourseRegistrationDetails();
                         $("#myModalUnits").modal("hide");
+                        LoadCourseRegistrationDetails();
                         Swal.fire('Success', data.message, 'success');
                     }
                     else {
                         HideProgress();
+                        $("#myModalUnits").modal("hide");
                         LoadCourseRegistrationDetails();
                         Swal.fire('Warning', data.message, 'warning');
                     }
@@ -256,34 +225,41 @@
         });
     }
     var RegisterSelectedUnits = function () {
-        ShowProgress();
-        $.ajax({
-            type: "POST",
-            url: "/Course/RegisterSelectedUnits",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-                    if (data.Redirect == true) {
-                        window.location = data.message;
+        var totalRowCount = $("#tblUnitBasket>tbody>tr.rowUnits").length;
+        if (totalRowCount < 1) {
+            Swal.fire('Warning', 'There are no units selected to submit!!', 'warning');
+            return;
+        }
+        else {
+            ShowProgress();
+            $.ajax({
+                type: "POST",
+                url: "/Course/RegisterSelectedUnits",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        if (data.Redirect == true) {
+                            window.location = data.message;
+                        }
+                        else {
+                            HideProgress();
+                            LoadCourseRegistrationDetails();
+                            Swal.fire('Success', data.message, 'success');
+                        }
                     }
                     else {
                         HideProgress();
                         LoadCourseRegistrationDetails();
-                        Swal.fire('Success', data.message, 'success');
+                        Swal.fire('Error', data.message, 'error');
                     }
-                }
-                else {
+                },
+                error: function (data) {
                     HideProgress();
-                    LoadCourseRegistrationDetails();
                     Swal.fire('Error', data.message, 'error');
                 }
-            },
-            error: function (data) {
-                HideProgress();
-                Swal.fire('Error', data.message, 'error');
-            }
-        });
+            });
+        }
     }
     var DropRegisteredUnit = function (button, prog, sem, Unit, UnitName, RegFor) {
         Swal.fire({

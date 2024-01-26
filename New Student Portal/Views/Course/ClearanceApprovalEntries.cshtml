@@ -30,6 +30,7 @@
                             <th>#</th>
                             <th>Approval Level</th>
                             <th style="text-align:center">Status</th>
+                            <th>Approver(s)</th>
                             <th>Rejection Comment</th>
                         </tr>
                     </thead>
@@ -47,21 +48,24 @@
                                         <td align="center">
                                             @if (c.Status == "Open")
                                             {
-                                                <span class="badge badge-danger">Pending Approval</span>
+                                                <span class="badge badge-outline-danger">Pending Approval</span>
                                             }
                                             @if (c.Status == "Created")
                                             {
-                                                <span class="badge badge-warning">Waiting Approval</span>
+                                                <span class="badge badge-outline-warning">Waiting Approval</span>
                                             }
                                             @if (c.Status == "Approved")
                                             {
-                                                <span class="badge badge-success">Approved</span>
+                                                <span class="badge badge-outline-success">Approved</span>
                                             }
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" onclick="ViewApprovalTrail(`@Model.DocNo`, `@c.Sequence`);">View Approvers</button>
                                         </td>
                                         <td>
                                             @if (c.CommentExist)
                                             {
-                                                <button class="btn btn-sm btn-success" onclick="GetRejectionComments(`@Model.DocNo`,`@c.Sequence`,`@c.ApprovalCode`);">View Comments</button>
+                                                <button class="btn btn-sm btn-danger" onclick="GetRejectionComments(`@Model.DocNo`,`@c.Sequence`);">View Comments</button>
                                             }
                                             else
                                             {
@@ -78,21 +82,24 @@
                                         <td align="center">
                                             @if (c.Status == "Open")
                                             {
-                                                <span class="badge badge-danger">Pending Approval</span>
+                                                <span class="badge badge-outline-danger">Pending Approval</span>
                                             }
                                             @if (c.Status == "Created")
                                             {
-                                                <span class="badge badge-warning">Waiting Approval</span>
+                                                <span class="badge badge-outline-warning">Waiting Approval</span>
                                             }
                                             @if (c.Status == "Approved")
                                             {
-                                                <span class="badge badge-success">Approved</span>
+                                                <span class="badge badge-outline-success">Approved</span>
                                             }
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" onclick="ViewApprovalTrail(`@Model.DocNo`, `@c.Sequence`);">View Approvers</button>
                                         </td>
                                         <td>
                                             @if (c.CommentExist)
                                             {
-                                                <button class="btn btn-sm btn-success" onclick="GetRejectionComments(`@Model.DocNo`,`@c.Sequence`,`@c.ApprovalCode`);">View Comments</button>
+                                                <button class="btn btn-sm btn-danger" onclick="GetRejectionComments(`@Model.DocNo`,`@c.Sequence`,`@c.ApprovalCode`);">View Comments</button>
                                             }
                                             else
                                             {
@@ -110,99 +117,11 @@
         </div>
     </div>
 </div>
-@*//////////////////////Modal////////////////////////////*@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content bg-white">
-            <div class="modal-header">
-                <h4 class="modal-title">Rejection Comments under <label id="lblComment"></label></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <div class="row">
-                    <div class="col-md-12">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-@*//////////////////////Modal////////////////////////////*@
-<div class="modal fade" id="myModalReport" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content bg-white">
-            <div class="modal-header">
-                <h4 class="modal-title">Clearance Report</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBodyReport">
-                <iframe id="iframe" style="width:100%;height:500px"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="~/assets/js/ShowProgression.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#lblTitle").text("Clearance Approval Entries(Document No: @Model.DocNo)");
-    });
-    var GetRejectionComments = function (DocNo, Sequence, ApprovalLevel) {
-        $("#lblComment").text(ApprovalLevel);
-        ShowProgress();
-        $.ajax({
-            async: true,
-            type: "POST",
-            datatype: "json",
-            data: JSON.stringify({ DocNo: DocNo, Sequence: Sequence }),
-            contentType: "application/json; charset = utf-8",
-            processData: false,
-            url: '/Common/DocumentApprovalComments',
-            success: function (data) {
-                $("#modalBody").html(data);
-                HideProgress();
-                $("#myModalLinks").modal("hide");
-                $("#myModal").modal("show");
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    }
-    var PrintClearanceReport = function () {
-        ShowProgress();
-        $.ajax({
-            url: "/Course/PrintClearanceForm",
-            type: "POST",
-            success: function (data) {
-                if (data.success == true) {
-                    $('iframe').attr('src', data.message);
-                    $("#myModalReport").modal("show");
-                    HideProgress();
-                }
-                else {
-                    Swal.fire('Warning', data.message, 'warning');
-                    HideProgress();
-                }
-
-            },
-            error: function (err) {
-                HideProgress();
-                Swal.fire('Warning', err, 'warning');
-            }
-        });
-    };
+    });  
 </script>
 
 

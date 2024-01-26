@@ -38,12 +38,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -83,6 +83,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -161,7 +164,6 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ExamResultsController.cs" />
     <Compile Include="Controllers\FinancialController.cs" />
-    <Compile Include="Controllers\GradeCompaintController.cs" />
     <Compile Include="Controllers\LecturerEvaluationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -193,7 +195,6 @@
     <Compile Include="ViewModel\Error.cs" />
     <Compile Include="ViewModel\ExamResults.cs" />
     <Compile Include="ViewModel\FeeStatement.cs" />
-    <Compile Include="ViewModel\Grade_Compaint.cs" />
     <Compile Include="ViewModel\Hostel.cs" />
     <Compile Include="ViewModel\HostelBookingView.cs" />
     <Compile Include="ViewModel\ImportantDocs.cs" />
@@ -234,15 +235,12 @@
     <Content Include="assets\Fonts\remixicon.symbol.svg" />
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
     <Content Include="assets\images\ajax-loader.gif" />
-    <Content Include="assets\images\ajax-loader2.gif" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\login-bg.gif" />
-    <Content Include="assets\images\login-bg2.jpg" />
     <Content Include="assets\images\logo2.png" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
     <Content Include="assets\images\profile_m.png" />
-    <Content Include="assets\images\retina_logo3.png" />
     <Content Include="assets\js\app.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery2.0.3.min.js" />
@@ -463,7 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Downloads\" />
     <Folder Include="Views\LecturerEvaluation\" />
   </ItemGroup>
   <ItemGroup>
@@ -556,6 +553,7 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
+    <Content Include="Downloads\Jan 2022 semester plan %283%29.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -600,7 +598,6 @@
     <Content Include="Views\Course\ViewStudentRegisteredUnits.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\Dashboard\ViewUnitSummery.cshtml" />
-    <Content Include="Views\ExamResults\ProvisionalResults.cshtml" />
     <Content Include="Views\Financial\FeeStatement.cshtml" />
     <Content Include="Views\Financial\Payment Plan\PaymentPlanData.cshtml" />
     <Content Include="Views\Financial\Payment Plan\PaymentPlanForm.cshtml" />
@@ -659,25 +656,15 @@
     <Content Include="Views\Alumni\Partial Views\QualHistForm.cshtml" />
     <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
     <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BsDiv.cshtml" />
-    <Content Include="Views\Alumni\StudentRequisitions.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\NewAcademicRequisition.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\ProgrammeTransit.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\AskLeadershipWithGroup.cshtml" />
-    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
-    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestForm.cshtml" />
-    <Content Include="Views\Course\Partial Views\GraduationRequestList.cshtml" />
-    <Content Include="Views\Course\Partial Views\SpecialExamForm.cshtml" />
-    <Content Include="Views\GradeCompaint\Grade_Complaint_List.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\Grade_Complaint_List_Views.cshtml" />
-    <Content Include="Views\GradeCompaint\Partial View\NewRequisition.cshtml" />
     <Content Include="Views\Common\AcademicCalender.cshtml" />
-    <Content Include="Web References\NAVWS\Reference.map">
+    <Content Include="Views\ExamResults\ProvisionalResults.cshtml" />
+    <None Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <None Include="Web References\NAVWS\WebPortal.wsdl" />
+    </None>
+    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
+    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
+    <None Include="Web References\NAVWS\Webportal.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -686,16 +673,16 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://amiunavapp.amref.int:7047/ERP/WS/AMREF%2520INTERNATIONAL%2520UNIVERSITY/Codeunit/Webportal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://amiunavapp.amref.int:7047/ERP/WS/AMREF%2520INTERNATIONAL%2520UNIVERSITY/Codeunit/Webportal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>New_Student_Portal_NAVWS_WebPortal</CachedSettingsPropName>
+      <CachedSettingsPropName>New_Student_Portal_NAVWS_Webportal</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

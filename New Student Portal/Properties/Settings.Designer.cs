@@ -12,7 +12,7 @@ namespace New_Student_Portal.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,10 +26,22 @@ namespace New_Student_Portal.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://45.34.8.215:8047/AIU/WS/AIU/Codeunit/WebPortal")]
-        public string New_Student_Portal_NAVWS_WebPortal {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.businesscentral.dynamics.com/v2.0/6969d4c8-9627-46e5-a0ce-f7a4567b12f" +
+            "5/CPL_Sandbox/WS/CPL/Codeunit/Webportal?tenant=msasia0087t56491056&aid=FIN")]
+        public string New_Student_Portal_BCWS_Webportal {
             get {
-                return ((string)(this["New_Student_Portal_NAVWS_WebPortal"]));
+                return ((string)(this["New_Student_Portal_BCWS_Webportal"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://amiunavapp.amref.int:7047/ERP/WS/AMREF%20INTERNATIONAL%20UNIVERSITY/Codeun" +
+            "it/Webportal")]
+        public string New_Student_Portal_NAVWS_Webportal {
+            get {
+                return ((string)(this["New_Student_Portal_NAVWS_Webportal"]));
             }
         }
     }

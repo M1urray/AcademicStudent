@@ -30,7 +30,7 @@ namespace New_Student_Portal.Controllers
                     string RegNo = Session["Username"].ToString();
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -45,12 +45,6 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "You need to register for units before booking for hostel";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
                         return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
                     else
@@ -316,11 +310,11 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                 }
                 string sem = Session["CurrentSem"].ToString();
 
-                Credentials.ObjNav.GenerateHostelAllocationWithCateringCharge(StdNo, sem, spaceDetails.HostelCode, spaceDetails.RoomCode, spaceDetails.SpaceCode, Convert.ToDecimal(spaceDetails.Cost));
+                //Credentials.ObjNav.GenerateHostelAllocationWithCateringCharge(StdNo, sem, spaceDetails.HostelCode, spaceDetails.RoomCode, spaceDetails.SpaceCode, Convert.ToDecimal(spaceDetails.Cost));
                 msg = "Space booked successfully";
                 ValSucc = true;
                 return Json(new { message = msg, success = ValSucc }, JsonRequestBehavior.AllowGet);
@@ -348,7 +342,7 @@ namespace New_Student_Portal.Controllers
 
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
                     string sem = Session["CurrentSem"].ToString();
 
@@ -363,7 +357,7 @@ namespace New_Student_Portal.Controllers
 
                         foreach (JObject config in details["value"])
                         {
-                            Credentials.ObjNav.PrintHostelInvoice(StudentNo, (string)config["Hostel_No"], (string)config["Room_No"], (string)config["Space_No"], sem, "HOSTEL INV-" + filename + ".pdf");
+                            //Credentials.ObjNav.PrintHostelInvoice(StudentNo, (string)config["Hostel_No"], (string)config["Room_No"], (string)config["Space_No"], sem, "HOSTEL INV-" + filename + ".pdf");
                             filename = "HOSTEL INV-" + filename + ".pdf";
                         }
                     }
@@ -407,7 +401,7 @@ namespace New_Student_Portal.Controllers
                     string filename = StudentNo.Replace("/", "");
 
 
-                    Credentials.ObjNav.PrintHostelClearanceForm(StudentNo, "HOSTEL CLEARANCE-" + filename + ".pdf");
+                    //Credentials.ObjNav.PrintHostelClearanceForm(StudentNo, "HOSTEL CLEARANCE-" + filename + ".pdf");
                     filename = "HOSTEL CLEARANCE-" + filename + ".pdf";
 
                     //MoveFile(filename);
@@ -448,7 +442,7 @@ namespace New_Student_Portal.Controllers
                     string StudentNo = Session["Username"].ToString();
                     string filename = StudentNo.Replace("/", "");
 
-                    Credentials.ObjNav.PrintResidentialForm(Session["username"].ToString(), "RESIDENTIALFORM-" + filename + ".pdf");
+                    //Credentials.ObjNav.PrintResidentialForm(Session["username"].ToString(), "RESIDENTIALFORM-" + filename + ".pdf");
                     filename = "RESIDENTIALFORM-" + filename + ".pdf";
 
                     //MoveFile(filename);
@@ -479,7 +473,7 @@ namespace New_Student_Portal.Controllers
             try
             {
                 string RegNo = Session["Username"].ToString();
-
+               
                 HostelList HostD = new HostelList();
                 string gender = CommonClass.GetStudentGender(RegNo);
                 if (gender != "")
@@ -534,7 +528,7 @@ namespace New_Student_Portal.Controllers
                 {
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
                     string sem = Session["CurrentSem"].ToString();
                     string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
@@ -548,12 +542,6 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "You need to register for units before booking for Meals";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
                         return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
                     else
@@ -579,7 +567,7 @@ namespace New_Student_Portal.Controllers
                 {
                     if (Session["CurrentSem"] == null)
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(RegNo);
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                     }
                     string sem = Session["CurrentSem"].ToString();
                     string pageRoom = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + sem + "' and Meals_Booked eq true&$format=json";
@@ -643,11 +631,11 @@ namespace New_Student_Portal.Controllers
                 string StdNo = Session["Username"].ToString();
                 if (Session["CurrentSem"] == null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
+                    Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
                 }
                 string sem = Session["CurrentSem"].ToString();
 
-                Credentials.ObjNav.MealBooking(StdNo, sem);
+                //Credentials.ObjNav.MealBooking(StdNo, sem);
                 msg = "Meals booked successfully";
                 ValSucc = true;
                 return Json(new { message = msg, success = ValSucc }, JsonRequestBehavior.AllowGet);

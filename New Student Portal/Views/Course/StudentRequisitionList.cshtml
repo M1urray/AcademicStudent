@@ -65,7 +65,7 @@
                                     {
                                         <div>
                                             @Html.DisplayFor(modelItem => item.Requisition_Type) <button class="btn btn-primary btnClass" onclick="ViewLines('@item.Code', '@item.Status', '@item.Requisition_Type');">(@item.LinesCounter Units)</button>
-                                            @if (item.ApprovedCount > 0 && item.Status == "Approved")
+                                            @if (item.ApprovalCount > 0 && item.Status == "Approved")
                                             {
                                                 <span>
                                                     @if (item.ApprovalCount > 0)
