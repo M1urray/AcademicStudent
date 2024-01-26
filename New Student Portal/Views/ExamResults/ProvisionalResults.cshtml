@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<New_Student_Portal.ViewModel.ExamSemesters>
 @{
-    ViewBag.Title = "Provisional Results";
+    // ViewBag.Title = "Provisional Results";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -23,24 +23,30 @@
         max-height: none
     }
 </style>
+
+
 <div class="modal-content">
     <div class="modal-body pre-scrollable">
-        <table class="table table-hover" style="font-size:12px">
-            <thead style="color:white;background-color:black">
-                <tr>
-                    <th>
-                        Unit
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    @*<th style="text-align:center">
+        <div>
+            <input type="button" value="Print Transcript" class="btn btn-danger" onclick="PrintFeeStatement();" />
+        </div>
+        <hr/>
+        <table class="table table-hover" style="font-size: 12px">
+            <thead style="color: white; background-color: black">
+            <tr>
+                <th>
+                    Unit
+                </th>
+                <th>
+                    Description
+                </th>
+                @*<th style="text-align:center">
                         Credits
                     </th>*@
-                    <th style="text-align:center">
-                        Grade
-                    </th>
-                </tr>
+                <th style="text-align: center">
+                    Grade
+                </th>
+            </tr>
             </thead>
             @{
                 if (Model != null)
@@ -50,37 +56,37 @@
                         foreach (var item in Model)
                         {
                             <tbody>
-                                @{
-                                    <tr style="color:white;background-color:cadetblue">
-                                        <td colspan="6">@item.Semester</td>
-                                    </tr>
-                                    decimal TotalGPA = 0, TotalQltPoint = 0, TotalUnits = 0, AVGQPoints = 0, TotalCredits = 0;
-                                    if (item.ListOfResults.Count() > 0)
+                            @{
+                                <tr style="color: white; background-color: cadetblue">
+                                    <td colspan="6">@item.Semester</td>
+                                </tr>
+                                decimal TotalGPA = 0, TotalQltPoint = 0, TotalUnits = 0, AVGQPoints = 0, TotalCredits = 0;
+                                if (item.ListOfResults.Count() > 0)
+                                {
+                                    foreach (var Res in item.ListOfResults)
                                     {
-                                        foreach (var Res in item.ListOfResults)
-                                        {
-                                            decimal TotalCred = 0;
-                                            //TotalCred = Convert.ToDecimal(Res.Credits) * 15;
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => Res.Unit)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => Res.UnitName)
-                                                </td>
-                                                @*<td align="center">
+                                        decimal TotalCred = 0;
+                                        //TotalCred = Convert.ToDecimal(Res.Credits) * 15;
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => Res.Unit)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => Res.UnitName)
+                                            </td>
+                                            @*<td align="center">
                                                     @TotalCred
                                                 </td>*@
-                                                <td align="center">
-                                                    @Html.DisplayFor(modelItem => Res.Grade)
-                                                </td>
-                                            </tr>
-                                            //TotalGPA = TotalGPA + Convert.ToDecimal(Res.GPA);
-                                            //TotalQltPoint = TotalQltPoint + Convert.ToDecimal(Res.GltyPoints);
-                                            //TotalUnits = TotalUnits + Convert.ToDecimal(Res.TotalUnits);
-                                            //TotalCredits = TotalCredits + TotalCred;
-                                        }
-                                        @*AVGQPoints = Math.Round((TotalQltPoint / TotalUnits), 2);
+                                            <td align="center">
+                                                @Html.DisplayFor(modelItem => Res.Grade)
+                                            </td>
+                                        </tr>
+                                        //TotalGPA = TotalGPA + Convert.ToDecimal(Res.GPA);
+                                        //TotalQltPoint = TotalQltPoint + Convert.ToDecimal(Res.GltyPoints);
+                                        //TotalUnits = TotalUnits + Convert.ToDecimal(Res.TotalUnits);
+                                        //TotalCredits = TotalCredits + TotalCred;
+                                    }
+                                    @*AVGQPoints = Math.Round((TotalQltPoint / TotalUnits), 2);
                                         <tr class="border_bottom">
                                             <td colspan="2" align="right">Totals</td>
                                             <td align="center">
@@ -88,28 +94,28 @@
                                             </td>
                                             <td colspan="2"></td>
                                         </tr>*@
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="5" style="color:red">
-                                                No Records found
-                                            </td>
-                                        </tr>
-                                    }
-
                                 }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" style="color: red">
+                                            No Records found
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
                             </tbody>
                         }
                     }
                     else
                     {
                         <tbody>
-                            <tr>
-                                <td colspan="6" style="color:red">
-                                    No Records found
-                                </td>
-                            </tr>
+                        <tr>
+                            <td colspan="6" style="color: red">
+                                No Records found
+                            </td>
+                        </tr>
                         </tbody>
                     }
                 }
@@ -117,6 +123,31 @@
         </table>
     </div>
 </div>
+<script type="text/javascript">
+    var PrintFeeStatement = function () {
+        ShowProgress();
+        $.ajax({
+            url: '/ViewDocuments/ProvisionalResults',
+            type: "POST",
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', data.message);
+                    $("#myModalUnits").modal("show");
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
+
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+</script>
 
 
 

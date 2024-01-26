@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<New_Student_Portal.ViewModel.FeeStatementDetails>
 @{
-    ViewBag.Title = "Fee Statement";
+    // ViewBag.Title = "Fee Statement";
     Layout = "~/Views/Shared/Sitemaster.cshtml";
 }
 <style>
@@ -17,6 +17,7 @@
 <div class="card">
     <div class="card-body">
         <input type="button" value="Print Fee Statement" class="btn btn-danger" onclick="PrintFeeStatement();" />
+        <hr />
         @{
             decimal TotalDebit = 0, TotalCredit = 0, Balance = 0, RunningBal = 0;
         }

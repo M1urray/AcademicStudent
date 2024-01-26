@@ -197,7 +197,6 @@ namespace Student.Controllers
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
                                         var callbackUrl = url + "/Login/AccountResetPassword?user=" + (string)config["No"] + "&Token=" + value;
                                         var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance.";
-                                        //"<BR/>Contact Email : admissions@daystar.ac.ke <BR/><BR/>Best Regards.<BR/><BR/>";
                                         var body = "Hi " + ret;
                                         body += "<br />";
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
