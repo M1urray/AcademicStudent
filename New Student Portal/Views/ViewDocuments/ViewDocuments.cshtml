@@ -3,7 +3,6 @@
     ViewBag.Title = "View Documents";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
-
 <div class="card">
     <div class="card-body">
         <div class="row" id="divProg">
@@ -48,22 +47,22 @@
             $("#divReport").show();
             PrintProvissionalResults();
         }
-//        if (DocType == "RESULTS" || DocType == "STDAUDIT") {
-//            $("#divProg").show();
-//            $("#divReport").hide();
-//            ShowProgress();
-//            $("#ddlProgramme option").remove();
-//            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-//
-//            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
-//                function (data) {
-//                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-//                    $.each(data.ListOfValues, function () {
-//                        $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
-//                    });
-//                    HideProgress();
-//                });
-//        };
+        //if (DocType == "RESULTS" || DocType == "STDAUDIT") {
+        //    $("#divProg").show();
+        //    $("#divReport").hide();
+        //    ShowProgress();
+        //    $("#ddlProgramme option").remove();
+        //    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+
+        //    $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
+        //        function (data) {
+        //            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+        //            $.each(data.ListOfValues, function () {
+        //                $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
+        //            });
+        //            HideProgress();
+        //        });
+        //};
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
             $("#divReport").show();

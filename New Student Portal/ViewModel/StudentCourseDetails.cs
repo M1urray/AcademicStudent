@@ -14,6 +14,7 @@ namespace New_Student_Portal.ViewModel
         public string Email { get; set; }
         public string Prog { get; set; }
         public string HostelCode { get; set; }
+        public string RegT { get; set; }
     }
     public class RegisteredProgrammes
     {
@@ -29,6 +30,7 @@ namespace New_Student_Portal.ViewModel
     public class StudentCourseRegistration
     {
         public string Code { get; set; }
+        public string RegT { get; set; }
         public RegisteredProgrammes RegProg { get; set; }
         public IEnumerable<CourseReg> ListOfCourseRegistration { get; set; }
         public IEnumerable<StudentUnits> ListOfStudentBasketUnits { get; set; }

@@ -1,886 +1,865 @@
-﻿using New_Student_Portal.Models;
-using Newtonsoft.Json.Linq;
+﻿using New_Student_Portal.CustomSecurity;
+using New_Student_Portal.Models;
 using New_Student_Portal.ViewModel;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
-using New_Student_Portal.CustomSecurity;
 
 namespace New_Student_Portal.Controllers
 {
-    [CustomeAuthentication]
     [CustomAuthorization(Role = "STUD")]
+    [CustomeAuthentication]
     public class WelfareController : Controller
     {
-        // GET: Welfare      
-        public ActionResult HostelList()
+        public WelfareController()
         {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-                    string sem = Session["CurrentSem"].ToString();
-
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
-                    if (r[0] == "")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You have not been registered in the current semester. Register for Units first";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (Convert.ToInt32(r[3]) < 1)
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You need to register for units before booking for hostel";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else
-                    {
-
-                        bool AllowBooking = CommonClass.AllowOnlyY1S1(RegNo);
-                        if (AllowBooking)
-                        {
-                            string residency = CommonClass.GetStudentResidence(RegNo, sem);
-                            if (residency == "Non Resident")
-                            {
-                                #region Residential Details
-                                NonResidenceData resDetails = new NonResidenceData();
-                                string page = "NonResidence?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
-
-                                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                                {
-                                    var result = streamReader.ReadToEnd();
-
-                                    var details = JObject.Parse(result);
-
-                                    foreach (JObject config in details["value"])
-                                    {
-                                        resDetails = new NonResidenceData
-                                        {
-                                            Student = RegNo,
-                                            Sem = sem,
-                                            Premise = (string)config["Residential_Premise"],
-                                            RoomNo = (string)config["Room_No"],
-                                            LandLoard = (string)config["LardLord_Name"],
-                                            Caretaker = (string)config["Caretaker_Name"],
-                                            Witness = (string)config["Witness"],
-                                            AreaName = (string)config["Area_Name"]
-                                        };
-                                    }
-                                }
-                                #endregion
-                                return View("~/Views/Welfare/NonResidenceForm.cshtml", resDetails);
-                            }
-                            else
-                            {
-                                bool s = HasBookedHostel(RegNo, sem);
-
-                                if (s)
-                                {
-                                    RoomSpaces bookedSpaceDetails = new RoomSpaces();
-                                    #region Hostel Booked Details
-                                    string page = "StudentHostelRooms?$filter=Student eq '" + RegNo + "' and Semester eq '" + sem + "' and Cleared eq false&$format=json";
-
-                                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                                    {
-                                        var result = streamReader.ReadToEnd();
-
-                                        var details = JObject.Parse(result);
-
-                                        foreach (JObject config in details["value"])
-                                        {
-                                            bookedSpaceDetails = new RoomSpaces
-                                            {
-                                                Student = RegNo,
-                                                Sem = sem,
-                                                HostelCode = (string)config["Hostel_No"],
-                                                RoomCode = (string)config["Room_No"],
-                                                SpaceCode = (string)config["Space_No"],
-                                                Cost = Convert.ToDecimal((string)config["Accomodation_Fee"]).ToString("#,##0.00"),
-                                                Billed = (bool)config["Billed"]
-                                            };
-                                        }
-                                    }
-                                    #endregion
-
-                                    return PartialView("~/Views/Welfare/BookedSpaceDetails.cshtml", bookedSpaceDetails);
-                                }
-                                else
-                                {
-                                    bool allowHostelBooking = CommonClass.AllowHostelBooking();
-                                    if (allowHostelBooking)
-                                    {
-                                        #region Hostel List
-                                        string gender = CommonClass.GetStudentGender(RegNo);
-                                        if (gender != "")
-                                        {
-                                            List<Hostel> HostelList = new List<Hostel>();
-                                            string page = "";
-
-                                            //string Hostel = CommonClass.GetHostelFromCourseReg(RegNo, sem);
-                                            //if (Hostel != "")
-                                            //{
-                                            //    page = "HostelCard?$filter=Asset_No eq '" + Hostel + "' and Gender eq '" + gender + "' and Not_Available eq false&$format=json";
-                                            //}
-                                            //else
-                                            //{
-                                            //    page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false&$format=json";
-                                            //}
-                                            page = "HostelCard?$filter=Gender eq '" + gender + "' and Not_Available eq false and Total_Vacant gt 0&$format=json";
-                                            HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                                            using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                                            {
-                                                var result = streamReader.ReadToEnd();
-
-                                                var details = JObject.Parse(result);
-
-                                                foreach (JObject config in details["value"])
-                                                {
-                                                    Hostel Hlist = new Hostel();
-                                                    Hlist.AssetNo = (string)config["Asset_No"];
-                                                    Hlist.Description = (string)config["Discription"];
-                                                    //Hlist.VacantSpaces = (int)config["Semester"];
-                                                    HostelList.Add(Hlist);
-                                                }
-                                            }
-                                            return View(HostelList);
-                                        }
-                                        else
-                                        {
-                                            Error erroMsg = new Error();
-                                            erroMsg.Message = "Your gender has not been set. Contact admission";
-                                            return PartialView("~/Views/Shared/ErrorMessange.cshtml", erroMsg);
-                                        }
-                                        #endregion
-                                    }
-                                    else
-                                    {
-                                        Error errormsg = new Error();
-                                        errormsg.Message = "Hostel Booking not allowed at the moment";
-                                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Error errormsg = new Error();
-                            errormsg.Message = "Hostel Booking allowed only for first years at the moment";
-                            return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
-            }
         }
-        protected bool HasBookedHostel(string StdNo, string sem)
-        {
-            bool s = false;
-            try
-            {
-                string page = "StudentHostelRooms?$filter=Student eq '" + StdNo + "' and Semester eq '" + sem + "' and Cleared eq false&$format=json";
 
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        s = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Clear();
-            }
-            return s;
-        }
-        public ActionResult HostelRoomList(string HostelCode, string HostelName)
-        {
-            return View();
-        }
-        public PartialViewResult HostelBlockRooms(string HostelCode)
-        {
-            try
-            {
-                #region Hostel Room List
-
-                List<Rooms> HostelRoomList = new List<Rooms>();
-                string page = "HostelBlockRooms?$filter=Hostel_Code eq '" + HostelCode + "' and (Status eq 'Vaccant' or Status eq 'Partially Occupied')  and NotAvaillable eq false&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        Rooms room = new Rooms();
-                        room.HostelCode = HostelCode;
-                        room.RoomCode = (string)config["RoomCode"];
-                        room.Cost = Convert.ToDecimal((string)config["RoomCost"]).ToString("#,##0.00");
-                        room.Status = (string)config["Status"];
-                        //room.VacantSpaces = (string)config["Discription"];
-                        HostelRoomList.Add(room);
-                    }
-                }
-                #endregion
-
-                return PartialView("~/Views/Welfare/Partial View/HostelBlockRooms.cshtml", HostelRoomList);
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public PartialViewResult RoomSpacesList(string HostelCode, string RoomCode, string Cost)
-        {
-            try
-            {
-                #region Room Space List
-
-                List<RoomSpaces> RoomSpaceList = new List<RoomSpaces>();
-                string page = "RoomSpaces?$select=BedSpaces,Status&$filter=HostelCode eq '" + HostelCode + "' and RoomCode eq '" + RoomCode + "' and Status eq 'Vaccant' and RoomNotAvaillable eq false&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        RoomSpaces space = new RoomSpaces();
-                        space.HostelCode = HostelCode;
-                        space.RoomCode = RoomCode;
-                        space.SpaceCode = (string)config["BedSpaces"];
-                        space.Cost = Cost;
-                        space.Status = (string)config["Status"];
-                        RoomSpaceList.Add(space);
-                    }
-                }
-                #endregion
-
-                return PartialView("~/Views/Welfare/Partial View/RoomSpaces.cshtml", RoomSpaceList);
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        [HttpPost]
-        public JsonResult SaveSelectedSpace(RoomSpaces spaceDetails)
-        {
-            try
-            {
-                string msg = "";
-                bool ValSucc = false;
-                string StdNo = Session["Username"].ToString();
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                }
-                string sem = Session["CurrentSem"].ToString();
-
-                //Credentials.ObjNav.GenerateHostelAllocationWithCateringCharge(StdNo, sem, spaceDetails.HostelCode, spaceDetails.RoomCode, spaceDetails.SpaceCode, Convert.ToDecimal(spaceDetails.Cost));
-                msg = "Space booked successfully";
-                ValSucc = true;
-                return Json(new { message = msg, success = ValSucc }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult PrintHostelInvoice()
-        {
-            bool success = false;
-            try
-            {
-                string message = "";
-
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-                    string sem = Session["CurrentSem"].ToString();
-
-                    string page = "StudentHostelRooms?$filter=Student eq '" + StudentNo + "' and Semester eq '" + sem + "' and Cleared eq false&$format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            //Credentials.ObjNav.PrintHostelInvoice(StudentNo, (string)config["Hostel_No"], (string)config["Room_No"], (string)config["Space_No"], sem, "HOSTEL INV-" + filename + ".pdf");
-                            filename = "HOSTEL INV-" + filename + ".pdf";
-                        }
-                    }
-
-                    MoveFile(filename);
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult PrintHostelClearanceForm()
-        {
-            bool success = false;
-            try
-            {
-                string message = "";
-
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-
-                    //Credentials.ObjNav.PrintHostelClearanceForm(StudentNo, "HOSTEL CLEARANCE-" + filename + ".pdf");
-                    filename = "HOSTEL CLEARANCE-" + filename + ".pdf";
-
-                    //MoveFile(filename);
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult PrintNonResidentialForm()
-        {
-            bool success = false;
-            try
-            {
-                string message = "";
-
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-                    //Credentials.ObjNav.PrintResidentialForm(Session["username"].ToString(), "RESIDENTIALFORM-" + filename + ".pdf");
-                    filename = "RESIDENTIALFORM-" + filename + ".pdf";
-
-                    //MoveFile(filename);
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
-            }
-        }
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetHostelList()
         {
+            JsonResult jsonResult;
             try
             {
-                string RegNo = Session["Username"].ToString();
-               
-                HostelList HostD = new HostelList();
-                string gender = CommonClass.GetStudentGender(RegNo);
-                if (gender != "")
+                string str = base.Session["Username"].ToString();
+                HostelList hostelList = new HostelList();
+                string studentGender = CommonClass.GetStudentGender(str);
+                if (studentGender != "")
                 {
-                    #region Hostel List
-                    List<Hostel> HostelList = new List<Hostel>();
-                    string page = "HostelList?$filter=Gender eq '" + gender + "' and Not_Available eq false and Total_Vacant gt 0&$format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                    List<Hostel> hostels = new List<Hostel>();
+                    string str1 = string.Concat("HostelList?$filter=Gender eq '", studentGender, "' and Not_Available eq false and Total_Vacant gt 0&$format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
                     {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
                         {
-                            Hostel Hlist = new Hostel();
-                            Hlist.AssetNo = (string)config["AssetNo"];
-                            Hlist.Description = (string)config["Discription"];
-                            HostelList.Add(Hlist);
+                            Hostel hostel = new Hostel()
+                            {
+                                AssetNo = (string)item["AssetNo"],
+                                Description = (string)item["Discription"]
+                            };
+                            hostels.Add(hostel);
                         }
                     }
-                    #endregion
-                    HostD = new HostelList
+                    hostelList = new HostelList()
                     {
-                        ListOfHostels = HostelList.Select(x =>
-                                        new SelectListItem()
-                                        {
-                                            Text = x.Description,
-                                            Value = x.AssetNo
-                                        }).ToList()
+                        ListOfHostels = (
+                            from x in hostels
+                            select new SelectListItem()
+                            {
+                                Text = x.Description,
+                                Value = x.AssetNo
+                            }).ToList<SelectListItem>()
                     };
                 }
-                return Json(new { message = HostD, success = true }, JsonRequestBehavior.AllowGet);
+                jsonResult = base.Json(new { message = hostelList, success = true }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        public ActionResult MealBooking()
+
+        protected bool HasBookedHostel(string StdNo, string sem)
         {
+            bool flag = false;
             try
             {
-                string RegNo = Session["Username"].ToString();
-                if (Session["Username"] == null)
+                string str = string.Concat(new string[] { "StudentHostelRooms?$filter=Student eq '", StdNo, "' and Semester eq '", sem, "' and Cleared eq false&$format=json" });
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str).GetResponseStream()))
                 {
-                    return RedirectToAction("Login", "Login");
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                    {
+                        flag = true;
+                    }
                 }
-                else
+            }
+            catch (Exception exception)
+            {
+                exception.Data.Clear();
+            }
+            return flag;
+        }
+
+        public PartialViewResult HostelBlockRooms(string HostelCode)
+        {
+            PartialViewResult partialViewResult;
+            try
+            {
+                List<Rooms> rooms = new List<Rooms>();
+                string str = string.Concat("HostelBlockRooms?$filter=Hostel_Code eq '", HostelCode, "' and (Status eq 'Vaccant' or Status eq 'Partially Occupied')  and NotAvaillable eq false&$format=json");
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str).GetResponseStream()))
                 {
-                    if (Session["CurrentSem"] == null)
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
                     {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
+                        Rooms room = new Rooms()
+                        {
+                            HostelCode = HostelCode,
+                            RoomCode = (string)item["RoomCode"]
+                        };
+                        decimal num = Convert.ToDecimal((string)item["RoomCost"]);
+                        room.Cost = num.ToString("#,##0.00");
+                        room.Status = (string)item["Status"];
+                        rooms.Add(room);
                     }
-                    string sem = Session["CurrentSem"].ToString();
-                    string[] r = CommonClass.CurrentCourseRegistration(RegNo, sem);
-                    if (r[0] == "")
+                }
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/HostelBlockRooms.cshtml", rooms);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return partialViewResult;
+        }
+
+        public ActionResult HostelList()
+        {
+            ActionResult action;
+            try
+            {
+                if (base.Session["Username"] != null)
+                {
+                    string str = base.Session["Username"].ToString();
+                    if (base.Session["CurrentSem"] == null)
                     {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You have not been registered in the current semester. Register for Units first";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
                     }
-                    else if (Convert.ToInt32(r[3]) < 1)
+                    string str1 = base.Session["CurrentSem"].ToString();
+                    string[] strArrays = CommonClass.CurrentCourseRegistration(str, str1, "0");
+                    if (strArrays[0] == "")
                     {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You need to register for units before booking for Meals";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        Error error = new Error()
+                        {
+                            Message = "You have not been registered in the current semester. Register for Units first"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error);
+                    }
+                    else if (Convert.ToInt32(strArrays[3]) < 1)
+                    {
+                        Error error1 = new Error()
+                        {
+                            Message = "You need to register for units before booking for hostel"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error1);
+                    }
+                    else if (!CommonClass.AllowOnlyY1S1(str))
+                    {
+                        Error error2 = new Error()
+                        {
+                            Message = "Hostel Booking allowed only for first years at the moment"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error2);
+                    }
+                    else if (CommonClass.GetStudentResidence(str, str1) == "Non Resident")
+                    {
+                        NonResidenceData nonResidenceDatum = new NonResidenceData();
+                        string str2 = string.Concat(new string[] { "NonResidence?$filter=Student_No eq '", str, "' and Semester eq '", str1, "'&$format=json" });
+                        using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str2).GetResponseStream()))
+                        {
+                            foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                            {
+                                nonResidenceDatum = new NonResidenceData()
+                                {
+                                    Student = str,
+                                    Sem = str1,
+                                    Premise = (string)item["Residential_Premise"],
+                                    RoomNo = (string)item["Room_No"],
+                                    LandLoard = (string)item["LardLord_Name"],
+                                    Caretaker = (string)item["Caretaker_Name"],
+                                    Witness = (string)item["Witness"],
+                                    AreaName = (string)item["Area_Name"]
+                                };
+                            }
+                        }
+                        action = base.View("~/Views/Welfare/NonResidenceForm.cshtml", nonResidenceDatum);
+                    }
+                    else if (this.HasBookedHostel(str, str1))
+                    {
+                        RoomSpaces roomSpace = new RoomSpaces();
+                        string str3 = string.Concat(new string[] { "StudentHostelRooms?$filter=Student eq '", str, "' and Semester eq '", str1, "' and Cleared eq false&$format=json" });
+                        using (StreamReader streamReader1 = new StreamReader(Credentials.GetOdataData(str3).GetResponseStream()))
+                        {
+                            foreach (JObject jObjects in (IEnumerable<JToken>)JObject.Parse(streamReader1.ReadToEnd())["value"])
+                            {
+                                RoomSpaces roomSpace1 = new RoomSpaces()
+                                {
+                                    Student = str,
+                                    Sem = str1,
+                                    HostelCode = (string)jObjects["Hostel_No"],
+                                    RoomCode = (string)jObjects["Room_No"],
+                                    SpaceCode = (string)jObjects["Space_No"]
+                                };
+                                decimal num = Convert.ToDecimal((string)jObjects["Accomodation_Fee"]);
+                                roomSpace1.Cost = num.ToString("#,##0.00");
+                                roomSpace1.Billed = (bool)jObjects["Billed"];
+                                roomSpace = roomSpace1;
+                            }
+                        }
+                        action = this.PartialView("~/Views/Welfare/BookedSpaceDetails.cshtml", roomSpace);
+                    }
+                    else if (!CommonClass.AllowHostelBooking())
+                    {
+                        Error error3 = new Error()
+                        {
+                            Message = "Hostel Booking not allowed at the moment"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error3);
                     }
                     else
                     {
-                        return View();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
-            }
-        }
-        public PartialViewResult MealBookingForm()
-        {
-            try
-            {
-                string RegNo = Session["Username"].ToString();
-                MealBooking mealB = new MealBooking();
-                try
-                {
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-                    string sem = Session["CurrentSem"].ToString();
-                    string pageRoom = "CourseReg?$filter=StudentNo eq '" + RegNo + "' and Semester eq '" + sem + "' and Meals_Booked eq true&$format=json";
-
-                    HttpWebResponse httpResponseRoom = Credentials.GetOdataData(pageRoom);
-                    using (var streamReaderRoom = new StreamReader(httpResponseRoom.GetResponseStream()))
-                    {
-                        var resultRoom = streamReaderRoom.ReadToEnd();
-
-                        var detailsRoom = JObject.Parse(resultRoom);
-
-                        if (detailsRoom["value"].Count() > 0)
+                        string studentGender = CommonClass.GetStudentGender(str);
+                        if (studentGender == "")
                         {
-                            mealB.Message = "You have already booked for meals";
-                            mealB.BookedMeals = true;
+                            Error error4 = new Error()
+                            {
+                                Message = "Your gender has not been set. Contact admission"
+                            };
+                            action = this.PartialView("~/Views/Shared/ErrorMessange.cshtml", error4);
                         }
                         else
                         {
-                            string pageCharge = "ChargeList?$select=Amount&$filter=Code eq 'CAFETERIA'&$format=json";
-
-                            HttpWebResponse httpResponseCharge = Credentials.GetOdataData(pageCharge);
-                            using (var streamReaderCharge = new StreamReader(httpResponseCharge.GetResponseStream()))
+                            List<Hostel> hostels = new List<Hostel>();
+                            string str4 = "";
+                            str4 = string.Concat("HostelCard?$filter=Gender eq '", studentGender, "' and Not_Available eq false and Total_Vacant gt 0&$format=json");
+                            using (StreamReader streamReader2 = new StreamReader(Credentials.GetOdataData(str4).GetResponseStream()))
                             {
-                                var resultCharge = streamReaderCharge.ReadToEnd();
-
-                                var detailsCharge = JObject.Parse(resultCharge);
-
-                                if (detailsCharge["value"].Count() > 0)
+                                foreach (JObject item1 in (IEnumerable<JToken>)JObject.Parse(streamReader2.ReadToEnd())["value"])
                                 {
-                                    foreach (JObject config2 in detailsCharge["value"])
+                                    Hostel hostel = new Hostel()
                                     {
-                                        mealB.Message = "Total Meal Charge = Ksh. " + Math.Round(((decimal)config2["Amount"]), 2).ToString("#,##0.00");
-                                        mealB.BookedMeals = false;
+                                        AssetNo = (string)item1["Asset_No"],
+                                        Description = (string)item1["Discription"]
+                                    };
+                                    hostels.Add(hostel);
+                                }
+                            }
+                            action = base.View(hostels);
+                        }
+                    }
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                Error error5 = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = base.View("~/Views/Common/ErrorMessage.cshtml", error5);
+            }
+            return action;
+        }
+
+        public ActionResult HostelRoomList(string HostelCode, string HostelName)
+        {
+            return base.View();
+        }
+
+        public ActionResult MealBooking()
+        {
+            ActionResult action;
+            try
+            {
+                string str = base.Session["Username"].ToString();
+                if (base.Session["Username"] != null)
+                {
+                    if (base.Session["CurrentSem"] == null)
+                    {
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    string str1 = base.Session["CurrentSem"].ToString();
+                    string[] strArrays = CommonClass.CurrentCourseRegistration(str, str1, "0");
+                    if (strArrays[0] == "")
+                    {
+                        Error error = new Error()
+                        {
+                            Message = "You have not been registered in the current semester. Register for Units first"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error);
+                    }
+                    else if (Convert.ToInt32(strArrays[3]) >= 1)
+                    {
+                        action = base.View();
+                    }
+                    else
+                    {
+                        Error error1 = new Error()
+                        {
+                            Message = "You need to register for units before booking for Meals"
+                        };
+                        action = base.View("~/Views/Shared/ErrorMessange.cshtml", error1);
+                    }
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                Error error2 = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = base.View("~/Views/Common/ErrorMessage.cshtml", error2);
+            }
+            return action;
+        }
+
+        public PartialViewResult MealBookingForm()
+        {
+            PartialViewResult partialViewResult;
+            try
+            {
+                string str = base.Session["Username"].ToString();
+                MealBooking mealBooking = new MealBooking();
+                try
+                {
+                    if (base.Session["CurrentSem"] == null)
+                    {
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    string str1 = base.Session["CurrentSem"].ToString();
+                    string str2 = string.Concat(new string[] { "CourseReg?$filter=StudentNo eq '", str, "' and Semester eq '", str1, "' and Meals_Booked eq true&$format=json" });
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str2).GetResponseStream()))
+                    {
+                        if (JObject.Parse(streamReader.ReadToEnd())["value"].Count<JToken>() <= 0)
+                        {
+                            using (StreamReader streamReader1 = new StreamReader(Credentials.GetOdataData("ChargeList?$select=Amount&$filter=Code eq 'CAFETERIA'&$format=json").GetResponseStream()))
+                            {
+                                JObject jObjects = JObject.Parse(streamReader1.ReadToEnd());
+                                if (jObjects["value"].Count<JToken>() > 0)
+                                {
+                                    foreach (JObject item in (IEnumerable<JToken>)jObjects["value"])
+                                    {
+                                        decimal num = Math.Round((decimal)item["Amount"], 2);
+                                        mealBooking.Message = string.Concat("Total Meal Charge = Ksh. ", num.ToString("#,##0.00"));
+                                        mealBooking.BookedMeals = false;
                                     }
                                 }
                             }
                         }
+                        else
+                        {
+                            mealBooking.Message = "You have already booked for meals";
+                            mealBooking.BookedMeals = true;
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    mealB.Message = ex.Message;
-                    mealB.BookedMeals = false;
+                    mealBooking.Message = exception.Message;
+                    mealBooking.BookedMeals = false;
                 }
-                return PartialView("~/Views/Welfare/Partial View/MealBookingForm.cshtml", mealB);
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/MealBookingForm.cshtml", mealBooking);
             }
-            catch (Exception ex)
+            catch (Exception exception2)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                Exception exception1 = exception2;
+                Error error = new Error()
+                {
+                    Message = exception1.Message.Replace("'", "")
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
+            return partialViewResult;
         }
-        [HttpPost]
-        public JsonResult SubmitMealBooking()
-        {
-            try
-            {
-                string msg = "";
-                bool ValSucc = false;
-                string StdNo = Session["Username"].ToString();
-                if (Session["CurrentSem"] == null)
-                {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                }
-                string sem = Session["CurrentSem"].ToString();
 
-                //Credentials.ObjNav.MealBooking(StdNo, sem);
-                msg = "Meals booked successfully";
-                ValSucc = true;
-                return Json(new { message = msg, success = ValSucc }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
         private bool MoveFile(string FileName)
         {
-            bool s = false;
+            bool flag = false;
             try
             {
-                string sourcefile = Credentials.fileSourcePath + FileName;
-                string destinationfile = Server.MapPath("~/Downloads/" + FileName);
-                if (System.IO.File.Exists(destinationfile) == true)
-                {
-                    System.IO.File.Delete(destinationfile);
-                    System.IO.File.Move(sourcefile, destinationfile);
-                }
-                if (System.IO.File.Exists(destinationfile) == false)
-                {
-                    System.IO.File.Move(sourcefile, destinationfile);
-                }
+                string str = string.Concat(Credentials.fileSourcePath, FileName);
+                string str1 = base.Server.MapPath(string.Concat("~/Downloads/", FileName));
+                //if (File.Exists(str1))
+                //{
+                //    File.Delete(str1);
+                //    File.Move(str, str1);
+                //}
+                //if (!File.Exists(str1))
+                //{
+                //    File.Move(str, str1);
+                //}
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                ex.Data.Clear();
+                exception.Data.Clear();
             }
-            return s;
+            return flag;
         }
-        public ActionResult SponsorshipApplication()
+
+        public PartialViewResult NewSponsorshipApplication()
         {
+            PartialViewResult partialViewResult;
             try
             {
-                if (Session["Username"] == null)
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/NewSponsorshipApplication.cshtml", new SponsorshipApplication());
+            }
+            catch (Exception exception)
+            {
+                Error error = new Error()
                 {
-                    return RedirectToAction("Login", "Login");
+                    Message = exception.Message
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return partialViewResult;
+        }
+
+        public JsonResult PrintHostelClearanceForm()
+        {
+            JsonResult jsonResult;
+            bool flag = false;
+            try
+            {
+                string str = "";
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = str1.Replace("/", "");
+                    str2 = string.Concat("HOSTEL CLEARANCE-", str2, ".pdf");
+                    if (!(new FileInfo(base.Server.MapPath(string.Concat("~/Downloads/", str2)))).Exists)
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                    else
+                    {
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
+                    }
                 }
                 else
                 {
-                    return View();
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
                 }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error erroMsg = new Error();
-                erroMsg.Message = ex.Message;
-                return View("~/Views/Common/ErrorMessage.cshtml", erroMsg);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = flag }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        public PartialViewResult SponsorshipApplicationList()
+
+        public JsonResult PrintHostelInvoice()
         {
+            JsonResult jsonResult;
+            bool flag = false;
             try
             {
-                string StdNo = Session["Username"].ToString();
-                List<SponsorshipApplication> SPNSHPList = new List<SponsorshipApplication>();
-
-                string page = "SponsorshipApplication?$filter=Student_No eq '" + StdNo + "'&$format=json";
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                string str = "";
+                if (base.Session["Username"] != null)
                 {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-                    foreach (JObject config in details["value"])
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = str1.Replace("/", "");
+                    if (base.Session["CurrentSem"] == null)
                     {
-                        SponsorshipApplication SPList = new SponsorshipApplication();
-                        SPList.Student_No = (string)config["Student_No"];
-                        SPList.Application_No = (string)config["Application_No"];
-                        SPList.Application_Date = ((DateTime)config["Application_Date"]).ToString("dd/MM/yyyy");
-                        SPList.Applied_Amount = Convert.ToDecimal((string)config["Applied_Amount"]).ToString("#,##0.00");
-                        SPList.Status = (string)config["Status"];
-                        SPNSHPList.Add(SPList);
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    string str3 = base.Session["CurrentSem"].ToString();
+                    string str4 = string.Concat(new string[] { "StudentHostelRooms?$filter=Student eq '", str1, "' and Semester eq '", str3, "' and Cleared eq false&$format=json" });
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str4).GetResponseStream()))
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                        {
+                            str2 = string.Concat("HOSTEL INV-", str2, ".pdf");
+                        }
+                    }
+                    this.MoveFile(str2);
+                    if (!(new FileInfo(base.Server.MapPath(string.Concat("~/Downloads/", str2)))).Exists)
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                    else
+                    {
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
                     }
                 }
-                return PartialView("~/Views/Welfare/Partial View/SponsorshipApplicationList.cshtml", SPNSHPList.OrderByDescending(x => x.Application_No));
-            }
-            catch (Exception ex)
-            {
-                Error erroMsg = new Error();
-                erroMsg.Message = ex.Message;
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", erroMsg);
-            }
-        }
-        public PartialViewResult NewSponsorshipApplication()
-        {
-            try
-            {
-                SponsorshipApplication SPApp = new SponsorshipApplication();
-                return PartialView("~/Views/Welfare/Partial View/NewSponsorshipApplication.cshtml", SPApp);
-            }
-            catch (Exception ex)
-            {
-                Error erroMsg = new Error();
-                erroMsg.Message = ex.Message;
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", erroMsg);
-            }
-        }
-        public JsonResult SubmitSponsorshipApplication(string Amount, string Remarks)
-        {
-            try
-            {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public PartialViewResult SponsorshipApplicationDoc(string DocNo)
-        {
-            try
-            {
-                SponsorshipApplication SPApp = new SponsorshipApplication();
-                string page = "SponsorshipApplication?$filter=Application_No eq '" + DocNo + "'&$format=json";
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                else
                 {
-                    var result = streamReader.ReadToEnd();
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = flag }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
 
-                    var details = JObject.Parse(result);
-                    foreach (JObject config in details["value"])
+        public JsonResult PrintNonResidentialForm()
+        {
+            JsonResult jsonResult;
+            bool flag = false;
+            try
+            {
+                string str = "";
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = str1.Replace("/", "");
+                    str2 = string.Concat("RESIDENTIALFORM-", str2, ".pdf");
+                    if (!(new FileInfo(base.Server.MapPath(string.Concat("~/Downloads/", str2)))).Exists)
                     {
-                        SPApp.Student_No = (string)config["Student_No"];
-                        SPApp.Application_No = (string)config["Application_No"];
-                        SPApp.Application_Date = ((DateTime)config["Application_Date"]).ToString("dd/MM/yyyy");
-                        SPApp.Applied_Amount = Convert.ToDecimal((string)config["Applied_Amount"]).ToString("#,##0.00");
-                        SPApp.Approved_Amount = Convert.ToDecimal((string)config["Approved_Amount"]).ToString("#,##0.00");
-                        SPApp.Remarks = (string)config["Remarks"];
-                        SPApp.Status = (string)config["Status"];
-                        SPApp.ApprovalStatus = (string)config["Approval_Status"];
-                        SPApp.Recommendation = (string)config["Recommendation"];
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                    else
+                    {
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
                     }
                 }
-                return PartialView("~/Views/Welfare/Partial View/SponsorshipApplicationDoc.cshtml", SPApp);
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error erroMsg = new Error();
-                erroMsg.Message = ex.Message;
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", erroMsg);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = flag }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        public ActionResult ScolorshipApplcationForm()
+
+        public PartialViewResult RoomSpacesList(string HostelCode, string RoomCode, string Cost)
         {
-            return View();
-        }
-        public PartialViewResult StepView(string Step)
-        {
-            return PartialView("~/Views/Welfare/Steps/" + Step + ".cshtml");
-        }
-        [HttpPost]
-        public JsonResult SaveStepTwoSection()
-        {
+            PartialViewResult partialViewResult;
             try
             {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                List<RoomSpaces> roomSpaces = new List<RoomSpaces>();
+                string str = string.Concat(new string[] { "RoomSpaces?$select=BedSpaces,Status&$filter=HostelCode eq '", HostelCode, "' and RoomCode eq '", RoomCode, "' and Status eq 'Vaccant' and RoomNotAvaillable eq false&$format=json" });
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str).GetResponseStream()))
+                {
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                    {
+                        RoomSpaces roomSpace = new RoomSpaces()
+                        {
+                            HostelCode = HostelCode,
+                            RoomCode = RoomCode,
+                            SpaceCode = (string)item["BedSpaces"],
+                            Cost = Cost,
+                            Status = (string)item["Status"]
+                        };
+                        roomSpaces.Add(roomSpace);
+                    }
+                }
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/RoomSpaces.cshtml", roomSpaces);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
+            return partialViewResult;
         }
+
         [HttpPost]
-        public JsonResult SaveStepThreeSection()
+        public JsonResult SaveSelectedSpace(RoomSpaces spaceDetails)
         {
+            JsonResult jsonResult;
             try
             {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                base.Session["Username"].ToString();
+                if (base.Session["CurrentSem"] == null)
+                {
+                    base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                }
+                base.Session["CurrentSem"].ToString();
+                jsonResult = base.Json(new { message = "Space booked successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        [HttpPost]
-        public JsonResult SaveStepFourSection()
-        {
-            try
-            {
-                string StdNo = Session["Username"].ToString();
 
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpPost]
         public JsonResult SaveStepFiveSection()
         {
+            JsonResult jsonResult;
             try
             {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
+
         [HttpPost]
-        public JsonResult SaveStepSixSection()
+        public JsonResult SaveStepFourSection()
         {
+            JsonResult jsonResult;
             try
             {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
+
         [HttpPost]
         public JsonResult SaveStepSevenrSection()
         {
+            JsonResult jsonResult;
             try
             {
-                string StdNo = Session["Username"].ToString();
-
-                //Credentials.ObjNav.InsertStudentSponsorshipApplication(StdNo,Convert.ToDecimal(Amount), Remarks);
-                return Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepSixSection()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepThreeSection()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepTwoSection()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        public ActionResult ScolorshipApplcationForm()
+        {
+            return base.View();
+        }
+
+        public ActionResult SponsorshipApplication()
+        {
+            ActionResult action;
+            try
+            {
+                if (base.Session["Username"] != null)
+                {
+                    action = base.View();
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
+            }
+            catch (Exception exception)
+            {
+                Error error = new Error()
+                {
+                    Message = exception.Message
+                };
+                action = base.View("~/Views/Common/ErrorMessage.cshtml", error);
+            }
+            return action;
+        }
+
+        public PartialViewResult SponsorshipApplicationDoc(string DocNo)
+        {
+            PartialViewResult partialViewResult;
+            try
+            {
+                SponsorshipApplication sponsorshipApplication = new SponsorshipApplication();
+                string str = string.Concat("SponsorshipApplication?$filter=Application_No eq '", DocNo, "'&$format=json");
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str).GetResponseStream()))
+                {
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                    {
+                        sponsorshipApplication.Student_No = (string)item["Student_No"];
+                        sponsorshipApplication.Application_No = (string)item["Application_No"];
+                        DateTime dateTime = (DateTime)item["Application_Date"];
+                        sponsorshipApplication.Application_Date = dateTime.ToString("dd/MM/yyyy");
+                        decimal num = Convert.ToDecimal((string)item["Applied_Amount"]);
+                        sponsorshipApplication.Applied_Amount = num.ToString("#,##0.00");
+                        num = Convert.ToDecimal((string)item["Approved_Amount"]);
+                        sponsorshipApplication.Approved_Amount = num.ToString("#,##0.00");
+                        sponsorshipApplication.Remarks = (string)item["Remarks"];
+                        sponsorshipApplication.Status = (string)item["Status"];
+                        sponsorshipApplication.ApprovalStatus = (string)item["Approval_Status"];
+                        sponsorshipApplication.Recommendation = (string)item["Recommendation"];
+                    }
+                }
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/SponsorshipApplicationDoc.cshtml", sponsorshipApplication);
+            }
+            catch (Exception exception)
+            {
+                Error error = new Error()
+                {
+                    Message = exception.Message
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return partialViewResult;
+        }
+
+        public PartialViewResult SponsorshipApplicationList()
+        {
+            PartialViewResult partialViewResult;
+            try
+            {
+                string str = base.Session["Username"].ToString();
+                List<SponsorshipApplication> sponsorshipApplications = new List<SponsorshipApplication>();
+                string str1 = string.Concat("SponsorshipApplication?$filter=Student_No eq '", str, "'&$format=json");
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                {
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                    {
+                        SponsorshipApplication sponsorshipApplication = new SponsorshipApplication()
+                        {
+                            Student_No = (string)item["Student_No"],
+                            Application_No = (string)item["Application_No"]
+                        };
+                        DateTime dateTime = (DateTime)item["Application_Date"];
+                        sponsorshipApplication.Application_Date = dateTime.ToString("dd/MM/yyyy");
+                        decimal num = Convert.ToDecimal((string)item["Applied_Amount"]);
+                        sponsorshipApplication.Applied_Amount = num.ToString("#,##0.00");
+                        sponsorshipApplication.Status = (string)item["Status"];
+                        sponsorshipApplications.Add(sponsorshipApplication);
+                    }
+                }
+                partialViewResult = this.PartialView("~/Views/Welfare/Partial View/SponsorshipApplicationList.cshtml",
+                    from x in sponsorshipApplications
+                    orderby x.Application_No descending
+                    select x);
+            }
+            catch (Exception exception)
+            {
+                Error error = new Error()
+                {
+                    Message = exception.Message
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return partialViewResult;
+        }
+
+        public PartialViewResult StepView(string Step)
+        {
+            PartialViewResult partialViewResult = base.PartialView(string.Concat("~/Views/Welfare/Steps/", Step, ".cshtml"));
+            return partialViewResult;
+        }
+
+        [HttpPost]
+        public JsonResult SubmitMealBooking()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                if (base.Session["CurrentSem"] == null)
+                {
+                    base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                }
+                base.Session["CurrentSem"].ToString();
+                jsonResult = base.Json(new { message = "Meals booked successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        public JsonResult SubmitSponsorshipApplication(string Amount, string Remarks)
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                jsonResult = base.Json(new { message = "Sponsorship Application Submitted successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
         }
     }
 }

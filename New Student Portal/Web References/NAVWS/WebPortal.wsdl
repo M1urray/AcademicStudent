@@ -265,32 +265,6 @@
           <sequence />
         </complexType>
       </element>
-      <element name="EditLecturerUnit">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="lect" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="campus" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="studyMode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldProg" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldStage" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldSemester" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldUnit" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldCampus" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="oldStudyMode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineNo" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="_Class" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="EditLecturerUnit_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
       <element name="EnterRowMarks">
         <complexType>
           <sequence>
@@ -315,13 +289,14 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="receipt_No" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GenerateReceipts_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateScoreSheet">
@@ -339,7 +314,9 @@
       </element>
       <element name="GenerateScoreSheet_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentAudit">
@@ -374,13 +351,14 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sem" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentExamCards_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentProformaInvoices">
@@ -394,7 +372,9 @@
       </element>
       <element name="GenerateStudentProformaInvoices_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentReportCardByProg">
@@ -468,13 +448,14 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentStatement_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GetExamCategory">
@@ -564,6 +545,25 @@
           <sequence />
         </complexType>
       </element>
+      <element name="LecturerEvaluationHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lectureNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="programme" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lecturerName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="suggestions" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="LecturerEvaluationHeader_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="OnlineClearance">
         <complexType>
           <sequence>
@@ -636,6 +636,22 @@
         </complexType>
       </element>
       <element name="PostTransferCharge_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Post_RegisterStudentUnitsAdditional">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="program" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="reg_Type" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Post_RegisterStudentUnitsAdditional_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -754,6 +770,50 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
           </sequence>
+        </complexType>
+      </element>
+      <element name="SaveGeneralEvaluationComments">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="staff_Number" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="staff_Name" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sugge1" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sugge2" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sugge3" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sugge4" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SaveGeneralEvaluationComments_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="SaveLecturerEvaluationForm">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="staff_Number" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="staff_Name" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="evaluation_Question" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="evaluation_Category" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="programme" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="question_Score" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="section" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="evaluationItem" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isQuizbool" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="quizAns" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SaveLecturerEvaluationForm_Result">
+        <complexType>
+          <sequence />
         </complexType>
       </element>
       <element name="SendEmail">
@@ -918,6 +978,25 @@
           </sequence>
         </complexType>
       </element>
+      <element name="SubmitRetakeResitUnits">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sem" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="regFor" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="chargeCode" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SubmitRetakeResitUnits_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="TestRegistrationStartDate">
         <complexType>
           <sequence>
@@ -927,6 +1006,27 @@
         </complexType>
       </element>
       <element name="TestRegistrationStartDate_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="UpdateTimetable">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lect" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="campus" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="studyMode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_Class" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="classSize" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="assLec" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateTimetable_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -1065,12 +1165,6 @@
   <message name="DropUnitBasket_Result">
     <part name="parameters" element="tns:DropUnitBasket_Result" />
   </message>
-  <message name="EditLecturerUnit">
-    <part name="parameters" element="tns:EditLecturerUnit" />
-  </message>
-  <message name="EditLecturerUnit_Result">
-    <part name="parameters" element="tns:EditLecturerUnit_Result" />
-  </message>
   <message name="EnterRowMarks">
     <part name="parameters" element="tns:EnterRowMarks" />
   </message>
@@ -1179,6 +1273,12 @@
   <message name="InsertStudentPaymentPlan_Result">
     <part name="parameters" element="tns:InsertStudentPaymentPlan_Result" />
   </message>
+  <message name="LecturerEvaluationHeader">
+    <part name="parameters" element="tns:LecturerEvaluationHeader" />
+  </message>
+  <message name="LecturerEvaluationHeader_Result">
+    <part name="parameters" element="tns:LecturerEvaluationHeader_Result" />
+  </message>
   <message name="OnlineClearance">
     <part name="parameters" element="tns:OnlineClearance" />
   </message>
@@ -1208,6 +1308,12 @@
   </message>
   <message name="PostTransferCharge_Result">
     <part name="parameters" element="tns:PostTransferCharge_Result" />
+  </message>
+  <message name="Post_RegisterStudentUnitsAdditional">
+    <part name="parameters" element="tns:Post_RegisterStudentUnitsAdditional" />
+  </message>
+  <message name="Post_RegisterStudentUnitsAdditional_Result">
+    <part name="parameters" element="tns:Post_RegisterStudentUnitsAdditional_Result" />
   </message>
   <message name="Post_RegisterStudentUnits">
     <part name="parameters" element="tns:Post_RegisterStudentUnits" />
@@ -1250,6 +1356,18 @@
   </message>
   <message name="RegisterStudentUnits_Result">
     <part name="parameters" element="tns:RegisterStudentUnits_Result" />
+  </message>
+  <message name="SaveGeneralEvaluationComments">
+    <part name="parameters" element="tns:SaveGeneralEvaluationComments" />
+  </message>
+  <message name="SaveGeneralEvaluationComments_Result">
+    <part name="parameters" element="tns:SaveGeneralEvaluationComments_Result" />
+  </message>
+  <message name="SaveLecturerEvaluationForm">
+    <part name="parameters" element="tns:SaveLecturerEvaluationForm" />
+  </message>
+  <message name="SaveLecturerEvaluationForm_Result">
+    <part name="parameters" element="tns:SaveLecturerEvaluationForm_Result" />
   </message>
   <message name="SendEmail">
     <part name="parameters" element="tns:SendEmail" />
@@ -1311,11 +1429,23 @@
   <message name="Student_Password_Token_Used_Result">
     <part name="parameters" element="tns:Student_Password_Token_Used_Result" />
   </message>
+  <message name="SubmitRetakeResitUnits">
+    <part name="parameters" element="tns:SubmitRetakeResitUnits" />
+  </message>
+  <message name="SubmitRetakeResitUnits_Result">
+    <part name="parameters" element="tns:SubmitRetakeResitUnits_Result" />
+  </message>
   <message name="TestRegistrationStartDate">
     <part name="parameters" element="tns:TestRegistrationStartDate" />
   </message>
   <message name="TestRegistrationStartDate_Result">
     <part name="parameters" element="tns:TestRegistrationStartDate_Result" />
+  </message>
+  <message name="UpdateTimetable">
+    <part name="parameters" element="tns:UpdateTimetable" />
+  </message>
+  <message name="UpdateTimetable_Result">
+    <part name="parameters" element="tns:UpdateTimetable_Result" />
   </message>
   <message name="UploadAttachedDocument">
     <part name="parameters" element="tns:UploadAttachedDocument" />
@@ -1394,10 +1524,6 @@
       <input name="DropUnitBasket" message="tns:DropUnitBasket" />
       <output name="DropUnitBasket_Result" message="tns:DropUnitBasket_Result" />
     </operation>
-    <operation name="EditLecturerUnit">
-      <input name="EditLecturerUnit" message="tns:EditLecturerUnit" />
-      <output name="EditLecturerUnit_Result" message="tns:EditLecturerUnit_Result" />
-    </operation>
     <operation name="EnterRowMarks">
       <input name="EnterRowMarks" message="tns:EnterRowMarks" />
       <output name="EnterRowMarks_Result" message="tns:EnterRowMarks_Result" />
@@ -1470,6 +1596,10 @@
       <input name="InsertStudentPaymentPlan" message="tns:InsertStudentPaymentPlan" />
       <output name="InsertStudentPaymentPlan_Result" message="tns:InsertStudentPaymentPlan_Result" />
     </operation>
+    <operation name="LecturerEvaluationHeader">
+      <input name="LecturerEvaluationHeader" message="tns:LecturerEvaluationHeader" />
+      <output name="LecturerEvaluationHeader_Result" message="tns:LecturerEvaluationHeader_Result" />
+    </operation>
     <operation name="OnlineClearance">
       <input name="OnlineClearance" message="tns:OnlineClearance" />
       <output name="OnlineClearance_Result" message="tns:OnlineClearance_Result" />
@@ -1489,6 +1619,10 @@
     <operation name="PostTransferCharge">
       <input name="PostTransferCharge" message="tns:PostTransferCharge" />
       <output name="PostTransferCharge_Result" message="tns:PostTransferCharge_Result" />
+    </operation>
+    <operation name="Post_RegisterStudentUnitsAdditional">
+      <input name="Post_RegisterStudentUnitsAdditional" message="tns:Post_RegisterStudentUnitsAdditional" />
+      <output name="Post_RegisterStudentUnitsAdditional_Result" message="tns:Post_RegisterStudentUnitsAdditional_Result" />
     </operation>
     <operation name="Post_RegisterStudentUnits">
       <input name="Post_RegisterStudentUnits" message="tns:Post_RegisterStudentUnits" />
@@ -1517,6 +1651,14 @@
     <operation name="RegisterStudentUnits">
       <input name="RegisterStudentUnits" message="tns:RegisterStudentUnits" />
       <output name="RegisterStudentUnits_Result" message="tns:RegisterStudentUnits_Result" />
+    </operation>
+    <operation name="SaveGeneralEvaluationComments">
+      <input name="SaveGeneralEvaluationComments" message="tns:SaveGeneralEvaluationComments" />
+      <output name="SaveGeneralEvaluationComments_Result" message="tns:SaveGeneralEvaluationComments_Result" />
+    </operation>
+    <operation name="SaveLecturerEvaluationForm">
+      <input name="SaveLecturerEvaluationForm" message="tns:SaveLecturerEvaluationForm" />
+      <output name="SaveLecturerEvaluationForm_Result" message="tns:SaveLecturerEvaluationForm_Result" />
     </operation>
     <operation name="SendEmail">
       <input name="SendEmail" message="tns:SendEmail" />
@@ -1558,9 +1700,17 @@
       <input name="Student_Password_Token_Used" message="tns:Student_Password_Token_Used" />
       <output name="Student_Password_Token_Used_Result" message="tns:Student_Password_Token_Used_Result" />
     </operation>
+    <operation name="SubmitRetakeResitUnits">
+      <input name="SubmitRetakeResitUnits" message="tns:SubmitRetakeResitUnits" />
+      <output name="SubmitRetakeResitUnits_Result" message="tns:SubmitRetakeResitUnits_Result" />
+    </operation>
     <operation name="TestRegistrationStartDate">
       <input name="TestRegistrationStartDate" message="tns:TestRegistrationStartDate" />
       <output name="TestRegistrationStartDate_Result" message="tns:TestRegistrationStartDate_Result" />
+    </operation>
+    <operation name="UpdateTimetable">
+      <input name="UpdateTimetable" message="tns:UpdateTimetable" />
+      <output name="UpdateTimetable_Result" message="tns:UpdateTimetable_Result" />
     </operation>
     <operation name="UploadAttachedDocument">
       <input name="UploadAttachedDocument" message="tns:UploadAttachedDocument" />
@@ -1714,15 +1864,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="DropUnitBasket_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="EditLecturerUnit">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:EditLecturerUnit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="EditLecturerUnit">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="EditLecturerUnit_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1888,6 +2029,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="LecturerEvaluationHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:LecturerEvaluationHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="LecturerEvaluationHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="LecturerEvaluationHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="OnlineClearance">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:OnlineClearance" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="OnlineClearance">
@@ -1930,6 +2080,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="PostTransferCharge_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Post_RegisterStudentUnitsAdditional">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:Post_RegisterStudentUnitsAdditional" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Post_RegisterStudentUnitsAdditional">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Post_RegisterStudentUnitsAdditional_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1993,6 +2152,24 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="RegisterStudentUnits_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SaveGeneralEvaluationComments">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:SaveGeneralEvaluationComments" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SaveGeneralEvaluationComments">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SaveGeneralEvaluationComments_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SaveLecturerEvaluationForm">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:SaveLecturerEvaluationForm" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SaveLecturerEvaluationForm">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SaveLecturerEvaluationForm_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -2086,12 +2263,30 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="SubmitRetakeResitUnits">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:SubmitRetakeResitUnits" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SubmitRetakeResitUnits">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SubmitRetakeResitUnits_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="TestRegistrationStartDate">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:TestRegistrationStartDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="TestRegistrationStartDate">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="TestRegistrationStartDate_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateTimetable">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:UpdateTimetable" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateTimetable">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateTimetable_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

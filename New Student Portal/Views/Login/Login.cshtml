@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/LoginMaster.cshtml";
     string UniEmail = "@mcampus.amref.ac.ke";
 }
+<style>
+    .btn-color {        
+        background-color:black;
+    }
+    .text-muted {
+        color: white !important;
+    }
+</style>
 <div class="card">
     <div class="card-body p-4">
         <div class="text-center w-75 m-auto">
@@ -45,8 +53,8 @@
         </div>
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <p> <a href="/Login/ForgotPassword" class="text-muted ms-1">Forgot your password?</a></p>
-            </div>  end col 
+                <p> <a href="/Login/ForgotPassword" class="btn btn-color text-muted ms-1">Forgot your password?</a></p>
+            </div> 
         </div>
     </div> <!-- end card-body -->
 </div>

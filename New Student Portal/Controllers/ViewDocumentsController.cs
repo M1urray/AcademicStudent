@@ -1,527 +1,498 @@
 ﻿using New_Student_Portal.CustomSecurity;
 using New_Student_Portal.Models;
+using New_Student_Portal.NAVWS;
+using New_Student_Portal.ViewModel;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
-using New_Student_Portal.ViewModel;
 
 namespace New_Student_Portal.Controllers
 {
-    [CustomeAuthentication]
     [CustomAuthorization(Role = "STUD")]
+    [CustomeAuthentication]
     public class ViewDocumentsController : Controller
     {
-        // GET: ViewDocuments
-        public ActionResult ViewDocuments()
+        public ViewDocumentsController()
         {
-            return View();
         }
-        public JsonResult FeeStatement()
+
+        public JsonResult AdmissionLetter(string AppNo)
         {
+            JsonResult jsonResult;
+            bool flag = false;
             try
             {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
+                string str = "";
+                if (base.Session["Username"] != null)
                 {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-                    Credentials.ObjNav.GenerateStudentStatement(StudentNo, "FEESTATEMENT-" + filename + ".pdf");
-                    filename = "FEESTATEMENT-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = str1.Replace("/", "");
+                    str2 = string.Concat("ADMLETTER-", str2, ".pdf");
+                    string str3 = base.Server.MapPath(string.Concat("~/Downloads/", str2));
+                    CommonClass.MoveFile(str2, str3);
+                    if (!(new FileInfo(str3)).Exists)
                     {
-                        success = true;
-                        message = @"/Downloads/" + filename;
+                        flag = false;
+                        str = "File Not Found";
                     }
                     else
                     {
-                        success = false;
-                        message = "File Not Found";
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
                     }
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult Receipts(string ReceiptNo)
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
                 }
                 else
                 {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.GenerateReceipts(ReceiptNo, "RCP-" + filename + ".pdf");
-                    filename = "RCP-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
                 }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        public JsonResult SemesterProformaInvoice()
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
 
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-
-                    Sem = Session["CurrentSem"].ToString();
-
-                    string filename = StudentNo.Replace("/", "") + "-SEM-PROFORMA";
-                    Credentials.ObjNav.GenerateStudentSemesterInvoice(StudentNo, Sem, filename + ".pdf");
-                    filename = filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public ActionResult ExamCard()
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-                    Sem = Session["CurrentSem"].ToString();
-
-                    if (EvaluatedAllUnits(RegNo, Sem))
-                    {
-                        string filename = Session["Username"].ToString().Replace("/", "");
-                        Credentials.ObjNav.GenerateStudentExamCards(RegNo, Sem, "EXAMCARD-" + filename + ".pdf");
-                        filename = "EXAMCARD-" + filename + ".pdf";
-                        string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                        CommonClass.MoveFile(filename, DestinationPath);
-
-                        System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                        if (file.Exists)
-                        {
-                            success = true;
-                            message = @"/Downloads/" + filename;
-                        }
-                        else
-                        {
-                            success = false;
-                            message = "File Not Found";
-                        }
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "You need to Evaluate all the Units before printing exam card";
-                    }
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
         protected bool EvaluatedAllUnits(string StdNo, string Sem)
         {
-            bool s = true;
+            bool flag = true;
             try
             {
-                string page = "StudentUnits?$filter=Student_No eq '" + StdNo + "' and Semester eq '" + Sem + "' and Evaluated eq false and (Teaching_Type eq 'Lecture' or Teaching_Type eq 'Teaching Practice')&format=json";
-
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                string str = string.Concat(new string[] { "StudentUnits?$filter=Student_No eq '", StdNo, "' and Semester eq '", Sem, "' and Evaluated eq false and (Teaching_Type eq 'Lecture' or Teaching_Type eq 'Teaching Practice')&format=json" });
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str).GetResponseStream()))
                 {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-                    if (details["value"].Count() > 0)
+                    if (JObject.Parse(streamReader.ReadToEnd())["value"].Count<JToken>() > 0)
                     {
-                        s = false;
+                        flag = false;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                ex.Data.Clear();
+                exception.Data.Clear();
             }
-            return s;
+            return flag;
         }
-        public ActionResult ProvisionalResults()
+
+        public ActionResult ExamCard()
         {
+            ActionResult action;
             try
             {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
                 {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
-
-                    string filename = Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentReportCard(RegNo, "PROVISIONAL RESULTS-" + filename + ".pdf");
-                    filename = "PROVISIONAL RESULTS-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = "";
+                    if (base.Session["CurrentSem"] == null)
                     {
-                        success = true;
-                        message = @"/Downloads/" + filename;
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    str2 = base.Session["CurrentSem"].ToString();
+                    if (!this.EvaluatedAllUnits(str1, str2))
+                    {
+                        flag = false;
+                        str = "You need to Evaluate all the Units before printing exam card";
                     }
                     else
                     {
-                        success = false;
-                        message = "File Not Found";
+                        base.Session["Username"].ToString().Replace("/", "");
+                        str = Credentials.ObjNav.GenerateStudentExamCards(str1, str2);
+                        flag = true;
+                        if (str == "")
+                        {
+                            flag = false;
+                            str = "File Not Found";
+                        }
                     }
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult ProformaInvoice()
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
+                    action = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    string StudentNo = Session["Username"].ToString();
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-
-                    Sem = Session["CurrentSem"].ToString();
-
-                    string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentProformaInvoices(StudentNo, Sem, "PROFORMA-" + filename + ".pdf");
-                    filename = "PROFORMA-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
+                    action = base.RedirectToAction("Login", "Login");
                 }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                action = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return action;
         }
-        public JsonResult PrintCourseStatement()
+
+        public JsonResult FeeStatement()
         {
+            JsonResult jsonResult;
             try
             {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
                 {
-                    Response.Redirect(Url.Action("Login", "Login"));
+                    string str1 = base.Session["Username"].ToString();
+                    str1.Replace("/", "");
+                    str = Credentials.ObjNav.GenerateStudentStatement(str1);
+                    flag = true;
+                    if (str == "")
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
                 }
                 else
                 {
-                    string StudentNo = Session["Username"].ToString();
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                    }
-
-                    Sem = Session["CurrentSem"].ToString();
-
-                    string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.PrintCourseStatement(StudentNo, Sem, "COURSESTATEMENT-" + filename + ".pdf");
-                    filename = "COURSESTATEMENT-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
                 }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
+
         public JsonResult GenerateStudentAudit(string Prog)
         {
+            JsonResult jsonResult;
             try
             {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
                 {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = str1.Replace("/", "");
                     if (Prog == null)
                     {
                         Prog = "";
                     }
-                    Credentials.ObjNav.GenerateStudentAudit(StudentNo, Prog, "STDAUDIT-" + filename + ".pdf");
-                    filename = "STDAUDIT-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
+                    Credentials.ObjNav.GenerateStudentAudit(str1, Prog, string.Concat("STDAUDIT-", str2, ".pdf"));
+                    str2 = string.Concat("STDAUDIT-", str2, ".pdf");
+                    string str3 = base.Server.MapPath(string.Concat("~/Downloads/", str2));
+                    CommonClass.MoveFile(str2, str3);
+                    if (!(new FileInfo(str3)).Exists)
                     {
-                        success = true;
-                        message = @"/Downloads/" + filename;
+                        flag = false;
+                        str = "File Not Found";
                     }
                     else
                     {
-                        success = false;
-                        message = "File Not Found";
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
                     }
                 }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
+
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetEnrolledProgrammes()
         {
+            JsonResult jsonResult;
             try
             {
-                string STDNo = Session["Username"].ToString();
-                #region Programme List
-                List<DropdownList> ProgList = new List<DropdownList>();
-                string page = "StudentEnrolment?$select=Programme&$filter=Student_No eq '" + STDNo + "'&$format=json";
-
-                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                string str = base.Session["Username"].ToString();
+                List<DropdownList> dropdownLists = new List<DropdownList>();
+                string str1 = string.Concat("StudentEnrolment?$select=Programme&$filter=Student_No eq '", str, "'&$format=json");
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
                 {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-
-                    foreach (JObject config in details["value"])
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
                     {
-                        DropdownList p = new DropdownList();
-                        p.Value = (string)config["Programme"];
-                        p.Text = (string)config["Programme"];
-                        ProgList.Add(p);
+                        DropdownList dropdownList = new DropdownList()
+                        {
+                            Value = (string)item["Programme"],
+                            Text = (string)item["Programme"]
+                        };
+                        dropdownLists.Add(dropdownList);
                     }
                 }
-                #endregion
-                DropdownListValues STDProg = new DropdownListValues
+                jsonResult = base.Json(new DropdownListValues()
                 {
-                    ListOfValues = ProgList.Select(x =>
-                                    new SelectListItem()
-                                    {
-                                        Text = x.Text,
-                                        Value = x.Value
-                                    }).ToList()
-                };
-                return Json(STDProg, JsonRequestBehavior.AllowGet);
+                    ListOfValues = (
+                        from x in dropdownLists
+                        select new SelectListItem()
+                        {
+                            Text = x.Text,
+                            Value = x.Value
+                        }).ToList<SelectListItem>()
+                }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
-        public JsonResult AdmissionLetter(string AppNo)
+
+        public JsonResult PrintCourseStatement()
         {
-            bool success = false;
+            JsonResult jsonResult;
             try
             {
-                string message = "";
-
-                if (Session["Username"] == null)
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
                 {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string filename = StudentNo.Replace("/", "");
-
-                    //Credentials.ObjNav.GenerateNextLevelAdmissionLetter(AppNo, "ADMLETTER-" + filename + ".pdf", "");
-                    filename = "ADMLETTER-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = "";
+                    if (base.Session["CurrentSem"] == null)
                     {
-                        success = true;
-                        message = @"/Downloads/" + filename;
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    str2 = base.Session["CurrentSem"].ToString();
+                    string str3 = str1.Replace("/", "");
+                    Credentials.ObjNav.PrintCourseStatement(str1, str2, string.Concat("COURSESTATEMENT-", str3, ".pdf"));
+                    str3 = string.Concat("COURSESTATEMENT-", str3, ".pdf");
+                    string str4 = base.Server.MapPath(string.Concat("~/Downloads/", str3));
+                    CommonClass.MoveFile(str3, str4);
+                    if (!(new FileInfo(str4)).Exists)
+                    {
+                        flag = false;
+                        str = "File Not Found";
                     }
                     else
                     {
-                        success = false;
-                        message = "File Not Found";
+                        flag = true;
+                        str = string.Concat("/Downloads/", str3);
                     }
                 }
-                return Json(new { message = message, success = success }, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
+            return jsonResult;
         }
+
+        public JsonResult ProformaInvoice()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = "";
+                    if (base.Session["CurrentSem"] == null)
+                    {
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    str2 = base.Session["CurrentSem"].ToString();
+                    string str3 = str1.Replace("/", "");
+                    str = Credentials.ObjNav.GenerateStudentProformaInvoices(str1, str2, string.Concat("PROFORMA-", str3, ".pdf"));
+                    flag = true;
+                    if (str == "")
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                }
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        public ActionResult ProvisionalResults()
+        {
+            ActionResult action;
+            try
+            {
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = base.Session["Username"].ToString().Replace("/", "");
+                    Credentials.ObjNav.GenerateStudentReportCard(str1, string.Concat("PROVISIONAL RESULTS-", str2, ".pdf"));
+                    str2 = string.Concat("PROVISIONAL RESULTS-", str2, ".pdf");
+                    string str3 = base.Server.MapPath(string.Concat("~/Downloads/", str2));
+                    CommonClass.MoveFile(str2, str3);
+                    if (!(new FileInfo(str3)).Exists)
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                    else
+                    {
+                        flag = true;
+                        str = string.Concat("/Downloads/", str2);
+                    }
+                    action = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                action = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return action;
+        }
+
+        public JsonResult Receipts(string ReceiptNo)
+        {
+            JsonResult jsonResult;
+            try
+            {
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    str1.Replace("/", "");
+                    str = Credentials.ObjNav.GenerateReceipts(ReceiptNo);
+                    flag = true;
+                    if (str == "")
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                }
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        public JsonResult SemesterProformaInvoice()
+        {
+            JsonResult jsonResult;
+            try
+            {
+                string str = "";
+                bool flag = false;
+                if (base.Session["Username"] != null)
+                {
+                    string str1 = base.Session["Username"].ToString();
+                    string str2 = "";
+                    if ((base.Session["CurrentSem"] == null ? true : base.Session["CurrentSem"].ToString() == ""))
+                    {
+                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                    }
+                    str2 = base.Session["CurrentSem"].ToString();
+                    string str3 = string.Concat(str1.Replace("/", ""), "-SEM-PROFORMA");
+                    Credentials.ObjNav.GenerateStudentSemesterInvoice(str1, str2, string.Concat(str3, ".pdf"));
+                    str3 = string.Concat(str3, ".pdf");
+                    string str4 = base.Server.MapPath(string.Concat("~/Downloads/", str3));
+                    CommonClass.MoveFile(str3, str4);
+                    if (!(new FileInfo(str4)).Exists)
+                    {
+                        flag = false;
+                        str = "File Not Found";
+                    }
+                    else
+                    {
+                        flag = true;
+                        str = string.Concat("/Downloads/", str3);
+                    }
+                }
+                else
+                {
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
+                }
+                jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
         public ActionResult SpecialExamCard(string DocNo)
         {
-            bool success = false;
+            ActionResult action;
+            bool flag = false;
             try
             {
-                string message = "";
-
-                if (Session["Username"] == null)
+                string str = "";
+                if (base.Session["Username"] != null)
                 {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();                  
-
-                    string filename = Session["Username"].ToString().Replace("/", "");
-                    //Credentials.ObjNav.PrintSpecialExamCard(DocNo, "SPC_EXAMCARD-" + filename + ".pdf");
-                    filename = "SPC_EXAMCARD-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
+                    base.Session["Username"].ToString();
+                    string str1 = base.Session["Username"].ToString().Replace("/", "");
+                    str1 = string.Concat("SPC_EXAMCARD-", str1, ".pdf");
+                    string str2 = base.Server.MapPath(string.Concat("~/Downloads/", str1));
+                    CommonClass.MoveFile(str1, str2);
+                    if (!(new FileInfo(str2)).Exists)
                     {
-                        success = true;
-                        message = @"/Downloads/" + filename;
+                        flag = false;
+                        str = "File Not Found";
                     }
                     else
                     {
-                        success = false;
-                        message = "File Not Found";
+                        flag = true;
+                        str = string.Concat("/Downloads/", str1);
                     }
+                    action = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message, success }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                action = base.Json(new { message = exception.Message, success = flag }, JsonRequestBehavior.AllowGet);
             }
+            return action;
+        }
+
+        public ActionResult ViewDocuments()
+        {
+            return base.View();
         }
     }
 }

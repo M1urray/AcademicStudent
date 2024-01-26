@@ -32,7 +32,7 @@
                         <th width="10%" style="text-align:right">Select</th>
                         <th width="15%">
                             Course
-                        </th>                        
+                        </th>
                         <th width="30%">
                             Desription
                         </th>
@@ -63,38 +63,38 @@
                         {
                             foreach (var item in Model.ListOfCoreUnitsSubjects)
                             {
-                                        <tr>
-                                            <td align="center">
-                                                <input type="checkbox" class="checkboxClass" id="@i" value="@item.CF" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Code)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Desription)
-                                            </td>
-                                            <td align="center">
-                                                @Html.DisplayFor(modelItem => item.Room)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Day)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Period)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Campus)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Lec)
-                                            </td>
-                                            <td class="hide">
-                                                @Html.DisplayFor(modelItem => item.HasPrelqUnit)
-                                            </td>
-                                            <td class="hide">
-                                                @Html.DisplayFor(modelItem => item.ClassFull)
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td align="center">
+                                        <input type="checkbox" class="checkboxClass" id="@i" value="@item.CF" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Code)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Desription)
+                                    </td>
+                                    <td align="center">
+                                        @Html.DisplayFor(modelItem => item.Room)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Day)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Period)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Campus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec)
+                                    </td>
+                                    <td class="hide">
+                                        @Html.DisplayFor(modelItem => item.HasPrelqUnit)
+                                    </td>
+                                    <td class="hide">
+                                        @Html.DisplayFor(modelItem => item.ClassFull)
+                                    </td>
+                                </tr>
                                 i++;
                             }
                         }
@@ -115,7 +115,7 @@
 <hr />
 <div align="center">
     <hr />
-    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits('@ClassCodeNeeded');" />
+    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits(`@Model.RegT`,`@Model.Stage`);" />
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -129,14 +129,9 @@
                 $('input:checkbox:checked').each(function () {
                     TotalSelected += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());
                 });
-                
+
                 TotalSelected = TotalSelected + parseInt(@Model.SelectedCourses);
 
-                if (TotalSelected > parseInt(@Model.MaximumCourses)) {
-                        Swal.fire('Warning', 'You have reached maximum number of Units. Maximum allowed is ' +@Model.MaximumCourses+' Units', 'warning');
-                        $(this).closest('tr').find(':checkbox').prop('checked', false);
-                        return;
-                }
                 ////////////end of check/////////////
 
                 varID = $(this).prop("id");

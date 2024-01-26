@@ -6,341 +6,375 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace New_Student_Portal.Controllers
 {
-    [CustomeAuthentication]
     [CustomAuthorization(Role = "ALLUMINAE")]
+    [CustomeAuthentication]
     public class AlumniController : Controller
     {
-        // GET: Allumni
+        public AlumniController()
+        {
+        }
+
         public ActionResult Dashboard()
         {
-            if (Session["Username"] == null)
+            ActionResult action;
+            if (base.Session["Username"] != null)
             {
-                return RedirectToAction("Login", "Login");
+                string str = base.Session["Username"].ToString();
+                string str1 = string.Concat("CustomerList?$filter=No eq '", str, "'&format=json");
+                HttpWebResponse odataData = Credentials.GetOdataData(str1);
+                StudentDetailView studentDetailView = new StudentDetailView();
+                using (StreamReader streamReader = new StreamReader(odataData.GetResponseStream()))
+                {
+                    foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                    {
+                        studentDetailView.No = (string)item["No"];
+                        studentDetailView.Name = (string)item["Name"];
+                        studentDetailView.ID_No = (string)item["ID_No"];
+                        studentDetailView.Gender = (string)item["Gender"];
+                        base.Session["STDGender"] = (string)item["Gender"];
+                        studentDetailView.Date_Of_Birth = (string)item["Date_Of_Birth"];
+                        studentDetailView.Phone_No = (string)item["Phone_No"];
+                        studentDetailView.Address = (string)item["Address"];
+                        studentDetailView.E_Mail = (string)item["E_Mail"];
+                        studentDetailView.Campus = (string)item["Global_Dimension_1_Code"];
+                        studentDetailView.Balance = (decimal)item["Balance_LCY"];
+                        studentDetailView.Debit_Amount = (decimal)item["Debit_Amount"];
+                        studentDetailView.Credit_Amount = (decimal)item["Credit_Amount"];
+                        studentDetailView.ProfilePic = CommonClass.ProfilePicture(str);
+                    }
+                }
+                action = base.View(studentDetailView);
             }
             else
             {
-                string RegNo = Session["Username"].ToString();
-
-                string page = "CustomerList?$filter=No eq '" + RegNo + "'&format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-
-                StudentDetailView Details = new StudentDetailView();
-
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    foreach (JObject config in details["value"])
-                    {
-                        Details.No = (string)config["No"];
-                        Details.Name = (string)config["Name"];
-                        Details.ID_No = (string)config["ID_No"];
-                        Details.Gender = (string)config["Gender"];
-                        Session["STDGender"] = (string)config["Gender"];
-                        Details.Date_Of_Birth = (string)config["Date_Of_Birth"];
-                        Details.Phone_No = (string)config["Phone_No"];
-                        Details.Address = (string)config["Address"];
-                        Details.E_Mail = (string)config["E_Mail"];
-                        Details.Campus = (string)config["Global_Dimension_1_Code"];
-                        Details.Balance = (decimal)config["Balance_LCY"];
-                        Details.Debit_Amount = (decimal)config["Debit_Amount"];
-                        Details.Credit_Amount = (decimal)config["Credit_Amount"];
-                        Details.ProfilePic = CommonClass.ProfilePicture(RegNo);
-                    }
-                }
-                return View(Details);
+                action = base.RedirectToAction("Login", "Login");
             }
+            return action;
         }
-        public ActionResult ProgrammeEnrollment()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
 
-                    #region Registered programmes
-                    List<ProgEnrol> ProgEnrList = new List<ProgEnrol>();
-                    string pageReg = "StudentEnrolment?$filter=Student_No eq '" + RegNo + "'&$format=json";
-
-                    HttpWebResponse httpResponseReg = Credentials.GetOdataData(pageReg);
-                    using (var streamReader = new StreamReader(httpResponseReg.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            ProgEnrol e = new ProgEnrol();
-                            e.Prog = (string)config["Programme"];
-                            e.ProgName = CommonClass.GetProgrammeName((string)config["Programme"]);
-                            ProgEnrList.Add(e);
-                        }
-                    }
-                    #endregion                 
-
-                    return PartialView("~/Views/Alumni/Partial Views/ProgrammeEnrolment.cshtml", ProgEnrList);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
-        public ActionResult EmplHistList()
-        {
-            try
-            {
-                if (Session["Username"] == null)
-                {
-                    return RedirectToAction("Login", "Login");
-                }
-                else
-                {
-                    string RegNo = Session["Username"].ToString();
-
-                    #region Registered programmes
-                    List<EmpHist> EmpList = new List<EmpHist>();
-                    string pageReg = "StdEmpHist?$filter=Student_No eq '" + RegNo + "'&$format=json";
-
-                    HttpWebResponse httpResponseReg = Credentials.GetOdataData(pageReg);
-                    using (var streamReader = new StreamReader(httpResponseReg.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            EmpHist e = new EmpHist();
-                            e.From = (string)config["From"];
-                            e.To = (string)config["To"];
-                            e.Company = (string)config["Organisation"];
-                            e.Title = (string)config["Job_Title"];
-                            EmpList.Add(e);
-                        }
-                    }
-                    #endregion                 
-
-                    return PartialView("~/Views/Alumni/Partial Views/EmploymentHistory.cshtml", EmpList);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
-        }
         public ActionResult EducHistList()
         {
+            ActionResult action;
             try
             {
-                if (Session["Username"] == null)
+                if (base.Session["Username"] != null)
                 {
-                    return RedirectToAction("Login", "Login");
+                    string str = base.Session["Username"].ToString();
+                    List<QualHist> qualHists = new List<QualHist>();
+                    string str1 = string.Concat("StdEduHistory?$filter=Student_No eq '", str, "'&$format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                        {
+                            QualHist qualHist = new QualHist()
+                            {
+                                From = (string)item["From"],
+                                To = (string)item["To"],
+                                Institution = (string)item["Organisation"],
+                                Award = (string)item["Job_Title"]
+                            };
+                            qualHists.Add(qualHist);
+                        }
+                    }
+                    action = this.PartialView("~/Views/Alumni/Partial Views/QualificationHistory.cshtml", qualHists);
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();
-
-                    #region Educ Hist
-                    List<QualHist> EmpList = new List<QualHist>();
-                    string pageReg = "StdEduHistory?$filter=Student_No eq '" + RegNo + "'&$format=json";
-
-                    HttpWebResponse httpResponseReg = Credentials.GetOdataData(pageReg);
-                    using (var streamReader = new StreamReader(httpResponseReg.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            QualHist e = new QualHist();
-                            e.From = (string)config["From"];
-                            e.To = (string)config["To"];
-                            e.Institution = (string)config["Organisation"];
-                            e.Award = (string)config["Job_Title"];
-                            EmpList.Add(e);
-                        }
-                    }
-                    #endregion
-
-                    return PartialView("~/Views/Alumni/Partial Views/QualificationHistory.cshtml", EmpList);
+                    action = base.RedirectToAction("Login", "Login");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
+            return action;
         }
+
+        public ActionResult EmplHistList()
+        {
+            ActionResult action;
+            try
+            {
+                if (base.Session["Username"] != null)
+                {
+                    string str = base.Session["Username"].ToString();
+                    List<EmpHist> empHists = new List<EmpHist>();
+                    string str1 = string.Concat("StdEmpHist?$filter=Student_No eq '", str, "'&$format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                        {
+                            EmpHist empHist = new EmpHist()
+                            {
+                                From = (string)item["From"],
+                                To = (string)item["To"],
+                                Company = (string)item["Organisation"],
+                                Title = (string)item["Job_Title"]
+                            };
+                            empHists.Add(empHist);
+                        }
+                    }
+                    action = this.PartialView("~/Views/Alumni/Partial Views/EmploymentHistory.cshtml", empHists);
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return action;
+        }
+
         public ActionResult NewEmplymentHist()
         {
-            return PartialView("~/Views/Alumni/Partial Views/EmpHistForm.cshtml");
+            return base.PartialView("~/Views/Alumni/Partial Views/EmpHistForm.cshtml");
         }
+
+        public ActionResult NewProgrammeApplication()
+        {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.View();
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
         public ActionResult NewQualifHist()
         {
-            return PartialView("~/Views/Alumni/Partial Views/QualHistForm.cshtml");
+            return base.PartialView("~/Views/Alumni/Partial Views/QualHistForm.cshtml");
         }
-        [HttpPost]
-        public JsonResult SubmitEmpHistLine(EmpHist empHist)
+
+        public ActionResult OnlineApplicationInstructions()
         {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.View();
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
+        public ActionResult ProgrammApplicationList()
+        {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.View();
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
+        public ActionResult ProgrammeEnrollment()
+        {
+            ActionResult action;
             try
             {
-                string RegNo = Session["Username"].ToString();
-
-                DateTime startDate = DateTime.ParseExact(empHist.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                DateTime endDate = DateTime.ParseExact(empHist.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                //Credentials.ObjNav.StudentEmploymentHistory(RegNo, empHist.Title, empHist.Company, startDate, endDate, "");
-
-                return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
+                if (base.Session["Username"] != null)
+                {
+                    string str = base.Session["Username"].ToString();
+                    List<ProgEnrol> progEnrols = new List<ProgEnrol>();
+                    string str1 = string.Concat("StudentEnrolment?$filter=Student_No eq '", str, "'&$format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                        {
+                            ProgEnrol progEnrol = new ProgEnrol()
+                            {
+                                Prog = (string)item["Programme"],
+                                ProgName = CommonClass.GetProgrammeName((string)item["Programme"])
+                            };
+                            progEnrols.Add(progEnrol);
+                        }
+                    }
+                    action = this.PartialView("~/Views/Alumni/Partial Views/ProgrammeEnrolment.cshtml", progEnrols);
+                }
+                else
+                {
+                    action = base.RedirectToAction("Login", "Login");
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                return Json(new { message = ex.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
             }
+            return action;
         }
-        [HttpPost]
-        public JsonResult SubmitQualHistLine(QualHist qual)
-        {
-            try
-            {
-                string RegNo = Session["Username"].ToString();
 
-                DateTime startDate = DateTime.ParseExact(qual.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                DateTime endDate = DateTime.ParseExact(qual.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-               // Credentials.ObjNav.StudentEducationHistory(RegNo, "", qual.Institution, qual.Award, startDate, endDate, "");
-
-                return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpPost]
         public JsonResult RemoveEmpHistLine(string LineNo)
         {
+            JsonResult jsonResult;
             try
             {
-                //Credentials.ObjNav.DeleteStudentEmploymentHistory(Convert.ToInt32(LineNo));
+                jsonResult = base.Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
 
-                return Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public ActionResult OnlineApplicationInstructions()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            return View();
-        }
-        public ActionResult ProgrammApplicationList()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            return View();
-        }
-        public ActionResult NewProgrammeApplication()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            return View();
-        }
-        public ActionResult StepOneView()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                return PartialView("~/Views/Alumni/Steps/Step1.cshtml");
-            }
-        }
-        [HttpPost]
-        public ActionResult SaveStepOneData()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public ActionResult StepTwoView()
-        {
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                return PartialView("~/Views/Alumni/Steps/Step2.cshtml");
-            }
-        }
-        [HttpPost]
-        public JsonResult SaveStepTwoData()
-        {
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
-        public PartialViewResult StepThreeView()
-        {
-            return PartialView("~/Views/Alumni/Steps/Step3.cshtml");
-        }
-        [HttpPost]
-        public JsonResult SaveStepThreeData()
-        {
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
-        public PartialViewResult StepFourView()
-        {
-            return PartialView("~/Views/Alumni/Steps/Step4.cshtml");
-        }
-        [HttpPost]
-        public JsonResult SaveStepFourData()
-        {
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
-        public PartialViewResult StepFiveView()
-        {
-            return PartialView("~/Views/Alumni/Steps/Step5.cshtml");
-        }
         [HttpPost]
         public JsonResult SaveStepFiveData()
         {
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            JsonResult jsonResult = base.Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepFourData()
+        {
+            JsonResult jsonResult = base.Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public ActionResult SaveStepOneData()
+        {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepThreeData()
+        {
+            JsonResult jsonResult = base.Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SaveStepTwoData()
+        {
+            JsonResult jsonResult = base.Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+
+        public PartialViewResult StepFiveView()
+        {
+            return base.PartialView("~/Views/Alumni/Steps/Step5.cshtml");
+        }
+
+        public PartialViewResult StepFourView()
+        {
+            return base.PartialView("~/Views/Alumni/Steps/Step4.cshtml");
+        }
+
+        public ActionResult StepOneView()
+        {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.PartialView("~/Views/Alumni/Steps/Step1.cshtml");
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
+        public PartialViewResult StepThreeView()
+        {
+            return base.PartialView("~/Views/Alumni/Steps/Step3.cshtml");
+        }
+
+        public ActionResult StepTwoView()
+        {
+            ActionResult action;
+            if (base.Session["Username"] != null)
+            {
+                action = base.PartialView("~/Views/Alumni/Steps/Step2.cshtml");
+            }
+            else
+            {
+                action = base.RedirectToAction("Login", "Login");
+            }
+            return action;
+        }
+
+        [HttpPost]
+        public JsonResult SubmitEmpHistLine(EmpHist empHist)
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                DateTime.ParseExact(empHist.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime.ParseExact(empHist.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                jsonResult = base.Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult SubmitQualHistLine(QualHist qual)
+        {
+            JsonResult jsonResult;
+            try
+            {
+                base.Session["Username"].ToString();
+                DateTime.ParseExact(qual.From.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime.ParseExact(qual.To.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                jsonResult = base.Json(new { message = "Line deleted Successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                jsonResult = base.Json(new { message = exception.Message.Replace("'", ""), success = false }, JsonRequestBehavior.AllowGet);
+            }
+            return jsonResult;
         }
     }
 }

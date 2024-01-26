@@ -1,6 +1,6 @@
-﻿@model New_Student_Portal.ViewModel.StudentCourseDetails
+﻿
 @{
-    ViewBag.Title = "Course Registration";
+    ViewBag.Title = "Retake";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <div class="card">
@@ -48,13 +48,12 @@
     function LoadCourseRegistrationDetails() {
         ShowProgress();
         $.ajax({
-            async: true,
-            type: "POST",
-            datatype: "json",
-            contentType: "application/json; charset = utf-8",
+            async: false,
+            type: "GET",
+            dataType: 'HTML',
+            contentType: false,
             processData: false,
-            data: JSON.stringify({ T: `@Model.RegT` }),
-            url: '@Url.Action("CourseRegistrationDetails", "Course")',
+            url: "/Retake/CourseRegistrationDetails",
             success: function (data) {
                 $("#divCourseReg").html(data);
                 HideProgress();

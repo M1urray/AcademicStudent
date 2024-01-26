@@ -29,6 +29,8 @@ namespace New_Student_Portal.ViewModel
     public class UnitSubject
     {
         public string Class { get; set; }
+        public string RegT { get; set; }
+        public string Stage { get; set; }
         public IEnumerable<CoreUnitSubject> ListOfCoreUnitsSubjects { get; set; }
         public IEnumerable<GeneralUnitSubject> ListOfgeneralEduSubjects { get; set; }
         public IEnumerable<ElectiveUnitSubject> ListOfElectiveUnitsSubjects { get; set; }

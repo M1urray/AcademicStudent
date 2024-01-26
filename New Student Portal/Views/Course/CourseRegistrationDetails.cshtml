@@ -40,9 +40,19 @@
                 <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
                 <select class="form-select" id="RegType" name="RegType" onchange="ShowStageReg();">
                     <option value="">----</option>
-                    <option value="0">Normal Registration</option>
-                    <option value="2">Supplementary</option>
-                    <option value="3">Special Exams</option>
+                    @if (Model.RegT == "N")
+                    {
+                        <option value="0">Normal Registration</option>
+                    }
+                    @if (Model.RegT == "S")
+                    {
+                        <option value="2">Supplementary</option>
+                    }
+                    @if (Model.RegT == "R")
+                    {
+                        <option value="3">Retake</option>
+                    }
+                    <option value="4">Special Exams</option>
                 </select>
             </div>
             <div class="col-md-6" id="divStage">
@@ -182,9 +192,9 @@
                         <th>
                             Settlement Type
                         </th>
-                        <th>
+                        @*<th>
                             Registration Date
-                        </th>
+                        </th>*@
                         <th class="alignC">
                             Total Billed
                         </th>
@@ -218,9 +228,9 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Settlement_Type)
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Convert.ToDateTime(item.Registration_Date).ToString("yy/MM/yyyy")
-                                        </td>
+                                        </td>*@
                                         <td align="center">
                                             @Convert.ToDecimal(item.TotalBilled).ToString("#,##0.00")
                                         </td>
@@ -244,18 +254,18 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {        
+    $(document).ready(function () {
         $("#divStage").hide();
     });
     var ShowStageReg = function () {
         var RegT = $("#RegType").children("option:selected").val();
-        if (RegT == "2") {
+        if (RegT == "2" || RegT == "3") {
             $("#divStage").show();
         }
         else {
             $("#divStage").hide();
         };
-        if (RegT == "3") {
+        if (RegT == "4") {
             window.location = "/Course/StudentRequisitions";
         };
     };

@@ -130,7 +130,7 @@
             data: JSON.stringify({ ReceiptNo: Receipt }),
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message);
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
                     $("#myModalUnits").modal("show");
                 }
                 else {

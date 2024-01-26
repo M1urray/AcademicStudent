@@ -166,7 +166,9 @@
     <Compile Include="Controllers\FinancialController.cs" />
     <Compile Include="Controllers\LecturerEvaluationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RetakeController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\SupplimentaryController.cs" />
     <Compile Include="Controllers\ViewDocumentsController.cs" />
     <Compile Include="Controllers\WelfareController.cs" />
     <Compile Include="CustomSecurity\CustomAuthorization.cs" />
@@ -456,12 +458,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LecturerEvaluation\" />
+    <Folder Include="Views\Supplimentary\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
@@ -553,51 +553,73 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
-    <Content Include="Downloads\Jan 2022 semester plan %283%29.pdf" />
+    <Content Include="Downloads\Jan 2022 semester plan %2810%29.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Shared\LoginMaster.cshtml" />
-    <Content Include="Views\Shared\SiteMaster.cshtml" />
-    <Content Include="Views\Login\ForgotPassword.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Login\AccountResetPassword.cshtml" />
+    <Content Include="Uploads\Jan 2022 semester plan %283%29.pdf" />
+    <Content Include="Uploads\2021-2022  Fee Structure0001.pdf" />
     <Content Include="Views\Alumni\Dashboard.cshtml" />
     <Content Include="Views\Alumni\NewProgrammeApplication.cshtml" />
     <Content Include="Views\Alumni\OnlineApplicationInstructions.cshtml" />
+    <Content Include="Views\Alumni\Partial Views\EmpHistForm.cshtml" />
+    <Content Include="Views\Alumni\Partial Views\EmploymentHistory.cshtml" />
+    <Content Include="Views\Alumni\Partial Views\ProgrammeEnrolment.cshtml" />
+    <Content Include="Views\Alumni\Partial Views\QualHistForm.cshtml" />
+    <Content Include="Views\Alumni\Partial Views\QualificationHistory.cshtml" />
     <Content Include="Views\Alumni\ProgrammApplicationList.cshtml" />
     <Content Include="Views\Alumni\Steps\Step1.cshtml" />
     <Content Include="Views\Alumni\Steps\Step2.cshtml" />
     <Content Include="Views\Alumni\Steps\Step3.cshtml" />
     <Content Include="Views\Alumni\Steps\Step4.cshtml" />
     <Content Include="Views\Alumni\Steps\Step5.cshtml" />
+    <Content Include="Views\Common\AcademicCalender.cshtml" />
+    <Content Include="Views\Common\ApprovalComments.cshtml" />
     <Content Include="Views\Common\ErrorMessage.cshtml" />
+    <Content Include="Views\Common\Notification.cshtml" />
     <Content Include="Views\Common\Unauthorized.cshtml" />
+    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
     <Content Include="Views\Course\ClearanceRequest.cshtml" />
     <Content Include="Views\Course\CourseRegistration.cshtml" />
     <Content Include="Views\Course\CourseRegistrationDetails.cshtml" />
     <Content Include="Views\Course\CourseRequisitionLines.cshtml" />
     <Content Include="Views\Course\CurrentRegisteredUnits.cshtml" />
+    <Content Include="Views\Course\EnquiryListView.cshtml" />
     <Content Include="Views\Course\GetProgramUnits.cshtml" />
     <Content Include="Views\Course\GradClearanceLine.cshtml" />
     <Content Include="Views\Course\GraduationRequest.cshtml" />
     <Content Include="Views\Course\LecturerEvaluation.cshtml" />
     <Content Include="Views\Course\LecturerEvaluationForm.cshtml" />
+    <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
     <Content Include="Views\Course\NewAcademicRequisition.cshtml" />
+    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
+    <Content Include="Views\Course\Partial Views\ExcemptionRequest.cshtml" />
     <Content Include="Views\Course\Partial Views\GetFreeElectiveCourses.cshtml" />
+    <Content Include="Views\Course\Partial Views\OfficalTranscript.cshtml" />
     <Content Include="Views\Course\Partial Views\ProgrammeMajor.cshtml" />
     <Content Include="Views\Course\Partial Views\ProgrammeMajorMinor.cshtml" />
+    <Content Include="Views\Course\Partial Views\ProgrammeTransit.cshtml" />
     <Content Include="Views\Course\ProgrammeOptions.cshtml" />
     <Content Include="Views\Course\RequisitionLines.cshtml" />
+    <Content Include="Views\Course\StudentEnquiryList.cshtml" />
     <Content Include="Views\Course\StudentRequisitionList.cshtml" />
     <Content Include="Views\Course\StudentRequisitions.cshtml" />
     <Content Include="Views\Course\StudentTimeTable.cshtml" />
     <Content Include="Views\Course\UnitsNotInTimeTable.cshtml" />
     <Content Include="Views\Course\ViewStudentRegisteredUnits.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\BSDetails.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\ClassAttendance.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\CreateDCFActivity.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\CreateDoc.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\DCFEvents.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\DCFEventsLeader.cshtml" />
+    <Content Include="Views\Dashboard\Partial Views\JoinBS.cshtml" />
     <Content Include="Views\Dashboard\ViewUnitSummery.cshtml" />
+    <Content Include="Views\ExamResults\ProvisionalResults.cshtml" />
     <Content Include="Views\Financial\FeeStatement.cshtml" />
     <Content Include="Views\Financial\Payment Plan\PaymentPlanData.cshtml" />
     <Content Include="Views\Financial\Payment Plan\PaymentPlanForm.cshtml" />
@@ -605,8 +627,20 @@
     <Content Include="Views\Financial\Receipts.cshtml" />
     <Content Include="Views\Financial\SponsorshipApplication.cshtml" />
     <Content Include="Views\Financial\SponsorshipApp\SponsorshipApplications.cshtml" />
+    <Content Include="Views\Login\AccountResetPassword.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Retake\Retake.cshtml" />
     <Content Include="Views\Settings\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\ErrorMessange.cshtml" />
+    <Content Include="Views\Shared\LoginMaster.cshtml" />
+    <Content Include="Views\Shared\Partial Views\ApprovalTrail.cshtml" />
+    <Content Include="Views\Shared\Partial Views\ErroMessangeView.cshtml" />
+    <Content Include="Views\Shared\Partial Views\GraduationReqInfo.cshtml" />
+    <Content Include="Views\Shared\SiteMaster.cshtml" />
     <Content Include="Views\ViewDocuments\ViewDocuments.cshtml" />
+    <Content Include="Views\Web.config" />
     <Content Include="Views\Welfare\BookedSpaceDetails.cshtml" />
     <Content Include="Views\Welfare\ClubsSociety.cshtml" />
     <Content Include="Views\Welfare\HostelBooking.cshtml" />
@@ -628,42 +662,11 @@
     <Content Include="Views\Welfare\Steps\Step4.cshtml" />
     <Content Include="Views\Welfare\Steps\Step5.cshtml" />
     <Content Include="Views\Welfare\Steps\Step6.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\ErrorMessange.cshtml" />
-    <Content Include="Views\Shared\Partial Views\ErroMessangeView.cshtml" />
-    <Content Include="Views\Shared\Partial Views\GraduationReqInfo.cshtml" />
-    <Content Include="Views\Common\Notification.cshtml" />
-    <Content Include="Views\Course\EnquiryListView.cshtml" />
-    <Content Include="Views\Course\StudentEnquiryList.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\JoinBS.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BSDetails.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\DCFEvents.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\DCFEventsLeader.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\CreateDoc.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\CreateDCFActivity.cshtml" />
-    <Content Include="Views\Course\Partial Views\ProgrammeTransit.cshtml" />
-    <Content Include="Views\Course\Partial Views\ExcemptionRequest.cshtml" />
-    <Content Include="Uploads\Jan 2022 semester plan %283%29.pdf" />
-    <Content Include="Uploads\2021-2022  Fee Structure0001.pdf" />
-    <Content Include="Views\Shared\Partial Views\ApprovalTrail.cshtml" />
-    <Content Include="Views\Common\ApprovalComments.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\ClassAttendance.cshtml" />
-    <Content Include="Views\Course\Partial Views\OfficalTranscript.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\EmploymentHistory.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\QualificationHistory.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\ProgrammeEnrolment.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\EmpHistForm.cshtml" />
-    <Content Include="Views\Alumni\Partial Views\QualHistForm.cshtml" />
-    <Content Include="Views\Dashboard\Partial Views\BsMembersList.cshtml" />
-    <Content Include="Views\Course\LecturerEvaluationForm1.cshtml" />
-    <Content Include="Views\Common\AcademicCalender.cshtml" />
-    <Content Include="Views\ExamResults\ProvisionalResults.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web References\NAVWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Course\ClearanceApprovalEntries.cshtml" />
-    <Content Include="Views\Course\NewClearanceRequestForm.cshtml" />
     <None Include="Web References\NAVWS\Webportal.wsdl" />
   </ItemGroup>
   <ItemGroup>

@@ -8,289 +8,304 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 
 namespace New_Student_Portal.Controllers
 {
-    [CustomeAuthentication]
     [CustomAuthorization(Role = "STUD")]
+    [CustomeAuthentication]
     public class FinancialController : Controller
     {
-        // GET: Financial
+        public FinancialController()
+        {
+        }
+
         public ActionResult FeeStatement()
         {
+            ActionResult action;
             try
             {
-                if (Session["Username"] == null)
+                if (base.Session["Username"] != null)
                 {
-                    return RedirectToAction("Login", "Login");
+                    string str = base.Session["Username"].ToString();
+                    List<FeeStatementDetails> feeStatementDetails = new List<FeeStatementDetails>();
+                    string str1 = string.Concat("DCust?$filter=Customer_No eq '", str, "' and Entry_Type eq 'Initial Entry' and Reversed eq false and Cust__Ledger_Entry_No gt 0&format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
+                        {
+                            FeeStatementDetails feeStatementDetail = new FeeStatementDetails()
+                            {
+                                DateOrder = (DateTime)item["Posting_Date"],
+                                Posting_Date = (string)item["Posting_Date"],
+                                Document_No = (string)item["Document_No"],
+                                Description = (string)item["Description"],
+                                Debit_Amount = (string)item["Debit_Amount"],
+                                Credit_Amount = (string)item["Credit_Amount"],
+                                RunnningBal = (string)item["Amount"]
+                            };
+                            feeStatementDetails.Add(feeStatementDetail);
+                        }
+                    }
+                    action = base.View(
+                        from x in feeStatementDetails
+                        orderby x.DateOrder
+                        select x);
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();
-                    List<FeeStatementDetails> FDetails = new List<FeeStatementDetails>();
-                    string page = "DCust?$filter=Customer_No eq '" + RegNo + "' and Entry_Type eq 'Initial Entry' and Reversed eq false and Cust__Ledger_Entry_No gt 0&format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
-                        {
-                            FeeStatementDetails FD = new FeeStatementDetails();
-                            FD.DateOrder = (DateTime)config["Posting_Date"];
-                            FD.Posting_Date = (string)config["Posting_Date"];
-                            FD.Document_No = (string)config["Document_No"];
-                            FD.Description = (string)config["Description"];
-                            FD.Debit_Amount = (string)config["Debit_Amount"];
-                            FD.Credit_Amount = (string)config["Credit_Amount"];
-                            FD.RunnningBal = (string)config["Amount"];
-                            FDetails.Add(FD);
-                        }
-                    }
-                    return View(FDetails.OrderBy(x => x.DateOrder));
+                    action = base.RedirectToAction("Login", "Login");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = base.View("~/Views/Common/ErrorMessage.cshtml", error);
             }
+            return action;
         }
-        public ActionResult Receipts()
+
+        public PartialViewResult GetPaymentPlan()
         {
+            PartialViewResult partialViewResult;
             try
             {
-                if (Session["Username"] == null)
+                string str = base.Session["Username"].ToString();
+                if ((base.Session["CurrentSem"] == null ? true : base.Session["CurrentSem"].ToString() == ""))
                 {
-                    return RedirectToAction("Login", "Login");
+                    base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
+                }
+                string str1 = base.Session["CurrentSem"].ToString();
+                if (CommonClass.GetSemesterEndDate(str1) == "")
+                {
+                    Error error = new Error()
+                    {
+                        Message = "Semester end date not set"
+                    };
+                    partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
                 }
                 else
                 {
-                    string RegNo = Session["Username"].ToString();
-                    List<Receipts> RCDetails = new List<Receipts>();
-                    string page = "Receipts?$filter=Student_No eq '" + RegNo + "'&format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                    List<PaymentPlan> paymentPlans = new List<PaymentPlan>();
+                    string str2 = string.Concat(new string[] { "StudentPaymentPlan?$filter=Student_No eq '", str, "' and Semester eq '", str1, "'&format=json" });
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str2).GetResponseStream()))
                     {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        foreach (JObject config in details["value"])
+                        JObject jObjects = JObject.Parse(streamReader.ReadToEnd());
+                        if (jObjects["value"].Count<JToken>() > 0)
                         {
-                            Receipts RC = new Receipts();
-                            RC.Receipt_No = (string)config["Receipt_No"];
-                            RC.Date = (string)config["Date"];
-                            RC.Payment_Mode = (string)config["Payment_Mode"];
-                            RC.Amount = (string)config["Amount"];
-                            RCDetails.Add(RC);
+                            foreach (JObject item in (IEnumerable<JToken>)jObjects["value"])
+                            {
+                                PaymentPlan paymentPlan = new PaymentPlan();
+                                DateTime dateTime = (DateTime)item["Due_Date"];
+                                paymentPlan.ByDate = dateTime.ToString("dd/MM/yyyy");
+                                paymentPlan.InstallNo = (string)item["Installment_No"];
+                                paymentPlan.Percentage = (string)item["Installment_Percentage"];
+                                decimal num = Convert.ToDecimal((string)item["Expected_Payment"]);
+                                paymentPlan.AmountDue = num.ToString("#,##0.00");
+                                paymentPlans.Add(paymentPlan);
+                            }
                         }
+                        partialViewResult = this.PartialView("~/Views/Financial/Payment Plan/PaymentPlanData.cshtml",
+                            from x in paymentPlans
+                            orderby x.InstallNo
+                            select x);
                     }
-                    return View(RCDetails);
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return View("~/Views/Common/ErrorMessage.cshtml", error);
+                Exception exception = exception1;
+                Error error1 = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error1);
             }
+            return partialViewResult;
         }
+
+        public PartialViewResult GetSponsorshipApplications()
+        {
+            PartialViewResult partialViewResult;
+            try
+            {
+                string str = base.Session["Username"].ToString();
+                List<SponsorshipApplication> sponsorshipApplications = new List<SponsorshipApplication>();
+                string str1 = string.Concat("SponsorshipApplication?$filter=Student_No eq '", str, "'&$format=json");
+                using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
+                {
+                    JObject jObjects = JObject.Parse(streamReader.ReadToEnd());
+                    if (jObjects["value"].Count<JToken>() > 0)
+                    {
+                        foreach (JObject item in (IEnumerable<JToken>)jObjects["value"])
+                        {
+                            SponsorshipApplication sponsorshipApplication = new SponsorshipApplication()
+                            {
+                                Student_No = (string)item["Student_No"],
+                                Application_No = (string)item["Application_No"]
+                            };
+                            DateTime dateTime = (DateTime)item["Application_Date"];
+                            sponsorshipApplication.Application_Date = dateTime.ToString("dd/MM/yyyy");
+                            decimal num = Convert.ToDecimal((string)item["Applied_Amount"]);
+                            sponsorshipApplication.Applied_Amount = num.ToString("#,##0.00");
+                            num = Convert.ToDecimal((string)item["Approved_Amount"]);
+                            sponsorshipApplication.Approved_Amount = num.ToString("#,##0.00");
+                            sponsorshipApplication.Remarks = (string)item["Remarks"];
+                            sponsorshipApplication.Status = (string)item["Status"];
+                            sponsorshipApplications.Add(sponsorshipApplication);
+                        }
+                    }
+                    partialViewResult = this.PartialView("~/Views/Financial/SponsorshipApp/SponsorshipApplications.cshtml",
+                        from x in sponsorshipApplications
+                        orderby x.Application_No
+                        select x);
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                partialViewResult = this.PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+            }
+            return partialViewResult;
+        }
+
         public ActionResult PaymentPlan()
         {
-            if (Session["Username"] == null)
+            ActionResult action;
+            if (base.Session["Username"] != null)
             {
-                return RedirectToAction("Login", "Login");
+                action = base.View();
             }
             else
             {
-                return View();
+                action = base.RedirectToAction("Login", "Login");
             }
+            return action;
         }
-        public PartialViewResult GetPaymentPlan()
+
+        public ActionResult Receipts()
         {
+            ActionResult action;
             try
             {
-                string RegNo = Session["Username"].ToString();
-
-                string semEndDate = "";
-
-                if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+                if (base.Session["Username"] != null)
                 {
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(Session["CurrentProgram"].ToString());
-                }
-                string sem = Session["CurrentSem"].ToString();
-                semEndDate = CommonClass.GetSemesterEndDate(sem);
-                if (semEndDate != "")
-                {
-                    List<PaymentPlan> PPlan = new List<PaymentPlan>();
-                    string page = "StudentPaymentPlan?$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
+                    string str = base.Session["Username"].ToString();
+                    List<Receipts> receipts = new List<Receipts>();
+                    string str1 = string.Concat("Receipts?$filter=Student_No eq '", str, "'&format=json");
+                    using (StreamReader streamReader = new StreamReader(Credentials.GetOdataData(str1).GetResponseStream()))
                     {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
+                        foreach (JObject item in (IEnumerable<JToken>)JObject.Parse(streamReader.ReadToEnd())["value"])
                         {
-                            foreach (JObject config in details["value"])
+                            Receipts receipt = new Receipts()
                             {
-                                PaymentPlan RC = new PaymentPlan();
-                                RC.ByDate = ((DateTime)config["Due_Date"]).ToString("dd/MM/yyyy");
-                                RC.InstallNo = (string)config["Installment_No"];
-                                RC.Percentage = (string)config["Installment_Percentage"];
-                                RC.AmountDue = Convert.ToDecimal((string)config["Expected_Payment"]).ToString("#,##0.00");
-                                PPlan.Add(RC);
-                            }
-                            //return PartialView("~/Views/Financial/Payment Plan/PaymentPlanData.cshtml", PPlan.OrderBy(x => x.InstallNo));
+                                Receipt_No = (string)item["Receipt_No"],
+                                Date = (string)item["Date"],
+                                Payment_Mode = (string)item["Payment_Mode"],
+                                Amount = (string)item["Amount"]
+                            };
+                            receipts.Add(receipt);
                         }
-                        return PartialView("~/Views/Financial/Payment Plan/PaymentPlanData.cshtml", PPlan.OrderBy(x => x.InstallNo));
-                        //else
-                        //{
-                        //    SemeterEndDate enddate = new SemeterEndDate();
-                        //    enddate.SemEndDate = semEndDate;
-                        //    return PartialView("~/Views/Financial/Payment Plan/PaymentPlanForm.cshtml", enddate);
-                        //}
                     }
+                    action = base.View(receipts);
                 }
                 else
                 {
-
-                    Error erroMsg = new Error();
-                    erroMsg.Message = "Semester end date not set";
-                    return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", erroMsg);
+                    action = base.RedirectToAction("Login", "Login");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
+                Exception exception = exception1;
+                Error error = new Error()
+                {
+                    Message = exception.Message.Replace("'", "")
+                };
+                action = base.View("~/Views/Common/ErrorMessage.cshtml", error);
             }
+            return action;
         }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult SavePaymentPlan(List<Array> pPlan)
         {
-            bool Val = false;
-            string msg = "";
+            bool flag = false;
+            string str = "";
             try
             {
-                if (Session["Username"] == null)
+                if (base.Session["Username"] == null)
                 {
-                    Response.Redirect(Url.Action("Login", "Login"));
+                    base.Response.Redirect(base.Url.Action("Login", "Login"));
                 }
-                string RegNo = Session["Username"].ToString();
-
-                if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+                string str1 = base.Session["Username"].ToString();
+                if ((base.Session["CurrentSem"] == null ? true : base.Session["CurrentSem"].ToString() == ""))
                 {
-                    string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
-                    Session["CurrentSem"] = CommonClass.CurrentSemester(Prog);
+                    string studentRegisteredProgramme = CommonClass.GetStudentRegisteredProgramme(str1);
+                    base.Session["CurrentSem"] = CommonClass.CurrentSemester(studentRegisteredProgramme);
                 }
-                string sem = Session["CurrentSem"].ToString();
-
-                int RowCount = pPlan.Count();
-
-                if (sem != "")
+                string str2 = base.Session["CurrentSem"].ToString();
+                int num = pPlan.Count<Array>();
+                if (str2 == "")
                 {
-                    decimal StdBal = CommonClass.GetStudentBalance(RegNo);
-                    decimal previousPerc = 0, ActualPerc = 0, AmountDue = 0;
-                    for (int i = 0; i < RowCount; i++)
-                    {
-                        string[] RowText = (string[])pPlan[i];
-
-                        string installNo = RowText[0].Trim();
-                        string byDate = RowText[1].Trim();
-                        string perc = RowText[2].Trim();
-
-                        if (byDate != "" && installNo != "" && perc != "")
-                        {
-                            ActualPerc = Convert.ToDecimal(perc) - previousPerc;
-                            AmountDue = StdBal * (ActualPerc / 100);
-                            DateTime Dby = DateTime.ParseExact(byDate.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                            //Credentials.ObjNav.InsertStudentPaymentPlan(RegNo, Dby, sem, installNo, Convert.ToDecimal(perc), AmountDue);
-                            previousPerc = Convert.ToDecimal(perc);
-                        }
-                    }
-                    Val = true;
-                    msg = "Payment Plan saved successfully";
+                    flag = false;
+                    str = "Not registsred in the current semester";
                 }
                 else
                 {
-                    Val = false;
-                    msg = "Not registsred in the current semester";
+                    decimal studentBalance = CommonClass.GetStudentBalance(str1);
+                    decimal num1 = new decimal();
+                    decimal num2 = new decimal();
+                    decimal num3 = new decimal();
+                    for (int i = 0; i < num; i++)
+                    {
+                        string[] item = (string[])pPlan[i];
+                        string str3 = item[0].Trim();
+                        string str4 = item[1].Trim();
+                        string str5 = item[2].Trim();
+                        if ((!(str4 != "") || !(str3 != "") ? false : str5 != ""))
+                        {
+                            num2 = Convert.ToDecimal(str5) - num1;
+                            num3 = studentBalance * (num2 / new decimal(100));
+                            DateTime.ParseExact(str4.Replace("-", "/"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            num1 = Convert.ToDecimal(str5);
+                        }
+                    }
+                    flag = true;
+                    str = "Payment Plan saved successfully";
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Val = false;
-                msg = ex.Message.Replace("'", "");
+                Exception exception = exception1;
+                flag = false;
+                str = exception.Message.Replace("'", "");
             }
-            return Json(new
-            {
-                message = msg,
-                success = Val
-            }, JsonRequestBehavior.AllowGet);
+            JsonResult jsonResult = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
+            return jsonResult;
         }
+
         public ActionResult SponsorshipApplication()
         {
-            if (Session["Username"] == null)
+            ActionResult action;
+            if (base.Session["Username"] != null)
             {
-                return RedirectToAction("Login", "Login");
+                action = base.View();
             }
             else
             {
-                return View();
+                action = base.RedirectToAction("Login", "Login");
             }
-        }
-        public PartialViewResult GetSponsorshipApplications()
-        {
-            try
-            {
-                string RegNo = Session["Username"].ToString();
-
-                List<SponsorshipApplication> sponsApp = new List<SponsorshipApplication>();
-                string page = "SponsorshipApplication?$filter=Student_No eq '" + RegNo + "'&$format=json";
-
-                HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-
-                    var details = JObject.Parse(result);
-
-                    if (details["value"].Count() > 0)
-                    {
-                        foreach (JObject config in details["value"])
-                        {
-                            SponsorshipApplication SApp = new SponsorshipApplication();
-                            SApp.Student_No = (string)config["Student_No"];
-                            SApp.Application_No = (string)config["Application_No"];
-                            SApp.Application_Date = ((DateTime)config["Application_Date"]).ToString("dd/MM/yyyy");
-                            SApp.Applied_Amount = Convert.ToDecimal((string)config["Applied_Amount"]).ToString("#,##0.00");
-                            SApp.Approved_Amount = Convert.ToDecimal((string)config["Approved_Amount"]).ToString("#,##0.00");
-                            SApp.Remarks = (string)config["Remarks"];
-                            SApp.Status = (string)config["Status"];
-                            sponsApp.Add(SApp);
-                        }
-                    }
-                    return PartialView("~/Views/Financial/SponsorshipApp/SponsorshipApplications.cshtml", sponsApp.OrderBy(x => x.Application_No));
-                }
-            }
-            catch (Exception ex)
-            {
-                Error error = new Error();
-                error.Message = ex.Message.Replace("'", "");
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", error);
-            }
+            return action;
         }
     }
 }
