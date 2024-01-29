@@ -65,22 +65,22 @@
             $("#divReport").show();
             PrintProvissionalResults();
         }
-        //if (DocType == "RESULTS" || DocType == "STDAUDIT") {
-        //    $("#divProg").show();
-        //    $("#divReport").hide();
-        //    ShowProgress();.
-        //    $("#ddlProgramme option").remove();
-        //    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+        if (DocType == "STDAUDIT") {
+            $("#divProg").show();
+            $("#divReport").hide();
+            ShowProgress();.
+            $("#ddlProgramme option").remove();
+            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
 
-        //    $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
-        //        function (data) {
-        //            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-        //            $.each(data.ListOfValues, function () {
-        //                $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
-        //            });
-        //            HideProgress();
-        //        });
-        //};
+            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
+                function (data) {
+                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
+                    $.each(data.ListOfValues, function () {
+                        $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                    HideProgress();
+                });
+        };
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
             $("#divReport").show();
