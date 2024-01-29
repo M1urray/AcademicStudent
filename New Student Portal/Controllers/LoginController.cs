@@ -3,7 +3,6 @@ using New_Student_Portal.Models;
 using New_Student_Portal.ViewModel;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace New_Student_Portal.ViewModel
 {
@@ -22,5 +20,12 @@ namespace New_Student_Portal.ViewModel
         public string AcademicYear { get; set; }
         public string Stage { get; set; }
         public List<ExamResults> ListOfResults { get; set; }
+    }
+    public class StudentSemesters
+    {
+        public string Semester { get; set; }
+        public string AcademicYear { get; set; }
+
+        public List<SelectListItem> ListOfSemesters { get; set; }
     }
 }
