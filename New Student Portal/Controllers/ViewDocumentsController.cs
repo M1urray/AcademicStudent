@@ -12,6 +12,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace New_Student_Portal.Controllers
 {
@@ -82,8 +83,52 @@ namespace New_Student_Portal.Controllers
             }
             return flag;
         }
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetSemesters()
+        {
+            try
+            {
+                string regNo = Session["Username"].ToString();
+                string programme = Session["CurrentProgram"].ToString();
 
-        public ActionResult ExamCard()
+                #region Years
+                List<CourseReg> CReg = new List<CourseReg>();
+
+                string page = "CourseReg?$filter=StudentNo eq '" + regNo + "' and Reversed eq false and Programme eq '" + programme + "'&format=json";
+
+
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+                    var details = JObject.Parse(result);
+                    foreach (JObject config in details["value"])
+                    {
+                        CourseReg Prgrammes = new CourseReg();
+                        Prgrammes.Semester = (string)config["Semester"];
+                        CReg.Add(Prgrammes);
+                    }
+                }
+                #endregion
+                var listSemesters = new StudentSemesters
+                {
+                    ListOfSemesters = CReg.Select(x =>
+                        new SelectListItem()
+                        {
+                            Text = x.Semester,
+                            Value = x.Semester
+                        }).DistinctBy(x => x.Value).ToList()
+                };
+                return Json(listSemesters, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult ExamCard(string semester)
         {
             ActionResult action;
             try
@@ -93,13 +138,7 @@ namespace New_Student_Portal.Controllers
                 if (base.Session["Username"] != null)
                 {
                     string str1 = base.Session["Username"].ToString();
-                    string str2 = "";
-                    if (base.Session["CurrentSem"] == null)
-                    {
-                        base.Session["CurrentSem"] = CommonClass.CurrentSemester(base.Session["CurrentProgram"].ToString());
-                    }
-                    str2 = base.Session["CurrentSem"].ToString();
-                    if (!this.EvaluatedAllUnits(str1, str2))
+                    if (!this.EvaluatedAllUnits(str1, semester))
                     {
                         flag = false;
                         str = "You need to Evaluate all the Units before printing exam card";
@@ -107,7 +146,7 @@ namespace New_Student_Portal.Controllers
                     else
                     {
                         base.Session["Username"].ToString().Replace("/", "");
-                        str = Credentials.ObjNav.GenerateStudentExamCards(str1, str2);
+                        str = Credentials.ObjNav.GenerateStudentExamCards(str1, semester);
                         flag = true;
                         if (str == "")
                         {
@@ -129,7 +168,6 @@ namespace New_Student_Portal.Controllers
             }
             return action;
         }
-
         public JsonResult FeeStatement()
         {
             JsonResult jsonResult;
