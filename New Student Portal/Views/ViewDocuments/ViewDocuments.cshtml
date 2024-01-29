@@ -66,20 +66,9 @@
             PrintProvissionalResults();
         }
         if (DocType == "STDAUDIT") {
-            $("#divProg").show();
-            $("#divReport").hide();
-            ShowProgress();.
-            $("#ddlProgramme option").remove();
-            $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-
-            $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
-                function (data) {
-                    $('#ddlProgramme').empty().append('<option selected="selected" value="">--Select Programme--</option>');
-                    $.each(data.ListOfValues, function () {
-                        $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
-                    });
-                    HideProgress();
-                });
+            $("#divProg").hide();
+            $("#divSem").hide();
+            GetStudentAudit();
         };
         if (DocType == "SEMPROFINV") {
             $("#divProg").hide();
@@ -200,14 +189,14 @@
             }
         });
     }
-    var GetStudentAudit = function (Prog) {
+    var GetStudentAudit = function () {
         ShowProgress();
         $.ajax({
             url: '/ViewDocuments/GenerateStudentAudit',
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({ Prog: Prog }),
+            data: JSON.stringify({ Prog:"" }),
             success: function (data) {
                 if (data.success == true) {
                     $('iframe').attr('src', data.message);

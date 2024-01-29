@@ -212,6 +212,7 @@ namespace New_Student_Portal.Controllers
                 {
                     string str1 = base.Session["Username"].ToString();
                     string str2 = str1.Replace("/", "");
+                    Prog = Session["CurrentProgram"].ToString();
                     if (Prog == null)
                     {
                         Prog = "";
