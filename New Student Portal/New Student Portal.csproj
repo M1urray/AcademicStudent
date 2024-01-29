@@ -461,6 +461,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Downloads\" />
     <Folder Include="Views\Supplimentary\" />
   </ItemGroup>
   <ItemGroup>
@@ -553,7 +554,6 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
-    <Content Include="Downloads\Jan 2022 semester plan %2810%29.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
