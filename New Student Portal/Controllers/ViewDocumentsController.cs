@@ -217,19 +217,12 @@ namespace New_Student_Portal.Controllers
                     {
                         Prog = "";
                     }
-                    Credentials.ObjNav.GenerateStudentAudit(str1, Prog, string.Concat("STDAUDIT-", str2, ".pdf"));
-                    str2 = string.Concat("STDAUDIT-", str2, ".pdf");
-                    string str3 = base.Server.MapPath(string.Concat("~/Downloads/", str2));
-                    CommonClass.MoveFile(str2, str3);
-                    if (!(new FileInfo(str3)).Exists)
+                    //str = Credentials.ObjNav.GenerateStudentAudit(str1, Prog, string.Concat("STDAUDIT-", str2, ".pdf"));
+                    flag = true;
+                    if (str == "")
                     {
                         flag = false;
                         str = "File Not Found";
-                    }
-                    else
-                    {
-                        flag = true;
-                        str = string.Concat("/Downloads/", str2);
                     }
                 }
                 else
@@ -382,19 +375,12 @@ namespace New_Student_Portal.Controllers
                 {
                     string str1 = base.Session["Username"].ToString();
                     string str2 = base.Session["Username"].ToString().Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentReportCard(str1, string.Concat("PROVISIONAL RESULTS-", str2, ".pdf"));
-                    str2 = string.Concat("PROVISIONAL RESULTS-", str2, ".pdf");
-                    string str3 = base.Server.MapPath(string.Concat("~/Downloads/", str2));
-                    CommonClass.MoveFile(str2, str3);
-                    if (!(new FileInfo(str3)).Exists)
+                    //str = Credentials.ObjNav.GenerateStudentReportCard(str1, string.Concat("PROVISIONAL RESULTS-", str2, ".pdf"));
+                    flag = true;
+                    if (str == "")
                     {
                         flag = false;
                         str = "File Not Found";
-                    }
-                    else
-                    {
-                        flag = true;
-                        str = string.Concat("/Downloads/", str2);
                     }
                     action = base.Json(new { message = str, success = flag }, JsonRequestBehavior.AllowGet);
                 }

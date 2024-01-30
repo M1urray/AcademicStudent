@@ -174,7 +174,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message + "#toolbar=0");
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
                     $("#divReport").show();
                     HideProgress();
                 }
@@ -199,7 +199,7 @@
             data: JSON.stringify({ Prog:"" }),
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message);
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
                     $("#divReport").show();
                     HideProgress();
                 }
