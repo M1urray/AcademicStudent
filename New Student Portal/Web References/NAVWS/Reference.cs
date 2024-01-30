@@ -63,9 +63,17 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback EnterRowMarksOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GenerateAwardListOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateClassificationsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateConsolidatedMarksOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GenerateReceiptsOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateScoreSheetOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GenerateSenateSummaryOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentAuditOperationCompleted;
         
@@ -249,10 +257,22 @@ namespace New_Student_Portal.NAVWS {
         public event EnterRowMarksCompletedEventHandler EnterRowMarksCompleted;
         
         /// <remarks/>
+        public event GenerateAwardListCompletedEventHandler GenerateAwardListCompleted;
+        
+        /// <remarks/>
+        public event GenerateClassificationsCompletedEventHandler GenerateClassificationsCompleted;
+        
+        /// <remarks/>
+        public event GenerateConsolidatedMarksCompletedEventHandler GenerateConsolidatedMarksCompleted;
+        
+        /// <remarks/>
         public event GenerateReceiptsCompletedEventHandler GenerateReceiptsCompleted;
         
         /// <remarks/>
         public event GenerateScoreSheetCompletedEventHandler GenerateScoreSheetCompleted;
+        
+        /// <remarks/>
+        public event GenerateSenateSummaryCompletedEventHandler GenerateSenateSummaryCompleted;
         
         /// <remarks/>
         public event GenerateStudentAuditCompletedEventHandler GenerateStudentAuditCompleted;
@@ -1021,6 +1041,126 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateAwardList", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateAwardList_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateAwardList(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.Invoke("GenerateAwardList", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateAwardListAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.GenerateAwardListAsync(prog, academicYear, stage, progOptions, docType, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateAwardListAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp, object userState) {
+            if ((this.GenerateAwardListOperationCompleted == null)) {
+                this.GenerateAwardListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateAwardListOperationCompleted);
+            }
+            this.InvokeAsync("GenerateAwardList", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp}, this.GenerateAwardListOperationCompleted, userState);
+        }
+        
+        private void OnGenerateAwardListOperationCompleted(object arg) {
+            if ((this.GenerateAwardListCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateAwardListCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateClassifications", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateClassifications_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateClassifications(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.Invoke("GenerateClassifications", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateClassificationsAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.GenerateClassificationsAsync(prog, academicYear, stage, progOptions, docType, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateClassificationsAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp, object userState) {
+            if ((this.GenerateClassificationsOperationCompleted == null)) {
+                this.GenerateClassificationsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateClassificationsOperationCompleted);
+            }
+            this.InvokeAsync("GenerateClassifications", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp}, this.GenerateClassificationsOperationCompleted, userState);
+        }
+        
+        private void OnGenerateClassificationsOperationCompleted(object arg) {
+            if ((this.GenerateClassificationsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateClassificationsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateConsolidatedMarks", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateConsolidatedMarks_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateConsolidatedMarks(string prog, string semesters, string stage, string studyMode, string progOptions, int docType, string campus, string filenameFromApp, string intakeFilter) {
+            this.Invoke("GenerateConsolidatedMarks", new object[] {
+                        prog,
+                        semesters,
+                        stage,
+                        studyMode,
+                        progOptions,
+                        docType,
+                        campus,
+                        filenameFromApp,
+                        intakeFilter});
+        }
+        
+        /// <remarks/>
+        public void GenerateConsolidatedMarksAsync(string prog, string semesters, string stage, string studyMode, string progOptions, int docType, string campus, string filenameFromApp, string intakeFilter) {
+            this.GenerateConsolidatedMarksAsync(prog, semesters, stage, studyMode, progOptions, docType, campus, filenameFromApp, intakeFilter, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateConsolidatedMarksAsync(string prog, string semesters, string stage, string studyMode, string progOptions, int docType, string campus, string filenameFromApp, string intakeFilter, object userState) {
+            if ((this.GenerateConsolidatedMarksOperationCompleted == null)) {
+                this.GenerateConsolidatedMarksOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateConsolidatedMarksOperationCompleted);
+            }
+            this.InvokeAsync("GenerateConsolidatedMarks", new object[] {
+                        prog,
+                        semesters,
+                        stage,
+                        studyMode,
+                        progOptions,
+                        docType,
+                        campus,
+                        filenameFromApp,
+                        intakeFilter}, this.GenerateConsolidatedMarksOperationCompleted, userState);
+        }
+        
+        private void OnGenerateConsolidatedMarksOperationCompleted(object arg) {
+            if ((this.GenerateConsolidatedMarksCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateConsolidatedMarksCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateReceipts", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateReceipts_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string GenerateReceipts(string receipt_No) {
@@ -1093,12 +1233,52 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateSenateSummary", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateSenateSummary_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GenerateSenateSummary(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.Invoke("GenerateSenateSummary", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp});
+        }
+        
+        /// <remarks/>
+        public void GenerateSenateSummaryAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp) {
+            this.GenerateSenateSummaryAsync(prog, academicYear, stage, progOptions, docType, filenameFromApp, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateSenateSummaryAsync(string prog, string academicYear, string stage, string progOptions, int docType, string filenameFromApp, object userState) {
+            if ((this.GenerateSenateSummaryOperationCompleted == null)) {
+                this.GenerateSenateSummaryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateSenateSummaryOperationCompleted);
+            }
+            this.InvokeAsync("GenerateSenateSummary", new object[] {
+                        prog,
+                        academicYear,
+                        stage,
+                        progOptions,
+                        docType,
+                        filenameFromApp}, this.GenerateSenateSummaryOperationCompleted, userState);
+        }
+        
+        private void OnGenerateSenateSummaryOperationCompleted(object arg) {
+            if ((this.GenerateSenateSummaryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateSenateSummaryCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateStudentAudit", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateStudentAudit_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateStudentAudit(string student_No, string prog, string filenameFromApp) {
-            this.Invoke("GenerateStudentAudit", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateStudentAudit(string student_No, string prog, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateStudentAudit", new object[] {
                         student_No,
                         prog,
                         filenameFromApp});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -1120,7 +1300,7 @@ namespace New_Student_Portal.NAVWS {
         private void OnGenerateStudentAuditOperationCompleted(object arg) {
             if ((this.GenerateStudentAuditCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateStudentAuditCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateStudentAuditCompleted(this, new GenerateStudentAuditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1256,10 +1436,12 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateStudentReportCard", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", ResponseElementName="GenerateStudentReportCard_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Webportal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateStudentReportCard(string student_No, string filenameFromApp) {
-            this.Invoke("GenerateStudentReportCard", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateStudentReportCard(string student_No, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateStudentReportCard", new object[] {
                         student_No,
                         filenameFromApp});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -1280,7 +1462,7 @@ namespace New_Student_Portal.NAVWS {
         private void OnGenerateStudentReportCardOperationCompleted(object arg) {
             if ((this.GenerateStudentReportCardCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateStudentReportCardCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateStudentReportCardCompleted(this, new GenerateStudentReportCardCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2900,6 +3082,18 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void GenerateAwardListCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void GenerateClassificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void GenerateConsolidatedMarksCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     public delegate void GenerateReceiptsCompletedEventHandler(object sender, GenerateReceiptsCompletedEventArgs e);
     
     /// <remarks/>
@@ -2952,7 +3146,33 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GenerateSenateSummaryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, GenerateStudentAuditCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentAuditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentAuditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
@@ -3016,7 +3236,29 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
-    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, GenerateStudentReportCardCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentReportCardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentReportCardCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]

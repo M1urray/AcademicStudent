@@ -285,6 +285,60 @@
           <sequence />
         </complexType>
       </element>
+      <element name="GenerateAwardList">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="academicYear" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="progOptions" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GenerateAwardList_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GenerateClassifications">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="academicYear" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="progOptions" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GenerateClassifications_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GenerateConsolidatedMarks">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semesters" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="studyMode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="progOptions" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="campus" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="intakeFilter" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GenerateConsolidatedMarks_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="GenerateReceipts">
         <complexType>
           <sequence>
@@ -319,6 +373,23 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GenerateSenateSummary">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="academicYear" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="stage" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="progOptions" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="docType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GenerateSenateSummary_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="GenerateStudentAudit">
         <complexType>
           <sequence>
@@ -330,7 +401,9 @@
       </element>
       <element name="GenerateStudentAudit_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentCharges">
@@ -401,7 +474,9 @@
       </element>
       <element name="GenerateStudentReportCard_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentResultSlip">
@@ -1171,6 +1246,24 @@
   <message name="EnterRowMarks_Result">
     <part name="parameters" element="tns:EnterRowMarks_Result" />
   </message>
+  <message name="GenerateAwardList">
+    <part name="parameters" element="tns:GenerateAwardList" />
+  </message>
+  <message name="GenerateAwardList_Result">
+    <part name="parameters" element="tns:GenerateAwardList_Result" />
+  </message>
+  <message name="GenerateClassifications">
+    <part name="parameters" element="tns:GenerateClassifications" />
+  </message>
+  <message name="GenerateClassifications_Result">
+    <part name="parameters" element="tns:GenerateClassifications_Result" />
+  </message>
+  <message name="GenerateConsolidatedMarks">
+    <part name="parameters" element="tns:GenerateConsolidatedMarks" />
+  </message>
+  <message name="GenerateConsolidatedMarks_Result">
+    <part name="parameters" element="tns:GenerateConsolidatedMarks_Result" />
+  </message>
   <message name="GenerateReceipts">
     <part name="parameters" element="tns:GenerateReceipts" />
   </message>
@@ -1182,6 +1275,12 @@
   </message>
   <message name="GenerateScoreSheet_Result">
     <part name="parameters" element="tns:GenerateScoreSheet_Result" />
+  </message>
+  <message name="GenerateSenateSummary">
+    <part name="parameters" element="tns:GenerateSenateSummary" />
+  </message>
+  <message name="GenerateSenateSummary_Result">
+    <part name="parameters" element="tns:GenerateSenateSummary_Result" />
   </message>
   <message name="GenerateStudentAudit">
     <part name="parameters" element="tns:GenerateStudentAudit" />
@@ -1528,6 +1627,18 @@
       <input name="EnterRowMarks" message="tns:EnterRowMarks" />
       <output name="EnterRowMarks_Result" message="tns:EnterRowMarks_Result" />
     </operation>
+    <operation name="GenerateAwardList">
+      <input name="GenerateAwardList" message="tns:GenerateAwardList" />
+      <output name="GenerateAwardList_Result" message="tns:GenerateAwardList_Result" />
+    </operation>
+    <operation name="GenerateClassifications">
+      <input name="GenerateClassifications" message="tns:GenerateClassifications" />
+      <output name="GenerateClassifications_Result" message="tns:GenerateClassifications_Result" />
+    </operation>
+    <operation name="GenerateConsolidatedMarks">
+      <input name="GenerateConsolidatedMarks" message="tns:GenerateConsolidatedMarks" />
+      <output name="GenerateConsolidatedMarks_Result" message="tns:GenerateConsolidatedMarks_Result" />
+    </operation>
     <operation name="GenerateReceipts">
       <input name="GenerateReceipts" message="tns:GenerateReceipts" />
       <output name="GenerateReceipts_Result" message="tns:GenerateReceipts_Result" />
@@ -1535,6 +1646,10 @@
     <operation name="GenerateScoreSheet">
       <input name="GenerateScoreSheet" message="tns:GenerateScoreSheet" />
       <output name="GenerateScoreSheet_Result" message="tns:GenerateScoreSheet_Result" />
+    </operation>
+    <operation name="GenerateSenateSummary">
+      <input name="GenerateSenateSummary" message="tns:GenerateSenateSummary" />
+      <output name="GenerateSenateSummary_Result" message="tns:GenerateSenateSummary_Result" />
     </operation>
     <operation name="GenerateStudentAudit">
       <input name="GenerateStudentAudit" message="tns:GenerateStudentAudit" />
@@ -1876,6 +1991,33 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GenerateAwardList">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateAwardList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GenerateAwardList">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GenerateAwardList_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GenerateClassifications">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateClassifications" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GenerateClassifications">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GenerateClassifications_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GenerateConsolidatedMarks">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateConsolidatedMarks" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GenerateConsolidatedMarks">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GenerateConsolidatedMarks_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GenerateReceipts">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateReceipts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GenerateReceipts">
@@ -1891,6 +2033,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GenerateScoreSheet_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GenerateSenateSummary">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Webportal:GenerateSenateSummary" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GenerateSenateSummary">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GenerateSenateSummary_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

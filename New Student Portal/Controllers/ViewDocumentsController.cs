@@ -217,7 +217,7 @@ namespace New_Student_Portal.Controllers
                     {
                         Prog = "";
                     }
-                    //str = Credentials.ObjNav.GenerateStudentAudit(str1, Prog, string.Concat("STDAUDIT-", str2, ".pdf"));
+                    str = Credentials.ObjNav.GenerateStudentAudit(str1, Prog, string.Concat("STDAUDIT-", str2, ".pdf"));
                     flag = true;
                     if (str == "")
                     {
@@ -375,7 +375,7 @@ namespace New_Student_Portal.Controllers
                 {
                     string str1 = base.Session["Username"].ToString();
                     string str2 = base.Session["Username"].ToString().Replace("/", "");
-                    //str = Credentials.ObjNav.GenerateStudentReportCard(str1, string.Concat("PROVISIONAL RESULTS-", str2, ".pdf"));
+                    str = Credentials.ObjNav.GenerateStudentReportCard(str1, string.Concat("PROVISIONAL RESULTS-", str2, ".pdf"));
                     flag = true;
                     if (str == "")
                     {
