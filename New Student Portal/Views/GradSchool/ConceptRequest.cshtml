@@ -1,0 +1,21 @@
+﻿<div class="container">
+    <div class="col-md-12">
+        <span class="font-weight-bold"><label id="lblTitle">Thesis Title</label></span>
+        <textarea class="form-control" id="txtTitle"></textarea>
+    </div>
+    <hr />
+    <div class="col-md-12">
+        <span class="font-weight-bold"><label id="lblDescription">Thesis Description</label></span>
+        <textarea class="form-control" id="txtDescription"></textarea>
+    </div>
+    <hr />
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.Label("Thesis (Soft Copy)", htmlAttributes: new { @class = "control-label col-md-12" })
+            <hr/>
+            <div class="col-md-12">
+                <input type="file" class="form-control" id="thesisFileAttachment" />
+            </div>
+        </div>
+    </div>
+</div>

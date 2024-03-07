@@ -143,15 +143,6 @@
                         <option value="3">Retake</option>
                     </select>
                 </div>
-                <div class="col-md-4" id="divStage">
-                    <span style="font-size: 16px; font-weight: bold">Unit Category:</span>
-                    @Html.DropDownListFor(model => model.Code, Model.ListOfUnitCategory, "--Select Unit Category --", new { @class = "form-select", @id = "ddlStage", @onchange = "ShowProgOption();" })
-                </div>
-                <div class="col-md-4" id="divOption">
-                    <span style="font-size: 16px; font-weight: bold">Programme Option:</span>
-                    <select class="form-select" id="ddlProgOption" name="ddlProgOption">
-                    </select>
-                </div>
             </div>
             <hr />
             <div align="center">
@@ -229,29 +220,4 @@
             }
         });
     }
-    var ShowProgOption = function () {
-            $("#ddlProgOption option").remove();
-            $('#ddlProgOption').empty().append('<option selected="selected" value="">--Select Programme Option--</option>');
-            $("#divOption").hide();
-            $.getJSON('@Url.Action("GetProgrammeOptions", "Course")', { Prog: `@Model.RegProg.CurrentProg`},
-                    function (data) {
-                        if (data.success == true) {
-                            if (data.message.ListOfValues.length > 0) {
-                                $('#ddlProgOption').empty().append('<option selected="selected" value="">--Select Programme Option--</option>');
-                                $.each(data.message.ListOfValues, function () {
-                                    $("#ddlProgOption").append($("<option></option>").val(this['Value']).html(this['Text']));
-                                });
-                                if (`@Model.RegProg.Programme_Option` != "") {
-                                    $('#ddlProgOption').Value(@Model.RegProg.Programme_Option);
-                                }
-                                $("#divOption").show();
-                            }
-                            HideProgress();
-                        }
-                        else {
-                            HideProgress();
-                            Swal.fire('Warning', data.message, 'warning');
-                        }
-                    });
-    };
 </script>

@@ -671,12 +671,12 @@
     <Content Include="Views\GradeCompaint\Partial View\NewRequisition.cshtml" />
     <Content Include="Views\Common\AcademicCalender.cshtml" />
     <Content Include="Views\Course\Partial Views\BasketUnitList.cshtml" />
-    <None Include="Web References\NAVWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Views\Course\Partial Views\CreditTransfer.cshtml" />
     <Content Include="Views\Course\Partial Views\LateRegistration.cshtml" />
+    <Content Include="Web References\NAVWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\NAVWS\WebPortal.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -686,10 +686,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://maachah.negst.net:7047/AIU/WS/AIU%2520LIVE/Codeunit/WebPortal">
+    <WebReferenceUrl Include="http://khhrerp001.kijabehospital.local:7047/KIJABE/WS/KCHS/Codeunit/WebPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\NAVWS\</RelPath>
-      <UpdateFromURL>http://maachah.negst.net:7047/AIU/WS/AIU%2520LIVE/Codeunit/WebPortal</UpdateFromURL>
+      <UpdateFromURL>http://khhrerp001.kijabehospital.local:7047/KIJABE/WS/KCHS/Codeunit/WebPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

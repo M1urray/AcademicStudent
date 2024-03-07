@@ -44,10 +44,11 @@ namespace Student.Controllers
 
                     var details = JObject.Parse(result);
 
-                    if (details["value"].Count() > 0)
+                    if (details["value"].Any())
                     {
-                        foreach (JObject config in details["value"])
+                        foreach (var jToken in details["value"])
                         {
+                            var config = (JObject)jToken;
                             string User = (string)config["No"];
                             string Password = (string)config["Password"];
                             string changedPassword = (string)config["Changed_Password"];

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<New_Student_Portal.ViewModel.StudentThesis>
+<table id="" class="table table-striped table-hover">
+    <thead style="background-color:black;color:white">
+    <tr>
+        <th>Action</th>
+        <th>
+            @Html.DisplayNameFor(model => model.No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThesisDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThesisTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supervisor1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supervisor2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateRequested)
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model.Any())
+    { 
+        foreach (var item in Model)
+        {
+            <tr>
+                <td><a href="#" onclick="SelectedRow('@item.No');">Select</a></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThesisDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThesisTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supervisor1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supervisor2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="9" style="color:red">
+                No Records Found
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

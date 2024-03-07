@@ -146,6 +146,43 @@ namespace New_Student_Portal.Controllers
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ProformaInvoice()
+        {
+            try
+            {
+                string message = "";
+                bool success = false;
+                if (Session["Username"] == null)
+                {
+                    Response.Redirect(Url.Action("Login", "Login"));
+                }
+                else
+                {
+                    string studentNo = Session["Username"].ToString();
+                    string sem = "";
+                    if (Session["CurrentSem"] == null)
+                    {
+                        Session["CurrentSem"] = CommonClass.CurrentSemester(studentNo);
+                    }
+
+                    sem = Session["CurrentSem"].ToString();
+
+                    string filename = studentNo.Replace("/", "");
+                    message = Credentials.ObjNav.fnGenerateStudentProfomaInvoice(studentNo, sem);
+                    success = true;
+                    if (message == "")
+                    {
+                        success = false;
+                        message = "File Not Found";
+                    }
+                }
+                return Json(new { message, success }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult ExamCard()
         {
             try
@@ -263,53 +300,7 @@ namespace New_Student_Portal.Controllers
                 return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult ProformaInvoice()
-        {
-            try
-            {
-                string message = "";
-                bool success = false;
-                if (Session["Username"] == null)
-                {
-                    Response.Redirect(Url.Action("Login", "Login"));
-                }
-                else
-                {
-                    string StudentNo = Session["Username"].ToString();
-                    string Sem = "";
-                    if (Session["CurrentSem"] == null)
-                    {
-                        Session["CurrentSem"] = CommonClass.CurrentSemester(StudentNo);
-                    }
 
-                    Sem = Session["CurrentSem"].ToString();
-
-                    string filename = StudentNo.Replace("/", "");
-                    Credentials.ObjNav.GenerateStudentProformaInvoice(StudentNo, Sem, "PROFORMA-" + filename + ".pdf");
-                    filename = "PROFORMA-" + filename + ".pdf";
-                    string DestinationPath = Server.MapPath("~/Downloads/" + filename);
-                    CommonClass.MoveFile(filename, DestinationPath);
-
-                    System.IO.FileInfo file = new System.IO.FileInfo(DestinationPath);
-                    if (file.Exists)
-                    {
-                        success = true;
-                        message = @"/Downloads/" + filename;
-                    }
-                    else
-                    {
-                        success = false;
-                        message = "File Not Found";
-                    }
-
-                }
-                return Json(new { message = message, success }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
         public JsonResult PrintCourseStatement()
         {
             try

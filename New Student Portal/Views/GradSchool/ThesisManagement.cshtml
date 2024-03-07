@@ -1,0 +1,191 @@
+﻿@model New_Student_Portal.ViewModel.StudentThesisStatus
+
+@{
+    // ViewBag.Title = "ThesisManagement";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<style>
+    .BtnPadding {
+        padding: 7px;
+        font-size: 12px;
+    }
+</style>
+<div class="card pre-scrollable">
+    <div class="card-body">
+        @{
+            // if (Model.ThesisStatus == 0)
+            // {
+                <a href="#" onclick="ApplyConcept();" class="btn btn-primary BtnPadding">Concept Request</a>
+            // }
+
+            // if (Model.ThesisStatus == 1)
+            //
+            // {
+                <a href="#" onclick="ApplyProposal();" class="btn btn-danger BtnPadding " id="ViewDoc">Proposal Request</a>
+            @* } *@
+
+            // if (Model.ThesisStatus == 2)
+            // {
+                <a href="#" onclick="ApplyReview();" class="btn btn-primary BtnPadding " id="SendDocAppr">Review Request</a>
+            @* } *@
+
+            // if (Model.ThesisStatus == 3)
+            // {
+                <a href="#" onclick="ApplySchoolPresenation();" class="btn btn-danger BtnPadding" id="CancelDocAppr">School Presentation Request</a>
+            @* } *@
+
+            // if (Model.ThesisStatus == 4)
+            // {
+                <a href="#" onclick="ApplyDefense();" class="btn btn-primary BtnPadding" id="AppTrail">Defense Request</a>
+            @* } *@
+        }
+
+        <hr />
+        <div id="thesisList"></div>
+    </div>
+</div>
+@*//////////////////////Modal////////////////////////////*@
+<div class="modal fade" id="myModalUnits" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><label id="labelT"></label></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            loadThesisRequests();
+        });
+        function loadThesisRequests() {
+            ShowProgress();
+            $.ajax({
+                url: '@Url.Action("ThesisListPartialViewResult", "GradSchool")',
+                type: "POST",
+                datatype: "json",
+                cache: false,
+                contentType: "application/json; charset = utf-8",
+                processData: false,
+                async: false,
+                type: "GET",
+                dataType: 'HTML',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $("#thesisList").html(data);
+                    HideProgress();
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
+                }
+            });
+    }
+    var ApplyConcept = function () {
+            var x = document.getElementById("labelT");
+            x.innerHTML = 'New Concept Request';
+            ShowProgress();
+            $.ajax({
+                url: "/GradSchool/ConceptRequest",
+                datatype: "json",
+                type: "POST",
+                contentType: "application/json; charset = utf-8",
+                success: function (data) {
+                    HideProgress();
+                    $("#modalBody").html(data);
+                    $("#myModalUnits").modal("show");
+                },
+                error: function () {
+                    HideProgress();
+                    Swal.fire('Warning', 'Problem encountered', 'warning');
+                }
+            });
+    }
+    var ApplyProposal = function () {
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'New Concept Request';
+        ShowProgress();
+        $.ajax({
+            url: "/GradSchool/ProposalRequest",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'Problem encountered', 'warning');
+            }
+        });
+    }
+    var ApplyReview = function () {
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'New Concept Request';
+        ShowProgress();
+        $.ajax({
+            url: "/GradSchool/ReviewRequest",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'Problem encountered', 'warning');
+            }
+        });
+    }
+    var ApplySchoolPresenation = function () {
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'New Concept Request';
+        ShowProgress();
+        $.ajax({
+            url: "/GradSchool/SchoolPresentation",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'Problem encountered', 'warning');
+            }
+        });
+    }
+    var ApplyDefense = function () {
+        var x = document.getElementById("labelT");
+        x.innerHTML = 'New Concept Request';
+        ShowProgress();
+        $.ajax({
+            url: "/GradSchool/DefenceRequest",
+            datatype: "json",
+            type: "POST",
+            contentType: "application/json; charset = utf-8",
+            success: function (data) {
+                HideProgress();
+                $("#modalBody").html(data);
+                $("#myModalUnits").modal("show");
+            },
+            error: function () {
+                HideProgress();
+                Swal.fire('Warning', 'Problem encountered', 'warning');
+            }
+        });
+    }
+</script>

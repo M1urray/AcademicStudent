@@ -29,7 +29,7 @@
             <table id="tblProgUnit" class="table table-striped table-hover" style="font-size:11px">
                 <thead>
                     <tr>
-                        <th width="10%" style="text-align:right">Select</th>
+                        <th class="hide "width="10%" style="text-align:right">Select</th>
                         <th width="15%">
                             Course
                         </th>
@@ -37,7 +37,7 @@
                             Section
                         </th>
                         <th width="30%">
-                            Desription
+                            Description
                         </th>
                         <th width="15%">
                             Day
@@ -64,8 +64,8 @@
                             foreach (var item in Model.ListOfCoreUnitsSubjects)
                             {
                                 <tr>
-                                    <td align="center">
-                                        <input type="checkbox" class="checkboxClass" id="@i" value="@item.CF" />
+                                    <td align="center" class="hide">
+                                        <input type="" class="checkboxClass" id="@i" value="@item.CF" />
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Code)
@@ -115,164 +115,5 @@
 <hr />
 <div align="center">
     <hr />
-    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Selected Units to Basket" onclick="SubmitSelectedUnits('@ClassCodeNeeded');" />
+    <input type="button" id="btnSaving" class="btn btn-danger" value="Add Units to Basket" onclick="SubmitSelectedUnits('@ClassCodeNeeded');" />
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var varID = 0;
-        $(':checkbox').on('change', function () {
-            var CurrDay, currTime, CstartTime, currentRow, Campus,ClassCode, ClassFull, ClassFull;
-            if ($(this).prop('checked') == true) {
-
-                //////////Test Maximum Reached/////////////////////
-                var TotalSelected = 0;
-                $('input:checkbox:checked').each(function () {
-                    TotalSelected += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());
-                });
-                
-                TotalSelected = TotalSelected + parseInt(@Model.SelectedCourses);
-
-                if (TotalSelected > parseInt(@Model.MaximumCourses)) {
-                        Swal.fire('Warning', 'You have reached maximum number of Credits. Maximum allowed is ' +@Model.MaximumCourses+' Credits', 'warning');
-                        $(this).closest('tr').find(':checkbox').prop('checked', false);
-                        return;
-                }
-                ////////////end of check/////////////
-
-                varID = $(this).prop("id");
-                currentRow = $(this);
-                //CurrDay = currentRow.closest('tr').find("td").eq(4).html().trim();
-                currTime = currentRow.closest('tr').find("td").eq(5).html().trim();
-                CurrentCourse = currentRow.closest('tr').find("td").eq(1).html().trim();
-                hasPrel = currentRow.closest('tr').find("td").eq(8).html().trim();
-                ClassFull = currentRow.closest('tr').find("td").eq(9).html().trim();
-                CurrDay = currentRow.closest('tr').find("td").eq(4).html().trim();
-                Campus = currentRow.closest('tr').find("td").eq(6).html().trim();
-                ClassCode = currentRow.closest('tr').find("td").eq(2).html().trim();
-                var s = currTime.split('-');
-                CstartTime = s[0];
-
-                if (ClassFull == "Y") {
-                    Swal.fire('Warning', 'The class size has reached its maximum. Choose another class/Unit', 'warning');
-                    $(this).closest('tr').find(':checkbox').prop('checked', false);
-                    return;
-                }
-                else {
-                    var proceed = true;
-                    if (hasPrel == "Y") {
-                        ShowProgress();
-                        $.ajax({
-                            type: "POST",
-                            url: "/Course/GetPrerequisiteUnits",
-                            async: false,
-                            data: JSON.stringify({ Unit: CurrentCourse }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.success == true) {
-                                    if (data.Found == true) {
-                                        Swal.fire('Warning', data.message, 'warning');
-                                        currentRow.closest('tr').find(':checkbox').prop('checked', false);
-                                        proceed = false;
-                                        HideProgress();
-                                    }
-                                    else {
-                                        proceed = true;
-                                        HideProgress();
-                                    }
-                                }
-                                else {
-                                    Swal.fire('Warning', data.message, 'warning');
-                                    currentRow.closest('tr').find(':checkbox').prop('checked', false);
-                                    HideProgress();
-                                }
-                            },
-                            error: function () {
-                                HideProgress();
-                                alert("There is some problem to process your request. Please try after some time");
-                            }
-                        });
-                    }
-                    if (proceed && (@Model.RegT == "0" || @Model.RegT == "1")) {
-                        $('tbody tr').has(':checkbox:checked').each(function () {
-                            var row = $(this);
-                            var varID2 = $(this).find("input[type=checkbox]").prop("id");
-                            var conlict = false;
-                            var msg = "";
-                            ///////////Check Conflicts////////////////
-                            ShowProgress();
-                            $.ajax({
-                                type: "POST",
-                                url: "/Course/TestStudentTimeTable",
-                                async: false,
-                                data: JSON.stringify({ Unit: CurrentCourse, Campus: Campus, ClassCode: ClassCode, day: CurrDay, period: currTime }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data.success == false) {
-                                        HideProgress();
-                                        conlict = true;
-                                        msg = data.message;
-                                    }
-                                    else {
-                                        HideProgress();
-                                    }
-                                },
-                                error: function () {
-                                    HideProgress();
-                                    conlict = true;
-                                    msg = "There is some problem to process your request. Please try after some time";
-                                }
-                            });
-                            ///////////end checking///////////////////
-                            if (conlict) {
-                                Swal.fire('Warning', msg, 'warning');
-                                currentRow.closest('tr').find(':checkbox').prop('checked', false);
-                                return false;
-                            }
-                            else {
-                                if (varID != varID2) {
-                                    var Course, day, STime;
-
-                                    Course = row.find("td").eq(1).html().trim();
-                                    day = row.find("td").eq(4).html().trim();
-                                    STime = row.find("td").eq(5).html().trim();
-
-                                    var s = STime.split('-');
-                                    STime = s[0];
-                                    endTime = s[1];
-
-                                    if (CurrentCourse != Course) {
-                                        if (CurrDay == day) {
-                                            //convert both time into timestamp
-                                            var CurrentTime = new Date("November 13, 2021 " + CstartTime);
-                                            CurrentTime = CurrentTime.getTime();
-
-                                            var stt = new Date("November 13, 2021 " + STime);
-                                            stt = stt.getTime();
-
-                                            var endt = new Date("November 13, 2021 " + endTime);
-                                            endt = endt.getTime();
-
-                                            if ((stt <= CurrentTime) && (CurrentTime <= endt)) {
-                                                currentRow.closest('tr').find(':checkbox').prop('checked', false);
-                                                Swal.fire('Warning', 'This unit coflicts with ' + Course + ' taking place at the same day(' + CurrDay + ') and same time(' + STime + ' - ' + endTime + ')', 'warning');
-                                                return false;
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        Swal.fire('Warning', "You have already selected this unit", 'warning');
-                                        currentRow.closest('tr').find(':checkbox').prop('checked', false);
-                                        HideProgress();
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    });
-</script>
-
