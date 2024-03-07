@@ -236,7 +236,6 @@
     <Content Include="assets\Fonts\weathericons-regular-webfont.svg" />
     <Content Include="assets\images\ajax-loader2.gif" />
     <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\login-bg.gif" />
     <Content Include="assets\images\login-bg2.jpg" />
     <Content Include="assets\images\NEW2.gif" />
     <Content Include="assets\images\profile_f.png" />
@@ -462,6 +461,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Downloads\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\LecturerEvaluation\" />
   </ItemGroup>
   <ItemGroup>
@@ -554,7 +555,6 @@
     <Content Include="assets\Fonts\boxicons.woff2" />
     <Content Include="assets\Fonts\boxicons.woff" />
     <Content Include="assets\Fonts\boxicons.ttf" />
-    <Content Include="Downloads\FEESTATEMENT-1230558MATS.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -645,8 +645,6 @@
     <Content Include="Views\Dashboard\Partial Views\CreateDCFActivity.cshtml" />
     <Content Include="Views\Course\Partial Views\ProgrammeTransit.cshtml" />
     <Content Include="Views\Course\Partial Views\ExcemptionRequest.cshtml" />
-    <Content Include="Uploads\Jan 2022 semester plan %283%29.pdf" />
-    <Content Include="Uploads\2021-2022  Fee Structure0001.pdf" />
     <Content Include="Views\Shared\Partial Views\ApprovalTrail.cshtml" />
     <Content Include="Views\Common\ApprovalComments.cshtml" />
     <Content Include="Views\Dashboard\Partial Views\ClassAttendance.cshtml" />

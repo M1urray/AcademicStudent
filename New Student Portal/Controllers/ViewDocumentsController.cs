@@ -408,7 +408,7 @@ namespace New_Student_Portal.Controllers
                 string STDNo = Session["Username"].ToString();
                 #region Programme List
                 List<DropdownList> ProgList = new List<DropdownList>();
-                string page = "StudentEnrolment?$select=Programme&$filter=Student_No eq '" + STDNo + "'&$format=json";
+                string page = "StudentEnrollment?$select=Programme&$filter=Student_No eq '" + STDNo + "'&$format=json";
 
                 HttpWebResponse httpResponse = Credentials.GetOdataData(page);
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))

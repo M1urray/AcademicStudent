@@ -1,4 +1,5 @@
-﻿@using New_Student_Portal.Models;
+﻿@using New_Student_Portal.CustomSecurity;
+@using New_Student_Portal.Models;
 @using System.Globalization;
 @{
     Layout = null;
@@ -18,13 +19,13 @@
     else
     {
         string StdNo = Session["Username"].ToString();
-        string Sem = Session["CurrentSem"].ToString();
-        if (Sem == "")
+        string Sem = "";
+        if (Session["CurrentSem"] == null)
         {
-            Sem = CommonClass.CurrentSemester(StdNo);
+            Session["CurrentSem"] = CommonClass.CurrentSemester(StdNo);
         }
 
-        Session["CurrentSem"] = Sem;
+        Sem = Session["CurrentSem"].ToString();
         string RegDeadlineDate = CommonClass.RegistrationDeadline(Sem);
         CountNotif = CommonClass.GetDocumentCount();
         if (RegDeadlineDate != "")
@@ -84,10 +85,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <title>AFRICA INTERNATIONAL UNIVERSITY | Student Portal</title>
+    <title>Kijabe  College | Student Portal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="AFRICA INTERNATIONAL UNIVERSITY Student Portal" name="description" />
-    <meta content="AFRICA INTERNATIONAL UNIVERSITY" name="DSL" />
+    <meta content="Kijabe College Student Portal" name="description" />
+    <meta content="Kijabe College" name="DSL" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="~/assets/images/favicon.ico">
@@ -179,7 +180,7 @@
                 <div class="logo-box">
                     <a href="/Dashboard/Dashboard" class="logo logo-dark text-center">
                         <span class="logo-sm">
-                            <img src="~/assets/images/logo2.png" alt="" height="24">
+                            <img src="~/assets/images/retina_logo3.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Minton</span> -->
                         </span>
                         <span class="logo-lg">
@@ -320,38 +321,34 @@
                                     <span>Academic Requisition</span>
                                 </a>
                             </li>
-
-                            if (AllowGradAppl)
+                            //if (AllowGradAppl)
+                            //{
+                            <li>
+                                <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
+                                    <i class="fa fa-graduation-cap"></i>
+                                    <span>Graduation Request</span>
+                                </a>
+                            </li>
+                            <li> <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
+                                        <i class="ri-shopping-bag-fill"></i>
+                                        <span>Clearance Request</span> 
+                                     </a> 
+                                 </li>
+                            if (fullAccess && AllowEval)
                             {
                                 <li>
-                                    <a href="#" onclick="GraduationRequestLink();" class=" waves-effect">
-                                        <i class="fa fa-graduation-cap"></i>
-                                        <span>Graduation Request</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
-                                        <i class="ri-shopping-bag-fill"></i>
-                                        <span>Clearance Request</span>
-                                    </a>
-                                </li>
-
-                            }
-                            if (AllowApplication)
-                            {
-                                <li>
-                                    <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
-                                        <i class="ri-shopping-bag-fill"></i>
-                                        <span>Clearance Request</span>
+                                    <a href="#" onclick="LecturerEvaluationLink();">
+                                        <i class="ri-clapperboard-fill"></i>
+                                        <span>Course Evaluation</span>
                                     </a>
                                 </li>
                             }
                             @*<li>
-                                    <a href="#" onclick="EnquiryLink();">
-                                        <i class="ri-question-answer-fill"></i>
-                                        <span>General Complaint</span>
-                                    </a>
-                                </li>*@
+                                <a href="#" onclick="EnquiryLink();">
+                                    <i class="ri-question-answer-fill"></i>
+                                    <span>General Complaint</span>
+                                </a>
+                            </li>*@
                             <li>
                                 <a href="#" onclick="StudentAuditLink();">
                                     <i class="ri-pushpin-fill"></i>
@@ -411,15 +408,6 @@
                             if (fullAccess)
                             {
                                 <li class="menu-title mt-2">Examination</li>
-                                if (AllowEval)
-                                {
-                                    <li>
-                                        <a href="#" onclick="LecturerEvaluationLink();">
-                                            <i class="ri-clapperboard-fill"></i>
-                                            <span>Course Evaluation</span>
-                                        </a>
-                                    </li>
-                                }
                                 if (AllowExamCard)
                                 {
                                     <li>
@@ -429,15 +417,13 @@
                                         </a>
                                     </li>
                                 }
+                                <li>
+                                    <a href="#" onclick="ProvisionalResultsLink();">
+                                        <i class="ri-download-cloud-fill"></i>
+                                        <span>Transcipt</span>
+                                    </a>
+                                </li>
                             }
-
-                            <li>
-                                <a href="#" onclick="ProvisionalResultsLink();">
-                                    <i class="ri-download-cloud-fill"></i>
-                                    <span>Transcipt</span>
-                                </a>
-                            </li>
-
                         }
                         <li class="menu-title mt-2">Settings</li>
                         <li>
@@ -648,7 +634,6 @@
         //end Alluminae Links/////////////////
         var ChangePasswordLink = function () {
             ShowProgress();
-            window.location = "https://ssp.aiu.ac.ke";
         }
     </script>
 </body>
