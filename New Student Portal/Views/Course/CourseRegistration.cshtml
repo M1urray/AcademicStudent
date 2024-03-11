@@ -55,7 +55,6 @@
             url: '@Url.Action("CourseRegistrationDetails", "Course")',
             success: function (data) {
                 $("#divCourseReg").html(data);
-                LoadBasketUnits(RegT);
                 HideProgress();
             },
             error: function () {
@@ -93,21 +92,47 @@
     }
     var GetUnits = function (prog) {
         var regType = $("#RegType").children("option:selected").val();
-        var unitType = $("#ddlStage").children("option:selected").val();
-        var option = $("#ddlProgOption").children("option:selected").val();
+        //var unitType = $("#ddlStage").children("option:selected").val();
+        //var option = $("#ddlProgOption").children("option:selected").val();
         var title = "Units Registration";
         if (regType == "") {
             Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
             return;
         }
-        else if ((unitType == "") && regType == "0") {
-            Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-                var x = document.getElementById("labelT");
-                x.innerHTML = title;
+        //else if ((unitType == "") && regType == "0") {
+        //    Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
+        //    return;
+        //}
+        else {            
+            var x = document.getElementById("labelT");
+            x.innerHTML = title;
+            if (regType == "0") {
+                ShowProgress();
+                $.ajax({
+                    url: '@Url.Action("SignNorminalRoll", "Course")',
+                    datatype: "json",
+                    type: "POST",
+                    contentType: "application/json; charset = utf-8",
+                    success: function (data) {
+                        HideProgress();
+                        if (data.success == true) {
+                            HideProgress();
+                            LoadCourseRegistrationDetails(regT);
+                            Swal.fire('Success', data.message, 'success');
+                        }
+                        else {
+                            HideProgress();
+                            Swal.fire('Warning', data.message, 'warning');
+                        }
+                    },
+                    error: function () {
+                        HideProgress();
+                        Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
+                    }
+                });
+            }
+            else {
+                ShowProgress();
                 $.ajax({
                     url: '@Url.Action("GetProgramUnits", "Course")',
                     datatype: "json",
@@ -116,7 +141,7 @@
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         HideProgress();
-                        LoadBasketUnits(regType)
+                        LoadCourseRegistrationDetails(regType)
                         $("#modalBody").html(data);
                         $("#myModalUnits").modal("show");
                     },
@@ -125,6 +150,7 @@
                         Swal.fire('Warning', 'Problem encountered while reading Units', 'warning');
                     }
                 });
+            }
         }
     }
     var SubmitSelectedUnits = function (regT) {

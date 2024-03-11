@@ -407,79 +407,79 @@ namespace New_Student_Portal.Controllers
                                 }
                                 #endregion
                             }
-                            else
-                            {
-                                #region Programme Units                    
-                                    string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and StageCode eq '" + s[1] + "'&$format=json";
+                            //else
+                            //{
+                            //    #region Programme Units                    
+                            //        string page = "UnitSubject?$filter=ProgrammeCode eq '" + s[0] + "' and StageCode eq '" + s[1] + "'&$format=json";
 
-                                    HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                                    {
-                                        var result = streamReader.ReadToEnd();
+                            //        HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                            //        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                            //        {
+                            //            var result = streamReader.ReadToEnd();
 
-                                        var details = JObject.Parse(result);
+                            //            var details = JObject.Parse(result);
 
-                                        if (details["value"].Any())
-                                        {
-                                            foreach (var jToken in details["value"])
-                                            {
-                                                var config = (JObject)jToken;
-                                                if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme"], (string)config["Code"], Sem))
-                                                {
-                                                    string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
+                            //            if (details["value"].Any())
+                            //            {
+                            //                foreach (var jToken in details["value"])
+                            //                {
+                            //                    var config = (JObject)jToken;
+                            //                    if (!StudentRegisteredUnitExists(RegNo, (string)config["Programme"], (string)config["Code"], Sem))
+                            //                    {
+                            //                        string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Code"] + "' and Semester eq '" + Sem + "'&$format=json";
 
-                                                    HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
-                                                    using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
-                                                    {
-                                                        var resultTmT = streamReaderTmT.ReadToEnd();
+                            //                        HttpWebResponse httpResponseTmT = Credentials.GetOdataData(pageTimetable);
+                            //                        using (var streamReaderTmT = new StreamReader(httpResponseTmT.GetResponseStream()))
+                            //                        {
+                            //                            var resultTmT = streamReaderTmT.ReadToEnd();
 
-                                                        var detailsTmT = JObject.Parse(resultTmT);
+                            //                            var detailsTmT = JObject.Parse(resultTmT);
 
-                                                        if (detailsTmT["value"].Any())
-                                                        {
-                                                            foreach (JObject config1 in detailsTmT["value"])
-                                                            {
-                                                                if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
-                                                                {
-                                                                    CoreUnitSubject NewUnit = new CoreUnitSubject();
-                                                                    bool HasPreUnit = false;
-                                                                    HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
-                                                                    NewUnit.Code = (string)config1["Unit"];
-                                                                    NewUnit.Desription = (string)config1["Unit_Description"];
-                                                                    NewUnit.Day = (string)config1["DayofWeek"];
-                                                                    NewUnit.Period = (string)config1["Period"];
-                                                                    NewUnit.Class = (string)config1["Unit_Class"];
-                                                                    NewUnit.Lec = (string)config1["Lecturer_Name"];
-                                                                    NewUnit.CF = (string)config1["No_of_Units"];
-                                                                    NewUnit.Campus = (string)config1["Campus_Code"];
-                                                                    NewUnit.UnitType = UnitType;
-                                                                    if (HasPreUnit)
-                                                                    {
-                                                                        NewUnit.HasPrelqUnit = "Y";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        NewUnit.HasPrelqUnit = "N";
-                                                                    }
-                                                                    if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
-                                                                    {
-                                                                        NewUnit.ClassFull = "Y";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        NewUnit.ClassFull = "N";
-                                                                    }
-                                                                    CoreUnitSub.Add(NewUnit);
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    #endregion
-                            }
+                            //                            if (detailsTmT["value"].Any())
+                            //                            {
+                            //                                foreach (JObject config1 in detailsTmT["value"])
+                            //                                {
+                            //                                    if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
+                            //                                    {
+                            //                                        CoreUnitSubject NewUnit = new CoreUnitSubject();
+                            //                                        bool HasPreUnit = false;
+                            //                                        HasPreUnit = CommonClass.UnitHasPreliquisites(RegNo, (string)config["Unit"], Sem);
+                            //                                        NewUnit.Code = (string)config1["Unit"];
+                            //                                        NewUnit.Desription = (string)config1["Unit_Description"];
+                            //                                        NewUnit.Day = (string)config1["DayofWeek"];
+                            //                                        NewUnit.Period = (string)config1["Period"];
+                            //                                        NewUnit.Class = (string)config1["Unit_Class"];
+                            //                                        NewUnit.Lec = (string)config1["Lecturer_Name"];
+                            //                                        NewUnit.CF = (string)config1["No_of_Units"];
+                            //                                        NewUnit.Campus = (string)config1["Campus_Code"];
+                            //                                        NewUnit.UnitType = UnitType;
+                            //                                        if (HasPreUnit)
+                            //                                        {
+                            //                                            NewUnit.HasPrelqUnit = "Y";
+                            //                                        }
+                            //                                        else
+                            //                                        {
+                            //                                            NewUnit.HasPrelqUnit = "N";
+                            //                                        }
+                            //                                        if ((decimal)config1["Students_Count"] >= (decimal)config1["Class_Size"])
+                            //                                        {
+                            //                                            NewUnit.ClassFull = "Y";
+                            //                                        }
+                            //                                        else
+                            //                                        {
+                            //                                            NewUnit.ClassFull = "N";
+                            //                                        }
+                            //                                        CoreUnitSub.Add(NewUnit);
+                            //                                    }
+                            //                                }
+                            //                            }
+                            //                        }
+                            //                    }
+                            //                }
+                            //            }
+                            //        }
+                            //        #endregion
+                            //}
                             #region Maximum Courses
                             string pageMax = "ProgrammeList?$select=MaxNoofCourses&$filter=Code eq '" + s[0] + "'&format=json";
 
@@ -545,6 +545,28 @@ namespace New_Student_Portal.Controllers
                 Error errormsg = new Error();
                 errormsg.Message = ex.Message.Replace("'", "");
                 return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
+            }
+        }
+        public JsonResult SignNorminalRoll()
+        {
+            try
+            {
+                string RegNo = Session["Username"].ToString();
+                string Sem = "";
+                if (Session["CurrentSem"] == null || Session["CurrentSem"].ToString() == "")
+                {
+                    Session["CurrentSem"] = CommonClass.CurrentSemester("");
+                }
+
+                Sem = Session["CurrentSem"].ToString();
+                string Prog = CommonClass.GetStudentRegisteredProgramme(RegNo);
+                Credentials.ObjNav.TestRegistrationStartDate(Sem, RegNo);
+                Credentials.ObjNav.StudentSelfPromotion(RegNo, Prog, 0);
+                return Json(new { message = "You have signed norminal roll successfully", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message, success = false }, JsonRequestBehavior.AllowGet);
             }
         }
         protected bool StudentExistInStudentUnitBakset(string stdNo, string Unit, string sem)
@@ -1283,7 +1305,8 @@ namespace New_Student_Portal.Controllers
                                             {
                                                 TimeTableView tmTable = new TimeTableView();
                                                 tmTable.Unit = (string)config1["Unit"];
-                                                tmTable.Period = (string)config1["Period"];
+                                                tmTable.Period = (string)config1["Period"]; 
+                                                
                                                 tmTable.Semester = (string)config1["Semester"];
                                                 tmTable.Day_of_Week = (string)config1["DayofWeek"];
                                                 tmTable.Lecture_Room = (string)config1["Lecture_Room"];

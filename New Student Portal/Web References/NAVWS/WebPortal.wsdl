@@ -2,20 +2,6 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WebPortal" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://www.w3.org/2001/XMLSchema">
-      <element name="GetProfilePicture">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetProfilePicture_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="UpdateFoodRequestLines">
         <complexType>
           <sequence>
@@ -4626,6 +4612,9 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="reason" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="serveNotice" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="noticeStartDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="lastWorkingDate" type="date" />
           </sequence>
         </complexType>
       </element>
@@ -5433,6 +5422,20 @@
         </complexType>
       </element>
       <element name="GetProfilePictureStudent_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetProfilePicture">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetProfilePicture_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -8481,12 +8484,6 @@
       </element>
     </schema>
   </types>
-  <message name="GetProfilePicture">
-    <part name="parameters" element="tns:GetProfilePicture" />
-  </message>
-  <message name="GetProfilePicture_Result">
-    <part name="parameters" element="tns:GetProfilePicture_Result" />
-  </message>
   <message name="UpdateFoodRequestLines">
     <part name="parameters" element="tns:UpdateFoodRequestLines" />
   </message>
@@ -10491,6 +10488,12 @@
   <message name="GetProfilePictureStudent_Result">
     <part name="parameters" element="tns:GetProfilePictureStudent_Result" />
   </message>
+  <message name="GetProfilePicture">
+    <part name="parameters" element="tns:GetProfilePicture" />
+  </message>
+  <message name="GetProfilePicture_Result">
+    <part name="parameters" element="tns:GetProfilePicture_Result" />
+  </message>
   <message name="GetStage">
     <part name="parameters" element="tns:GetStage" />
   </message>
@@ -11698,10 +11701,6 @@
     <part name="parameters" element="tns:DeleteFacultyStaffAppraisal_Result" />
   </message>
   <portType name="WebPortal_Port">
-    <operation name="GetProfilePicture">
-      <input name="GetProfilePicture" message="tns:GetProfilePicture" />
-      <output name="GetProfilePicture_Result" message="tns:GetProfilePicture_Result" />
-    </operation>
     <operation name="UpdateFoodRequestLines">
       <input name="UpdateFoodRequestLines" message="tns:UpdateFoodRequestLines" />
       <output name="UpdateFoodRequestLines_Result" message="tns:UpdateFoodRequestLines_Result" />
@@ -13038,6 +13037,10 @@
       <input name="GetProfilePictureStudent" message="tns:GetProfilePictureStudent" />
       <output name="GetProfilePictureStudent_Result" message="tns:GetProfilePictureStudent_Result" />
     </operation>
+    <operation name="GetProfilePicture">
+      <input name="GetProfilePicture" message="tns:GetProfilePicture" />
+      <output name="GetProfilePicture_Result" message="tns:GetProfilePicture_Result" />
+    </operation>
     <operation name="GetStage">
       <input name="GetStage" message="tns:GetStage" />
       <output name="GetStage_Result" message="tns:GetStage_Result" />
@@ -13845,15 +13848,6 @@
   </portType>
   <binding name="WebPortal_Binding" type="tns:WebPortal_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-    <operation name="GetProfilePicture">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePicture" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetProfilePicture">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetProfilePicture_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="UpdateFoodRequestLines">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateFoodRequestLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="UpdateFoodRequestLines">
@@ -16857,6 +16851,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetProfilePictureStudent_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetProfilePicture">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePicture" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetProfilePicture">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetProfilePicture_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

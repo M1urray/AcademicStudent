@@ -38,8 +38,8 @@
                     <tr>
                         <th class="alignC" width="10%">Action</th>
                         @*<th>
-                            Stage
-                        </th>*@
+                                Stage
+                            </th>*@
                         <th>
                             Semester
                         </th>
@@ -77,8 +77,8 @@
                                             <a href="#" class="btn btn-danger btn-sm" onclick="ViewUnits('@item.RegID','@item.Programme','@item.Stage','@item.Semester','@item.Register_for');">View Units</a>
                                         </td>
                                         @*<td>
-                                            @Html.DisplayFor(modelItem => item.Stage)
-                                        </td>*@
+                                                @Html.DisplayFor(modelItem => item.Stage)
+                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Semester)
                                         </td>
@@ -138,86 +138,61 @@
                     <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
                     <select class="form-select" id="RegType" name="RegType" onchange="ShowBasketUnits();">
                         <option value="">--Registration Type--</option>
-                        <option value="0">Normal</option>
+                        <option value="0">Norminal Roll</option>
                         <option value="2">Supplementary</option>
                         <option value="3">Retake</option>
                     </select>
                 </div>
             </div>
-            <hr />
-            <div align="center">
-                <input type="button" class="btn btn-danger" value="Get Units" onclick="GetUnits(`@Model.RegProg.CurrentProg`);" />
+            <div id="divGetUnits">
+                <hr />
+                <div align="center">
+                    <input type="button" class="btn btn-danger" id="btnSumit" value="Get Units" onclick="GetUnits(`@Model.RegProg.CurrentProg`);" />
+                </div>
             </div>
         </div>
         <hr />
-        <div id="divBasket">
-            <h4>Basket Unit List</h4>
+        @*<div id="divBasket">*@
+        @*<h4>Basket Unit List</h4>
             <div id="divBasketList"></div>
-            <hr />
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="button" class="btn btn-primary form-control" value="View Proforma Invoice" onclick="GetProformaInvoice();" />
-                    <hr />
-                </div>
-                <div class="col-md-4">
-                    <input type="button" class="btn btn-danger form-control" value="Complete Registration" onclick="RegisterSelectedUnits();" />
-                    <hr />
-                </div>
-                <div class="col-md-4">
-                    <input type="button" class="btn btn-primary form-control" value="Print Course Statement" onclick="PrintCourseStatement();" />
-                    <hr />
-                </div>
+            <hr />*@
+        <div class="row">
+            <div class="col-md-4">
+                <input type="button" class="btn btn-primary form-control" value="View Proforma Invoice" onclick="GetProformaInvoice();" />
+                <hr />
             </div>
+            @*<div class="col-md-4">
+                <input type="button" class="btn btn-danger form-control" value="Complete Registration" onclick="RegisterSelectedUnits();" />
+                <hr />
+            </div>
+            <div class="col-md-4">
+                <input type="button" class="btn btn-primary form-control" value="Print Course Statement" onclick="PrintCourseStatement();" />
+                <hr />
+            </div>*@
         </div>
+        @*</div>*@
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        if (`@Model.RegT` == "") {
-            $("#divBasket").show();
-            ShowBasketUnits();
-        }
-        else {
-            $("#RegType").val(`@Model.RegT`);
-            LoadBasketUnits(`@Model.RegT`);
-        }
-        $("#divStage").hide();
-        $("#divOption").hide();
+        $("#divGetUnits").hide();
+        
     });
     var ShowBasketUnits = function () {
         var RegT = $("#RegType").children("option:selected").val();
-        
+
         if (RegT == "") {
-            $("#divBasket").hide();
-            $("#divOption").hide();
+            $("#divGetUnits").hide();
         }
         else {
-            if (RegT == "1") {
-                $("#divStage").show();
+            if (RegT == "0") {
+                $("#btnSumit").val("Sign Norminal Roll");
             }
             else {
-                $("#divStage").hide();
+                $("#btnSumit").val("Get Units");
             }
-            $("#divBasket").show();
-            LoadBasketUnits(RegT);
+            $("#divGetUnits").show();
         }
     }
-    function LoadBasketUnits(RegT) {
-        //ShowProgress();
-        $.ajax({
-            datatype: "json",
-            type: "POST",
-            data: JSON.stringify({ RegT: RegT }),
-            contentType: "application/json; charset = utf-8",
-            url: '@Url.Action("GetBasketUnitRegistration", "Course")',
-            success: function (data) {
-                $("#divBasketList").html(data);
-                //HideProgress();
-            },
-            error: function () {
-                //HideProgress();
-                Swal.fire('Warning', 'There is some problem to process your request. Please try after some time', 'warning');
-            }
-        });
-    }
+   
 </script>
