@@ -7,6 +7,47 @@
     <div class="card-body">
         <div id="divCourseReg"></div>
     </div> <!-- end card-body -->
+    <div class="row" style="background-color: white;padding: 17px; border: 5px solid #7ca23b; border-radius: 10px">
+        <div class="col-md-12" style="padding: 5px">
+            <h4>COURSE REGISTRATION</h4>
+            <h6>Registration Semester : <span style="font-size:12px" class="badge badge-soft-pink"> @Session["CurrentSem"].ToString()</span></h6>
+            <hr />
+            <span style="font-size: 10pt; color: orangered">
+                Click on the button "<strong><em>Get Courses to Register</em></strong>".
+                Select your Courses and click button "<strong><em> Add Selected Courses to the Basket</em></strong>", Confirm them then Complete registration by clicking button"<strong><em> Complete Registration.</em></strong>" You can view Proforma Invoice by clicking button "<strong><em> View Proforma Invoice</em></strong>"
+            </span>
+            <hr />
+            <div style="background-color: #afaaaa;padding:10px">
+                <h4>Filters</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <span style="font-size: 16px; font-weight: bold">Registration Type:</span>
+                        <select class="form-select" id="RegType" name="RegType" onchange="ShowBasketUnits();">
+                            <option value="">--Registration Type--</option>
+                            <option value="0">Nominal Roll</option>
+                            @* <option value="2">Supplementary</option> *@
+                            @* <option value="3">Retake</option> *@
+                        </select>
+                    </div>
+                </div>
+                <div id="divGetUnits">
+                    <hr />
+                    <div align="center">
+                        <input type="button" class="btn btn-danger" id="btnSumit" value="Get Units" onclick="GetUnits();" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="button" class="btn btn-primary form-control" value="View Proforma Invoice" onclick="GetProformaInvoice();" />
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div> <!-- end card-->
 @*//////////////////////Modal////////////////////////////*@
 <div id="myModalUnits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -43,8 +84,26 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#divGetUnits").hide();
+
         LoadCourseRegistrationDetails("");
     });
+    var ShowBasketUnits = function () {
+        var RegT = $("#RegType").children("option:selected").val();
+
+        if (RegT == "") {
+            $("#divGetUnits").hide();
+        }
+        else {
+            if (RegT == "0") {
+                $("#btnSumit").val("Sign Norminal Roll");
+            }
+            else {
+                $("#btnSumit").val("Get Units");
+            }
+            $("#divGetUnits").show();
+        }
+    }
     function LoadCourseRegistrationDetails(RegT) {
         ShowProgress();
         $.ajax({
@@ -90,7 +149,7 @@
             }
         });
     }
-    var GetUnits = function (prog) {
+    var GetUnits = function () {
         var regType = $("#RegType").children("option:selected").val();
         //var unitType = $("#ddlStage").children("option:selected").val();
         //var option = $("#ddlProgOption").children("option:selected").val();
@@ -103,7 +162,7 @@
         //    Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
         //    return;
         //}
-        else {            
+        else {
             var x = document.getElementById("labelT");
             x.innerHTML = title;
             if (regType == "0") {
@@ -137,11 +196,11 @@
                     url: '@Url.Action("GetProgramUnits", "Course")',
                     datatype: "json",
                     type: "POST",
-                    data: JSON.stringify({ RegType: regType, Prog: prog, UnitType: unitType, Option: option }),
+                    data: JSON.stringify({ RegType: regType}),
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
                         HideProgress();
-                        LoadCourseRegistrationDetails(regType)
+                        LoadCourseRegistrationDetails(regType);
                         $("#modalBody").html(data);
                         $("#myModalUnits").modal("show");
                     },
