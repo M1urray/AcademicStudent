@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="New_Student_Portal_NAVWS_WebPortal" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://74.124.24.233:2047/dykaan/WS/Dykaan%20College/Codeunit/WebPortal</Value>
+      <Value Profile="(Default)">http://74.124.24.233:4547/dykaan/WS/Dykaan%20College/Codeunit/WebPortal</Value>
     </Setting>
   </Settings>
 </SettingsFile>

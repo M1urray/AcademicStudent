@@ -17304,7 +17304,7 @@
   </binding>
   <service name="WebPortal">
     <port name="WebPortal_Port" binding="tns:WebPortal_Binding">
-      <address location="http://74.124.24.233:2047/dykaan/WS/Dykaan%20College/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://74.124.24.233:4547/dykaan/WS/Dykaan%20College/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>
