@@ -41,21 +41,20 @@ namespace New_Student_Portal.Controllers
                         errormsg.Message = "You have not been registered in the current semester. Register for Units first";
                         return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
                     }
-                    else if (Convert.ToInt32(r[3]) < 1)
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You need to register for units before booking for hostel";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
-                    else if (r[5] != "University Accommodation")
-                    {
-                        Error errormsg = new Error();
-                        errormsg.Message = "You did not choose University Accommondation !!";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
-                    }
+                    //else if (Convert.ToInt32(r[3]) < 1)
+                    //{
+                    //    Error errormsg = new Error();
+                    //    errormsg.Message = "You need to register for units before booking for hostel";
+                    //    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                    //}
+                    //else if (r[5] != "University Accommodation")
+                    //{
+                    //    Error errormsg = new Error();
+                    //    errormsg.Message = "You did not choose University Accommondation !!";
+                    //    return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                    //}
                     else
                     {
-
                         bool AllowBooking = CommonClass.AllowOnlyY1S1(RegNo);
                         if (AllowBooking)
                         {

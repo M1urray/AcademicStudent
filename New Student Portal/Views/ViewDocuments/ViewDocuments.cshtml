@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "View Documents";
+    //ViewBag.Title = "View Documents";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <div class="card">
@@ -23,7 +23,7 @@
                 <select class="form-select" id="ddlExamT" name="ddlExamT">
                     <option value="">--Select Exam Card--</option>
                     <option value="0">Normal Exam Card</option>
-                    <option value="1">Supplimentary Exam Card</option>                  
+                    <option value="1">Supplimentary Exam Card</option>
                 </select>
             </div>
             <div class="col-md-6">
@@ -87,9 +87,15 @@
             $("#divProg").hide();
             $("#divReport").show();
             $("#divExamCard").hide();
-
             GetSemesterInvoice();
         }
+        if (DocType == "PROFORMA") {
+            $("#divProg").hide();
+            $("#divReport").show();
+            $("#divExamCard").hide();
+            GetProformaInvoice();
+        }
+
     }
     var GetSemesterInvoice = function () {
         ShowProgress();
@@ -115,53 +121,47 @@
         });
     }
     var PrintProvissionalResults = function () {
-        var Prog = $("#ddlProgramme").children("option:selected").val();
-        if (Prog == "") {
-            Swal.fire('Warning', "Select programme", 'warning');
-            return;
-        }
-        else {
-            ShowProgress();
-            $.ajax({
-                url: '/ViewDocuments/ProvisionalResults',
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify({ Prog: Prog }),
-                success: function (data) {
-                    if (data.success == true) {
-                        $('iframe').attr('src', data.message + "#toolbar=0");
-                        $("#divReport").show();
-                        HideProgress();
-                    }
-                    else {
-                        Swal.fire('Warning', data.message, 'warning');
-                        HideProgress();
-                    }
-                },
-                error: function (err) {
-                    HideProgress();
-                    Swal.fire('Warning', err, 'warning');
-                }
-            });
-        }
-    }
-    var GetStudentAudit = function () {
         ShowProgress();
         $.ajax({
-            url: '/ViewDocuments/GenerateStudentAudit',
+            url: '/ViewDocuments/ProvisionalResults',
             type: "POST",
-            async: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message);
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
+                    $("#divReport").show();
                     HideProgress();
                 }
                 else {
                     Swal.fire('Warning', data.message, 'warning');
                     HideProgress();
                 }
-
+            },
+            error: function (err) {
+                HideProgress();
+                Swal.fire('Warning', err, 'warning');
+            }
+        });
+    }
+    var GetStudentAudit = function () {
+        ShowProgress();
+        $.ajax({
+            url: '/ViewDocuments/GenerateStudentAudit',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ Prog: "" }),
+            success: function (data) {
+                if (data.success == true) {
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
+                    $("#divReport").show();
+                    HideProgress();
+                }
+                else {
+                    Swal.fire('Warning', data.message, 'warning');
+                    HideProgress();
+                }
             },
             error: function (err) {
                 HideProgress();
@@ -204,4 +204,27 @@
             });
         }
     }
+    var GetProformaInvoice = function () {
+    ShowProgress();
+    $.ajax({
+        url: '@Url.Action("ProformaInvoice", "ViewDocuments")',
+        type: "POST",
+        success: function (data) {
+            if (data.success == true) {
+                $('iframe').attr('src', "data:application/pdf;base64," + data.message);
+                $("#divReport").show();
+
+                HideProgress();
+            }
+            else {
+                Swal.fire('Warning', data.message, 'warning');
+                HideProgress();
+            }
+        },
+        error: function (err) {
+            HideProgress();
+            Swal.fire('Warning', err, 'warning');
+        }
+    });
+}
 </script>

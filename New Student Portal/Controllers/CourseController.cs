@@ -8,7 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using New_Student_Portal.CustomSecurity;
 using System.Web.UI.WebControls;
@@ -1199,7 +1198,7 @@ namespace New_Student_Portal.Controllers
                     string sem = Session["CurrentSem"].ToString();
                     string Campus = CommonClass.GetStudentCampus(RegNo);
 
-                    string pageReg = "StudentUnits?$select=Unit,Unit_Description,Unit_Class_Code,Campus&$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
+                    string pageReg = "StudentUnits?$select=Unit,Unit_Description&$filter=Student_No eq '" + RegNo + "' and Semester eq '" + sem + "'&$format=json";
 
                     HttpWebResponse httpResponse = Credentials.GetOdataData(pageReg);
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -1212,8 +1211,7 @@ namespace New_Student_Portal.Controllers
                         {
                             foreach (JObject config in details["value"])
                             {
-                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Unit_Class eq '" + (string)config["Unit_Class_Code"] + "' and Semester eq '" + sem + "' and Campus_Code eq '" + (string)config["Campus"] + "'&$format=json";
-                                //string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "' and Campus_Code eq '" + Campus + "'&$format=json";
+                                string pageTimetable = "ManualTimeTable?$filter=Unit eq '" + (string)config["Unit"] + "'and Semester eq '" + sem + "'&$format=json";
 
                                 HttpWebResponse httpResponseTimeTable = Credentials.GetOdataData(pageTimetable);
                                 using (var streamReaderTimeTable = new StreamReader(httpResponseTimeTable.GetResponseStream()))
@@ -1231,7 +1229,6 @@ namespace New_Student_Portal.Controllers
                                                 TimeTableView tmTable = new TimeTableView();
                                                 tmTable.Unit = (string)config1["Unit"];
                                                 tmTable.Period = (string)config1["Period"]; 
-                                                
                                                 tmTable.Semester = (string)config1["Semester"];
                                                 tmTable.Day_of_Week = (string)config1["DayofWeek"];
                                                 tmTable.Lecture_Room = (string)config1["Lecture_Room"];
@@ -1247,58 +1244,10 @@ namespace New_Student_Portal.Controllers
                             }
                         }
                     }
-                    string page = "StudentUnitsAudit?$select=Unit,Description,Progress_Status&$filter=StudentNo eq '" + RegNo + "' and Progress_Status eq 'Future'&$format=json";
-
-                    HttpWebResponse httpResponseResC = Credentials.GetOdataData(page);
-                    using (var streamReader = new StreamReader(httpResponseResC.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-
-                        var details = JObject.Parse(result);
-
-                        if (details["value"].Count() > 0)
-                        {
-                            foreach (JObject config in details["value"])
-                            {
-                                string pageTimetable = "Timetable?$filter=Unit eq '" + (string)config["Unit"] + "' and Semester eq '" + sem + "'&$format=json";
-
-                                HttpWebResponse httpResponseTimeTable = Credentials.GetOdataData(pageTimetable);
-                                using (var streamReaderTimeTable = new StreamReader(httpResponseTimeTable.GetResponseStream()))
-                                {
-                                    var resultTimeTable = streamReaderTimeTable.ReadToEnd();
-
-                                    var detailsTimeTable = JObject.Parse(resultTimeTable);
-
-                                    if (detailsTimeTable["value"].Count() > 0)
-                                    {
-                                        foreach (JObject config1 in detailsTimeTable["value"])
-                                        {
-                                            if (((string)config1["Campus_Code"] == Campus) || ((bool)config1["Multi_Campus"] == true))
-                                            {
-                                                TimeTableView tmTable = new TimeTableView();
-                                                tmTable.Unit = (string)config1["Unit"];
-                                                tmTable.Period = (string)config1["Period"];
-                                                tmTable.Semester = (string)config1["Semester"];
-                                                tmTable.Day_of_Week = (string)config1["DayofWeek"];
-                                                tmTable.Lecture_Room = (string)config1["Lecture_Room"];
-                                                tmTable.Lecturer = (string)config1["Lecturer_Name"];
-                                                tmTable.Campus = (string)config1["Campus_Code"];
-                                                tmTable.Campus = (string)config1["Campus_Code"];
-                                                tmTable.Section = (string)config1["Unit_Class"];
-                                                tmTable.Registered = "Future";
-                                                timeTableF.Add(tmTable);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
 
                     TimeTableSummeryView newSummery = new TimeTableSummeryView
                     {
-                        RegisteredUnitsTimeT = timeTableR,
-                        FutureUnitsTimeT = timeTableF
+                        RegisteredUnitsTimeT = timeTableR
                     };
                     return View(newSummery);
                 }
@@ -2689,10 +2638,8 @@ namespace New_Student_Portal.Controllers
                 {
                     return RedirectToAction("Login", "Login");
                 }
-                else
-                {
-                    return View();
-                }
+                return View();
+
             }
             catch (Exception ex)
             {
@@ -2789,7 +2736,7 @@ namespace New_Student_Portal.Controllers
                                     {
                                         ProgCode = (string)config["Current_Program"];
                                     }
-                                    if (ProgCode == "")
+                                    if (ProgCode == "" || ProgCode == null)
                                     {
                                         ProgCode = CommonClass.GetStudentRegisteredProgramme(RegNo);
                                     }
@@ -2807,7 +2754,7 @@ namespace New_Student_Portal.Controllers
                     {
                         Error errormsg = new Error();
                         errormsg.Message = "Clearance request not active at the moment";
-                        return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
+                        return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
                     }
                 }
             }
@@ -2815,7 +2762,7 @@ namespace New_Student_Portal.Controllers
             {
                 Error errormsg = new Error();
                 errormsg.Message = ex.Message;
-                return PartialView("~/Views/Shared/Partial Views/ErroMessangeView.cshtml", errormsg);
+                return View("~/Views/Shared/ErrorMessange.cshtml", errormsg);
             }
         }
         [AcceptVerbs(HttpVerbs.Post)]

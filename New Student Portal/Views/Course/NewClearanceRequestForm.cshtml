@@ -1,15 +1,33 @@
-﻿<div id="divForm">
+﻿<style>
+    .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #4CAF50; /* Green border color */
+        border-radius: 10px; /* Rounded corners */
+        background: #159ed5; /* Gradient background */
+        color: white; /* White text color */
+        font-family: Arial, sans-serif; /* Optional: Choose a font */
+        font-size: 14px; /* Optional: Adjust font size */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Increased margin for better spacing */
+    }
+</style>
+
+<div id="divForm">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="RegNo" class="lblClass">Registration No</label>
-                <label class="badge badge-info">@Model.No</label>
+                <span class="badge">@Model.No</span> <!-- Changed from label to span -->
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="fullName" class="lblClass">Full Name</label>
-                <label class="badge badge-info">@Model.Name</label>
+                <span class="badge">@Model.Name</span> <!-- Changed from label to span -->
             </div>
         </div>
     </div>
@@ -17,13 +35,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="IDNo" class="lblClass">National ID</label>
-                <label class="badge badge-info">@Model.ID_No</label>
+                <span class="badge">@Model.ID_No</span> <!-- Changed from label to span -->
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="IDaddress" class="lblClass">Address</label>
-                <label class="badge badge-info">@Model.Address</label>
+                <span class="badge">@Model.Address</span> <!-- Changed from label to span -->
             </div>
         </div>
     </div>
@@ -31,13 +49,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="txtTel" class="lblClass">Telephone</label>
-                <label class="badge badge-info">@Model.Phone_No</label>
+                <span class="badge">@Model.Phone_No</span> <!-- Changed from label to span -->
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="txtEmail" class="lblClass">Email</label>
-                <label class="badge badge-info">@Model.E_Mail</label>
+                <span class="badge">@Model.E_Mail</span> <!-- Changed from label to span -->
             </div>
         </div>
     </div>
@@ -45,18 +63,19 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="txtProg" class="lblClass">Programme</label>
-                <label class="badge badge-info">@Model.Prog (@Model.ProgName)</label>
+                <span class="badge">@Model.Prog (@Model.ProgName)</span> <!-- Changed from label to span -->
             </div>
         </div>
     </div>
     <hr />
     <div align="center">
-        <input type="button" id="btnSaving" class="btn btn-danger" value="Make Request" onclick="SubmitClearanceRequest(`@Model.No`,`@Model.Prog`);" />
+        <button type="button" id="btnSaving" class="btn btn-danger" onclick="SubmitClearanceRequest(`@Model.No`,`@Model.Prog`);">Make Request</button> <!-- Changed from input type="button" to button -->
     </div>
     <hr />
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#lblTitle").text("New Clearance Form");
-    });    
+    });
 </script>

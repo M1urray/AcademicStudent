@@ -85,53 +85,6 @@
                         }
                     }
                 </tbody>
-                <tbody>
-                    @{
-                        if (Model != null)
-                        {
-                            if (Model.FutureUnitsTimeT.Count() > 0)
-                            {
-                                <tr style="background-color:black;color:white">
-                                    <td colspan="7">Courses in Timetable</td>
-                                </tr>
-                                foreach (var item in Model.FutureUnitsTimeT)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.Unit
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Section)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Day_of_Week)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Period)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Campus)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Lecture_Room)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Lecturer)
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td colspan="7" style="color:red">
-                                        No Records Found
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    }
-                </tbody>
             </table>
         </div>
     </div>

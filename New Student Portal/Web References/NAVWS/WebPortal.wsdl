@@ -2,6 +2,25 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WebPortal" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="UpdateEmployeeInformation">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="empNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="personalEmailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companyEmailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="iDNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="doB" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="postalAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="postCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateEmployeeInformation_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="UpdateFoodRequestLines">
         <complexType>
           <sequence>
@@ -682,6 +701,21 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SMSStffSendResetPassord">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="newPassword" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SMSStffSendResetPassord_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -2025,23 +2059,22 @@
           <sequence />
         </complexType>
       </element>
-      <element name="UpdateEmployeeInformation">
+      <element name="InsertTransferHeader">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="empNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="personalEmailAddress" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="companyEmailAddress" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="iDNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="doB" type="date" />
-            <element minOccurs="1" maxOccurs="1" name="postalAddress" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="postCode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="from" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="transferTo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="department" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="revenuecode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="employeeno" type="string" />
           </sequence>
         </complexType>
       </element>
-      <element name="UpdateEmployeeInformation_Result">
+      <element name="InsertTransferHeader_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="InsertTransferLine">
@@ -3236,21 +3269,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="SMSStffSendResetPassord">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="newPassword" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="SMSStffSendResetPassord_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="ImprestRequisitionApprovalRequest">
         <complexType>
           <sequence>
@@ -3723,6 +3741,24 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
           </sequence>
+        </complexType>
+      </element>
+      <element name="InsertEmployeeKPIs">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="kPI" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="measure" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="target" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="initiative" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="timeLines" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="InsertEmployeeKPIs_Result">
+        <complexType>
+          <sequence />
         </complexType>
       </element>
       <element name="InsertEnquiry">
@@ -4811,24 +4847,6 @@
           <sequence />
         </complexType>
       </element>
-      <element name="InsertTransferHeader">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="from" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="transferTo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="department" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="revenuecode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="employeeno" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="InsertTransferHeader_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="GeneratePrescriptionPrintout">
         <complexType>
           <sequence>
@@ -4879,13 +4897,14 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="receipt_No" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GenerateReceipt_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateReferralPrintout">
@@ -4988,13 +5007,14 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
             <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentAudit_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentCharges">
@@ -5022,6 +5042,20 @@
       <element name="GenerateStudentExamCard_Result">
         <complexType>
           <sequence />
+        </complexType>
+      </element>
+      <element name="GenerateStudentFeeStatement">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GenerateStudentFeeStatement_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentProformaInvoice">
@@ -5090,7 +5124,9 @@
       </element>
       <element name="GenerateStudentReportCard_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="GenerateStudentResultSlip">
@@ -5156,19 +5192,6 @@
         </complexType>
       </element>
       <element name="GenerateStudentStatementTest_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="GenerateStudentStatement">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="student_No" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GenerateStudentStatement_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -8484,6 +8507,12 @@
       </element>
     </schema>
   </types>
+  <message name="UpdateEmployeeInformation">
+    <part name="parameters" element="tns:UpdateEmployeeInformation" />
+  </message>
+  <message name="UpdateEmployeeInformation_Result">
+    <part name="parameters" element="tns:UpdateEmployeeInformation_Result" />
+  </message>
   <message name="UpdateFoodRequestLines">
     <part name="parameters" element="tns:UpdateFoodRequestLines" />
   </message>
@@ -8741,6 +8770,12 @@
   </message>
   <message name="updateDashboardProfile_Result">
     <part name="parameters" element="tns:updateDashboardProfile_Result" />
+  </message>
+  <message name="SMSStffSendResetPassord">
+    <part name="parameters" element="tns:SMSStffSendResetPassord" />
+  </message>
+  <message name="SMSStffSendResetPassord_Result">
+    <part name="parameters" element="tns:SMSStffSendResetPassord_Result" />
   </message>
   <message name="SaveELearningEvaluation">
     <part name="parameters" element="tns:SaveELearningEvaluation" />
@@ -9240,11 +9275,11 @@
   <message name="UpdateDoctorNotes_Result">
     <part name="parameters" element="tns:UpdateDoctorNotes_Result" />
   </message>
-  <message name="UpdateEmployeeInformation">
-    <part name="parameters" element="tns:UpdateEmployeeInformation" />
+  <message name="InsertTransferHeader">
+    <part name="parameters" element="tns:InsertTransferHeader" />
   </message>
-  <message name="UpdateEmployeeInformation_Result">
-    <part name="parameters" element="tns:UpdateEmployeeInformation_Result" />
+  <message name="InsertTransferHeader_Result">
+    <part name="parameters" element="tns:InsertTransferHeader_Result" />
   </message>
   <message name="InsertTransferLine">
     <part name="parameters" element="tns:InsertTransferLine" />
@@ -9726,12 +9761,6 @@
   <message name="SMSSendResetPassord_Result">
     <part name="parameters" element="tns:SMSSendResetPassord_Result" />
   </message>
-  <message name="SMSStffSendResetPassord">
-    <part name="parameters" element="tns:SMSStffSendResetPassord" />
-  </message>
-  <message name="SMSStffSendResetPassord_Result">
-    <part name="parameters" element="tns:SMSStffSendResetPassord_Result" />
-  </message>
   <message name="ImprestRequisitionApprovalRequest">
     <part name="parameters" element="tns:ImprestRequisitionApprovalRequest" />
   </message>
@@ -9887,6 +9916,12 @@
   </message>
   <message name="InsertEmpTimesheet_Result">
     <part name="parameters" element="tns:InsertEmpTimesheet_Result" />
+  </message>
+  <message name="InsertEmployeeKPIs">
+    <part name="parameters" element="tns:InsertEmployeeKPIs" />
+  </message>
+  <message name="InsertEmployeeKPIs_Result">
+    <part name="parameters" element="tns:InsertEmployeeKPIs_Result" />
   </message>
   <message name="InsertEnquiry">
     <part name="parameters" element="tns:InsertEnquiry" />
@@ -10236,12 +10271,6 @@
   <message name="InsertTimetableProjections_Result">
     <part name="parameters" element="tns:InsertTimetableProjections_Result" />
   </message>
-  <message name="InsertTransferHeader">
-    <part name="parameters" element="tns:InsertTransferHeader" />
-  </message>
-  <message name="InsertTransferHeader_Result">
-    <part name="parameters" element="tns:InsertTransferHeader_Result" />
-  </message>
   <message name="GeneratePrescriptionPrintout">
     <part name="parameters" element="tns:GeneratePrescriptionPrintout" />
   </message>
@@ -10320,6 +10349,12 @@
   <message name="GenerateStudentExamCard_Result">
     <part name="parameters" element="tns:GenerateStudentExamCard_Result" />
   </message>
+  <message name="GenerateStudentFeeStatement">
+    <part name="parameters" element="tns:GenerateStudentFeeStatement" />
+  </message>
+  <message name="GenerateStudentFeeStatement_Result">
+    <part name="parameters" element="tns:GenerateStudentFeeStatement_Result" />
+  </message>
   <message name="GenerateStudentProformaInvoice">
     <part name="parameters" element="tns:GenerateStudentProformaInvoice" />
   </message>
@@ -10379,12 +10414,6 @@
   </message>
   <message name="GenerateStudentStatementTest_Result">
     <part name="parameters" element="tns:GenerateStudentStatementTest_Result" />
-  </message>
-  <message name="GenerateStudentStatement">
-    <part name="parameters" element="tns:GenerateStudentStatement" />
-  </message>
-  <message name="GenerateStudentStatement_Result">
-    <part name="parameters" element="tns:GenerateStudentStatement_Result" />
   </message>
   <message name="GenerateStudentThesis">
     <part name="parameters" element="tns:GenerateStudentThesis" />
@@ -11701,6 +11730,10 @@
     <part name="parameters" element="tns:DeleteFacultyStaffAppraisal_Result" />
   </message>
   <portType name="WebPortal_Port">
+    <operation name="UpdateEmployeeInformation">
+      <input name="UpdateEmployeeInformation" message="tns:UpdateEmployeeInformation" />
+      <output name="UpdateEmployeeInformation_Result" message="tns:UpdateEmployeeInformation_Result" />
+    </operation>
     <operation name="UpdateFoodRequestLines">
       <input name="UpdateFoodRequestLines" message="tns:UpdateFoodRequestLines" />
       <output name="UpdateFoodRequestLines_Result" message="tns:UpdateFoodRequestLines_Result" />
@@ -11872,6 +11905,10 @@
     <operation name="updateDashboardProfile">
       <input name="updateDashboardProfile" message="tns:updateDashboardProfile" />
       <output name="updateDashboardProfile_Result" message="tns:updateDashboardProfile_Result" />
+    </operation>
+    <operation name="SMSStffSendResetPassord">
+      <input name="SMSStffSendResetPassord" message="tns:SMSStffSendResetPassord" />
+      <output name="SMSStffSendResetPassord_Result" message="tns:SMSStffSendResetPassord_Result" />
     </operation>
     <operation name="SaveELearningEvaluation">
       <input name="SaveELearningEvaluation" message="tns:SaveELearningEvaluation" />
@@ -12205,9 +12242,9 @@
       <input name="UpdateDoctorNotes" message="tns:UpdateDoctorNotes" />
       <output name="UpdateDoctorNotes_Result" message="tns:UpdateDoctorNotes_Result" />
     </operation>
-    <operation name="UpdateEmployeeInformation">
-      <input name="UpdateEmployeeInformation" message="tns:UpdateEmployeeInformation" />
-      <output name="UpdateEmployeeInformation_Result" message="tns:UpdateEmployeeInformation_Result" />
+    <operation name="InsertTransferHeader">
+      <input name="InsertTransferHeader" message="tns:InsertTransferHeader" />
+      <output name="InsertTransferHeader_Result" message="tns:InsertTransferHeader_Result" />
     </operation>
     <operation name="InsertTransferLine">
       <input name="InsertTransferLine" message="tns:InsertTransferLine" />
@@ -12529,10 +12566,6 @@
       <input name="SMSSendResetPassord" message="tns:SMSSendResetPassord" />
       <output name="SMSSendResetPassord_Result" message="tns:SMSSendResetPassord_Result" />
     </operation>
-    <operation name="SMSStffSendResetPassord">
-      <input name="SMSStffSendResetPassord" message="tns:SMSStffSendResetPassord" />
-      <output name="SMSStffSendResetPassord_Result" message="tns:SMSStffSendResetPassord_Result" />
-    </operation>
     <operation name="ImprestRequisitionApprovalRequest">
       <input name="ImprestRequisitionApprovalRequest" message="tns:ImprestRequisitionApprovalRequest" />
       <output name="ImprestRequisitionApprovalRequest_Result" message="tns:ImprestRequisitionApprovalRequest_Result" />
@@ -12636,6 +12669,10 @@
     <operation name="InsertEmpTimesheet">
       <input name="InsertEmpTimesheet" message="tns:InsertEmpTimesheet" />
       <output name="InsertEmpTimesheet_Result" message="tns:InsertEmpTimesheet_Result" />
+    </operation>
+    <operation name="InsertEmployeeKPIs">
+      <input name="InsertEmployeeKPIs" message="tns:InsertEmployeeKPIs" />
+      <output name="InsertEmployeeKPIs_Result" message="tns:InsertEmployeeKPIs_Result" />
     </operation>
     <operation name="InsertEnquiry">
       <input name="InsertEnquiry" message="tns:InsertEnquiry" />
@@ -12869,10 +12906,6 @@
       <input name="InsertTimetableProjections" message="tns:InsertTimetableProjections" />
       <output name="InsertTimetableProjections_Result" message="tns:InsertTimetableProjections_Result" />
     </operation>
-    <operation name="InsertTransferHeader">
-      <input name="InsertTransferHeader" message="tns:InsertTransferHeader" />
-      <output name="InsertTransferHeader_Result" message="tns:InsertTransferHeader_Result" />
-    </operation>
     <operation name="GeneratePrescriptionPrintout">
       <input name="GeneratePrescriptionPrintout" message="tns:GeneratePrescriptionPrintout" />
       <output name="GeneratePrescriptionPrintout_Result" message="tns:GeneratePrescriptionPrintout_Result" />
@@ -12925,6 +12958,10 @@
       <input name="GenerateStudentExamCard" message="tns:GenerateStudentExamCard" />
       <output name="GenerateStudentExamCard_Result" message="tns:GenerateStudentExamCard_Result" />
     </operation>
+    <operation name="GenerateStudentFeeStatement">
+      <input name="GenerateStudentFeeStatement" message="tns:GenerateStudentFeeStatement" />
+      <output name="GenerateStudentFeeStatement_Result" message="tns:GenerateStudentFeeStatement_Result" />
+    </operation>
     <operation name="GenerateStudentProformaInvoice">
       <input name="GenerateStudentProformaInvoice" message="tns:GenerateStudentProformaInvoice" />
       <output name="GenerateStudentProformaInvoice_Result" message="tns:GenerateStudentProformaInvoice_Result" />
@@ -12964,10 +13001,6 @@
     <operation name="GenerateStudentStatementTest">
       <input name="GenerateStudentStatementTest" message="tns:GenerateStudentStatementTest" />
       <output name="GenerateStudentStatementTest_Result" message="tns:GenerateStudentStatementTest_Result" />
-    </operation>
-    <operation name="GenerateStudentStatement">
-      <input name="GenerateStudentStatement" message="tns:GenerateStudentStatement" />
-      <output name="GenerateStudentStatement_Result" message="tns:GenerateStudentStatement_Result" />
     </operation>
     <operation name="GenerateStudentThesis">
       <input name="GenerateStudentThesis" message="tns:GenerateStudentThesis" />
@@ -13848,6 +13881,15 @@
   </portType>
   <binding name="WebPortal_Binding" type="tns:WebPortal_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="UpdateEmployeeInformation">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateEmployeeInformation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateEmployeeInformation">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateEmployeeInformation_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="UpdateFoodRequestLines">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateFoodRequestLines" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="UpdateFoodRequestLines">
@@ -14232,6 +14274,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="updateDashboardProfile_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SMSStffSendResetPassord">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SMSStffSendResetPassord">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SMSStffSendResetPassord_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -14982,12 +15033,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="UpdateEmployeeInformation">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateEmployeeInformation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="UpdateEmployeeInformation">
+    <operation name="InsertTransferHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertTransferHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="InsertTransferHeader">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="UpdateEmployeeInformation_Result">
+      <output name="InsertTransferHeader_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -15711,15 +15762,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="SMSStffSendResetPassord">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="SMSStffSendResetPassord">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="SMSStffSendResetPassord_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="ImprestRequisitionApprovalRequest">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:ImprestRequisitionApprovalRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="ImprestRequisitionApprovalRequest">
@@ -15951,6 +15993,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="InsertEmpTimesheet_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="InsertEmployeeKPIs">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEmployeeKPIs" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="InsertEmployeeKPIs">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="InsertEmployeeKPIs_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -16476,15 +16527,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="InsertTransferHeader">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertTransferHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="InsertTransferHeader">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="InsertTransferHeader_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="GeneratePrescriptionPrintout">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GeneratePrescriptionPrintout" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GeneratePrescriptionPrintout">
@@ -16602,6 +16644,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GenerateStudentFeeStatement">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentFeeStatement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GenerateStudentFeeStatement">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GenerateStudentFeeStatement_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GenerateStudentProformaInvoice">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentProformaInvoice" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GenerateStudentProformaInvoice">
@@ -16689,15 +16740,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GenerateStudentStatementTest_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="GenerateStudentStatement">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentStatement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GenerateStudentStatement">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GenerateStudentStatement_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

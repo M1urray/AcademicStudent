@@ -284,17 +284,17 @@
                                 </a>
                             </li>
                             @*<li>
-                                    <a href="#" onclick="ApplicationIsntuctionLink();">
-                                        <i class="ri-information-fill"></i>
-                                        <span>Application Instructions</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="ApplicationListLink();">
-                                        <i class="ri-input-cursor-move"></i>
-                                        <span>Application List</span>
-                                    </a>
-                                </li>*@
+                <a href="#" onclick="ApplicationIsntuctionLink();">
+                    <i class="ri-information-fill"></i>
+                    <span>Application Instructions</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="ApplicationListLink();">
+                    <i class="ri-input-cursor-move"></i>
+                    <span>Application List</span>
+                </a>
+            </li>*@
 
                         }
                         else
@@ -329,11 +329,12 @@
                                     <span>Graduation Request</span>
                                 </a>
                             </li>
-                            <li> <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
-                                        <i class="ri-shopping-bag-fill"></i>
-                                        <span>Clearance Request</span> 
-                                     </a> 
-                                 </li>
+                            <li>
+                                <a href="#" onclick="ClearanceRequestLink();" class=" waves-effect">
+                                    <i class="ri-shopping-bag-fill"></i>
+                                    <span>Clearance Request</span>
+                                </a>
+                            </li>
                             if (fullAccess && AllowEval)
                             {
                                 <li>
@@ -344,11 +345,11 @@
                                 </li>
                             }
                             @*<li>
-                                <a href="#" onclick="EnquiryLink();">
-                                    <i class="ri-question-answer-fill"></i>
-                                    <span>General Complaint</span>
-                                </a>
-                            </li>*@
+                <a href="#" onclick="EnquiryLink();">
+                    <i class="ri-question-answer-fill"></i>
+                    <span>General Complaint</span>
+                </a>
+            </li>*@
                             <li>
                                 <a href="#" onclick="StudentAuditLink();">
                                     <i class="ri-pushpin-fill"></i>
@@ -368,20 +369,26 @@
                                     <span>Receipts</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="#" onclick="ProformaInvoice();">
+                                    <i class="ri-folder-received-fill"></i>
+                                    <span>Proforma Invoice</span>
+                                </a>
+                            </li>
                             if (fullAccess)
                             {
-                                <li>
-                                    <a href="#" onclick="SemProformaLink();">
-                                        <i class="ri-folder-received-fill"></i>
-                                        <span>Semester Proforma</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="PaymentPlanLink();">
-                                        <i class="ri-paypal-fill"></i>
-                                        <span>Payment Plan</span>
-                                    </a>
-                                </li>
+                                @*<li>
+                    <a href="#" onclick="SemProformaLink();">
+                        <i class="ri-folder-received-fill"></i>
+                        <span>Semester Proforma</span>
+                    </a>
+                </li>*@
+                                @*<li>
+                    <a href="#" onclick="PaymentPlanLink();">
+                        <i class="ri-paypal-fill"></i>
+                        <span>Payment Plan</span>
+                    </a>
+                </li>*@
                             }
                             if (fullAccess)
                             {
@@ -392,18 +399,18 @@
                                         <span>Hostel Booking</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" onclick="MealBookingLink();">
-                                        <i class="ri-menu-add-fill"></i>
-                                        <span>Meal Booking</span>
-                                    </a>
-                                </li>
                                 @*<li>
-                                        <a href="#" onclick="ClubsSocietiesLink();">
-                                            <i class="ri-football-fill"></i>
-                                            <span>Clubs & Society</span>
-                                        </a>
-                                    </li>*@
+                    <a href="#" onclick="MealBookingLink();">
+                        <i class="ri-menu-add-fill"></i>
+                        <span>Meal Booking</span>
+                    </a>
+                </li>*@
+                                @*<li>
+                    <a href="#" onclick="ClubsSocietiesLink();">
+                        <i class="ri-football-fill"></i>
+                        <span>Clubs & Society</span>
+                    </a>
+                </li>*@
                             }
                             if (fullAccess)
                             {
@@ -615,6 +622,10 @@
         var StudentAuditLink = function () {
             ShowProgress();
             window.location = "/ViewDocuments/ViewDocuments?DocT=STDAUDIT";
+        }
+        var ProformaInvoice = function () {
+            ShowProgress();
+            window.location = "/ViewDocuments/ViewDocuments?DocT=PROFORMA";
         }
         //end current student Links/////////////////
 

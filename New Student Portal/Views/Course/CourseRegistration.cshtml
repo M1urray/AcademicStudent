@@ -39,12 +39,12 @@
                 </div>
             </div>
             <hr />
-            <div class="row">
+            @*<div class="row">
                 <div class="col-md-4">
                     <input type="button" class="btn btn-primary form-control" value="View Proforma Invoice" onclick="GetProformaInvoice();" />
                     <hr />
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 
@@ -151,32 +151,26 @@
     }
     var GetUnits = function () {
         var regType = $("#RegType").children("option:selected").val();
-        //var unitType = $("#ddlStage").children("option:selected").val();
-        //var option = $("#ddlProgOption").children("option:selected").val();
         var title = "Units Registration";
         if (regType == "") {
             Swal.fire('Warning', 'Kindly select the Registration Type', 'warning');
             return;
         }
-        //else if ((unitType == "") && regType == "0") {
-        //    Swal.fire('Warning', 'Kindly select Unit Type', 'warning');
-        //    return;
-        //}
         else {
             var x = document.getElementById("labelT");
             x.innerHTML = title;
             if (regType == "0") {
-                ShowProgress();
+                //ShowProgress();
                 $.ajax({
                     url: '@Url.Action("SignNorminalRoll", "Course")',
                     datatype: "json",
                     type: "POST",
                     contentType: "application/json; charset = utf-8",
                     success: function (data) {
-                        HideProgress();
+                        //HideProgress();
                         if (data.success == true) {
-                            HideProgress();
-                            LoadCourseRegistrationDetails(regT);
+                            //HideProgress();
+                            LoadCourseRegistrationDetails(regType);
                             Swal.fire('Success', data.message, 'success');
                         }
                         else {

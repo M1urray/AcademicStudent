@@ -1,6 +1,5 @@
 ﻿@model New_Student_Portal.ViewModel.StudentDetailView
 @{
-    ViewBag.Title = "ClearanceRequest";
     Layout = "~/Views/Shared/SiteMaster.cshtml";
 }
 <style>
@@ -23,7 +22,7 @@
         GetNewClearanceRequest();
     });
     function GetNewClearanceRequest() {
-        ShowProgress();
+        //ShowProgress();
         $.ajax({
             async: true,
             type: "GET",
@@ -33,10 +32,10 @@
             url: "/Course/NewClearanceRequest",
             success: function (data) {
                 $("#divRequisition").html(data);
-                HideProgress();
+                //HideProgress();
             },
             error: function () {
-                HideProgress();
+                //HideProgress();
                 Swal.fire('Error', 'There is some problem to process your request. Please try after some time', 'error');
             }
         });

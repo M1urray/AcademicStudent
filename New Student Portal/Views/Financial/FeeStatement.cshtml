@@ -20,6 +20,7 @@
         @{
             decimal TotalDebit = 0, TotalCredit = 0, Balance = 0, RunningBal = 0;
         }
+        <hr />
         <div class="responsive-table-plugin">
             <div class="table-rep-plugin">
                 <div class="table-responsive" data-pattern="priority-columns">
@@ -139,7 +140,7 @@
             type: "POST",
             success: function (data) {
                 if (data.success == true) {
-                    $('iframe').attr('src', data.message);
+                    $('iframe').attr('src', "data:application/pdf;base64," + data.message);
                     $("#myModalUnits").modal("show");
                     HideProgress();
                 }

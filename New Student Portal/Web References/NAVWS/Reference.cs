@@ -29,6 +29,8 @@ namespace New_Student_Portal.NAVWS {
     [System.Web.Services.WebServiceBindingAttribute(Name="WebPortal_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal")]
     public partial class WebPortal : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback UpdateEmployeeInformationOperationCompleted;
+        
         private System.Threading.SendOrPostCallback UpdateFoodRequestLinesOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateICTService_mainRequestOperationCompleted;
@@ -114,6 +116,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback unbookHostelOperationCompleted;
         
         private System.Threading.SendOrPostCallback updateDashboardProfileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SMSStffSendResetPassordOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveELearningEvaluationOperationCompleted;
         
@@ -281,7 +285,7 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback UpdateDoctorNotesOperationCompleted;
         
-        private System.Threading.SendOrPostCallback UpdateEmployeeInformationOperationCompleted;
+        private System.Threading.SendOrPostCallback InsertTransferHeaderOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertTransferLineOperationCompleted;
         
@@ -443,8 +447,6 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback SMSSendResetPassordOperationCompleted;
         
-        private System.Threading.SendOrPostCallback SMSStffSendResetPassordOperationCompleted;
-        
         private System.Threading.SendOrPostCallback ImprestRequisitionApprovalRequestOperationCompleted;
         
         private System.Threading.SendOrPostCallback ImprestRequisitionCreateOperationCompleted;
@@ -496,6 +498,8 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback InsertEmpTimesheetLinesOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertEmpTimesheetOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InsertEmployeeKPIsOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertEnquiryOperationCompleted;
         
@@ -613,8 +617,6 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback InsertTimetableProjectionsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback InsertTransferHeaderOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GeneratePrescriptionPrintoutOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateProvisionalAdmissionLetterOperationCompleted;
@@ -641,6 +643,8 @@ namespace New_Student_Portal.NAVWS {
         
         private System.Threading.SendOrPostCallback GenerateStudentExamCardOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GenerateStudentFeeStatementOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GenerateStudentProformaInvoiceOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentProvisionalResultsOperationCompleted;
@@ -660,8 +664,6 @@ namespace New_Student_Portal.NAVWS {
         private System.Threading.SendOrPostCallback GenerateStudentSpecialExamCardOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentStatementTestOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GenerateStudentStatementOperationCompleted;
         
         private System.Threading.SendOrPostCallback GenerateStudentThesisOperationCompleted;
         
@@ -1140,6 +1142,9 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
+        public event UpdateEmployeeInformationCompletedEventHandler UpdateEmployeeInformationCompleted;
+        
+        /// <remarks/>
         public event UpdateFoodRequestLinesCompletedEventHandler UpdateFoodRequestLinesCompleted;
         
         /// <remarks/>
@@ -1267,6 +1272,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event updateDashboardProfileCompletedEventHandler updateDashboardProfileCompleted;
+        
+        /// <remarks/>
+        public event SMSStffSendResetPassordCompletedEventHandler SMSStffSendResetPassordCompleted;
         
         /// <remarks/>
         public event SaveELearningEvaluationCompletedEventHandler SaveELearningEvaluationCompleted;
@@ -1518,7 +1526,7 @@ namespace New_Student_Portal.NAVWS {
         public event UpdateDoctorNotesCompletedEventHandler UpdateDoctorNotesCompleted;
         
         /// <remarks/>
-        public event UpdateEmployeeInformationCompletedEventHandler UpdateEmployeeInformationCompleted;
+        public event InsertTransferHeaderCompletedEventHandler InsertTransferHeaderCompleted;
         
         /// <remarks/>
         public event InsertTransferLineCompletedEventHandler InsertTransferLineCompleted;
@@ -1761,9 +1769,6 @@ namespace New_Student_Portal.NAVWS {
         public event SMSSendResetPassordCompletedEventHandler SMSSendResetPassordCompleted;
         
         /// <remarks/>
-        public event SMSStffSendResetPassordCompletedEventHandler SMSStffSendResetPassordCompleted;
-        
-        /// <remarks/>
         public event ImprestRequisitionApprovalRequestCompletedEventHandler ImprestRequisitionApprovalRequestCompleted;
         
         /// <remarks/>
@@ -1840,6 +1845,9 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event InsertEmpTimesheetCompletedEventHandler InsertEmpTimesheetCompleted;
+        
+        /// <remarks/>
+        public event InsertEmployeeKPIsCompletedEventHandler InsertEmployeeKPIsCompleted;
         
         /// <remarks/>
         public event InsertEnquiryCompletedEventHandler InsertEnquiryCompleted;
@@ -2016,9 +2024,6 @@ namespace New_Student_Portal.NAVWS {
         public event InsertTimetableProjectionsCompletedEventHandler InsertTimetableProjectionsCompleted;
         
         /// <remarks/>
-        public event InsertTransferHeaderCompletedEventHandler InsertTransferHeaderCompleted;
-        
-        /// <remarks/>
         public event GeneratePrescriptionPrintoutCompletedEventHandler GeneratePrescriptionPrintoutCompleted;
         
         /// <remarks/>
@@ -2058,6 +2063,9 @@ namespace New_Student_Portal.NAVWS {
         public event GenerateStudentExamCardCompletedEventHandler GenerateStudentExamCardCompleted;
         
         /// <remarks/>
+        public event GenerateStudentFeeStatementCompletedEventHandler GenerateStudentFeeStatementCompleted;
+        
+        /// <remarks/>
         public event GenerateStudentProformaInvoiceCompletedEventHandler GenerateStudentProformaInvoiceCompleted;
         
         /// <remarks/>
@@ -2086,9 +2094,6 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event GenerateStudentStatementTestCompletedEventHandler GenerateStudentStatementTestCompleted;
-        
-        /// <remarks/>
-        public event GenerateStudentStatementCompletedEventHandler GenerateStudentStatementCompleted;
         
         /// <remarks/>
         public event GenerateStudentThesisCompletedEventHandler GenerateStudentThesisCompleted;
@@ -2746,6 +2751,48 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         public event DeleteFacultyStaffAppraisalCompletedEventHandler DeleteFacultyStaffAppraisalCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateEmployeeInformation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="UpdateEmployeeInformation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateEmployeeInformation(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime doB, string postalAddress, string postCode, string phoneNo) {
+            this.Invoke("UpdateEmployeeInformation", new object[] {
+                        empNo,
+                        personalEmailAddress,
+                        companyEmailAddress,
+                        iDNo,
+                        doB,
+                        postalAddress,
+                        postCode,
+                        phoneNo});
+        }
+        
+        /// <remarks/>
+        public void UpdateEmployeeInformationAsync(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, System.DateTime doB, string postalAddress, string postCode, string phoneNo) {
+            this.UpdateEmployeeInformationAsync(empNo, personalEmailAddress, companyEmailAddress, iDNo, doB, postalAddress, postCode, phoneNo, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateEmployeeInformationAsync(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, System.DateTime doB, string postalAddress, string postCode, string phoneNo, object userState) {
+            if ((this.UpdateEmployeeInformationOperationCompleted == null)) {
+                this.UpdateEmployeeInformationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateEmployeeInformationOperationCompleted);
+            }
+            this.InvokeAsync("UpdateEmployeeInformation", new object[] {
+                        empNo,
+                        personalEmailAddress,
+                        companyEmailAddress,
+                        iDNo,
+                        doB,
+                        postalAddress,
+                        postCode,
+                        phoneNo}, this.UpdateEmployeeInformationOperationCompleted, userState);
+        }
+        
+        private void OnUpdateEmployeeInformationOperationCompleted(object arg) {
+            if ((this.UpdateEmployeeInformationCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateEmployeeInformationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateFoodRequestLines", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="UpdateFoodRequestLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -4250,6 +4297,38 @@ namespace New_Student_Portal.NAVWS {
             if ((this.updateDashboardProfileCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.updateDashboardProfileCompleted(this, new updateDashboardProfileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSStffSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string SMSStffSendResetPassord(string staffNo, string newPassword) {
+            object[] results = this.Invoke("SMSStffSendResetPassord", new object[] {
+                        staffNo,
+                        newPassword});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword) {
+            this.SMSStffSendResetPassordAsync(staffNo, newPassword, null);
+        }
+        
+        /// <remarks/>
+        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword, object userState) {
+            if ((this.SMSStffSendResetPassordOperationCompleted == null)) {
+                this.SMSStffSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSStffSendResetPassordOperationCompleted);
+            }
+            this.InvokeAsync("SMSStffSendResetPassord", new object[] {
+                        staffNo,
+                        newPassword}, this.SMSStffSendResetPassordOperationCompleted, userState);
+        }
+        
+        private void OnSMSStffSendResetPassordOperationCompleted(object arg) {
+            if ((this.SMSStffSendResetPassordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SMSStffSendResetPassordCompleted(this, new SMSStffSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -7232,44 +7311,40 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:UpdateEmployeeInformation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="UpdateEmployeeInformation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateEmployeeInformation(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime doB, string postalAddress, string postCode, string phoneNo) {
-            this.Invoke("UpdateEmployeeInformation", new object[] {
-                        empNo,
-                        personalEmailAddress,
-                        companyEmailAddress,
-                        iDNo,
-                        doB,
-                        postalAddress,
-                        postCode,
-                        phoneNo});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertTransferHeader", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertTransferHeader_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string InsertTransferHeader(string from, string transferTo, string department, string revenuecode, string employeeno) {
+            object[] results = this.Invoke("InsertTransferHeader", new object[] {
+                        from,
+                        transferTo,
+                        department,
+                        revenuecode,
+                        employeeno});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateEmployeeInformationAsync(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, System.DateTime doB, string postalAddress, string postCode, string phoneNo) {
-            this.UpdateEmployeeInformationAsync(empNo, personalEmailAddress, companyEmailAddress, iDNo, doB, postalAddress, postCode, phoneNo, null);
+        public void InsertTransferHeaderAsync(string from, string transferTo, string department, string revenuecode, string employeeno) {
+            this.InsertTransferHeaderAsync(from, transferTo, department, revenuecode, employeeno, null);
         }
         
         /// <remarks/>
-        public void UpdateEmployeeInformationAsync(string empNo, string personalEmailAddress, string companyEmailAddress, string iDNo, System.DateTime doB, string postalAddress, string postCode, string phoneNo, object userState) {
-            if ((this.UpdateEmployeeInformationOperationCompleted == null)) {
-                this.UpdateEmployeeInformationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateEmployeeInformationOperationCompleted);
+        public void InsertTransferHeaderAsync(string from, string transferTo, string department, string revenuecode, string employeeno, object userState) {
+            if ((this.InsertTransferHeaderOperationCompleted == null)) {
+                this.InsertTransferHeaderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertTransferHeaderOperationCompleted);
             }
-            this.InvokeAsync("UpdateEmployeeInformation", new object[] {
-                        empNo,
-                        personalEmailAddress,
-                        companyEmailAddress,
-                        iDNo,
-                        doB,
-                        postalAddress,
-                        postCode,
-                        phoneNo}, this.UpdateEmployeeInformationOperationCompleted, userState);
+            this.InvokeAsync("InsertTransferHeader", new object[] {
+                        from,
+                        transferTo,
+                        department,
+                        revenuecode,
+                        employeeno}, this.InsertTransferHeaderOperationCompleted, userState);
         }
         
-        private void OnUpdateEmployeeInformationOperationCompleted(object arg) {
-            if ((this.UpdateEmployeeInformationCompleted != null)) {
+        private void OnInsertTransferHeaderOperationCompleted(object arg) {
+            if ((this.InsertTransferHeaderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateEmployeeInformationCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.InsertTransferHeaderCompleted(this, new InsertTransferHeaderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -10033,38 +10108,6 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:SMSStffSendResetPassord", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="SMSStffSendResetPassord_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SMSStffSendResetPassord(string staffNo, string newPassword) {
-            object[] results = this.Invoke("SMSStffSendResetPassord", new object[] {
-                        staffNo,
-                        newPassword});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword) {
-            this.SMSStffSendResetPassordAsync(staffNo, newPassword, null);
-        }
-        
-        /// <remarks/>
-        public void SMSStffSendResetPassordAsync(string staffNo, string newPassword, object userState) {
-            if ((this.SMSStffSendResetPassordOperationCompleted == null)) {
-                this.SMSStffSendResetPassordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSMSStffSendResetPassordOperationCompleted);
-            }
-            this.InvokeAsync("SMSStffSendResetPassord", new object[] {
-                        staffNo,
-                        newPassword}, this.SMSStffSendResetPassordOperationCompleted, userState);
-        }
-        
-        private void OnSMSStffSendResetPassordOperationCompleted(object arg) {
-            if ((this.SMSStffSendResetPassordCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SMSStffSendResetPassordCompleted(this, new SMSStffSendResetPassordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:ImprestRequisitionApprovalReque" +
             "st", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="ImprestRequisitionApprovalRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void ImprestRequisitionApprovalRequest(string reqNo) {
@@ -11156,6 +11199,46 @@ namespace New_Student_Portal.NAVWS {
             if ((this.InsertEmpTimesheetCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InsertEmpTimesheetCompleted(this, new InsertEmpTimesheetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertEmployeeKPIs", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertEmployeeKPIs_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void InsertEmployeeKPIs(string docNo, int entryNo, string kPI, string measure, string target, string initiative, string timeLines) {
+            this.Invoke("InsertEmployeeKPIs", new object[] {
+                        docNo,
+                        entryNo,
+                        kPI,
+                        measure,
+                        target,
+                        initiative,
+                        timeLines});
+        }
+        
+        /// <remarks/>
+        public void InsertEmployeeKPIsAsync(string docNo, int entryNo, string kPI, string measure, string target, string initiative, string timeLines) {
+            this.InsertEmployeeKPIsAsync(docNo, entryNo, kPI, measure, target, initiative, timeLines, null);
+        }
+        
+        /// <remarks/>
+        public void InsertEmployeeKPIsAsync(string docNo, int entryNo, string kPI, string measure, string target, string initiative, string timeLines, object userState) {
+            if ((this.InsertEmployeeKPIsOperationCompleted == null)) {
+                this.InsertEmployeeKPIsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertEmployeeKPIsOperationCompleted);
+            }
+            this.InvokeAsync("InsertEmployeeKPIs", new object[] {
+                        docNo,
+                        entryNo,
+                        kPI,
+                        measure,
+                        target,
+                        initiative,
+                        timeLines}, this.InsertEmployeeKPIsOperationCompleted, userState);
+        }
+        
+        private void OnInsertEmployeeKPIsOperationCompleted(object arg) {
+            if ((this.InsertEmployeeKPIsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertEmployeeKPIsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -13909,44 +13992,6 @@ namespace New_Student_Portal.NAVWS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertTransferHeader", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="InsertTransferHeader_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InsertTransferHeader(string from, string transferTo, string department, string revenuecode, string employeeno) {
-            object[] results = this.Invoke("InsertTransferHeader", new object[] {
-                        from,
-                        transferTo,
-                        department,
-                        revenuecode,
-                        employeeno});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InsertTransferHeaderAsync(string from, string transferTo, string department, string revenuecode, string employeeno) {
-            this.InsertTransferHeaderAsync(from, transferTo, department, revenuecode, employeeno, null);
-        }
-        
-        /// <remarks/>
-        public void InsertTransferHeaderAsync(string from, string transferTo, string department, string revenuecode, string employeeno, object userState) {
-            if ((this.InsertTransferHeaderOperationCompleted == null)) {
-                this.InsertTransferHeaderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertTransferHeaderOperationCompleted);
-            }
-            this.InvokeAsync("InsertTransferHeader", new object[] {
-                        from,
-                        transferTo,
-                        department,
-                        revenuecode,
-                        employeeno}, this.InsertTransferHeaderOperationCompleted, userState);
-        }
-        
-        private void OnInsertTransferHeaderOperationCompleted(object arg) {
-            if ((this.InsertTransferHeaderCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InsertTransferHeaderCompleted(this, new InsertTransferHeaderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GeneratePrescriptionPrintout", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GeneratePrescriptionPrintout_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string GeneratePrescriptionPrintout(string treatmentNo, string filenameFromApp) {
@@ -14047,31 +14092,31 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateReceipt", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateReceipt_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateReceipt(string receipt_No, string filenameFromApp) {
-            this.Invoke("GenerateReceipt", new object[] {
-                        receipt_No,
-                        filenameFromApp});
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateReceipt(string receipt_No) {
+            object[] results = this.Invoke("GenerateReceipt", new object[] {
+                        receipt_No});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GenerateReceiptAsync(string receipt_No, string filenameFromApp) {
-            this.GenerateReceiptAsync(receipt_No, filenameFromApp, null);
+        public void GenerateReceiptAsync(string receipt_No) {
+            this.GenerateReceiptAsync(receipt_No, null);
         }
         
         /// <remarks/>
-        public void GenerateReceiptAsync(string receipt_No, string filenameFromApp, object userState) {
+        public void GenerateReceiptAsync(string receipt_No, object userState) {
             if ((this.GenerateReceiptOperationCompleted == null)) {
                 this.GenerateReceiptOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateReceiptOperationCompleted);
             }
             this.InvokeAsync("GenerateReceipt", new object[] {
-                        receipt_No,
-                        filenameFromApp}, this.GenerateReceiptOperationCompleted, userState);
+                        receipt_No}, this.GenerateReceiptOperationCompleted, userState);
         }
         
         private void OnGenerateReceiptOperationCompleted(object arg) {
             if ((this.GenerateReceiptCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateReceiptCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateReceiptCompleted(this, new GenerateReceiptCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -14283,33 +14328,33 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentAudit", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentAudit_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateStudentAudit(string student_No, string prog, string filenameFromApp) {
-            this.Invoke("GenerateStudentAudit", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateStudentAudit(string student_No, string prog) {
+            object[] results = this.Invoke("GenerateStudentAudit", new object[] {
                         student_No,
-                        prog,
-                        filenameFromApp});
+                        prog});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GenerateStudentAuditAsync(string student_No, string prog, string filenameFromApp) {
-            this.GenerateStudentAuditAsync(student_No, prog, filenameFromApp, null);
+        public void GenerateStudentAuditAsync(string student_No, string prog) {
+            this.GenerateStudentAuditAsync(student_No, prog, null);
         }
         
         /// <remarks/>
-        public void GenerateStudentAuditAsync(string student_No, string prog, string filenameFromApp, object userState) {
+        public void GenerateStudentAuditAsync(string student_No, string prog, object userState) {
             if ((this.GenerateStudentAuditOperationCompleted == null)) {
                 this.GenerateStudentAuditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentAuditOperationCompleted);
             }
             this.InvokeAsync("GenerateStudentAudit", new object[] {
                         student_No,
-                        prog,
-                        filenameFromApp}, this.GenerateStudentAuditOperationCompleted, userState);
+                        prog}, this.GenerateStudentAuditOperationCompleted, userState);
         }
         
         private void OnGenerateStudentAuditOperationCompleted(object arg) {
             if ((this.GenerateStudentAuditCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateStudentAuditCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateStudentAuditCompleted(this, new GenerateStudentAuditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -14372,6 +14417,36 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateStudentExamCardCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateStudentExamCardCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentFeeStatement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentFeeStatement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateStudentFeeStatement(string student_No) {
+            object[] results = this.Invoke("GenerateStudentFeeStatement", new object[] {
+                        student_No});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentFeeStatementAsync(string student_No) {
+            this.GenerateStudentFeeStatementAsync(student_No, null);
+        }
+        
+        /// <remarks/>
+        public void GenerateStudentFeeStatementAsync(string student_No, object userState) {
+            if ((this.GenerateStudentFeeStatementOperationCompleted == null)) {
+                this.GenerateStudentFeeStatementOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentFeeStatementOperationCompleted);
+            }
+            this.InvokeAsync("GenerateStudentFeeStatement", new object[] {
+                        student_No}, this.GenerateStudentFeeStatementOperationCompleted, userState);
+        }
+        
+        private void OnGenerateStudentFeeStatementOperationCompleted(object arg) {
+            if ((this.GenerateStudentFeeStatementCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GenerateStudentFeeStatementCompleted(this, new GenerateStudentFeeStatementCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -14508,10 +14583,12 @@ namespace New_Student_Portal.NAVWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentReportCard", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentReportCard_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateStudentReportCard(string student_No, string filenameFromApp) {
-            this.Invoke("GenerateStudentReportCard", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GenerateStudentReportCard(string student_No, string filenameFromApp) {
+            object[] results = this.Invoke("GenerateStudentReportCard", new object[] {
                         student_No,
                         filenameFromApp});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -14532,7 +14609,7 @@ namespace New_Student_Portal.NAVWS {
         private void OnGenerateStudentReportCardOperationCompleted(object arg) {
             if ((this.GenerateStudentReportCardCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateStudentReportCardCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GenerateStudentReportCardCompleted(this, new GenerateStudentReportCardCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -14687,36 +14764,6 @@ namespace New_Student_Portal.NAVWS {
             if ((this.GenerateStudentStatementTestCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GenerateStudentStatementTestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/WebPortal:GenerateStudentStatement", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", ResponseElementName="GenerateStudentStatement_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GenerateStudentStatement(string student_No, string filenameFromApp) {
-            this.Invoke("GenerateStudentStatement", new object[] {
-                        student_No,
-                        filenameFromApp});
-        }
-        
-        /// <remarks/>
-        public void GenerateStudentStatementAsync(string student_No, string filenameFromApp) {
-            this.GenerateStudentStatementAsync(student_No, filenameFromApp, null);
-        }
-        
-        /// <remarks/>
-        public void GenerateStudentStatementAsync(string student_No, string filenameFromApp, object userState) {
-            if ((this.GenerateStudentStatementOperationCompleted == null)) {
-                this.GenerateStudentStatementOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGenerateStudentStatementOperationCompleted);
-            }
-            this.InvokeAsync("GenerateStudentStatement", new object[] {
-                        student_No,
-                        filenameFromApp}, this.GenerateStudentStatementOperationCompleted, userState);
-        }
-        
-        private void OnGenerateStudentStatementOperationCompleted(object arg) {
-            if ((this.GenerateStudentStatementCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GenerateStudentStatementCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -22342,6 +22389,10 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void UpdateEmployeeInformationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void UpdateFoodRequestLinesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -22882,6 +22933,32 @@ namespace New_Student_Portal.NAVWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void SMSStffSendResetPassordCompletedEventHandler(object sender, SMSStffSendResetPassordCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SMSStffSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SMSStffSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -23940,7 +24017,29 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void UpdateEmployeeInformationCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void InsertTransferHeaderCompletedEventHandler(object sender, InsertTransferHeaderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InsertTransferHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InsertTransferHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -24484,32 +24583,6 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void SMSStffSendResetPassordCompletedEventHandler(object sender, SMSStffSendResetPassordCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SMSStffSendResetPassordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SMSStffSendResetPassordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void ImprestRequisitionApprovalRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -24751,6 +24824,10 @@ namespace New_Student_Portal.NAVWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void InsertEmployeeKPIsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -25206,32 +25283,6 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void InsertTransferHeaderCompletedEventHandler(object sender, InsertTransferHeaderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InsertTransferHeaderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InsertTransferHeaderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void GeneratePrescriptionPrintoutCompletedEventHandler(object sender, GeneratePrescriptionPrintoutCompletedEventArgs e);
     
     /// <remarks/>
@@ -25310,7 +25361,29 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void GenerateReceiptCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GenerateReceiptCompletedEventHandler(object sender, GenerateReceiptCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateReceiptCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateReceiptCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -25426,7 +25499,29 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GenerateStudentAuditCompletedEventHandler(object sender, GenerateStudentAuditCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentAuditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentAuditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -25435,6 +25530,32 @@ namespace New_Student_Portal.NAVWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void GenerateStudentExamCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void GenerateStudentFeeStatementCompletedEventHandler(object sender, GenerateStudentFeeStatementCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentFeeStatementCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentFeeStatementCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -25454,7 +25575,29 @@ namespace New_Student_Portal.NAVWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GenerateStudentReportCardCompletedEventHandler(object sender, GenerateStudentReportCardCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GenerateStudentReportCardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GenerateStudentReportCardCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
@@ -25475,10 +25618,6 @@ namespace New_Student_Portal.NAVWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void GenerateStudentStatementTestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void GenerateStudentStatementCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
