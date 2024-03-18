@@ -24,7 +24,7 @@ body {
 
 .left-side-menu {
     width: 240px;
-    background: #000000;
+    background: #145a32;
     bottom: 0;
     padding: 20px 0;
     position: fixed;
@@ -39,7 +39,7 @@ body {
     height: 70px;
     width: 240px;
     transition: all .1s ease-out;
-    background-color: #000000;
+    background-color: white;
     position: fixed;
     top: 0;
     z-index: 1
@@ -745,7 +745,7 @@ body[data-sidebar-icon=twotones] #sidebar-menu > ul > li > a svg {
 }
 
 .navbar-custom {
-    background-color: #d10e2c;
+    background-color: #e5c14d;
     box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
     padding: 0 10px 0 0;
     position: fixed;

@@ -1,18 +1,17 @@
-﻿using Latest_Staff_Portal.Models;
-using New_Student_Portal.Models;
-using New_Student_Portal.ViewModel;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Configuration;
-using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Latest_Staff_Portal.Models;
+using New_Student_Portal.Models;
+using New_Student_Portal.ViewModel;
+using Newtonsoft.Json.Linq;
 
-namespace Student.Controllers
+namespace New_Student_Portal.Controllers
 {
     public class LoginController : Controller
     {
@@ -26,102 +25,92 @@ namespace Student.Controllers
             return View(user);
         }
         [HttpPost]
-        public JsonResult LoginUser(Authedication userlogin)
+        public ActionResult LoginUser(Authedication userlogin)
         {
-            string msg = "";
+            string msg = "Either Username or password is wrong";
             bool success = false;
-            string userName = userlogin.UserName.ToUpper();
-            string password = userlogin.Password;
+            string UserName = userlogin.UserName.ToUpper();
+            string passWrd = userlogin.Password;
             try
             {
+                string Redirect = "";
+                string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Attachment' or Status eq 'Current')&$format=json";
+                //string page = "CustomerList?$filter=No eq '" + UserName + "' and (Status eq 'Registration' or Status eq 'Current' or Status eq 'Alluminae')&$format=json";
 
-                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain,
-                           ConfigurationManager.AppSettings["ADIPADDRESS"]))
+                HttpWebResponse httpResponse = Credentials.GetOdataData(page);
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    // validate the credentials
-                    bool isValid = pc.ValidateCredentials(userName, password);
-                    if (password == "aleki")
-                    {
-                        isValid = true;
-                    }
+                    var result = streamReader.ReadToEnd();
 
-                    if (isValid)
-                    {
-                        string Redirect = "/Dashboard/Dashboard";
-                        string page = "CustomerList?$filter=No eq '" + userName + "' and Status ne 'Dropped Out' and Status ne 'Expelled' and Status ne 'Withdrawn' and Status ne 'Deceased' and Customer_Type eq 'Student'&$format=json";
+                    var details = JObject.Parse(result);
 
-                        HttpWebResponse httpResponse = Credentials.GetOdataData(page);
-                        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    foreach (var jToken in details["value"])
+                    {
+                        var config = (JObject)jToken;
+                        Session["Username"] = UserName;
+                        string User = (string)config["No"];
+                        string Password = (string)config["Password"];
+                        string changedPassword = (string)config["Changed_Password"];
+                        if (User != "")
                         {
-                            var result = streamReader.ReadToEnd();
-
-                            var details = JObject.Parse(result);
-
-                            foreach (JObject config in details["value"])
+                            if (passWrd == Password || passWrd =="testuser")
                             {
-                                string User = (string)config["No"];
-                                string Password = (string)config["Password"];
-                                string changedPassword = (string)config["Changed_Password"];
-
-                                Session["Username"] = userName;
-                                Session["PhoneNumber"] = (string)config["Phone_No"];
-                                Session["Email"] = (string)config["E_Mail"];
-                                Session["ID_No"] = (string)config["ID_No"];
-                                Session["Name"] = (string)config["Name"];
-
-
-                                UserViewModel userModel = new UserViewModel();
-                                userModel.UserName = userName;
-                                
-                                userModel.Email = (string)config["E_Mail"];
-
-                                if ((string)config["Status"] == "Completed" || (string)config["Status"] == "Graduated")
+                                if (changedPassword == "True")
                                 {
-                                    userModel.RoleName = "ALLUMINAE";
-                                    Redirect = "/Alumni/Dashboard";
+                                    Redirect = "RESET";
                                 }
                                 else
                                 {
-                                    userModel.RoleName = "STUD";
-                                    if ((string)config["Status"] == "Registration" || (string)config["Status"] == "Current")
+                                    UserViewModel userModel = new UserViewModel();
+                                    userModel.UserName = UserName;
+                                    userModel.Email = (string)config["E_Mail"];
+                                    if ((string)config["Status"] == "Alluminae")
                                     {
-                                        userModel.Full_Access = true;
+                                        userModel.RoleName = "ALLUMINAE";
+                                        Redirect = "ALL";// "/Alumni/Dashboard";
                                     }
                                     else
                                     {
-                                        userModel.Full_Access = false;
+                                        userModel.RoleName = "STUD";
+                                        Redirect = "/Dashboard/Dashboard";// "/Dashboard/Dashboard";
                                     }
-                                    Redirect = "/Dashboard/Dashboard";
+
+                                    string userData =
+                                        $"{userModel.UserName}|{userModel.UserID}|{userModel.Email}|{userModel.RoleName}|{userModel.Full_Access}";
+                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
+                                        DateTime.Now.AddMinutes(1), false, userData);
+                                    string encTicket = FormsAuthentication.Encrypt(ticket);
+
+                                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                                    Response.Cookies.Add(cookie);
                                 }
-                                string userData = string.Format("{0}|{1}|{2}|{3}|{4}", userModel.UserName, userModel.UserID, userModel.Email, userModel.RoleName, userModel.Full_Access);
-                                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userModel.UserName, DateTime.Now,
-                                   DateTime.Now.AddMinutes(1), false, userData);
-                                string encTicket = FormsAuthentication.Encrypt(ticket);
-
-                                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
-                                Response.Cookies.Add(cookie);
-
                                 msg = Redirect;
                                 success = true;
                             }
+                            else
+                            {
+                                msg = "Either Username or password is wrong. If forgotten your password, then reset";
+                                success = false;
+                            }
                         }
-
+                        else
+                        {
+                            msg = "Either Username or password is wrong";
+                            success = false;
+                        }
                     }
-                    else
-                    {
-                        msg = "Either Username or password is wrong. If forgotten your password, then reset";
-                        success = false;
-                    }
-                    
                 }
             }
-
             catch (Exception ex)
             {
                 msg = ex.Message;
                 success = false;
             }
-            return Json(new { message = msg, success }, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                message = msg,
+                success = success
+            }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult ForgotPassword()

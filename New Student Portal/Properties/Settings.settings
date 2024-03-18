@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="New_Student_Portal_NAVWS_WebPortal" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://maachah.negst.net:7047/AIU/WS/AIU%20LIVE/Codeunit/WebPortal</Value>
+      <Value Profile="(Default)">http://108.181.199.151:7201/PACU/WS/PACU%20UNIVERSITY/Codeunit/WebPortal</Value>
     </Setting>
   </Settings>
 </SettingsFile>

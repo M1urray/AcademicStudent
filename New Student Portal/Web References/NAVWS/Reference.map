@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://maachah.negst.net:7047/AIU/WS/AIU LIVE/Codeunit/WebPortal" filename="WebPortal.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://108.181.199.151:7201/PACU/WS/PACU UNIVERSITY/Codeunit/WebPortal" filename="WebPortal.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>
