@@ -2,14 +2,48 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WebPortal" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WebPortal" xmlns="http://www.w3.org/2001/XMLSchema">
-      <element name="GetProfilePictureStudent">
+      <element name="InsertClassListAttendance">
         <complexType>
           <sequence>
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="attendance" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="wkCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lecturer" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="campus" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="wKSection" type="int" />
           </sequence>
         </complexType>
       </element>
-      <element name="GetProfilePictureStudent_Result">
+      <element name="InsertClassListAttendance_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="PostAttendanceList">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lec" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostAttendanceList_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GetProfilePicture">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetProfilePicture_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -1316,19 +1350,6 @@
         </complexType>
       </element>
       <element name="OnlineClearance_Result">
-        <complexType>
-          <sequence />
-        </complexType>
-      </element>
-      <element name="PostAttendanceList">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lec" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="PostAttendanceList_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -3154,14 +3175,14 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetProfilePicture">
+      <element name="GetProfilePictureStudent">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="staffNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
           </sequence>
         </complexType>
       </element>
-      <element name="GetProfilePicture_Result">
+      <element name="GetProfilePictureStudent_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -4086,27 +4107,6 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
           </sequence>
-        </complexType>
-      </element>
-      <element name="InsertClassListAttendance">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="studentNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="attendance" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="prog" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="semester" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="wkCode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lecturer" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="campus" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="wKSection" type="int" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="InsertClassListAttendance_Result">
-        <complexType>
-          <sequence />
         </complexType>
       </element>
       <element name="InsertConceptReview">
@@ -6508,7 +6508,8 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="employeeNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="period" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="month" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="year" type="int" />
             <element minOccurs="1" maxOccurs="1" name="filenameFromApp" type="string" />
           </sequence>
         </complexType>
@@ -6552,11 +6553,23 @@
       </element>
     </schema>
   </types>
-  <message name="GetProfilePictureStudent">
-    <part name="parameters" element="tns:GetProfilePictureStudent" />
+  <message name="InsertClassListAttendance">
+    <part name="parameters" element="tns:InsertClassListAttendance" />
   </message>
-  <message name="GetProfilePictureStudent_Result">
-    <part name="parameters" element="tns:GetProfilePictureStudent_Result" />
+  <message name="InsertClassListAttendance_Result">
+    <part name="parameters" element="tns:InsertClassListAttendance_Result" />
+  </message>
+  <message name="PostAttendanceList">
+    <part name="parameters" element="tns:PostAttendanceList" />
+  </message>
+  <message name="PostAttendanceList_Result">
+    <part name="parameters" element="tns:PostAttendanceList_Result" />
+  </message>
+  <message name="GetProfilePicture">
+    <part name="parameters" element="tns:GetProfilePicture" />
+  </message>
+  <message name="GetProfilePicture_Result">
+    <part name="parameters" element="tns:GetProfilePicture_Result" />
   </message>
   <message name="UpdateAcceptance">
     <part name="parameters" element="tns:UpdateAcceptance" />
@@ -7013,12 +7026,6 @@
   </message>
   <message name="OnlineClearance_Result">
     <part name="parameters" element="tns:OnlineClearance_Result" />
-  </message>
-  <message name="PostAttendanceList">
-    <part name="parameters" element="tns:PostAttendanceList" />
-  </message>
-  <message name="PostAttendanceList_Result">
-    <part name="parameters" element="tns:PostAttendanceList_Result" />
   </message>
   <message name="PostConsumablesItems">
     <part name="parameters" element="tns:PostConsumablesItems" />
@@ -7764,11 +7771,11 @@
   <message name="GetGraduationFee_Result">
     <part name="parameters" element="tns:GetGraduationFee_Result" />
   </message>
-  <message name="GetProfilePicture">
-    <part name="parameters" element="tns:GetProfilePicture" />
+  <message name="GetProfilePictureStudent">
+    <part name="parameters" element="tns:GetProfilePictureStudent" />
   </message>
-  <message name="GetProfilePicture_Result">
-    <part name="parameters" element="tns:GetProfilePicture_Result" />
+  <message name="GetProfilePictureStudent_Result">
+    <part name="parameters" element="tns:GetProfilePictureStudent_Result" />
   </message>
   <message name="GetStage">
     <part name="parameters" element="tns:GetStage" />
@@ -8093,12 +8100,6 @@
   </message>
   <message name="InsertAppointment_Result">
     <part name="parameters" element="tns:InsertAppointment_Result" />
-  </message>
-  <message name="InsertClassListAttendance">
-    <part name="parameters" element="tns:InsertClassListAttendance" />
-  </message>
-  <message name="InsertClassListAttendance_Result">
-    <part name="parameters" element="tns:InsertClassListAttendance_Result" />
   </message>
   <message name="InsertConceptReview">
     <part name="parameters" element="tns:InsertConceptReview" />
@@ -9019,9 +9020,17 @@
     <part name="parameters" element="tns:GeneratePrescriptionPrintout_Result" />
   </message>
   <portType name="WebPortal_Port">
-    <operation name="GetProfilePictureStudent">
-      <input name="GetProfilePictureStudent" message="tns:GetProfilePictureStudent" />
-      <output name="GetProfilePictureStudent_Result" message="tns:GetProfilePictureStudent_Result" />
+    <operation name="InsertClassListAttendance">
+      <input name="InsertClassListAttendance" message="tns:InsertClassListAttendance" />
+      <output name="InsertClassListAttendance_Result" message="tns:InsertClassListAttendance_Result" />
+    </operation>
+    <operation name="PostAttendanceList">
+      <input name="PostAttendanceList" message="tns:PostAttendanceList" />
+      <output name="PostAttendanceList_Result" message="tns:PostAttendanceList_Result" />
+    </operation>
+    <operation name="GetProfilePicture">
+      <input name="GetProfilePicture" message="tns:GetProfilePicture" />
+      <output name="GetProfilePicture_Result" message="tns:GetProfilePicture_Result" />
     </operation>
     <operation name="UpdateAcceptance">
       <input name="UpdateAcceptance" message="tns:UpdateAcceptance" />
@@ -9326,10 +9335,6 @@
     <operation name="OnlineClearance">
       <input name="OnlineClearance" message="tns:OnlineClearance" />
       <output name="OnlineClearance_Result" message="tns:OnlineClearance_Result" />
-    </operation>
-    <operation name="PostAttendanceList">
-      <input name="PostAttendanceList" message="tns:PostAttendanceList" />
-      <output name="PostAttendanceList_Result" message="tns:PostAttendanceList_Result" />
     </operation>
     <operation name="PostConsumablesItems">
       <input name="PostConsumablesItems" message="tns:PostConsumablesItems" />
@@ -9827,9 +9832,9 @@
       <input name="GetGraduationFee" message="tns:GetGraduationFee" />
       <output name="GetGraduationFee_Result" message="tns:GetGraduationFee_Result" />
     </operation>
-    <operation name="GetProfilePicture">
-      <input name="GetProfilePicture" message="tns:GetProfilePicture" />
-      <output name="GetProfilePicture_Result" message="tns:GetProfilePicture_Result" />
+    <operation name="GetProfilePictureStudent">
+      <input name="GetProfilePictureStudent" message="tns:GetProfilePictureStudent" />
+      <output name="GetProfilePictureStudent_Result" message="tns:GetProfilePictureStudent_Result" />
     </operation>
     <operation name="GetStage">
       <input name="GetStage" message="tns:GetStage" />
@@ -10046,10 +10051,6 @@
     <operation name="InsertAppointment">
       <input name="InsertAppointment" message="tns:InsertAppointment" />
       <output name="InsertAppointment_Result" message="tns:InsertAppointment_Result" />
-    </operation>
-    <operation name="InsertClassListAttendance">
-      <input name="InsertClassListAttendance" message="tns:InsertClassListAttendance" />
-      <output name="InsertClassListAttendance_Result" message="tns:InsertClassListAttendance_Result" />
     </operation>
     <operation name="InsertConceptReview">
       <input name="InsertConceptReview" message="tns:InsertConceptReview" />
@@ -10666,12 +10667,30 @@
   </portType>
   <binding name="WebPortal_Binding" type="tns:WebPortal_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-    <operation name="GetProfilePictureStudent">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePictureStudent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetProfilePictureStudent">
+    <operation name="InsertClassListAttendance">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertClassListAttendance" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="InsertClassListAttendance">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="GetProfilePictureStudent_Result">
+      <output name="InsertClassListAttendance_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostAttendanceList">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:PostAttendanceList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostAttendanceList">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostAttendanceList_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetProfilePicture">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePicture" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetProfilePicture">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetProfilePicture_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -11356,15 +11375,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="OnlineClearance_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="PostAttendanceList">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:PostAttendanceList" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="PostAttendanceList">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="PostAttendanceList_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -12484,12 +12494,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="GetProfilePicture">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePicture" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetProfilePicture">
+    <operation name="GetProfilePictureStudent">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:GetProfilePictureStudent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetProfilePictureStudent">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="GetProfilePicture_Result">
+      <output name="GetProfilePictureStudent_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -12976,15 +12986,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="InsertAppointment_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="InsertClassListAttendance">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WebPortal:InsertClassListAttendance" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="InsertClassListAttendance">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="InsertClassListAttendance_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -14368,7 +14369,7 @@
   </binding>
   <service name="WebPortal">
     <port name="WebPortal_Port" binding="tns:WebPortal_Binding">
-      <address location="http://erp.dsl.ke:3031/MIBS/WS/MIBS/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://74.124.24.233:3031/MIBS/WS/MIBS/Codeunit/WebPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>
